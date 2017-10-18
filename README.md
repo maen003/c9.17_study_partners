@@ -2,13 +2,17 @@
 
 
 ### Producer
-- 
+- Scott
 
 ### Project Manager
-- TBD
+- Cody / Andy
 
 ### SR Devs
-- 
+- Michael A
+- Krystal
+- Prosith
+- Peter
+- Eric
 
 ### Jr Devs
 - 
