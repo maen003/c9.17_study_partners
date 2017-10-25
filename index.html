@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Find your study buddies!</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+    <script src="main.js"></script> 
+</head>
+
+<body>
+    <!-- Container -->
+    <div class="container-fluid" id="mainPage">
+        <!-- NavBar -->
+        <nav class="navbar navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#mainPage">Bookworm</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#mainPage">Home</a></li>
+                    <li><a href="#">Create</a></li>
+                    <li><a href="#">Join</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
+                </ul>
+            </div>
+        </nav> <!-- end of navbar -->
+
+        <!-- main content -->
+        <div class="container-fluid" id="landingPage">
+            <!-- joining event -->
+            <div class="col-md-6 join">
+                <h1 class="joinHeader">Join an Event!</h1>
+                <div class="findEvent">
+                    <div class="filter">
+
+                    </div>
+                    <div class="map">
+
+                    </div>
+                    <button type="button">Search Again</button>
+                </div>
+            </div> <!-- end of join -->
+            <!-- creating event -->
+            <div class="col-md-6 create">
+                <h1 class="createHeader">Create an Event!</h1>
+                <div class="createEvent">
+                    <button type="button">Back</button>
+                </div>
+            </div> <!-- end of create -->
+        </div> <!-- end of main content -->
+    </div> <!-- end of container -->
+</body>
+</html>

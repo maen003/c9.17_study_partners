@@ -1,0 +1,58 @@
+/* Main Page */
+#landingPage {
+    position: relative;
+    height: 90vh;
+}
+
+/* Join and Create */
+.join, .create {
+    border: 1px solid black;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.joinHeader, .createHeader {
+    font-size: 3.5em;
+    width: 80%;
+    text-align: center;
+    border-radius: 50px;
+    display: block;
+    position: absolute;
+}
+
+.moveHeaderUp {
+    top: 0;
+    transition: top 1s ease;
+}
+
+.moveHeaderDown {
+    top: 46%;
+    transition: top 1s ease;
+}
+
+/* Join */
+.join > h1 {
+    background: linear-gradient(to bottom right, cyan, grey);
+}
+
+.findEvent {
+    height: 80%;
+    width: 100%;
+    border: 1px solid black;
+    display: none;
+}
+
+/* Create */
+.create > h1 {
+    background: linear-gradient(to bottom left, orange, grey);
+}
+
+.createEvent {
+    height: 80%;
+    width: 100%;
+    border: 1px solid black;
+    display: none;
+}
