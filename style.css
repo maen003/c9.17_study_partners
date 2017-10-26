@@ -1,7 +1,11 @@
 /* Main Page */
 #landingPage {
     position: relative;
-    height: 90vh;
+    height: 100vh;
+}
+
+.jumbotron {
+    text-align: center;
 }
 
 /* Join and Create */
@@ -35,7 +39,7 @@
 
 /* Join */
 .join > h1 {
-    background: linear-gradient(to bottom right, cyan, grey);
+    background: linear-gradient(to bottom right, pink, white);
 }
 
 .findEvent {
@@ -47,7 +51,7 @@
 
 /* Create */
 .create > h1 {
-    background: linear-gradient(to bottom left, orange, grey);
+    background: linear-gradient(to bottom left, orange, white);
 }
 
 .createEvent {

@@ -21,12 +21,12 @@
         <nav class="navbar navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#mainPage">Bookworm</a>
+                    <a class="navbar-brand" href="#mainPage">STUBBIES</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#mainPage">Home</a></li>
-                    <li><a href="#">Create</a></li>
-                    <li><a href="#">Join</a></li>
+                    <li><a href="#join">Create</a></li>
+                    <li><a href="#create">Join</a></li>
                     <li><a href="#">Profile</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -35,10 +35,16 @@
             </div>
         </nav> <!-- end of navbar -->
 
+        <div class="container">
+            <div class="jumbotron">
+                <h3>You don't have to be lonely, with stubbies!</h1> 
+            </div>
+        </div>
+
         <!-- main content -->
         <div class="container-fluid" id="landingPage">
             <!-- joining event -->
-            <div class="col-md-6 join">
+            <div class="col-md-6 join" id="join">
                 <h1 class="joinHeader">Join an Event!</h1>
                 <div class="findEvent">
                     <div class="filter">
@@ -51,7 +57,7 @@
                 </div>
             </div> <!-- end of join -->
             <!-- creating event -->
-            <div class="col-md-6 create">
+            <div class="col-md-6 create" id="create">
                 <h1 class="createHeader">Create an Event!</h1>
                 <div class="createEvent">
                     <button type="button">Back</button>
