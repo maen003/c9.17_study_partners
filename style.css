@@ -54,6 +54,7 @@
     width: 100%;
     border: 1px solid black;
     display: none;
+    overflow: hidden;
 }
 
 /* animation */
