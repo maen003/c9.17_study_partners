@@ -40,6 +40,7 @@
     height: 0;
     width: 100%;
     border: 1px solid black;
+    display: none;
 }
 
 /* Create */
@@ -69,6 +70,7 @@
 }
 
 .animateExpandFind {
+    display: block;
     animation: expandFind 1.5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
