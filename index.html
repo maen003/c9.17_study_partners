@@ -64,10 +64,10 @@
                 <div class="createEvent">
                     <form>
                         <label>Title of event</label><br>
-                            <input name="title" id="title"><br>
-                        <textarea name="description" id="description" placeholder="Description of event..."></textarea><br>
+                            <input name="title" id="title" class="title"><br>
+                        <textarea name="description" id="description" placeholder="Description of event..." class="description"></textarea><br>
                         <label>Event Subject</label><br>
-                            <input list="subjects" name="subjects"><br>
+                            <input list="subjects" name="subjects" class="subjects"><br>
                             <datalist id="subjects">
                                 <option value="Life sciences">
                                 <option value="Visual and Perfomance Arts">
@@ -76,20 +76,21 @@
                                 <option value="Business">
                             </datalist>
                         <label>Date of event</label><br>
-                            <input type="date" name="bday"><br>
+                            <input type="date" name="bday" class="date"><br>
                         <label>Time of event</label><br>
-                            <input type="time" name="usr_time"><br>
+                            <input type="time" name="usr_time" class="time"><br>
                         <label>Duration of event</label><br>                   
-                            <input name="duration" id="duration"><br>
+                            <input name="duration" id="duration" class="duration"><br>
                         <label>Location of event</label><br>
-                            <input name="location" id="location"><br>
+                            <input name="location" id="location" class="location"><br>
                         <label>Group Size</label><br>
-                            <input type="number" name="quantity" min="2" max="50"><br>
+                            <input type="number" name="size" min="2" max="50" class="size"><br>
                         <label>Phone Number</label><br>
-                            <input type="tel" name="usrtel"><br>
+                            <input type="tel" name="usrtel" class="phone"><br>
                         <label>Email</label><br>
-                            <input type="email" name="email">
+                            <input type="email" name="email" class="email">
                     </form>
+                    <button class="btn btn-success submitForm" type="submit">Create Event</button>
                     <!-- <button type="button">Back</button> -->
                 </div>
             </div> <!-- end of create -->

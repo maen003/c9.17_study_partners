@@ -1,4 +1,19 @@
 $(document).ready(initializeApp);
+
+var arrEvent = [];
+// var event = {
+//     title: ,
+//     description: '',
+//     subject: '',
+//     date: '',
+//     time: '',
+//     duration: '',
+//     location: '(lat and long)',
+//     maxPeople: '#',
+//     creatorPhone: '(###-###-####)',
+//     creatorEmail: '...@gmail.com'
+// }
+
 /***************************************************************************************************
 * initializeApp
 * @params: {undefined}
@@ -12,6 +27,7 @@ function initializeApp() {
 function clickHandler() {
     $('.join > h1').click(joinEvent);
     $('.create > h1').click(createEvent);
+    $('.submitForm').click(submitData);
 }
 
 function joinEvent() {
@@ -48,4 +64,37 @@ function createEvent() {
         createEvent.removeClass('animateExpandCreate');
         createEvent.addClass('animateCloseCreate');
     }
+}
+
+function submitData() {
+    var event = {};
+    event.title = $('.title').val();
+    event.description = $('.description').val();
+    event.subject = $('.subjects').val();
+    event.date = $('.date').val();
+    event.time = $('.time').val();
+    event.duration = $('.duration').val();
+    event.location = $('.location').val();
+    event.groupSize = $('.size').val();
+    event.creatorPhone = $('.phone').val();
+    event.creatorEmail = $('.email').val();
+    console.log(event);
+
+    arrEvent.push(event);
+    console.log(arrEvent);
+
+    clearForm();
+}
+
+function clearForm() {
+    $('.title').val('');
+    $('.description').val('');
+    $('.subjects').val('');
+    $('.date').val('');
+    $('.time').val('');
+    $('.duration').val('');
+    $('.location').val('');
+    $('.size').val('');
+    $('.phone').val('');
+    $('.email').val('');
 }
