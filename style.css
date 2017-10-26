@@ -25,16 +25,8 @@
     border-radius: 50px;
     display: block;
     position: absolute;
-}
-
-.moveHeaderUp {
-    top: 0;
-    transition: top 1s ease;
-}
-
-.moveHeaderDown {
     top: 46%;
-    transition: top 1s ease;
+    margin: 10px 0;
 }
 
 /* Join */
@@ -43,10 +35,11 @@
 }
 
 .findEvent {
-    height: 80%;
+    position: relative;
+    margin-top: 10%;
+    height: 0;
     width: 100%;
     border: 1px solid black;
-    display: none;
 }
 
 /* Create */
@@ -55,8 +48,82 @@
 }
 
 .createEvent {
-    height: 80%;
+    position: relative;
+    margin-top: 10%;
+    height: 0;
     width: 100%;
     border: 1px solid black;
     display: none;
+}
+
+/* animation */
+.moveHeaderUp {
+    top: 0;
+    transition: top 1.5s ease;
+}
+
+.moveHeaderDown {
+    top: 46%;
+    transition: top 3s ease;
+}
+
+.animateExpandFind {
+    animation: expandFind 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes expandFind {
+    from {
+        height: 0;
+    }
+    to {
+        height: 90vh;
+    }
+}
+  
+.animateCloseFind {
+    animation: closeFind 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes closeFind {
+    from {
+        height: 90vh;
+    }
+    to {
+        height: 0;
+    }
+}
+
+.animateExpandCreate {
+    display: block;
+    animation: expandCreate 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes expandCreate {
+    from {
+        height: 0;
+    }
+    to {
+        height: 90vh;
+    }
+}
+  
+.animateCloseCreate {
+    animation: closeCreate 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes closeCreate {
+    from {
+        height: 90vh;
+    }
+    to {
+        height: 0;
+    }
 }
