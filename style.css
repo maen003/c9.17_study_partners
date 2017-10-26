@@ -1,3 +1,6 @@
+/* navbar */
+/* make navbar mobile responsive */
+
 /* Main Page */
 #landingPage {
     position: relative;
@@ -8,9 +11,36 @@
     text-align: center;
 }
 
+/* jumpbotron */
+.jumbotron > h3 {
+	background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+    background-size: 150px;
+    -webkit-background-size: 150px;
+    color: rgba(255, 255, 255, 0.3);
+    background-clip: text;
+	-webkit-background-clip: text;
+	animation: shine 3s infinite;
+	text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes shine {
+	0%, 10% {
+		background-position: -1000px;
+	}
+	20% {
+		background-position: top left;
+	}
+	90% {
+		background-position: top right;
+	}
+	100% {
+		background-position: 1000px;
+	}
+}
+
 /* Join and Create */
 .join, .create {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -46,7 +76,7 @@
 
 /* Create */
 .create > h1 {
-    background: linear-gradient(to bottom left, orange, white);
+    background: linear-gradient(to bottom left, rgb(111, 196, 128), white);
 }
 
 .createEvent {
@@ -57,6 +87,11 @@
     border: 1px solid black;
     display: block;
     overflow: hidden;
+}
+
+.createEvent > form {
+    height: 95%;
+    width: 100%;
 }
 
 /* animation */

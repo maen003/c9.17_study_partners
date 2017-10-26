@@ -71,7 +71,7 @@ function submitData() {
     event.title = $('.title').val();
     event.description = $('.description').val();
     event.subject = $('.subjects').val();
-    event.date = $('.date').val();
+    event.date = $('.dateEvent').val();
     event.time = $('.time').val();
     event.duration = $('.duration').val();
     event.location = $('.location').val();
@@ -90,7 +90,7 @@ function clearForm() {
     $('.title').val('');
     $('.description').val('');
     $('.subjects').val('');
-    $('.date').val('');
+    $('.dateEvent').val('');
     $('.time').val('');
     $('.duration').val('');
     $('.location').val('');
