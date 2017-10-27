@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Find your study buddies!</title>
 
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -21,26 +21,31 @@
     <div class="container-fluid" id="mainPage">
         <!-- NavBar -->
         <nav class="navbar navbar">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#mainPage">STUBBIES</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#mainPage">Home</a></li>
-                    <li><a href="#join">Create</a></li>
-                    <li><a href="#create">Join</a></li>
-                    <li><a href="#">Profile</a></li>
+            <div class="container-fluid navbarCustom">
+                <ul class="nav navbar-nav leftUl col-md-3">
+                    <li class="active"><a class="mouseHeader" href="#mainPage">Home</a></li>
+                    <li><a class="mouseHeader" href="#landingPage">Create or Join</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
-                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+                <div class="navbar-header headerName col-md-6">
+                    <span class="letter" data-letter="S">S</span>
+                    <span class="letter" data-letter="T">T</span>
+                    <span class="letter" data-letter="U">U</span>
+                    <span class="letter" data-letter="B">B</span>
+                    <span class="letter" data-letter="B">B</span>
+                    <span class="letter" data-letter="I">I</span>
+                    <span class="letter" data-letter="E">E</span>
+                    <span class="letter" data-letter="S">S</span>
+                </div>
+                <ul class="nav navbar-nav navbar-right rightUl col-md-3">
+                    <li><a class="mouseHeader" href="#">Profile</a></li>
+                    <li><a class="mouseHeader" href="#">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
                 </ul>
             </div>
         </nav> <!-- end of navbar -->
 
         <div class="container">
             <div class="jumbotron">
-                <h3>You don't have to be lonely, with stubbies!</h1> 
+                <h3>You don't have to be lonely, with stubbies!</h3> 
             </div>
         </div>
 
@@ -65,12 +70,11 @@
                 <div class="createEvent">
                     <form>
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>Title of event</label><br>
-                                    <input id="title" class="title"><br>
-                                </div>
-                                <div class="col-md-4 form-group">
+                            <label for="title">Title of event</label>
+                            <input id="title" class="title" name="title"><br>
+                        </div>
+                            <!-- <div>
+                                <div class="col-md-3">
                                     <label>Event Subject</label><br>
                                     <input list="subjects" class="subjects"><br>
                                     <datalist id="subjects">
@@ -81,12 +85,13 @@
                                         <option value="Business">
                                     </datalist>
                                 </div>
-                                <div class="col-md-2 form-group">
+                                <div class="col-md-2">
                                     <label>Group Size</label><br>
                                     <input type="number" min="2" max="50" class="size"><br>
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <div class="row"> -->
                                 <!-- <div class="col-md-4 form-group">
                                     <label>Date of event</label><br>
                                     <input type="date" class="input-group date dateEvent" placeholder="MM/DD/YYYY"><br>
@@ -95,40 +100,48 @@
                                     <label>Time of event</label><br>
                                     <input type="time" class="time"><br>
                                 </div> -->
-                                <label>Date and Time</label>
+
+                                <!-- <label>Date and Time</label>
                                 <div class="row">
-                                    <div class='col-md-6'>
+                                    <div class='col-md-5'>
                                         <input type='text' class="form-control" id='dateTime' />
                                     </div>
                                     <script type="text/javascript">
                                         $(function () {
-                                            $('#dateTime').datetimepicker();
+                                            $('#dateTime').datetimepicker({
+                                                icons: {
+                                                    time: "fa fa-clock-o",
+                                                    date: "fa fa-calendar",
+                                                    up: "fa fa-arrow-up",
+                                                    down: "fa fa-arrow-down"
+                                                }
+                                            });
                                         });
                                     </script>
                                 </div>
-                                <div class="col-md-4 form-group">
+                                <div class="col-md-3">
                                     <label>Duration of event</label><br>                   
                                     <input id="duration" class="duration"><br>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-5">
                                     <label>Phone Number</label><br>
                                     <input type="tel" class="phone"><br>
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-5">
                                     <label>Email</label><br>
                                     <input type="email" class="email">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 form-group">
+                                <div class="col-md-11">
                                     <label>Location of event</label><br>
                                     <input name="location" id="location" class="location"><br>
                                 </div>
                             </div>
                             <textarea class="form-group" rows="3" id="description" placeholder="Description of event..."></textarea>
-                        </div>                     
+                        </div>                  -->
                     </form>
                     <button class="form-group btn btn-success submitForm" type="submit">Create Event</button>
                     <!-- <button type="button">Back</button> -->
