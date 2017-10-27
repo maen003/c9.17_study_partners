@@ -12,7 +12,7 @@
     padding: 0 0 0 5%;
 }
 
-.mouseHeader {
+/* .mouseHeader {
     color: whitesmoke;
     text-shadow: -1px 0px 1px rgba(255,255,255,.8), 2px 0px 2px rgba(0,0,0,1);
     text-decoration: line-through;
@@ -21,7 +21,7 @@
 .mouseHeader:hover {
     color: black;
     text-shadow: -1px 0px 1px rgba(255,255,255,.8);
-}
+} */
 
 .headerName {
     text-align: center;
