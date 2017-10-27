@@ -53,26 +53,30 @@
     transition: all 0.2s ease-in-out;
 }
 
-.letter:before {
+/* .letter:before {
     color: white;
     text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8);
     z-index: 3;
     transform: rotateX(0deg) rotateY(-15deg) rotateZ(0deg);
-}
+} */
 
-.letter:after {
+/* .letter:after {
     color: rgba(0,0,0,.11);
     z-index:2;
     transform: scale(1.08,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg,1deg);
-}
+} */
 
-.letter:hover:before {
+.letter:before { /*hover */
     color: whitesmoke;
     transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8); /* delete if using hover */
+    z-index: 3; /* delete if using hover */
 }
 
-.letter:hover:after {
+.letter:after { /* hover */
     transform: scale(1.08,1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg,22deg);
+    color: rgba(0,0,0,.11); /* delete if using hover */
+    z-index:2; /* delete if using hover */
 }
 
 /* Main Page */
