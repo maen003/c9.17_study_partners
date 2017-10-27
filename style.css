@@ -1,5 +1,9 @@
 /* navbar */
 /* make navbar mobile responsive */
+.navbar {
+    margin: 0;
+}
+
 .leftUl li, .rightUl li {
     padding: 5% 0 0 3%;
 }
@@ -74,7 +78,7 @@
 /* Main Page */
 #landingPage {
     position: relative;
-    background-color: slategray;
+    background-color: lightgray;
     height: 75vmin;
 }
 
@@ -89,7 +93,7 @@
 }
 
 /* jumpbotron */
-.jumbotron > h3 {
+.jumbotron > h2 {
 	background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
     background-size: 150px;
     -webkit-background-size: 150px;
@@ -145,6 +149,26 @@
     overflow: hidden;
 }
 
+.filter {
+    width: 100%;
+    height: 20%;
+    padding-left: 15%;
+}
+
+.filterSubject {
+    padding: 3%;
+}
+
+.map {
+    height: 75%;
+    width: 100%;
+}
+
+.map > img {
+    height: 100%;
+    width: 100%;
+}
+
 /* Create */
 .create > h1 {
     background: linear-gradient(to bottom left, darkcyan, white);
@@ -158,6 +182,10 @@
     border: 1px solid black;
     display: block;
     overflow: hidden;
+}
+
+.inputArea {
+    text-align: center;
 }
 
 /* animation */

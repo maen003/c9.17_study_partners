@@ -22,11 +22,11 @@
         <!-- NavBar -->
         <nav class="navbar navbar">
             <div class="container-fluid navbarCustom">
-                <ul class="nav navbar-nav leftUl col-md-3">
+                <ul class="nav navbar-nav leftUl col-sm-3">
                     <li class="active"><a class="mouseHeader" href="#mainPage">Home</a></li>
                     <li><a class="mouseHeader" href="#landingPage">Create or Join</a></li>
                 </ul>
-                <div class="navbar-header headerName col-md-6">
+                <div class="navbar-header headerName col-sm-6">
                     <span class="letter" data-letter="S">S</span>
                     <span class="letter" data-letter="T">T</span>
                     <span class="letter" data-letter="U">U</span>
@@ -36,7 +36,7 @@
                     <span class="letter" data-letter="E">E</span>
                     <span class="letter" data-letter="S">S</span>
                 </div>
-                <ul class="nav navbar-nav navbar-right rightUl col-md-3">
+                <ul class="nav navbar-nav navbar-right rightUl col-sm-3">
                     <li><a class="mouseHeader" href="#">Profile</a></li>
                     <li><a class="mouseHeader" href="#">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
                 </ul>
@@ -45,106 +45,122 @@
 
         <div class="container">
             <div class="jumbotron">
-                <h3>You don't have to be lonely, with stubbies!</h3> 
+                <h2>You don't have to be lonely, with stubbies!</h2>
             </div>
         </div>
 
         <!-- main content -->
         <div class="container-fluid" id="landingPage">
+
             <!-- joining event -->
-            <div class="col-md-6 join" id="join">
+            <div class="col-sm-6 join" id="join">
                 <h1 class="joinHeader">Join an Event!</h1>
                 <div class="findEvent">
                     <div class="filter">
-                        filter here
+                        <form>
+                            <div class="filterCheckbox">
+                                <label class="checkbox-inline filterSubject" for"lifeSciences">Filter Subjects
+                                    <input type="checkbox" id="lifeSciences" value="Life sciences">
+                                </label>
+                                <label class="checkbox-inline filterSubject" for"vpArts">Visual and Perfomance Arts
+                                    <input type="checkbox" id="vpArts" value="Visual and Perfomance Arts">
+                                </label>
+                                <label class="checkbox-inline filterSubject" for"libArts">Liberal Arts
+                                    <input type="checkbox" id="libArts" value="Liberal Arts">
+                                </label>
+                                <label class="checkbox-inline filterSubject" for"engTech">Engineering and technology
+                                    <input type="checkbox" id="engTech" value="Engineering and technology">
+                                </label>
+                                <label class="checkbox-inline filterSubject" for"business">Business
+                                    <input type="checkbox" id="business" value="Business">
+                                </label>
+                            </div>
+                        </form>
                     </div>
                     <div class="map">
-                        map here
+                        <img src="images/temp_map.png">
                     </div>
-                    <!-- <button type="button">Search Again</button> -->
+                    <button class="btn btn-warning" type="button">Search Again</button>
                 </div>
             </div> <!-- end of join -->
+
             <!-- creating event -->
-            <div class="col-md-6 create" id="create">
+            <div class="col-sm-6 create" id="create">
                 <h1 class="createHeader">Create an Event!</h1>
                 <div class="createEvent">
                     <form>
-                        <div class="form-group">
-                            <label for="title">Title of event</label>
-                            <input id="title" class="title" name="title"><br>
+                        <div class="form-group inputArea">
+                            <div class="col-sm-6">
+                                <label for="title">Title of event</label><br>
+                                    <input type="text" id="title" class="title" placeholder="Title"><br>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="subjects">Event Subject</label><br>
+                                    <select id="subjects" class="subjects form-control">
+                                        <option>Life sciences</option>
+                                        <option>Visual and Perfomance Arts</option>
+                                        <option>Liberal Arts</option>
+                                        <option>Engineering and technology</option>
+                                        <option>Business</option>
+                                    </select>
+                            </div>
+                            <div class="col-sm-2">
+                                    <label for="groupSize">Group Size</label><br>
+                                        <select id="groupSize" class="size form-control">
+                                            <option>2-5</option>
+                                            <option>6-10</option>
+                                            <option>11-15</option>
+                                            <option>16-20</option>
+                                            <option>21-25</option>
+                                            <option>26-30</option>
+                                            <option>> 30</option>
+                                        </select>
+                                </div>
                         </div>
-                            <!-- <div>
-                                <div class="col-md-3">
-                                    <label>Event Subject</label><br>
-                                    <input list="subjects" class="subjects"><br>
-                                    <datalist id="subjects">
-                                        <option value="Life sciences">
-                                        <option value="Visual and Perfomance Arts">
-                                        <option value="Liberal Arts">
-                                        <option value="Engineering and technology">
-                                        <option value="Business">
-                                    </datalist>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Group Size</label><br>
-                                    <input type="number" min="2" max="50" class="size"><br>
-                                </div>
+                        <div class="form-group inputArea">
+                            <div class="col-sm-4 form-group">
+                                <label for="date">Date of event</label><br>
+                                    <input type="date" id="date" class="input-group date dateEvent" placeholder="MM/DD/YYYY">
                             </div>
-
-                            <div class="row"> -->
-                                <!-- <div class="col-md-4 form-group">
-                                    <label>Date of event</label><br>
-                                    <input type="date" class="input-group date dateEvent" placeholder="MM/DD/YYYY"><br>
-                                </div>
-                                <div class="col-md-4 form-group">
-                                    <label>Time of event</label><br>
-                                    <input type="time" class="time"><br>
-                                </div> -->
-
-                                <!-- <label>Date and Time</label>
-                                <div class="row">
-                                    <div class='col-md-5'>
-                                        <input type='text' class="form-control" id='dateTime' />
-                                    </div>
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            $('#dateTime').datetimepicker({
-                                                icons: {
-                                                    time: "fa fa-clock-o",
-                                                    date: "fa fa-calendar",
-                                                    up: "fa fa-arrow-up",
-                                                    down: "fa fa-arrow-down"
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Duration of event</label><br>                   
-                                    <input id="duration" class="duration"><br>
-                                </div>
+                            <div class="col-sm-4 form-group">
+                                <label for="time">Time of event</label><br>
+                                    <input type="time" id="time" class="time">
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label>Phone Number</label><br>
-                                    <input type="tel" class="phone"><br>
-                                </div>
-                                <div class="col-md-5">
-                                    <label>Email</label><br>
-                                    <input type="email" class="email">
-                                </div>
+                            <div class="col-sm-4">
+                                <label for="duration">Duration of event</label><br>
+                                    <select id="duration" class="duration form-control">
+                                        <option>< 1 Hour</option>
+                                        <option>1 - 2 Hours</option>
+                                        <option>2 - 3 Hours</option>
+                                        <option>3 - 4 Hours</option>
+                                        <option>4 - 5 Hours</option>
+                                        <option>> 5 Hours</option>
+                                    </select>          
                             </div>
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <label>Location of event</label><br>
-                                    <input name="location" id="location" class="location"><br>
-                                </div>
+                        </div>
+                        <div class="form-group inputArea">
+                            <div class="col-sm-5">
+                                <label for="phone">Phone Number</label><br>
+                                    <input type="tel" id="phone" class="phone">
                             </div>
-                            <textarea class="form-group" rows="3" id="description" placeholder="Description of event..."></textarea>
-                        </div>                  -->
+                            <div class="col-sm-5">
+                                <label for="email">Email</label><br>
+                                    <input type="email" id="email" class="email">
+                            </div>
+                        </div>
+                        <div class="form-group inputArea">
+                            <div class="col-sm-12">
+                                <label for="location">Location of event</label><br>
+                                    <input name="location" id="location" class="location">
+                                    <div class="mapView"></div>
+                            </div>
+                        </div>
+                        <div class="form-group inputArea">
+                            <textarea class="form-group col-sm-12 description" rows="3" id="description" placeholder="Description of event..."></textarea>
+                        </div>
                     </form>
-                    <button class="form-group btn btn-success submitForm" type="submit">Create Event</button>
-                    <!-- <button type="button">Back</button> -->
+                    <button class="btn btn-danger col-sm-6" type="button">Back</button>
+                    <button class="form-group btn btn-success submitForm col-sm-6" type="submit">Create Event</button>
                 </div>
             </div> <!-- end of create -->
         </div> <!-- end of main content -->
