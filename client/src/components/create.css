@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    padding-right: 0;
 }
 
 .createHeader {
@@ -48,7 +49,7 @@
 }
 
 /* keyframe animation */
-/* .animateExpandCreate {
+.animateExpandCreate {
     animation: expandCreate 1.5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
@@ -60,6 +61,10 @@
         width: 0;
     }
     50% {
+        height: 0;
+        width: 90%;
+    }
+    75% {
         height: 0;
         width: 100%;
     }
@@ -82,10 +87,14 @@
     }
     50% {
         height: 65vmin;
+        width: 10%;
+    }
+    75% {
+        height: 65vmin;
         width: 0;
     }
     100% {
         height: 0;
         width: 0;
     }
-} */
+}
