@@ -26,28 +26,44 @@
 .findEvent {
     position: relative;
     margin-top: 10%;
-    height: 65vmin; /* change back to 0 OR 65vmin */
+    height: 68vmin; /* change back to 0 OR 65vmin */
     width: 100%; /* change back to 0 OR 100% */
     border: 1px solid black;
     display: block;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .filter {
     width: 100%;
-    height: 20%;
+    height: 25%;
 }
 
-.formFilter > h3 {
-    margin: 0;
+.filter > form {
+    height: 100%;
 }
 
-.zipInput {
+.formFilter > h3,.zipInput {
     margin: 0;
 }
 
 .filterSubject input {
     margin-left: 10%;
+}
+
+.leftSideFilter, .rightSideFilter {
+    height: 100%;
+    padding-top: 3%;
+}
+
+.checkbox-inline:first-child {
+    margin: 0 0 0 3.5%;
+}
+
+.checkbox-inline {
+    display: block;
+    padding: 0 0 0 10%;
+    margin: 0 0 0 10%; 
 }
 
 .map {

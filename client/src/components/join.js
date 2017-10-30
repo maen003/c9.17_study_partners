@@ -22,7 +22,7 @@ class Join extends Component {
 
     render() {
         return (
-            <div className="col-sm-6 join col-xs-12" id="join">
+            <div className="col-sm-6 col-xs-12 join" id="join">
                 {/* {<h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>} */}
                 <div className="findEvent">
                     <div className="map">
@@ -30,33 +30,29 @@ class Join extends Component {
                     </div>
                     <div className="filter"> {/* pressing filter will animate filter options to left */}
                         <form>
-                            <div className="formFilter">
-                                <div className="col-sm-5 col-xs-12">    
-                                    <div className="form-group zipInput">
-                                        <input type="text" id="zipcode" className="zipcode" placeholder="Zip Code"/>
-                                    </div>
-                                    <h3>Filter By Subject</h3>
-                                    <button className="btn btn-warning" type="button">Search Again</button>
+                            <div className="col-sm-5 col-xs-12 leftSideFilter">    
+                                <div className="form-group zipInput">
+                                    <input type="text" id="zipcode" className="zipcode" placeholder="Zip Code"/>
                                 </div>
-                                <div className="col-sm-7 col-xs-12">
-                                    <div className="filterCheckbox">
-                                        <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">Filter Subjects
-                                            <input type="checkbox" id="lifeSciences" value="Life sciences"/>
-                                        </label>
-                                        <label className="checkbox-inline filterSubject" htmlFor="vpArts">Visual and Perfomance Arts
-                                            <input type="checkbox" id="vpArts" value="Visual and Perfomance Arts"/>
-                                        </label>
-                                        <label className="checkbox-inline filterSubject" htmlFor="libArts">Liberal Arts
-                                            <input type="checkbox" id="libArts" value="Liberal Arts"/>
-                                        </label>
-                                        <label className="checkbox-inline filterSubject" htmlFor="engTech">Engineering and technology
-                                            <input type="checkbox" id="engTech" value="Engineering and technology"/>
-                                        </label>
-                                        <label className="checkbox-inline filterSubject" htmlFor="business">Business
-                                            <input type="checkbox" id="business" value="Business"/>
-                                        </label>
-                                    </div>
-                                </div>
+                                <h3>Filter By Subject</h3>
+                                <button className="btn btn-warning" type="button">Search Again</button>
+                            </div>
+                            <div className="col-sm-7 col-xs-12 rightSideFilter">
+                                <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">
+                                    <input type="checkbox" id="lifeSciences" value="Life sciences"/> Filter Subjects
+                                </label>
+                                <label className="checkbox-inline filterSubject" htmlFor="vpArts">
+                                    <input type="checkbox" id="vpArts" value="Visual and Perfomance Arts"/> Visual and Perfomance Arts
+                                </label>
+                                <label className="checkbox-inline filterSubject" htmlFor="libArts">
+                                    <input type="checkbox" id="libArts" value="Liberal Arts"/> Liberal Arts
+                                </label>
+                                <label className="checkbox-inline filterSubject" htmlFor="engTech">
+                                    <input type="checkbox" id="engTech" value="Engineering and technology"/> Engineering and technology
+                                </label>
+                                <label className="checkbox-inline filterSubject" htmlFor="business">
+                                    <input type="checkbox" id="business" value="Business"/> Business
+                                </label>
                             </div>
                         </form>
                     </div>
