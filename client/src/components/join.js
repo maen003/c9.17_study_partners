@@ -22,7 +22,7 @@ class Join extends Component {
 
     render() {
         return (
-            <div className="col-sm-6 join" id="join">
+            <div className="col-sm-6 join col-xs-12" id="join">
                 {/* {<h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>} */}
                 <div className="findEvent">
                     <div className="map">
@@ -31,14 +31,14 @@ class Join extends Component {
                     <div className="filter"> {/* pressing filter will animate filter options to left */}
                         <form>
                             <div className="formFilter">
-                                <div className="col-sm-5">    
+                                <div className="col-sm-5 col-xs-12">    
                                     <div className="form-group zipInput">
                                         <input type="text" id="zipcode" className="zipcode" placeholder="Zip Code"/>
                                     </div>
                                     <h3>Filter By Subject</h3>
                                     <button className="btn btn-warning" type="button">Search Again</button>
                                 </div>
-                                <div className="col-sm-7">
+                                <div className="col-sm-7 col-xs-12">
                                     <div className="filterCheckbox">
                                         <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">Filter Subjects
                                             <input type="checkbox" id="lifeSciences" value="Life sciences"/>
