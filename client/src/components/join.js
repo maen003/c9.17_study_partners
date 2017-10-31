@@ -25,9 +25,6 @@ class Join extends Component {
             <div className="col-sm-6 col-xs-12 join" id="join">
                 {/* {<h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>} */}
                 <div className="findEvent">
-                    <div className="map">
-
-                    </div>
                     <div className="filter"> {/* pressing filter will animate filter options to left */}
                         <form>
                             <div className="col-sm-5 col-xs-12 leftSideFilter">    
@@ -36,6 +33,7 @@ class Join extends Component {
                                 </div>
                                 <h3>Filter By Subject</h3>
                                 <button className="btn btn-warning" type="button">Search Again</button>
+                                <button className="btn btn-success" type="button">Toh gleh</button>
                             </div>
                             <div className="col-sm-7 col-xs-12 rightSideFilter">
                                 <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">
@@ -55,6 +53,9 @@ class Join extends Component {
                                 </label>
                             </div>
                         </form>
+                    </div>
+                    <div className="map">
+
                     </div>
                 </div>
             </div>
