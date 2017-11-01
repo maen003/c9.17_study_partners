@@ -18,7 +18,7 @@ class Join extends Component {
     }
 
     clickHandlerTrue() {
-        console.log('header was clicked');
+        console.log('header was clicked'); /* add ajax call here */
         this.setState({
             thing: true
         })

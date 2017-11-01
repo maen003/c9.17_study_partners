@@ -5,7 +5,15 @@ import './create.css';
 class Create extends Component {
     constructor (props) {
         super (props);
+
+        this.submitData = this.submitData.bind(this);
     }
+
+    submitData() {
+        console.log('submit button was clicked');
+        
+    }
+
     render() {
         return (
             <div className="col-sm-6 col-xs-12 create" id="create">
@@ -88,7 +96,7 @@ class Create extends Component {
                     </form>
                     <div className="bottons col-sm-12 col-xs-12"> {/* bottom buttons */}
                         <button className="btn btn-danger" type="button">Back</button>
-                        <button className="form-group btn btn-success submitForm" type="submit">Create Event</button>
+                        <button className="form-group btn btn-success submitForm" type="submit" onClick={this.submitData}>Create Event</button>
                     </div>
                 </div>
             </div>
