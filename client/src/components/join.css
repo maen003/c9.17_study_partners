@@ -26,8 +26,8 @@
 .findEvent {
     position: relative;
     margin-top: 10%;
-    height: 68vmin; /* change back to 0 OR 65vmin */
-    width: 100%; /* change back to 0 OR 100% */
+    height: 0; /* change back to 0 OR 65vmin */
+    width: 0; /* change back to 0 OR 100% */
     border: 1px solid black;
     display: block;
     overflow: hidden;
