@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import LoginModal from './login_modal';
+
 import './nav.css';
 
-import Logo from'../assets/images/stubbieslogo.png';
+// import Logo from'../assets/images/logo.png';
 
 class Nav extends Component {
     constructor (props) {
         super (props);
+
+        this.state = {
+            modalOpen: false
+        }
+    }
+
+    loginClick() {
+        <LoginModal/>
     }
 
     render() {
@@ -45,7 +55,7 @@ class Nav extends Component {
                                     <Link to='/profile'>Profile</Link>
                                 </li>
                                 <li>
-                                    <Link to='/login'>Login <span className="glyphicon glyphicon-log-in"></span></Link>
+                                    <Link to='/login' onClick={loginClick}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
                                 </li>
                             </ul>
                         </div>
@@ -57,3 +67,7 @@ class Nav extends Component {
 }
 
 export default Nav;
+
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>

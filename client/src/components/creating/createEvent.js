@@ -60,7 +60,7 @@ class CreateEvent extends Component {
         const {title, subject, groupSize, date, time, duration, phone, email, location, description} = this.state.form; 
         return(
             <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.submitData}>
                     <div className="form-group inputArea col-sm-12 col-xs-12 row1">
                         <div className="col-sm-4 col-xs-12">
                             <label htmlFor="title">Title of event</label><br/>
