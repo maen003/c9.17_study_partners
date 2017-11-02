@@ -14,7 +14,6 @@ class Create extends Component {
         this.clickHandler = this.clickHandler.bind(this);
         this.createDivShow = this.createDivShow.bind(this);
         this.createDivHide = this.createDivHide.bind(this);
-        this.submitData = this.submitData.bind(this);
     }
 
     clickHandler() {
@@ -39,11 +38,6 @@ class Create extends Component {
                 <h1 className="createHeader" onClick={this.clickHandler}>Create an Event!</h1>
             </div>
         )
-    }
-
-    submitData() {
-        console.log('submit button was clicked');
-        
     }
 
     render() {

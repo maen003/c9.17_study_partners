@@ -29,7 +29,7 @@ class JoinEvent extends Component {
                     <form>
                         <div className="col-sm-5 col-xs-12 leftSideFilter">    
                             <div className="form-group zipInput">
-                                <input type="text" id="zipcode" className="zipcode" placeholder="Zip Code"/>
+                                <input type="text" id="zipcode" className="zipcode form-control" placeholder="Zip Code"/>
                             </div>
                             <h3>Filter By Subject</h3>
                             <button className="btn btn-warning" type="button">Search Again</button>
