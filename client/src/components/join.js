@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import JoinEvent from './joinEvent';
+import axios from 'axios';
 
 import './join.css';
 
@@ -18,12 +19,17 @@ class Join extends Component {
 
     clickHandler() {
         console.log('join header was clicked');
+        axios.post("http://localhost:4000/events")
+            .then(function(response){
+                console.log(response.data.data);     //this is the event data pulled from DB
+            });
         this.setState({
             showJoinDiv: !this.state.showJoinDiv
         })
     }
 
     joinDivShow() {
+        console.log('show is working');
         return (
             <div className="join" id="join">
                 <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
