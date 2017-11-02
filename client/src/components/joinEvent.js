@@ -24,7 +24,6 @@ class JoinEvent extends Component {
 
     render() {
         console.log('join - props.show: ', this.props.show);
-        axios.post("http://localhost:4000/add_events")
 
         return (
             <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
