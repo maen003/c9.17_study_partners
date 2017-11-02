@@ -11,7 +11,10 @@ class JoinEvent extends Component {
 
     getDomElement() {
         var join = document.getElementsByClassName("findEvent")[0];
-        join.className += " animateExpandFind";
+
+        if (join.classList.contains('animateExpandFind')) {
+            join.className += " animateCloseFind";
+        }
     }
 
     componentDidMount(){
@@ -19,13 +22,14 @@ class JoinEvent extends Component {
     }
 
     render() {
+        console.log('join - props.show: ', this.props.show);
         return (
-            <div className="findEvent">
+            <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
                 <div className="filter"> {/* pressing filter will animate filter options to left */}
                     <form>
                         <div className="col-sm-5 col-xs-12 leftSideFilter">    
                             <div className="form-group zipInput">
-                                <input type="text" id="zipcode" className="zipcode" placeholder="Zip Code"/>
+                                <input type="text" id="zipcode" className="zipcode form-control" placeholder="Zip Code"/>
                             </div>
                             <h3>Filter By Subject</h3>
                             <button className="btn btn-warning" type="button">Search Again</button>

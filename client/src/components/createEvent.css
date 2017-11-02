@@ -1,55 +1,58 @@
-.findEvent {
+.createEvent {
     position: relative;
     margin-top: 1%;
     height: 0;
     width: 0;
     border: 1px solid black;
+    display: block;
     overflow: hidden;
     overflow-y: auto;
-    display: none;
 }
 
-.filter {
+.createEvent > form {
+    height: 90%;
     width: 100%;
-    height: 25%;
 }
 
-.filter > form {
+.row1, .row2, .row3 {
+    height: 12%;
+}
+
+.row4 {
+    height: 40%;
+}
+
+.mapView {
+    width: 100%;
+    height: 100%;
+    background-color: pink;
+}
+
+.locationForm {
+    height: 100%;
+    width: 100%;
+}
+
+.locationFormComp:first-child {
+    padding-top: 15%;
+}
+
+.locationFormComp {
     height: 100%;
 }
 
-.formFilter > h3,.zipInput {
-    margin: 0;
+.inputArea {
+    text-align: center;
 }
 
-.filterSubject input {
-    margin-left: 10%;
+.form-group {
+    margin-bottom: 2%;
 }
 
-.leftSideFilter, .rightSideFilter {
-    height: 100%;
-    padding-top: 3%;
-}
-
-.checkbox-inline:first-child {
-    margin: 0 0 0 3.5%;
-}
-
-.checkbox-inline {
-    display: block;
-    padding: 0 0 0 10%;
-    margin: 0 0 0 10%; 
-}
-
-.map {
-    height: 75%;
+.bottons {
     width: 100%;
-    background-color: lightpink;
-}
-
-.map > img {
-    height: 100%;
-    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 /* animation */
@@ -64,14 +67,14 @@
 }
 
 /* keyframe animation */
-.animateExpandFind {
+.animateExpandCreate {
     display: block;
-    animation: expandFind 1.5s;
+    animation: expandCreate 1.5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
-  
-@keyframes expandFind {
+
+@keyframes expandCreate {
     0% {
         height: 0;
         width: 0;
@@ -86,14 +89,14 @@
     }
 }
   
-.animateCloseFind {
+.animateCloseCreate {
     display: block;
-    animation: closeFind 1s;
+    animation: closeCreate 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
   
-@keyframes closeFind {
+@keyframes closeCreate {
     0% {
         height: 68vmin;
         width: 100%;

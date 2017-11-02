@@ -8,34 +8,25 @@ class Join extends Component {
         super (props);
 
         this.state = {
-            thing: null
+            showJoinDiv: false,
         }
 
-        this.clickHandlerTrue = this.clickHandlerTrue.bind(this);
-        this.clickHandlerFalse = this.clickHandlerFalse.bind(this);
+        this.clickHandler = this.clickHandler.bind(this);
         this.joinDivShow = this.joinDivShow.bind(this);
         this.joinDivHide = this.joinDivHide.bind(this);
     }
 
-    clickHandlerTrue() {
-        console.log('header was clicked'); /* add ajax call here */
+    clickHandler() {
+        console.log('join header was clicked');
         this.setState({
-            thing: true
-        })
-    }
-
-    clickHandlerFalse() {
-        console.log('header was clicked');
-        this.setState({
-            thing: false
+            showJoinDiv: !this.state.showJoinDiv
         })
     }
 
     joinDivShow() {
         return (
             <div className="join" id="join">
-                <h1 className="joinHeader" onClick={this.clickHandlerFalse}>Join an Event!</h1>
-                <JoinEvent/>
+                <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
             </div>
         )
     }
@@ -43,27 +34,19 @@ class Join extends Component {
     joinDivHide() {
         return (
             <div className="join" id="join">
-                <h1 className="joinHeader" onClick={this.clickHandlerTrue}>Join an Event!</h1>
+                <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
+                <JoinEvent show={this.state.showJoinDiv}/>
             </div>
         )
     }
 
     render() {
-        if (this.state.thing) {
-            console.log(this.state.thing = true);
-            return (
-                <div className="col-sm-6 col-xs-12 joinContainer">
-                    {this.joinDivShow()}
-                </div>
-            )
-        } else {
-            console.log(this.state.thing = false);
-            return (
-                <div className="col-sm-6 col-xs-12 joinContainer">
-                    {this.joinDivHide()}
-                </div>
-            )
-        } 
+        console.log('showJoinDiv is:', this.state.showJoinDiv);
+        return (
+            <div className="col-sm-6 col-xs-12 joinContainer">
+                {this.joinDivHide()}
+            </div>
+        )
     }
 }
 

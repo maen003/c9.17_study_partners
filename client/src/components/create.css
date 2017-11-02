@@ -1,11 +1,17 @@
+.createContainer {
+    padding-right: 0;
+    height: 100%;
+    position: relative;
+}
+
 .create {
     /* border: 1px solid black; */
     height: 100%;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding-right: 0;
 }
 
 .createHeader {
@@ -14,130 +20,6 @@
     text-align: center;
     border-radius: 50px;
     display: block;
-    position: absolute;
-    top: 46%;
-    margin: 10px 0;
-}
-
-.create > h1 {
+    margin: auto;
     background: linear-gradient(to bottom left, darkcyan, white);
-}
-
-.createEvent {
-    position: relative;
-    margin-top: 10%;
-    height: 68vmin; /* change back to 0 */
-    width: 100%; /* change back to 0 */
-    border: 1px solid black;
-    display: block;
-    overflow: hidden;
-    overflow-y: auto;
-}
-
-.createEvent > form {
-    height: 90%;
-    width: 100%;
-}
-
-.row1, .row2, .row3 {
-    height: 12%;
-}
-
-.row4 {
-    height: 40%;
-}
-
-.mapView {
-    width: 100%;
-    height: 100%;
-    background-color: pink;
-}
-
-.locationForm {
-    height: 100%;
-    width: 100%;
-}
-
-.locationFormComp:first-child {
-    padding-top: 15%;
-}
-
-.locationFormComp {
-    height: 100%;
-}
-
-.inputArea {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 2%;
-}
-
-.bottons {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-/* animation */
-.moveHeaderUp {
-    top: 0;
-    transition: top 1.5s ease;
-}
-
-.moveHeaderDown {
-    top: 46%;
-    transition: top 3s ease;
-}
-
-/* keyframe animation */
-.animateExpandCreate {
-    animation: expandCreate 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-@keyframes expandCreate {
-    0% {
-        height: 0;
-        width: 0;
-    }
-    50% {
-        height: 0;
-        width: 90%;
-    }
-    75% {
-        height: 0;
-        width: 100%;
-    }
-    100% {
-        height: 65vmin;
-        width: 100%;
-    }
-}
-  
-.animateCloseCreate {
-    animation: closeCreate 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes closeCreate {
-    0% {
-        height: 65vmin;
-        width: 100%;
-    }
-    50% {
-        height: 65vmin;
-        width: 10%;
-    }
-    75% {
-        height: 65vmin;
-        width: 0;
-    }
-    100% {
-        height: 0;
-        width: 0;
-    }
 }
