@@ -52,7 +52,24 @@ class CreateEvent extends Component {
     submitData(event) {
         event.preventDefault();
         console.log('form values are:', this.state.form);
+        console.log('email is: ', this.state.form.email);
         // this.props.add(this.state.form);
+        axios.post("http://localhost:4000/add_events",{
+            title: this.state.form.title,
+            description: this.state.form.description,
+            subject: this.state.form.subject,
+            date: this.state.form.date,
+            time: this.state.form.time,
+            duration: this.state.form.duration,
+            location: this.state.form.location,
+            max: this.state.form.groupSize,
+            phone: this.state.form.phone,
+            email:this.state.form.email
+
+        }).then(function(resp){
+            console.log('add events successful');
+            console.log(resp);
+        });
     }
 
     render() {
