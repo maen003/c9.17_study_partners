@@ -11,7 +11,10 @@ class JoinEvent extends Component {
 
     getDomElement() {
         var join = document.getElementsByClassName("findEvent")[0];
-        join.className += " animateExpandFind";
+
+        if (join.classList.contains('animateExpandFind')) {
+            join.className += " animateCloseFind";
+        }
     }
 
     componentDidMount(){
@@ -19,8 +22,9 @@ class JoinEvent extends Component {
     }
 
     render() {
+        console.log('join - props.show: ', this.props.show);
         return (
-            <div className="findEvent">
+            <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
                 <div className="filter"> {/* pressing filter will animate filter options to left */}
                     <form>
                         <div className="col-sm-5 col-xs-12 leftSideFilter">    
