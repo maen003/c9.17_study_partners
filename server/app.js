@@ -48,11 +48,13 @@ app.post('/add_events',function(req, res){
     const connection = mysql.createConnection(credentials);
 
     const fields = `INSERT INTO events SET title = '${req.body.title}', description = '${req.body.description}', subject = '${req.body.subject}', date = '${req.body.date}', time = '${req.body.time}', duration = '${req.body.duration}', location = '${req.body.location}', max = '${req.body.max}', phone = '${req.body.phone}', email = '${req.body.email}'`;
+    const test = `INSERT INTO events SET title="Automotive Repair", description="Come learn how to repair and replace spark plugs, ignition coils, and head gaskets", subject="Engineering", date="2017-12-25", time="12:00 pm", duration="4-5 hours", location="Autozone", coordinates="33.628954, -117.705047", max="6-10", phone="5555555555", email="fixitfelix@gmail.com", facebookID = "0000000000"
+`;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
         connection.query(
-            fields
+            test
             , function(err, results, fields){
                 const output = {
                     success: true,
