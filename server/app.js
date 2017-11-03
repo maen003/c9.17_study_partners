@@ -52,7 +52,7 @@ app.post('/add_events',function(req, res){
     console.log('this is a request body', req.body);
     connection.connect(() => {
         connection.query(
-            test
+            fields
             , function(err, results, fields){
                 const output = {
                     success: true,
