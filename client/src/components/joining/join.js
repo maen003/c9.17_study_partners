@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import JoinEvent from './joinEvent';
+import axios from 'axios';
 
 import './join.css';
 
@@ -17,6 +18,10 @@ class Join extends Component {
     }
 
     clickHandler() {
+        axios.post("http://dev.michaelahn.solutions/events") //change back to "/events" when pushing
+            .then(function(response){
+                console.log(response.data.data); //this is the event data pulled from DB
+            });
         this.setState({
             showJoinDiv: !this.state.showJoinDiv
         })

@@ -21,6 +21,7 @@ class JoinEvent extends Component {
         this.getDomElement();
     }
 
+
     render() {
         return (
             <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
