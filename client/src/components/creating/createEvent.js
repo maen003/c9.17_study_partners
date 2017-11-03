@@ -46,17 +46,13 @@ class CreateEvent extends Component {
         this.setState({ // update form in state
             form: {...form}
         });
-        console.log('state: ', this.state);
     }
 
     submitData(event) {
         event.preventDefault();
-        console.log('form values are:', this.state.form);
-        // this.props.add(this.state.form);
     }
 
     render() {
-        console.log('create - props.show: ', this.props.show);
         const {title, subject, groupSize, date, time, duration, phone, email, location, description} = this.state.form; 
         return(
             <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>

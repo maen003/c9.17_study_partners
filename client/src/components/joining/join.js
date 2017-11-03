@@ -17,7 +17,6 @@ class Join extends Component {
     }
 
     clickHandler() {
-        console.log('join header was clicked');
         this.setState({
             showJoinDiv: !this.state.showJoinDiv
         })
@@ -41,7 +40,6 @@ class Join extends Component {
     }
 
     render() {
-        console.log('showJoinDiv is:', this.state.showJoinDiv);
         return (
             <div className="col-sm-6 col-xs-12 joinContainer">
                 {this.joinDivHide()}
