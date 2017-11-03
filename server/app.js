@@ -47,11 +47,13 @@ app.post('/add_events',function(req, res){
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
 
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates="123, 123", facebookID="0000"`;
+    console.log(fields);
+    console.log('this is a request body', req.body);
     connection.connect(() => {
-        console.log('omfg these is request time', req, 'this is the response', res);
         connection.query(
-            `INSERT INTO events SET title = '${req.body.title}', description = '${req.body.description}', subject = '${req.body.subject}', date = '${req.body.date}', time = '${req.body.time}', duration = '${req.body.duration}', location = '${req.body.location}', max = '${req.body.max}', phone = '${req.body.phone}', email = '${req.body.email}'`, function(err, results, fields){
-                console.log('query has finished', connection);
+            fields
+            , function(err, results, fields){
                 const output = {
                     success: true,
                     data: results
