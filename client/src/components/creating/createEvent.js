@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {createEvent} from '../../actions';
 
 import './createEvent.css';
 
@@ -40,31 +41,36 @@ class CreateEvent extends Component {
     }
 
     handleInputChange(event){
-        const {value, name} = event.target; // create constants for value and name from event.target
-        const {form} = this.state; // destructuring to create a constant for form from this.state
-        form[name] = value; // name constant to select the correct key in the form object and set it to the constant value
-        this.setState({ // update form in state
+        const {value, name} = event.target;
+        const {form} = this.state;
+        form[name] = value;
+        this.setState({
             form: {...form}
         });
     }
 
     submitData(event) {
         event.preventDefault();
-        axios.post("/add_events",{
-            title: this.state.form.title,
-            description: this.state.form.description,
-            subject: this.state.form.subject,
-            date: this.state.form.date,
-            time: this.state.form.time,
-            duration: this.state.form.duration,
-            location: this.state.form.location,
-            max: this.state.form.groupSize,
-            phone: this.state.form.phone,
-            email:this.state.form.email
-        }).then(function(resp){
+        console.log('form values: ', this.state.form);
+        this.props.createEvent(this.state.form).then(function(resp){
             console.log('add events successful');
             console.log(resp);
         });
+
+        this.setState({
+            form: {
+                title: '',
+                subject: '',
+                groupSize: '',
+                date: '',
+                time: '',
+                duration: '',
+                phone: '',
+                email: '',
+                location: '',
+                description: ''
+            }
+        })
     }
 
     render() {
@@ -158,4 +164,4 @@ class CreateEvent extends Component {
     }
 }
 
-export default CreateEvent;
+export default connect(null, {createEvent})(CreateEvent);

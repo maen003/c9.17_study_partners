@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import LoginModal from './modal/login_modal';
 
 import './nav.css';
 // import Logo from'../assets/images/logo.png';
@@ -9,15 +9,12 @@ class Nav extends Component {
     constructor (props) {
         super (props);
 
-        this.state = {
-            modalOpen: false
-        }
-
         this.loginClick = this.loginClick.bind(this);
     }
 
-    loginClick() {
-        console.log('login button was clicked');
+    loginClick(event) {
+        event.preventDefault();
+        console.log('login button was clicked. showing modal:');
         <LoginModal/>
     }
 
@@ -56,7 +53,7 @@ class Nav extends Component {
                                     <Link to='/profile'>Profile</Link>
                                 </li>
                                 <li>
-                                    <Link to='/login' onClick={this.loginClick}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
+                                    <Link to='/' data-toggle="modal" data-target="#loginModal" onClick={this.loginClick}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
                                 </li>
                             </ul>
                         </div>
@@ -68,7 +65,3 @@ class Nav extends Component {
 }
 
 export default Nav;
-
-
-// <!-- Trigger the modal with a button -->
-import { Button } from 'react-bootstrap';
