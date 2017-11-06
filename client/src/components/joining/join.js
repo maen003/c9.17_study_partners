@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getAll} from '../../actions';
 import JoinEvent from './joinEvent';
-import axios from 'axios';
 
 import './join.css';
 
@@ -18,18 +19,15 @@ class Join extends Component {
     }
 
     clickHandler() {
-        console.log('join header was clicked');
-        axios.post("/events")
-            .then(function(response){
-                console.log(response.data.data);     //this is the event data pulled from DB
-            });
+        this.props.getAll().then(function(response){
+            console.log(response.payload.data.data);
+        });
         this.setState({
             showJoinDiv: !this.state.showJoinDiv
         })
-    }
+     }
 
     joinDivShow() {
-        console.log('show is working');
         return (
             <div className="join" id="join">
                 <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
@@ -47,7 +45,6 @@ class Join extends Component {
     }
 
     render() {
-        console.log('showJoinDiv is:', this.state.showJoinDiv);
         return (
             <div className="col-sm-6 col-xs-12 joinContainer">
                 {this.joinDivHide()}
@@ -56,4 +53,4 @@ class Join extends Component {
     }
 }
 
-export default Join;
+export default connect(null, {getAll})(Join);

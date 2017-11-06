@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Join from './join';
-import Create from './create';
+import Join from '../joining/join';
+import Create from '../creating/create';
 
 export default () => {
     return (

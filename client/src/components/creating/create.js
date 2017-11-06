@@ -17,7 +17,6 @@ class Create extends Component {
     }
 
     clickHandler() {
-        console.log('create header was clicked');
         this.setState({
             showCreateDiv: !this.state.showCreateDiv
         })
@@ -41,7 +40,6 @@ class Create extends Component {
     }
 
     render() {
-        console.log('showCreateDiv is: ', this.state.showCreateDiv);
         return (
             <div className="col-sm-6 col-xs-12 createContainer">
                 {this.createDivShow()}
