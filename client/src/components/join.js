@@ -19,7 +19,7 @@ class Join extends Component {
 
     clickHandler() {
         console.log('join header was clicked');
-        axios.post("/events")
+        axios.post("http://dev.michaelahn.solutions/events")
             .then(function(response){
                 console.log(response.data.data);     //this is the event data pulled from DB
             });

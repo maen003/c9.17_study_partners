@@ -54,7 +54,7 @@ class CreateEvent extends Component {
         console.log('form values are:', this.state.form);
         console.log('email is: ', this.state.form.email);
         // this.props.add(this.state.form);
-        axios.post("/add_events",{
+        axios.post("http://dev.michaelahn.solutions/add_events",{
             title: this.state.form.title,
             description: this.state.form.description,
             subject: this.state.form.subject,
