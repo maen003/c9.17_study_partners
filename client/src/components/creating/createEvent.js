@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {createEvent} from '../../actions';
 
 import './createEvent.css';
 
@@ -11,7 +12,7 @@ class CreateEvent extends Component {
             form: {
                 title: '',
                 subject: '',
-                groupSize: '',
+                max: '',
                 date: '',
                 time: '',
                 duration: '',
@@ -40,44 +41,43 @@ class CreateEvent extends Component {
     }
 
     handleInputChange(event){
-        const {value, name} = event.target; // create constants for value and name from event.target
-        const {form} = this.state; // destructuring to create a constant for form from this.state
-        form[name] = value; // name constant to select the correct key in the form object and set it to the constant value
-        this.setState({ // update form in state
+        const {value, name} = event.target;
+        const {form} = this.state;
+        form[name] = value;
+        this.setState({
             form: {...form}
         });
-        console.log('state: ', this.state);
     }
 
     submitData(event) {
         event.preventDefault();
-        console.log('form values are:', this.state.form);
-        console.log('email is: ', this.state.form.email);
-        // this.props.add(this.state.form);
-        axios.post("/add_events",{
-            title: this.state.form.title,
-            description: this.state.form.description,
-            subject: this.state.form.subject,
-            date: this.state.form.date,
-            time: this.state.form.time,
-            duration: this.state.form.duration,
-            location: this.state.form.location,
-            max: this.state.form.groupSize,
-            phone: this.state.form.phone,
-            email:this.state.form.email
-
-        }).then(function(resp){
+        console.log('form values: ', this.state.form);
+        this.props.createEvent(this.state.form).then(function(resp){
             console.log('add events successful');
             console.log(resp);
         });
+
+        this.setState({
+            form: {
+                title: '',
+                subject: '',
+                max: '',
+                date: '',
+                time: '',
+                duration: '',
+                phone: '',
+                email: '',
+                location: '',
+                description: ''
+            }
+        })
     }
 
     render() {
-        console.log('create - props.show: ', this.props.show);
-        const {title, subject, groupSize, date, time, duration, phone, email, location, description} = this.state.form; 
+        const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form; 
         return(
             <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.submitData}>
                     <div className="form-group inputArea col-sm-12 col-xs-12 row1">
                         <div className="col-sm-4 col-xs-12">
                             <label htmlFor="title">Title of event</label><br/>
@@ -95,8 +95,8 @@ class CreateEvent extends Component {
                                 </select>
                         </div>
                         <div className="col-sm-4 col-xs-12">
-                                <label htmlFor="groupSize">Group Size</label><br/>
-                                    <select value={groupSize} onChange={this.handleInputChange} name="groupSize" id="groupSize" className="size form-control">
+                                <label htmlFor="max">Group Size</label><br/>
+                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="size form-control">
                                         <option>Set group size</option>
                                         <option>2-5</option>
                                         <option>6-10</option>
@@ -164,4 +164,4 @@ class CreateEvent extends Component {
     }
 }
 
-export default CreateEvent;
+export default connect(null, {createEvent})(CreateEvent);
