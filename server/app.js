@@ -21,7 +21,7 @@ app.use(express.static(path.resolve("..", "client", "dist")));
 
 
 
-app.post("http://dev.michaelahn.solutions/events",function(req, res){
+app.post("/events",function(req, res){
     const connection = mysql.createConnection(credentials);
 
     connection.connect(() => {
@@ -41,7 +41,7 @@ app.post("http://dev.michaelahn.solutions/events",function(req, res){
     //res.end('got a user request!!!!!');
 });
 
-app.post("http://dev.michaelahn.solutions/add_events",function(req, res){
+app.post("/add_events",function(req, res){
     console.log('the data is receiveth');
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
