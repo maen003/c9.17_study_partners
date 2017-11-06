@@ -20,11 +20,11 @@ class Join extends Component {
 
     clickHandler() {
         this.props.getAll().then(function(response){
-                 console.log(response.data.data); //this is the event data pulled from DB
-             });
-         this.setState({
-             showJoinDiv: !this.state.showJoinDiv
-         })
+            console.log(response.payload.data.data);
+        });
+        this.setState({
+            showJoinDiv: !this.state.showJoinDiv
+        })
      }
 
     joinDivShow() {

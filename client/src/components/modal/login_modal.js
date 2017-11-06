@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 
 import './login_modal.css';
 
+const display = {
+    display: 'block'
+}
+
+const hide = {
+    display: 'none'
+}
+
 class LoginModal extends Component {
     constructor (props) {
         super (props);
@@ -21,7 +29,7 @@ class LoginModal extends Component {
 
     toggleModal(event) {
         this.setState({
-            showModal: !showModal
+            showModal: !this.state.showModal
         })
     }
 
@@ -40,12 +48,11 @@ class LoginModal extends Component {
     }
 
     render() {
-        let close = () => this.setState({show: false});
         const { email, password } = this.state;
         
         return (
             <div className="container">
-                <div className="modal fade" id="loginModal" role="dialog">
+                <div onClick={this.toggleModal} className="modal loginModal" id="loginModal" role="dialog" style={this.state.showModal ? display : hide}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                         <div className="modal-header">
@@ -72,6 +79,7 @@ class LoginModal extends Component {
                         </div>
                     </div>
                 </div>
+                <button onClick={this.toggleModal} className="btn btn-success login">Login</button>
             </div>
         );
     }

@@ -12,7 +12,7 @@ class CreateEvent extends Component {
             form: {
                 title: '',
                 subject: '',
-                groupSize: '',
+                max: '',
                 date: '',
                 time: '',
                 duration: '',
@@ -61,7 +61,7 @@ class CreateEvent extends Component {
             form: {
                 title: '',
                 subject: '',
-                groupSize: '',
+                max: '',
                 date: '',
                 time: '',
                 duration: '',
@@ -74,7 +74,7 @@ class CreateEvent extends Component {
     }
 
     render() {
-        const {title, subject, groupSize, date, time, duration, phone, email, location, description} = this.state.form; 
+        const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form; 
         return(
             <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>
                 <form onSubmit={this.submitData}>
@@ -95,8 +95,8 @@ class CreateEvent extends Component {
                                 </select>
                         </div>
                         <div className="col-sm-4 col-xs-12">
-                                <label htmlFor="groupSize">Group Size</label><br/>
-                                    <select value={groupSize} onChange={this.handleInputChange} name="groupSize" id="groupSize" className="size form-control">
+                                <label htmlFor="max">Group Size</label><br/>
+                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="size form-control">
                                         <option>Set group size</option>
                                         <option>2-5</option>
                                         <option>6-10</option>

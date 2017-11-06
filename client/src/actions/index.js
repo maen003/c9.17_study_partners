@@ -10,7 +10,7 @@ export function createEvent(form) {
         time: form.time,
         duration: form.duration,
         location: form.location,
-        max: form.groupSize,
+        max: form.max,
         phone: form.phone,
         email:form.email
     });
@@ -22,7 +22,7 @@ export function createEvent(form) {
 }
 
 export function getAll() {
-    const request = axios.get("http://dev.michaelahn.solutions/events"); //change back to "/events" when pushing
+    const request = axios.post("http://dev.michaelahn.solutions/events"); //change to "/events" when pushing
 
     return {
         type: types.JOIN_EVENT,
