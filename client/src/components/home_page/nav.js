@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import LoginModal from './modal/login_modal';
+import LoginModal from '../modal/login_modal';
 
 import './nav.css';
 // import Logo from'../assets/images/logo.png';
