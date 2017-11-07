@@ -9,16 +9,27 @@ class Nav extends Component {
     constructor (props) {
         super (props);
 
-        this.loginClick = this.loginClick.bind(this);
+        this.state = {
+            showModal: false
+        }
+
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    loginClick(event) {
-        event.preventDefault();
-        console.log('login button was clicked. showing modal:');
-        <LoginModal/>
+    toggleModal(event) {
+        this.setState({
+            showModal: !this.state.showModal,
+            form: {
+                email: '',
+                password: ''
+            }
+        })
     }
 
     render() {
+        const display = {display: 'block'}
+        const hide = {display: 'none'}
+
         return (
             <div className="container">
                 <nav className="navbar navbar-default">
@@ -53,12 +64,13 @@ class Nav extends Component {
                                     <Link to='/profile'>Profile</Link>
                                 </li>
                                 <li>
-                                    <Link to='/' data-toggle="modal" data-target="#loginModal" onClick={this.loginClick}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
+                                    <Link to='/' onClick={this.toggleModal}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
+                <LoginModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
         )
     }
