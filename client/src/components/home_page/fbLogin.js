@@ -39,9 +39,9 @@ class FacebookLogin extends Component {
         FB.login(this.checkLoginState());
     }
     fetchDataFromFb() {
-        console.log('Welcome! Fetching your information.... ');
-        FB.api('/me', function(response) {
-            console.log('Successful login for: ' + response.name);
+        console.log('Login with Facebook button clicked');
+        FB.api('/me?fields=id,name, first_name,last_name, email, picture', function(response) {
+            console.log('Successfully logged in as ' + response.name);
             console.log('The data response from facebook : ', response);
         });
     }
@@ -65,8 +65,7 @@ class FacebookLogin extends Component {
             className="fb-login-button" data-width="150" 
             data-max-rows="1" data-size="medium"
             data-button-type="continue_with" data-show-faces="false" 
-            data-auto-logout-link="false" data-use-continue-as="true" 
-            scope="public_profile,email">
+            data-auto-logout-link="false" data-use-continue-as="true">
             </div>
             )
     }
