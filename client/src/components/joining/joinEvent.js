@@ -23,7 +23,6 @@ class JoinEvent extends Component {
     }
 
     render() {
-        console.log('JOIN EVENT - props: ', this.props);
         return (
             <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
                 <div className="filter"> {/* pressing filter will animate filter options to left */}

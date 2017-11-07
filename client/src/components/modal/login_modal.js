@@ -21,6 +21,7 @@ class LoginModal extends Component {
             },
             showModal: this.props.showModal
         }
+
         this.toggleModal = this.props.toggleModal;
         this.submitLogin = this.submitLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -55,27 +56,27 @@ class LoginModal extends Component {
                 <div className={`modal loginModal ${showModal ? '' : ' hidden'}`} id="loginModal" role="dialog">
                     <div className="modal-dialog">
                         <div className="modal-content">
-                        <div className="modal-header">
-                            <button onClick={this.toggleModal} type="button" className="close">&times;</button>
-                            <h4 className="modal-title">Login</h4>
-                        </div>
-                        <div className="modal-body">
-                            <form onSubmit={this.submitLogin}>
-                                <div className="form-group inputArea col-sm-12 col-xs-12">
-                                    <div className="col-sm-8 col-sm-offset-2 col-xs-12">
-                                        <label htmlFor="email">Email</label><br/>
-                                            <input value={email} onChange={this.handleInputChange} name="email" id="email" className="email form-control" type="email"/>
+                            <div className="modal-header">
+                                <button onClick={this.toggleModal} type="button" className="close">&times;</button>
+                                <h4 className="modal-title">Login</h4>
+                            </div>
+                            <div className="modal-body">
+                                <form onSubmit={this.submitLogin}>
+                                    <div className="form-group inputArea col-sm-12 col-xs-12">
+                                        <div className="col-sm-8 col-sm-offset-2 col-xs-12">
+                                            <label htmlFor="email">Email</label><br/>
+                                                <input value={email} onChange={this.handleInputChange} name="email" id="email" className="email form-control" type="email"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group inputArea col-sm-12 col-xs-12">
-                                    <div className="col-sm-8 col-sm-offset-2 col-xs-12">
-                                        <label htmlFor="email">Password</label><br/>
-                                            <input value={password} onChange={this.handleInputChange} name="password" id="password" className="password form-control" type="password"/>
+                                    <div className="form-group inputArea col-sm-12 col-xs-12">
+                                        <div className="col-sm-8 col-sm-offset-2 col-xs-12">
+                                            <label htmlFor="email">Password</label><br/>
+                                                <input value={password} onChange={this.handleInputChange} name="password" id="password" className="password form-control" type="password"/>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                            <button onClick={this.submitLogin} type="button" className="btn btn-primary">Login</button>
-                        </div>
+                                </form>
+                                <button onClick={this.submitLogin} type="button" className="btn btn-primary">Login</button>
+                            </div>
                         </div>
                     </div>
                 </div>
