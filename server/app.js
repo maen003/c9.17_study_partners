@@ -9,7 +9,7 @@ const app = express();
 
 const passport = require('passport');
 const Strategy = require('passport-facebook');
-const fbCredentials = require('./facebookCreds.js');
+const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
 
 //bodyParser
@@ -28,7 +28,7 @@ app.use(express.static(path.resolve("..", "client", "dist")));
 //Morgan
 app.use(morgan('dev'));
 
-
+//Session
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
@@ -38,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//EVENT ROUTES
+//CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
     const connection = mysql.createConnection(credentials);
 
@@ -107,11 +107,11 @@ app.post('/delete_events',function(req, res){
     console.log('got a user request????');
     //res.end('got a user request!!!!!');
 });
-//END EVENT ROUTES
+//END CREATE/JOIN EVENTS ROUTES
 
 
 //FB PASSPORT
-passport.use(new Strategy(fbCredentials, // First argument accepts an object for clientID, clientSecret, and callbackURL
+passport.use(new Strategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
     function (accessToken, refreshToken, profile, cb) {
         let sql = "SELECT * FROM ?? WHERE ?? = ?";
         let inserts = ['users', 'facebookid', profile.id];
@@ -120,7 +120,7 @@ passport.use(new Strategy(fbCredentials, // First argument accepts an object for
             debugger
             if (err) throw err;
             console.log("These are the results", results);
-            if (results.length == 0) {
+            if (results.length === 0) {
                 let { displayName, id } = profile;
                 let sql = "INSERT INTO ??(??, ??) VALUES (?, ?)";
                 let inserts = ['users', 'facebookid', 'displayName', id, displayName];
@@ -130,7 +130,7 @@ passport.use(new Strategy(fbCredentials, // First argument accepts an object for
                     console.log("This is the new id: ", results.insertId);
                 });
             }
-        })
+        });
         return cb(null, profile);
     }));
 
@@ -173,6 +173,7 @@ app.get('/logout',
     }
 );
 //END FB PASSPORT
+
 
 app.listen(4000,function(){
     console.log('the server is started on Port 4000');
