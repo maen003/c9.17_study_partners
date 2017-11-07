@@ -47,6 +47,8 @@ class FacebookLogin extends Component {
     }
     statusChangeCallback(response) {
         if (response.status === 'connected') {
+            let accessToken = FB.getAuthResponse()['accessToken']
+            console.log('This is the access Token : ', accessToken )
         this.fetchDataFromFb();
         } else if (response.status === 'not_authorized') {
             console.log('please log in to continue')
