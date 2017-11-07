@@ -48,9 +48,9 @@
     left: 0;
 }
 
-.letter, .letter:before, .letter:after {
+/* .letter, .letter:before, .letter:after {
     transition: all 0.2s ease-in-out;
-}
+} */
 
 /* .letter:before {
     color: white;

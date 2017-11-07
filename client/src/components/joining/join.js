@@ -11,6 +11,7 @@ class Join extends Component {
 
         this.state = {
             showJoinDiv: false,
+            eventList: null
         }
 
         this.clickHandler = this.clickHandler.bind(this);
@@ -20,12 +21,19 @@ class Join extends Component {
 
     clickHandler() {
         this.props.getAll().then(function(response){
-            console.log(response.payload.data.data);
+            console.log('response: ', response.payload.data);
         });
         this.setState({
-            showJoinDiv: !this.state.showJoinDiv
+            showJoinDiv: !this.state.showJoinDiv,
         })
-     }
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        console.log('next props: ', nextProps);
+        this.setState({
+            eventList: nextProps.events.data.data
+        })
+    }
 
     joinDivShow() {
         return (
@@ -39,7 +47,7 @@ class Join extends Component {
         return (
             <div className="join" id="join">
                 <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
-                <JoinEvent show={this.state.showJoinDiv}/>
+                <JoinEvent eventList={this.state.eventList} show={this.state.showJoinDiv}/>
             </div>
         )
     }
@@ -53,4 +61,10 @@ class Join extends Component {
     }
 }
 
-export default connect(null, {getAll})(Join);
+function mapStateToProps(state) {
+    return {
+        events: state.event.all
+    }
+}
+
+export default connect(mapStateToProps, {getAll})(Join);
