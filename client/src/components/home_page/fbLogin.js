@@ -6,7 +6,7 @@ class FacebookLogin extends Component {
         super(props);
         this.checkLoginState = this.checkLoginState.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.testAPI = this.fetchDataFromFb.bind(this);
+        this.fetchDataFromFb = this.fetchDataFromFb.bind(this);
         this.statusChangeCallback = this.statusChangeCallback.bind(this);
     }
     componentDidMount = () => {
