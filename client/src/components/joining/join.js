@@ -29,7 +29,7 @@ class Join extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        console.log('next props: ', nextProps);
+        // console.log('next props: ', nextProps);
         this.setState({
             eventList: nextProps.events.data.data
         })
