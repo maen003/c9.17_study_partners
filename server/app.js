@@ -3,7 +3,7 @@ const credentials = require('./mysql_credentials');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
-const morgan = require('morgan'); // Logger middleware for terminal
+// const morgan = require('morgan'); // Logger middleware for terminal
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 app.use(express.static(path.resolve("..", "client", "dist")));
 
 //Morgan
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 //Session
 app.use(session({
