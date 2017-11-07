@@ -6,7 +6,8 @@ class EventList extends Component {
 
 
     }
-    render() {
+
+    render() {       
         console.log('props: ', this.props);
         // const eventElements = this.props.allEvents.map((eventItem, index) => {
         //     return <EventItem key={index} index={index} item={eventItem}/>
@@ -15,7 +16,7 @@ class EventList extends Component {
         return (
             <div className="container">
                 <h3>All Events</h3>
-                {/* <ul>2
+                {/* <ul>
                     {eventElements}
                 </ul> */}
             </div>
