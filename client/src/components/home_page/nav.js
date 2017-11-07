@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import LoginModal from '../modal/login_modal';
 
+import FacebookLogin from './fbLogin';
+
 import './nav.css';
 // import Logo from'../assets/images/logo.png';
 
@@ -50,7 +52,7 @@ class Nav extends Component {
                             </div>
                             <ul className="nav navbar-nav navbar-right rightNav col-sm-3 col-xs-3">
                                 <li>
-                                    <Link to='/profile'>Profile</Link>
+                                    <FacebookLogin/>
                                 </li>
                                 <li>
                                     <Link to='/' data-toggle="modal" data-target="#loginModal" onClick={this.loginClick}>Login <span className="glyphicon glyphicon-log-in"></span></Link>
