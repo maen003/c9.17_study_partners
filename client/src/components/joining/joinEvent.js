@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import EventList from './listEvents';
+import EventList from './listEvents';
 
 import './joinEvent.css';
 
@@ -23,7 +23,7 @@ class JoinEvent extends Component {
     }
 
     render() {
-        // console.log('props: ', this.props);
+        console.log('JOIN EVENT - props: ', this.props);
         return (
             <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
                 <div className="filter"> {/* pressing filter will animate filter options to left */}
@@ -58,9 +58,9 @@ class JoinEvent extends Component {
                 {/* <div className="map">
 
                 </div> */}
-                {/* <div className="list">
+                <div className="list">
                     <EventList/>
-                </div> */}
+                </div>
             </div>
             
         )

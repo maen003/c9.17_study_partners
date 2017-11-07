@@ -7,7 +7,7 @@ export default (state = DEFAULT_STATE, action) => {
         case types.GET_ALL:
             console.log(action.payload);
             return {
-                all: action.payload
+                all: action.payload.data
             };
         default:
             return state;

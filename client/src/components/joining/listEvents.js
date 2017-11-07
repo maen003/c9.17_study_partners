@@ -1,27 +1,40 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import EventItem from './eventItem';
 
 class EventList extends Component {
     constructor (props) {
         super (props);
-
-
     }
 
-    render() {       
-        console.log('props: ', this.props);
-        // const eventElements = this.props.allEvents.map((eventItem, index) => {
-        //     return <EventItem key={index} index={index} item={eventItem}/>
-        // });
+    render() { 
+        console.log('LIST EVENTS - props: ', this.props);
+        const arrayCheck = this.props.events;
+        if (arrayCheck.length !== 0) {
+            const eventArray = this.props.events.data;
+            const eventElements = eventArray.map((eventItem, index) => {
+                return <EventItem key={index} info={eventItem}/>
+            });
+            return (
+                <div className="container">
+                    <h3>All Events</h3>
+                    <ul>
+                        {eventElements}
+                    </ul>
+                </div>
+            )
+        }
 
         return (
-            <div className="container">
-                <h3>All Events</h3>
-                {/* <ul>
-                    {eventElements}
-                </ul> */}
-            </div>
+            <div></div>
         )
     }
 }
 
-export default EventList;
+function mapStateToProps(state) {
+    return {
+        events: state.event.all
+    }
+}
+
+export default connect(mapStateToProps)(EventList);
