@@ -12,51 +12,51 @@ const hide = {
 
 class LoginModal extends Component {
     constructor (props) {
-        super (props);
+        super(props);
 
         this.state = {
             form: {
                 email: '',
                 password: ''
             },
-            showModal: false
+            showModal: this.props.showModal
         }
-
+        this.toggleModal = this.props.toggleModal;
         this.submitLogin = this.submitLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
-    }
-
-    toggleModal(event) {
-        this.setState({
-            showModal: !this.state.showModal
-        })
     }
 
     handleInputChange(event) {
         const {value, name} = event.target;
         const {form} = this.state;
         form[name] = value;
-        this.state({
+        this.setState({
             form: {...form}
         });
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            showModal: nextProps.showModal
+        })
+    }
+
     submitLogin(event) {
         event.preventDefault();
-        console.log('login button was pressed inside modal');
+        console.log('Log In -> Email: ' + this.state.form.email + '. Password: ' + this.state.form.password + '.');
+        this.toggleModal();
     }
 
     render() {
-        const { email, password } = this.state;
+        const {email, password, showModal} = this.state;
         
         return (
-            <div className="container">
-                <div onClick={this.toggleModal} className="modal loginModal" id="loginModal" role="dialog" style={this.state.showModal ? display : hide}>
+            // <div className="container">
+                <div className={`modal loginModal ${showModal ? '' : ' hidden'}`} id="loginModal" role="dialog">
                     <div className="modal-dialog">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal">&times;</button>
+                            <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">Login</h4>
                         </div>
                         <div className="modal-body">
@@ -74,13 +74,13 @@ class LoginModal extends Component {
                                     </div>
                                 </div>
                             </form>
-                            <button type="button" className="btn btn-primary">Login</button>
+                            <button onClick={this.submitLogin} type="button" className="btn btn-primary">Login</button>
                         </div>
                         </div>
                     </div>
                 </div>
-                <button onClick={this.toggleModal} className="btn btn-success login">Login</button>
-            </div>
+                /* <button onClick={this.toggleModal} className="btn btn-success login">Login</button> */
+            /* </div> */
         );
     }
 }
