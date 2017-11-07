@@ -110,20 +110,29 @@ app.post('/delete_events',function(req, res){
 //END CREATE/JOIN EVENTS ROUTES
 
 
+const pool = mysql.createPool({
+    connectionLimit: 10,
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'stubbies',
+    port: 8889
+});
+
 //FB PASSPORT
 passport.use(new Strategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
     function (accessToken, refreshToken, profile, cb) {
         let sql = "SELECT * FROM ?? WHERE ?? = ?";
-        let inserts = ['users', 'facebookid', profile.id];
+        let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
         pool.query(sql, function(err, results, fields) {
-            debugger
             if (err) throw err;
             console.log("These are the results", results);
             if (results.length === 0) {
-                let { displayName, id } = profile;
+                let { id, email, firstName, lastName, url } = profile;
                 let sql = "INSERT INTO ??(??, ??) VALUES (?, ?)";
-                let inserts = ['users', 'facebookid', 'displayName', id, displayName];
+                let inserts = ['users', 'facebookID', 'email', 'firstName', 'lastName', 'picture',
+                        id, email, firstName, lastName, url];
                 sql = mysql.format(sql, inserts);
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
