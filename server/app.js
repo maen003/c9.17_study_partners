@@ -38,7 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.post("/events",function(req, res){
 //CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
     const connection = mysql.createConnection(credentials);
