@@ -64,13 +64,13 @@ app.post("/add_events",function(req, res){
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
-
-    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates="123, 123", facebookID="0000"`;
+    const inputs = {title: "${req.body.title}", description: "${req.body.description}", subject: "${req.body.subject}", date: "${req.body.date}", time: "${req.body.time}", duration: "${req.body.duration}", location: "${req.body.location}", max: "${req.body.max}", phone: "${req.body.phone}", email: "${req.body.email}", coordinates: "123, 123", facebookID: "0000"};
+    const fields = 'INSERT INTO events SET ?';
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
         connection.query(
-            fields
+            fields, inputs
             , function(err, results, fields){
                 const output = {
                     success: true,
