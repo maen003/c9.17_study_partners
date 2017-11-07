@@ -9,7 +9,7 @@ class FacebookLogin extends Component {
         this.testAPI = this.fetchDataFromFb.bind(this);
         this.statusChangeCallback = this.statusChangeCallback.bind(this);
     }
-    componentDidMount() {
+    componentDidMount = () => {
         window.fbAsyncInit = function() {
         FB.init({
         appId      : '180201912542782',
@@ -35,17 +35,17 @@ class FacebookLogin extends Component {
         fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     }
-    handleClick() {
+    handleClick = () =>{
         FB.login(this.checkLoginState());
     }
-    fetchDataFromFb() {
+    fetchDataFromFb = () => {
         console.log('Login with Facebook button clicked');
         FB.api('/me?fields=id,name, first_name,last_name, email, picture', function(response) {
             console.log('Successfully logged in as ' + response.name);
             console.log('The data response from facebook : ', response);
         });
     }
-    statusChangeCallback(response) {
+    statusChangeCallback = (response) => {
         if (response.status === 'connected') {
             let accessToken = FB.getAuthResponse()['accessToken']
             console.log('This is the access Token : ', accessToken )
@@ -55,7 +55,7 @@ class FacebookLogin extends Component {
         }
     }
 
-    checkLoginState() {
+    checkLoginState = () => {
         FB.getLoginStatus(function(response) {
         this.statusChangeCallback(response);
         }.bind(this));
