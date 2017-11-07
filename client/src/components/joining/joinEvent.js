@@ -54,9 +54,9 @@ class JoinEvent extends Component {
                         </div>
                     </form>
                 </div>
-                {/* <div className="map">
-
-                </div> */}
+                <div className="map">
+                    <p>map goes here</p>
+                </div>
                 <div className="list">
                     <EventList/>
                 </div>
