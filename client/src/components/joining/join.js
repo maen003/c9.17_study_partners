@@ -27,7 +27,6 @@ class Join extends Component {
             showJoinDiv: !this.state.showJoinDiv,
         })
     }
-    
 
     joinDivShow() {
         return (
@@ -41,7 +40,7 @@ class Join extends Component {
         return (
             <div className="join" id="join">
                 <h1 className="joinHeader" onClick={this.clickHandler}>Join an Event!</h1>
-                <JoinEvent eventList={this.state.eventList} show={this.state.showJoinDiv}/>
+                <JoinEvent eventList={this.props.events} show={this.state.showJoinDiv}/>
             </div>
         )
     }
@@ -55,10 +54,4 @@ class Join extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        events: state.event.all
-    }
-}
-
-export default connect(mapStateToProps, {getAll})(Join);
+export default connect(null, {getAll})(Join);
