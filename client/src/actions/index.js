@@ -25,7 +25,7 @@ export function getAll() {
     const request = axios.post("http://dev.michaelahn.solutions/events"); //change to "/events" when pushing
 
     return {
-        type: types.JOIN_EVENT,
+        type: types.GET_ALL,
         payload: request
     }
 }

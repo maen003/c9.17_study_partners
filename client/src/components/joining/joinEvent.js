@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import EventList from './listEvents';
 
 import './joinEvent.css';
 
@@ -54,8 +55,11 @@ class JoinEvent extends Component {
                         </div>
                     </form>
                 </div>
-                <div className="map">
+                {/* <div className="map">
 
+                </div> */}
+                <div className="list">
+                    <EventList/>
                 </div>
             </div>
             
