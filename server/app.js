@@ -3,12 +3,12 @@ const credentials = require('./mysql_credentials');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
-// const morgan = require('morgan'); // Logger middleware for terminal
+const morgan = require('morgan'); // Logger middleware for terminal
 
 const app = express();
 
 const passport = require('passport');
-const Strategy = require('passport-facebook');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
 
@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 app.use(express.static(path.resolve("..", "client", "dist")));
 
 //Morgan
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 //Session
 app.use(session({
@@ -59,18 +59,18 @@ app.post('/events',function(req, res){
     //res.end('got a user request!!!!!');
 });
 
-app.post("/add_events",function(req, res){
+app.post('/add_events',function(req, res){
     console.log('the data is receiveth');
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
-    const inputs = {title: req.body.title, description: req.body.description, subject: req.body.subject, date: req.body.date, time: req.body.time, duration: req.body.duration, location: req.body.location, max: req.body.max, phone: req.body.phone, email: req.body.email};
-    const fields = 'INSERT INTO events SET ?';
+
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates="123, 123", facebookID="0000"`;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
         connection.query(
-            fields, inputs
+            fields
             , function(err, results, fields){
                 const output = {
                     success: true,
@@ -116,24 +116,28 @@ const pool = mysql.createPool({
     user: 'root',
     password: 'root',
     database: 'stubbies',
-    port: 8889
+    port: 3306
 });
 
 //FB PASSPORT
-passport.use(new Strategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
+passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
     function (accessToken, refreshToken, profile, cb) {
         let sql = "SELECT * FROM ?? WHERE ?? = ?";
         let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
+        console.log('sql: ', sql, 'profile id is: ', profile.id);
+
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
             if (results.length === 0) {
-                let { id, email, firstName, lastName, url } = profile;
-                let sql = "INSERT INTO ??(??, ??) VALUES (?, ?)";
-                let inserts = ['users', 'facebookID', 'email', 'firstName', 'lastName', 'picture',
-                        id, email, firstName, lastName, url];
+                let { id, name: { familyName, givenName }, emails: [{value}] } = profile;
+                console.log('this is the profile: ', profile);
+                let sql = "INSERT INTO ??(??, ??, ??, ??) VALUES (?, ?, ?, ?)";
+                let inserts = ['users', 'facebookID', 'last_name', 'first_name', 'email',
+                    id, familyName, givenName, value];
                 sql = mysql.format(sql, inserts);
+                console.log("This is the prepared statement", sql);
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
@@ -154,22 +158,24 @@ passport.deserializeUser(function(obj, cb) {
 
 app.get('/',
     function(req, res) {
-        res.sendFile(path.resolve('client', 'index.html'));
+        res.sendFile(path.resolve('../client', 'dist', 'index.html'));
     }
 );
 
 app.get('/home',
     function(req, res) {
         console.log("This is the session data", req.session);
-        res.sendFile(path.resolve('client', 'logout.html'));
+        res.sendFile(path.resolve('../client', 'dist', 'index.html'));
     }
 );
 
-app.get('/login/facebook',
-    passport.authenticate('facebook')
+app.get('/auth/facebook',
+    passport.authenticate('facebook'
+        // , { scope: 'id, name, first_name, last_name' }
+    )
 );
 
-app.get('/login/facebook/return',
+app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         res.redirect('/home');
