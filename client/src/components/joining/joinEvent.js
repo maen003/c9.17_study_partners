@@ -25,7 +25,7 @@ class JoinEvent extends Component {
     render() {
         return (
             <div className={`findEvent ${this.props.show ? 'animateExpandFind' : 'animateCloseFind'}`}>
-                <div className="filter"> {/* pressing filter will animate filter options to left */}
+                <div className="filter">
                     <form>
                         <div className="col-sm-5 col-xs-12 leftSideFilter">    
                             <div className="form-group zipInput">
