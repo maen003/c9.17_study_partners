@@ -38,6 +38,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.get('/dbtest',function(req, res){
+    console.log(credentials);
+    const connection = mysql.createConnection(credentials);
+    connection.connect( function(){
+        console.log(arguments);
+        connection.query('SELECT * FROM events', function(err, results){
+            res.end(JSON.stringify(results));
+        })
+    })
+})
+
 //CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
     const connection = mysql.createConnection(credentials);
@@ -112,9 +123,9 @@ app.post('/delete_events',function(req, res){
 
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
+    host: 'dev.michaelahn.solutions',
+    user: 'michael',
+    password: 'michaelAhn',
     database: 'stubbies',
     port: 3306
 });
