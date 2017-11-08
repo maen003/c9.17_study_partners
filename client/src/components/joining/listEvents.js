@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import EventItem from './eventItem';
+import EventDetails from './eventItem';
 
 class EventList extends Component {
     constructor (props) {
@@ -8,12 +8,12 @@ class EventList extends Component {
     }
 
     render() { 
-        console.log('LIST EVENTS - props: ', this.props);
+        // console.log('LIST EVENTS - props: ', this.props);
         const arrayCheck = this.props.events;
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.events.data;
             const eventElements = eventArray.map((eventItem, index) => {
-                return <EventItem key={index} info={eventItem}/>
+                return <EventDetails key={index} info={eventItem}/>
             });
             return (
                 <div className="container">
