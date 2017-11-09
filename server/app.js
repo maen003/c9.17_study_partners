@@ -11,7 +11,8 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
-global.glo
+
+global.ID = null;
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
@@ -71,11 +72,11 @@ app.post('/events',function(req, res){
 });
 
 app.post('/add_events',function(req, res){
-    const face = require(fbID);
-    console.log('this is the fb id', fbID);
-    console.log('the data is receiveth');
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
+    passport.authenticate('facebook'
+    );
+    console.log('facebook should be running');
     const connection = mysql.createConnection(credentials);
     const ex = '12356';
     const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${fbID}" `;
