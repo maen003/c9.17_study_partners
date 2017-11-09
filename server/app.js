@@ -183,7 +183,7 @@ app.get('/home',
     function(req, res) {
         console.log("user has logged in");
         console.log("This is the session data", req.session);
-        res.sendFile(path.resolve('../client', 'dist', 'logout.html'));
+        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 
