@@ -19,7 +19,7 @@ class CreateEvent extends Component {
                 phone: '',
                 email: '',
                 location: '',
-                description: ''
+                description: '',
             }
         }
 
@@ -68,13 +68,13 @@ class CreateEvent extends Component {
                 phone: '',
                 email: '',
                 location: '',
-                description: ''
+                description: '',
             }
         })
     }
 
     render() {
-        const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form; 
+        const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form;
         return(
             <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>
                 <form onSubmit={this.submitData}>

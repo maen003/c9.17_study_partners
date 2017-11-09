@@ -12,7 +12,8 @@ export function createEvent(form) {
         location: form.location,
         max: form.max,
         phone: form.phone,
-        email:form.email
+        email:form.email,
+        facebookID: '0987654321'
     });
 
     return {

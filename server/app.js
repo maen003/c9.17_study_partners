@@ -75,8 +75,8 @@ app.post('/add_events',function(req, res){
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
-
-    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates="123, 123", facebookID="0000"`;
+    const ex = '12356';
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "09765432" `;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
@@ -130,6 +130,7 @@ const pool = mysql.createPool({
     port: 3306
 });
 
+var fbID = null;
 //FB PASSPORT
 passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
     function (accessToken, refreshToken, profile, cb) {
@@ -137,7 +138,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
         console.log('sql: ', sql, 'profile id is: ', profile.id);
-
+            fbID = profile.id;
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
@@ -149,6 +150,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
                     id, familyName, givenName, value];
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
+                fbID = profile.id;
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
