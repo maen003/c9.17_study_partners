@@ -76,7 +76,7 @@ app.post('/add_events',function(req, res){
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
     const ex = '12356';
-    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "09765432" `;
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${fbID}" `;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
@@ -139,6 +139,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         sql = mysql.format(sql, inserts);
         console.log('sql: ', sql, 'profile id is: ', profile.id);
             fbID = profile.id;
+            console.log("the facebook ID for your current user is: ", fbID);
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
@@ -151,6 +152,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
                 fbID = profile.id;
+                console.log("the facebook ID for your current user is: ", fbID);
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
