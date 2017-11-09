@@ -141,14 +141,17 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
+
             if (results.length === 0) {
-                let { id, name: { familyName, givenName }, emails: [{value}] } = profile;
+                let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
                 console.log('this is the profile: ', profile);
-                let sql = "INSERT INTO ??(??, ??, ??, ??) VALUES (?, ?, ?, ?)";
-                let inserts = ['users', 'facebookID', 'last_name', 'first_name', 'email',
-                    id, familyName, givenName, value];
+
+                let sql = "INSERT INTO ??(??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?)";
+                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL',
+                    id, emailVal, givenName, familyName, photoVal];
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
+
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
@@ -175,14 +178,17 @@ app.get('/',
 
 app.get('/home',
     function(req, res) {
+        console.log("user has logged in");
         console.log("This is the session data", req.session);
-        res.sendFile(path.resolve('../client', 'dist', 'index.html'));
+        res.sendFile(path.resolve('../client', 'dist', 'logout.html'));
     }
 );
 
 app.get('/auth/facebook',
-    passport.authenticate('facebook'
-        // , { scope: 'id, name, first_name, last_name' }
+    passport.authenticate('facebook', {
+        authType: 'rerequest',
+        scope: ['email', 'public_profile']
+        }
     )
 );
 
@@ -195,6 +201,7 @@ app.get('/auth/facebook/callback',
 
 app.get('/logout',
     function(req, res){
+        console.log("user has logged out");
         res.redirect('/');
     }
 );
