@@ -11,8 +11,7 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
-
-
+global.glo
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
@@ -72,6 +71,8 @@ app.post('/events',function(req, res){
 });
 
 app.post('/add_events',function(req, res){
+    const face = require(fbID);
+    console.log('this is the fb id', fbID);
     console.log('the data is receiveth');
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
@@ -140,6 +141,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         console.log('sql: ', sql, 'profile id is: ', profile.id);
             fbID = profile.id;
             console.log("the facebook ID for your current user is: ", fbID);
+            module.exports = fbID;
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
@@ -153,6 +155,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
                 console.log("This is the prepared statement", sql);
                 fbID = profile.id;
                 console.log("the facebook ID for your current user is: ", fbID);
+                module.exports = fbID;
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
@@ -181,6 +184,8 @@ app.get('/home',
     function(req, res) {
         console.log("This is the session data", req.session);
         res.sendFile(path.resolve('../client', 'dist', 'index.html'));
+        // const dom = document.getElementById("facebookID");
+        // dom.text(req.session)
     }
 );
 
