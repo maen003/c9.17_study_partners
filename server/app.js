@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
 });
 
 //Express
-app.use(express.static(path.resolve("..", "client", "dist")));
+// app.use(express.static(path.resolve("..", "client", "dist")));
 
 //Morgan
 app.use(morgan('dev'));
@@ -170,11 +170,14 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 
-app.get('/',
-    function(req, res) {
-        res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-    }
-);
+app.get('/', isLoggedIn);
+    // function(req, res) {
+    //     // console.log('this is the req: ', req);
+    //     // console.log('this is the res: ', res);
+    //     // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
+    //     res.send('this is the root yo');
+    // }
+// );
 
 app.get('/home',
     function(req, res) {
@@ -205,6 +208,22 @@ app.get('/logout',
         res.redirect('/');
     }
 );
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
+    if (req.isAuthenticated()){
+        res.redirect('/home');
+        return next();
+    }
+    res.sendFile(path.resolve("..", "client", "dist", "index.html"));
+
+
+
+    // if they aren't redirect them to the home page
+    // res.redirect('/');
+}
 //END FB PASSPORT
 
 
