@@ -12,6 +12,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
 
+
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
@@ -130,7 +131,6 @@ const pool = mysql.createPool({
     port: 3306
 });
 
-var fbID = null;
 //FB PASSPORT
 passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
     function (accessToken, refreshToken, profile, cb) {
@@ -207,4 +207,5 @@ app.get('/logout',
 
 app.listen(4000,function(){
     console.log('the server is started on Port 4000');
+
 });
