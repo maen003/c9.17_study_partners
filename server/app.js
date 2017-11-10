@@ -204,6 +204,8 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         res.redirect('/home');
+        res.send(req);
+        console.log('anyong', req)
     }
 );
 
