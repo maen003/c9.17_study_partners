@@ -76,6 +76,7 @@ app.post('/events',function(req, res){
             console.log('hello good sir', profile);
         }));
     console.log('this is the passport', passport);
+    console.log('this si the request', req)
 });
 
 app.post('/add_events',function(req, res){
@@ -204,8 +205,6 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         res.redirect('/home');
-        res.send(req);
-        console.log('anyong', req)
     }
 );
 
