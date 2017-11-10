@@ -54,7 +54,7 @@ app.get('/dbtest',function(req, res){
 });
 
 //CREATE/JOIN EVENTS ROUTES
-app.post('/events',function(req, res){
+app.get('/events',function(req, res){
     const connection = mysql.createConnection(credentials);
     connection.connect(() => {
         console.log(arguments);
@@ -75,11 +75,12 @@ app.post('/events',function(req, res){
         function (accessToken, refreshToken, profile, cb) {
             console.log('hello good sir', profile);
         }));
+    passport.authenticate('facebook');
     console.log('this is the passport', passport);
     console.log('this si the request', req)
 });
 
-app.post('/add_events',function(req, res){
+app.get('/add_events',function(req, res){
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
