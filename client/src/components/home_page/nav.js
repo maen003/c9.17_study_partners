@@ -44,7 +44,10 @@ class Nav extends Component {
                                     <Link to='/'>Home</Link>
                                 </li>
                                 <li>
-                                    <Link to='/create-join'>Create or Join</Link>
+                                    <Link to='/join'>Join</Link>
+                                </li>
+                                <li>
+                                    <Link to='/create'>Create</Link>
                                 </li>
                                 <li>
                                     <Link to='/' onClick={this.toggleModal}>Profile</Link>

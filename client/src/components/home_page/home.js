@@ -18,6 +18,10 @@ export default () => {
                 </div>
                 <h2>You don't have to be lonely, with stubbies!</h2>
             </div>
+            <div className="info-about">
+                <h2>About/Info</h2>
+                <p>Put info here</p>
+            </div>
         </div>
     )
 }

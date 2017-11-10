@@ -3,13 +3,16 @@ import {Route} from 'react-router-dom';
 
 import Nav from './home_page/nav'; 
 import Home from './home_page/home';
-import MainContent from './home_page/mainContent';
+import Join from './joining/join';
+import Create from './creating/create';
 
 const App = () => (
     <div className='container'>
         <Nav/>
-        <Home/>
-        <MainContent/>
+        <Route exact path="/" component={Home}/>
+        <Route path="/join" component={Join}/>
+        <Route path="/create" component={Create}/>
+        {/* <Route path="/profile" component={Profile}/> */}
     </div>
 );
 
