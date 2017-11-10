@@ -12,7 +12,6 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
 
-global.ID = null;
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
@@ -74,12 +73,10 @@ app.post('/events',function(req, res){
 app.post('/add_events',function(req, res){
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
-    passport.authenticate('facebook'
-    );
-    console.log('facebook should be running');
+    console.log('THIS IS THE FUCKING SESSION DATA', req.session);
     const connection = mysql.createConnection(credentials);
-    const ex = '12356';
-    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${fbID}" `;
+    console.log('request data', req);
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${app.fbID}" `;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
@@ -140,9 +137,9 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
         console.log('sql: ', sql, 'profile id is: ', profile.id);
-            fbID = profile.id;
-            console.log("the facebook ID for your current user is: ", fbID);
-            module.exports = fbID;
+            app.fbID = profile.id;
+            console.log("the facebook ID for your current user is: ", app.fbID);
+            module.exports = app.fbID;
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
@@ -155,8 +152,8 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
                 fbID = profile.id;
-                console.log("the facebook ID for your current user is: ", fbID);
-                module.exports = fbID;
+                console.log("the facebook ID for your current user is: ", app.fbID);
+                module.exports = app.fbID;
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);
@@ -184,9 +181,11 @@ app.get('/',
 app.get('/home',
     function(req, res) {
         console.log("This is the session data", req.session);
+        console.log('facebook request is here id', req.session.id);
         res.sendFile(path.resolve('../client', 'dist', 'index.html'));
         // const dom = document.getElementById("facebookID");
         // dom.text(req.session)
+        return req.session.id;
     }
 );
 
