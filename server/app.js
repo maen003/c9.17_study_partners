@@ -19,7 +19,7 @@ var facebook = {};
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
-app.use(express.cookieParser());
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", 'http://localhost:4000' );
