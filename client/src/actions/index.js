@@ -24,7 +24,9 @@ export function createEvent(form) {
 }
 
 export function getAll() {
-    const request = axios.get("http://dev.michaelahn.solutions/events"); //change to "/events" when pushing
+    const request = axios.get("http://dev.michaelahn.solutions/events", {
+        withCredentials: true
+    }); //change to "/events" when pushing
 
     return {
         type: types.GET_ALL,
