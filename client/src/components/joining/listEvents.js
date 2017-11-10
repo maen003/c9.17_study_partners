@@ -26,7 +26,7 @@ class EventList extends Component {
         }
 
         return (
-            <div></div>
+            <div>No events found</div>
         )
     }
 }

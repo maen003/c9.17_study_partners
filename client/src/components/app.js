@@ -3,15 +3,15 @@ import {Route} from 'react-router-dom';
 
 import Nav from './home_page/nav'; 
 import Home from './home_page/home';
-import Join from './joining/join';
-import Create from './creating/create';
+import Join from './joining/joinEvent';
+import Create from './creating/createEvent';
 
 const App = () => (
     <div className='container'>
         <Nav/>
         <Route exact path="/" component={Home}/>
-        <Route path="/join" component={Join}/>
-        <Route path="/create" component={Create}/>
+        <Route path="/join-event" component={Join}/>
+        <Route path="/create-event" component={Create}/>
         {/* <Route path="/profile" component={Profile}/> */}
     </div>
 );

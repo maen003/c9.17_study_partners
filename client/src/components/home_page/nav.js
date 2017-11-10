@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ProfileModal from '../modal/profile_modal';
-
 import FacebookLogin from './fbLogin';
+import {getAll} from '../../actions';
 
 import './nav.css';
 // import Logo from'../assets/images/logo.png';
@@ -44,10 +44,10 @@ class Nav extends Component {
                                     <Link to='/'>Home</Link>
                                 </li>
                                 <li>
-                                    <Link to='/join'>Join</Link>
+                                    <Link to='/join-event'>Join</Link>
                                 </li>
                                 <li>
-                                    <Link to='/create'>Create</Link>
+                                    <Link to='/create-event'>Create</Link>
                                 </li>
                                 <li>
                                     <Link to='/' onClick={this.toggleModal}>Profile</Link>
