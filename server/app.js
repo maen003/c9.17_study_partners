@@ -12,6 +12,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const facebookCreds = require('./facebookCreds.js');
 const session = require('express-session');
 
+var facebook = {};
+
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
@@ -33,7 +35,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true,
-    cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
+    cookie: { path: '/', httpOnly: false, secure: false, maxAge: null }
 }
 ));
 app.use(passport.initialize());
@@ -54,7 +56,7 @@ app.get('/dbtest',function(req, res){
 //CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
     const connection = mysql.createConnection(credentials);
-
+    console.log('gutentag', facebook.id);
     connection.connect(() => {
         console.log(arguments);
         connection.query(
@@ -138,8 +140,9 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
         console.log('sql: ', sql, 'profile id is: ', profile.id);
-            app.fbID = profile.id;
-            console.log("the facebook ID for your current user is: ", app.fbID);
+            facebook.id = profile.id;
+            console.log('senor this is faeq', facebook.id);
+            console.log("mister professor profile: ", profile);
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
