@@ -14,7 +14,6 @@ export function createEvent(form) {
         phone: form.phone,
         email:form.email,
         facebookID: '',
-        withCredentials: true
     });
 
     return {
@@ -25,7 +24,9 @@ export function createEvent(form) {
 
 export function getAll() {
     const request = axios.get("http://dev.michaelahn.solutions/events", {
-        withCredentials: true
+        xhrFields: {
+            withCredentials: true
+        }
     }); //change to "/events" when pushing
 
     return {
