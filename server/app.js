@@ -170,14 +170,14 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 
-app.get('/', isLoggedIn);
-    // function(req, res) {
-    //     // console.log('this is the req: ', req);
-    //     // console.log('this is the res: ', res);
-    //     // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-    //     res.send('this is the root yo');
-    // }
-// );
+app.get('/', isLoggedIn,
+    function(req, res) {
+        // console.log('this is the req: ', req);
+        // console.log('this is the res: ', res);
+        // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
+        res.send('this is the root yo');
+    }
+);
 
 app.get('/home',
     function(req, res) {
@@ -219,10 +219,6 @@ function isLoggedIn(req, res, next) {
     }
     res.sendFile(path.resolve("..", "client", "dist", "index.html"));
 
-
-
-    // if they aren't redirect them to the home page
-    // res.redirect('/');
 }
 //END FB PASSPORT
 
