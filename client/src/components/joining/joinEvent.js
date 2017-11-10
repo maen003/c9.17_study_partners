@@ -66,4 +66,4 @@ class JoinEvent extends Component {
     }
 }
 
-export default JoinEvent;
+export default connect(null, {getAll})(JoinEvent);
