@@ -82,11 +82,17 @@ app.get('/events',function(req, res){
         }));
     passport.authenticate('facebook');
     console.log('this is the passport', passport);
-    console.log('this si the request', req.session);
-    console.log('vibes', passport.session());
+    console.log('this is le cookie', req.cookie);
+    console.log('these is le req', req);
+    console.log('sir here is the response', res);
+    console.log('good day sir', res.cookie);
+    console.log("This is the session data", req.session);
+    console.log('facebook request is here id', req.session.id);
 });
 
-app.get('/add_events',function(req, res){
+app.post('/add_events',function(req, res){
+    passport.authenticate('facebook');
+    console.log("This is the session from add_events", req.session.passport.user.id);
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
@@ -195,13 +201,10 @@ app.get('/home',
     function(req, res) {
         console.log("This is the session data", req.session);
         console.log('facebook request is here id', req.session.id);
+
         res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-        var cookie = req.cookies.fbIdNumber;
-        res.cookie('fbIdNumber', req.session.id, {maxAge:900000, httpOnly: true});
-        console.log('cookie has been successfully created!');
         // const dom = document.getElementById("facebookID");
         // dom.text(req.session)
-        next();
     }
 );
 
@@ -215,6 +218,9 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         res.redirect('/home');
+        var cookie = req.cookies.fbIdNumber;
+        res.cookie('fbIdNumber', req.session.id, {maxAge:900000, httpOnly: true});
+        console.log('cookie has been successfully created!', cookie);
     }
 );
 
