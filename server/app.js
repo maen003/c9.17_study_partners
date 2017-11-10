@@ -47,7 +47,7 @@ app.get('/dbtest',function(req, res){
             res.end(JSON.stringify(results));
         })
     })
-})
+});
 
 //CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
