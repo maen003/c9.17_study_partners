@@ -13,7 +13,7 @@ export function createEvent(form) {
         max: form.max,
         phone: form.phone,
         email:form.email,
-        facebookID: axios.get("http://dev.michaelahn.solutions/auth/facebook")
+        facebookID: ''
     });
 
     return {
