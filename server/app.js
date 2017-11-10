@@ -55,8 +55,13 @@ app.get('/dbtest',function(req, res){
 
 //CREATE/JOIN EVENTS ROUTES
 app.post('/events',function(req, res){
+
+    passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
+        function (accessToken, refreshToken, profile, cb) {
+            console.log('hello good sir', profile);
+        }));
+
     const connection = mysql.createConnection(credentials);
-    console.log('gutentag', facebook.id);
     connection.connect(() => {
         console.log(arguments);
         connection.query(
