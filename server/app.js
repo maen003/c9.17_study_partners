@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
+const cookieParser = require('cookie-parser');
+
 
 const app = express();
 
@@ -17,10 +19,13 @@ var facebook = {};
 //bodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use( bodyParser.json() );
+app.use(express.cookieParser());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", 'http://localhost:4000' );
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();
 });
 
@@ -35,7 +40,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true,
-    cookie: { path: '/', httpOnly: false, secure: false, maxAge: null }
+    cookie: { path: '/', httpOnly: false, secure: false, maxAge: null}
 }
 ));
 app.use(passport.initialize());
@@ -77,7 +82,8 @@ app.get('/events',function(req, res){
         }));
     passport.authenticate('facebook');
     console.log('this is the passport', passport);
-    console.log('this si the request', req)
+    console.log('this si the request', req.session);
+    console.log('vibes', passport.session());
 });
 
 app.get('/add_events',function(req, res){
@@ -190,9 +196,12 @@ app.get('/home',
         console.log("This is the session data", req.session);
         console.log('facebook request is here id', req.session.id);
         res.sendFile(path.resolve('../client', 'dist', 'index.html'));
+        var cookie = req.cookies.fbIdNumber;
+        res.cookie('fbIdNumber', req.session.id, {maxAge:900000, httpOnly: true});
+        console.log('cookie has been successfully created!');
         // const dom = document.getElementById("facebookID");
         // dom.text(req.session)
-        return req.session.id;
+        next();
     }
 );
 
