@@ -32,8 +32,10 @@ app.use(morgan('dev'));
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true
-}));
+    saveUninitialized: true,
+    cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
+}
+));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -73,7 +75,6 @@ app.post('/events',function(req, res){
 app.post('/add_events',function(req, res){
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
-    console.log('THIS IS THE FUCKING SESSION DATA', req.session);
     const connection = mysql.createConnection(credentials);
     console.log('request data', req);
     const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${app.fbID}" `;
@@ -139,7 +140,6 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         console.log('sql: ', sql, 'profile id is: ', profile.id);
             app.fbID = profile.id;
             console.log("the facebook ID for your current user is: ", app.fbID);
-            module.exports = app.fbID;
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log("These are the results", results);
@@ -151,9 +151,7 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
                     id, familyName, givenName, value];
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
-                fbID = profile.id;
                 console.log("the facebook ID for your current user is: ", app.fbID);
-                module.exports = app.fbID;
                 pool.query(sql, function(err, results, fields) {
                     if (err) throw err;
                     console.log("This is the new id: ", results.insertId);

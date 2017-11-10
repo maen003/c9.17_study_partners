@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createEvent} from '../../actions';
+import axios from 'axios';
 
 import './createEvent.css';
 
@@ -50,6 +51,7 @@ class CreateEvent extends Component {
     }
 
     submitData(event) {
+        const request = axios.post("/auth/facebook", { }
         event.preventDefault();
         console.log('form values: ', this.state.form);
         this.props.createEvent(this.state.form).then(function(resp){

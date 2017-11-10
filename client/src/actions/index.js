@@ -22,6 +22,7 @@ export function createEvent(form) {
     }
 }
 
+
 export function getAll() {
     const request = axios.post("http://dev.michaelahn.solutions/events"); //change to "/events" when pushing
 
