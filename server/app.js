@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
 const cookieParser = require('cookie-parser');
-
+const redis = require('redis');
 
 const app = express();
 
@@ -29,6 +29,9 @@ app.use(function(req, res, next) {
     next();
 });
 
+//Redis
+const client = redis.createClient(4000, "http://localhost");
+
 //Express
 app.use(express.static(path.resolve("..", "client", "dist")));
 
@@ -48,6 +51,8 @@ app.use(passport.session());
 
 
 app.get('/dbtest',function(req, res){
+    passport.authenticate('facebook');
+    console.log('THIS IS THE FUCKING DATA',req.session);
     console.log(credentials);
     const connection = mysql.createConnection(credentials);
     connection.connect( function(){
@@ -182,12 +187,12 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         return cb(null, profile);
     }));
 
-passport.serializeUser(function(user, cb) {
-    cb(null, user);
+passport.serializeUser(function(user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
 });
 
 
