@@ -2,7 +2,7 @@ import types from './types';
 import axios from 'axios';
 
 export function createEvent(form) {
-    const request = axios.post("http://dev.michaelahn.solutions/add_events", { //change to "/add_events" when pushing
+    const request = axios.post("/add_events", { //change to "/add_events" when pushing
         title: form.title,
         description: form.description,
         subject: form.subject,
@@ -23,7 +23,7 @@ export function createEvent(form) {
 }
 
 export function getAll() {
-    const request = axios.get("http://dev.michaelahn.solutions/events", {
+    const request = axios.get("/events", {
         xhrFields: {
             withCredentials: true
         }
