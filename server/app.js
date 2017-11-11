@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 });
 
 //Redis
-const client = redis.createClient(4000, "http://localhost");
+// const client = redis.createClient(4000, "http://localhost");
 
 //Express
 app.use(express.static(path.resolve("..", "client", "dist")));
@@ -51,8 +51,6 @@ app.use(passport.session());
 
 
 app.get('/dbtest',function(req, res){
-    passport.authenticate('facebook');
-    console.log('THIS IS THE FUCKING DATA',req.session);
     console.log(credentials);
     const connection = mysql.createConnection(credentials);
     connection.connect( function(){
@@ -97,12 +95,12 @@ app.get('/events',function(req, res){
 
 app.post('/add_events',function(req, res){
     passport.authenticate('facebook');
-    console.log("This is the session from add_events", req.session.passport.user.id);
+    console.log("domo arigato", req.session.passport.user.id);
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
     console.log('request data', req);
-    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${app.fbID}" `;
+    const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${req.session.passport.id}" `;
     console.log(fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
