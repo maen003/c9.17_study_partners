@@ -88,12 +88,12 @@ router.get('/home',
         //setting Login Status on DB
         const sess = req.session.passport.user.id;        
         let isLoggedIn = 'isLoggedIn';
-        let sql = `UPDATE users SET ${isLoggedIn} = true WHERE facebookID = ${sess}`;
+        let sql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
         console.log("This is the sql:", sql);
 
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
-            console.log()
+            console.log("isLoggedIn status updated on db");
         });
 
         // const sess = req.session;
@@ -133,7 +133,7 @@ router.get('/logout',
         //setting Login Status on DB
         const sess = req.session.passport.user.id;        
         let isLoggedIn = 'isLoggedIn';
-        let sql = `UPDATE users SET ${isLoggedIn} = false WHERE facebookID = ${sess}`;
+        let sql = `UPDATE users SET ${isLoggedIn} = 0 WHERE facebookID = ${sess}`;
         console.log("This is the sql:", sql);
 
         pool.query(sql, function(err, results, fields) {
