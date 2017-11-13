@@ -62,6 +62,8 @@ app.get('/dbtest',function(req, res){
 
 //CREATE/JOIN EVENTS ROUTES
 app.get('/events',function(req, res){
+    passport.authenticate('facebook');
+    console.log("domo", req.session.passport);
     const connection = mysql.createConnection(credentials);
     connection.connect(() => {
         console.log(arguments);
@@ -100,7 +102,7 @@ app.post('/add_events',function(req, res){
     const connection = mysql.createConnection(credentials);
     console.log('request data', req);
     const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", facebookID = "${req.session.passport.user.id}" `;
-    console.log(fields);
+    console.log("the fields are here:", fields);
     console.log('this is a request body', req.body);
     connection.connect(() => {
         connection.query(
