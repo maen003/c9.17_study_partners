@@ -96,7 +96,6 @@ app.get('/events',function(req, res){
 
 app.post('/add_events',function(req, res){
     passport.authenticate('facebook');
-    console.log("domo arigato", req.session.passport.user.id);
     console.log('req is before this');
     console.log("DATA RECEIVEDDDDD!!!!");
     const connection = mysql.createConnection(credentials);
