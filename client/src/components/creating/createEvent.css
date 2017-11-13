@@ -1,25 +1,5 @@
 .createEvent {
     position: relative;
-    margin-top: 1%;
-    height: 0;
-    width: 0;
-    border: 1px solid black;
-    display: block;
-    overflow: hidden;
-    overflow-y: auto;
-}
-
-.createEvent > form {
-    height: 90%;
-    width: 100%;
-}
-
-.row1, .row2, .row3 {
-    height: 12%;
-}
-
-.row4 {
-    height: 40%;
 }
 
 .mapView {
@@ -41,10 +21,6 @@
     height: 100%;
 }
 
-.inputArea {
-    text-align: center;
-}
-
 .form-group {
     margin-bottom: 2%;
 }
@@ -55,19 +31,8 @@
     justify-content: space-around;
 }
 
-/* animation */
-.moveHeaderUp {
-    top: 0;
-    transition: top 1.5s ease;
-}
-
-.moveHeaderDown {
-    top: 46%;
-    transition: top 3s ease;
-}
-
 /* keyframe animation */
-.animateExpandCreate {
+/* .animateExpandCreate {
     display: block;
     animation: expandCreate 1.5s;
     animation-timing-function: ease-in-out;
@@ -110,4 +75,4 @@
         width: 0;
         display: none;
     }
-}
+} */

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {createEvent} from '../../actions';
 
@@ -23,21 +24,8 @@ class CreateEvent extends Component {
             }
         }
 
-        this.getDomElement = this.getDomElement.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitData = this.submitData.bind(this);
-    }
-
-    componentDidMount() {
-        this.getDomElement();
-    }
-
-    getDomElement() {
-        var create = document.getElementsByClassName("createEvent")[0];
-
-        if (create.classList.contains('animateExpandCreate')) {
-            join.className += " animateCloseCreate"
-        }
     }
 
     handleInputChange(event){
@@ -75,18 +63,19 @@ class CreateEvent extends Component {
 
     render() {
         const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form;
+
         return(
-            <div className={`createEvent ${this.props.show ? 'animateExpandCreate' : 'animateCloseCreate'}`}>
+            <div className="container">
                 <form onSubmit={this.submitData}>
-                    <div className="form-group inputArea col-sm-12 col-xs-12 row1">
-                        <div className="col-sm-4 col-xs-12">
+                    <div className="form-group">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="title">Title of event</label><br/>
-                                <input value={title} onChange={this.handleInputChange} name="title" type="text" id="title" className="title form-control" placeholder="Title"/><br/>
+                                <input value={title} onChange={this.handleInputChange} name="title" type="text" id="title" className="form-control" placeholder="Title"/><br/>
                         </div>
-                        <div className="col-sm-4 col-xs-12">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="subjects">Event Subject</label><br/>
-                                <select value={subject} onChange={this.handleInputChange} name="subject" id="subjects" className="subjects form-control">
-                                    <option>Set subject</option>
+                                <select value={subject} onChange={this.handleInputChange} name="subject" id="subjects" className="form-control">
+                                    <option disabled>Set subject</option>
                                     <option>Life sciences</option>
                                     <option>Visual and Perfomance Arts</option>
                                     <option>Liberal Arts</option>
@@ -94,10 +83,10 @@ class CreateEvent extends Component {
                                     <option>Business</option>
                                 </select>
                         </div>
-                        <div className="col-sm-4 col-xs-12">
+                        <div className="col-sm-12 col-xs-12">
                                 <label htmlFor="max">Group Size</label><br/>
-                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="size form-control">
-                                        <option>Set group size</option>
+                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="form-control">
+                                        <option disabled>Set group size</option>
                                         <option>2-5</option>
                                         <option>6-10</option>
                                         <option>11-15</option>
@@ -108,19 +97,19 @@ class CreateEvent extends Component {
                                     </select>
                         </div>
                     </div>
-                    <div className="form-group inputArea col-sm-12 col-xs-12 row2">
-                        <div className="col-sm-4 col-xs-12 form-group">
+                    <div className="form-group">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="date">Date of event</label><br/>
-                                <input value={date} onChange={this.handleInputChange} name="date" type="date" id="date" className="input-group date dateEvent form-control" placeholder="MM/DD/YYYY"/>
+                                <input value={date} onChange={this.handleInputChange} name="date" type="date" id="date" className="form-control" placeholder="MM/DD/YYYY"/>
                         </div>
-                        <div className="col-sm-4 col-xs-12 form-group">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="time">Time of event</label><br/>
-                                <input value={time} onChange={this.handleInputChange} name="time" type="time" id="time" className="time form-control"/>
+                                <input value={time} onChange={this.handleInputChange} name="time" type="time" id="time" className="form-control"/>
                         </div>
-                        <div className="col-sm-4 col-xs-12">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="duration">Duration of event</label><br/>
-                                <select value={duration} onChange={this.handleInputChange} name="duration" id="duration" className="duration form-control">
-                                    <option>Set duration</option>
+                                <select value={duration} onChange={this.handleInputChange} name="duration" id="duration" className="form-control">
+                                    <option disabled>Set duration</option>
                                     <option>Less than 1 Hour</option>
                                     <option>1 - 2 Hours</option>
                                     <option>2 - 3 Hours</option>
@@ -130,29 +119,31 @@ class CreateEvent extends Component {
                                 </select>          
                         </div>
                     </div>
-                    <div className="form-group inputArea col-sm-12 col-xs-12 row3">
-                        <div className="col-sm-6 col-xs-12">
+                    <div className="form-group">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="phone">Phone Number</label><br/>
-                                <input value={phone} onChange={this.handleInputChange} name="phone" type="tel" id="phone" className="phone form-control"/>
+                                <input value={phone} onChange={this.handleInputChange} name="phone" type="tel" id="phone" className="form-control"/>
                         </div>
-                        <div className="col-sm-6 col-xs-12">
+                        <div className="col-sm-12 col-xs-12">
                             <label htmlFor="email">Email</label><br/>
-                                <input value={email} onChange={this.handleInputChange} name="email" type="email" id="email" className="email form-control"/>
+                                <input value={email} onChange={this.handleInputChange} name="email" type="email" id="email" className="form-control"/>
                         </div>
                     </div>
-                    <div className="form-group inputArea col-sm-12 col-xs-12 row4">
-                        <div className="col-sm-12 col-xs-12 locationForm">
+                    <div className="form-group">
+                        <div className="col-sm-12 col-xs-12">
                             <div className="col-sm-4 col-xs-12 locationFormComp"> 
                                 <label htmlFor="location">Location of event</label><br/>
-                                    <input value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="location form-control"/>
+                                    <input value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="form-control"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
-                                <div className="mapView"></div>
+                                <div className="mapView">
+                                    <h3>map here</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="form-group inputArea col-sm-12 col-xs-12 row5">
-                        <textarea value={description} onChange={this.handleInputChange} name="description" className="form-group col-sm-10 col-sm-offset-1 col-xs-10 description" rows="3" id="description" placeholder="Description of event..."></textarea>
+                    <div className="form-group">
+                        <textarea value={description} onChange={this.handleInputChange} name="description" className="form-group col-sm-12 col-xs-12" rows="3" id="description" placeholder="Description of event..."></textarea>
                     </div>
                 </form>
                 <div className="bottons col-sm-12 col-xs-12"> {/* bottom buttons */}
