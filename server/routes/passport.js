@@ -27,10 +27,11 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
         let inserts = ['users', 'facebookID', profile.id];
         sql = mysql.format(sql, inserts);
         console.log('sql: ', sql, 'profile id is: ', profile.id);
+        console.log('this is the profile info: ', profile);
 
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
-            console.log("These are the results", results);
+            console.log("These are the results from fbStrategy function", results);
 
             if (results.length === 0) {
                 let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
@@ -83,7 +84,19 @@ router.get('/home',
     function(req, res) {
         console.log("user has logged in");
         console.log("This is the session data", req.session);
-        const sess = req.session;
+
+        //setting Login Status on DB
+        const sess = req.session.passport.user.id;        
+        let isLoggedIn = 'isLoggedIn';
+        let sql = `UPDATE users SET ${isLoggedIn} = true WHERE facebookID = ${sess}`;
+        console.log("This is the sql:", sql);
+
+        pool.query(sql, function(err, results, fields) {
+            if (err) throw err;
+            console.log()
+        });
+
+        // const sess = req.session;
         // if (sess.passport.user.id) {
         //     console.log('fb user id from session: ', sess.passport.user.id);
         //     const output = {
@@ -116,6 +129,17 @@ router.get('/logout',
     function(req, res){
         console.log("user has logged out");
         res.redirect('/');
+
+        //setting Login Status on DB
+        const sess = req.session.passport.user.id;        
+        let isLoggedIn = 'isLoggedIn';
+        let sql = `UPDATE users SET ${isLoggedIn} = false WHERE facebookID = ${sess}`;
+        console.log("This is the sql:", sql);
+
+        pool.query(sql, function(err, results, fields) {
+            if (err) throw err;
+            console.log()
+        });
     }
 );
 
@@ -124,6 +148,7 @@ function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
     if (req.isAuthenticated()){
+
         res.redirect('/home');
         return next();
     }
