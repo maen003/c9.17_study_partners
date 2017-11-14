@@ -19,7 +19,20 @@ class DetailsModal extends Component {
             details: this.props.details
         }
 
+        this.getDomElement = this.getDomElement.bind(this);
         this.toggleModal = this.props.toggleModal;
+    }
+
+    componentDidMount() {
+        this.animateModal();
+    }
+
+    animateModal() {
+        var modal = document.getElementsByClassName("detailsModal")[0];
+
+        if (modal.classList.contains('expandDetails')) {
+            join.className += " closeDetails"
+        }
     }
 
     componentWillReceiveProps(nextProps){

@@ -15,3 +15,47 @@
     padding: 20px;
     background-color: white;
 }
+
+/* keyframe animation */
+.expandDetails {
+    animation: expandFind 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes expandDetails {
+    0% {
+        height: 0;
+        width: 0;
+    }
+    50% {
+        height: 0;
+        width: 100%;
+    }
+    100% {
+        height: 68vmin;
+        width: 100%;
+    }
+}
+  
+.closeDetails {
+    animation: closeFind 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes closeDetails {
+    0% {
+        height: 68vmin;
+        width: 100%;
+    }
+    50% {
+        height: 68vmin;
+        width: 0;
+    }
+    100% {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+}
