@@ -2,20 +2,31 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAll} from '../../actions';
 import EventList from './listEvents';
+import Checkbox from './Checkbox';
 
 import './joinEvent.css';
+
+const subjects = [
+    'Life Sciences',
+    'Visual and Perfomance Arts',
+    'Liberal Arts',
+    'Engineering and technology',
+    'Business'
+  ];
 
 class JoinEvent extends Component {
     constructor (props) {
         super (props);
 
         this.state = {
-            eventList: null,
-            checkboxState: true
+            eventList: null
         }
 
         this.getJoinData = this.getJoinData.bind(this);
-        this.filterData = this.filterData.bind(this);
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.createCheckbox = this.createCheckbox.bind(this);
+        this.createCheckboxes = this.createCheckboxes.bind(this);
     }
 
     componentDidMount() {
@@ -28,34 +39,47 @@ class JoinEvent extends Component {
         });
     }
 
-    filterData() {
-        // console.log(this);
-        console.log('value: ', this.textInput.value);
+    componentWillMount = () => {
+        this.selectedCheckboxes = new Set();
     }
+
+    toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+            this.selectedCheckboxes.delete(label);
+        } else {
+            this.selectedCheckboxes.add(label);
+        }
+    }
+
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+
+        for (const checkbox of this.selectedCheckboxes) {
+            console.log(checkbox, 'is selected.');
+        }
+    }
+
+    createCheckbox = label => (
+        <Checkbox
+            label={label}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label}
+        />
+    )
+
+    createCheckboxes = () => (
+        subjects.map(this.createCheckbox)
+    )
 
     render() {
         return (
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
-                    <form>
+                    <form onSubmit={this.handleFormSubmit}>
                         <div>
                             <h4>By Subject</h4>
-                            <label className="checkbox filterCheck">
-                                <input onClick={this.filterData} type="checkbox" value="Life sciences" ref={(input) => {this.textInput = input}}/> Life Sciences
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onClick={this.filterData} type="checkbox" value="Visual and Perfomance Arts" ref={(input) => {this.textInput = input}}/> Visual and Perfomance Arts
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onClick={this.filterData} type="checkbox" value="Liberal Arts" ref={(input) => {this.textInput = input}}/> Liberal Arts
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onClick={this.filterData} type="checkbox" value="Engineering and technology" ref={(input) => {this.textInput = input}}/> Engineering and technology
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onClick={this.filterData} type="checkbox" value="Business" ref={(input) => {this.textInput = input}}/> Business
-                            </label>
+                            {this.createCheckboxes()}
                         </div>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
