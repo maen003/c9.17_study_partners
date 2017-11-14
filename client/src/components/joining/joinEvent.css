@@ -29,12 +29,18 @@
     padding-left: 5%;
 }
 
-/* .map {
-    height: 75%;
-    width: 100%;
-    background-color: lightpink;
-} */
-
 .list > h3 {
     text-align: center;
+}
+
+.map {
+    border: 1px solid black;
+    margin-top: 3%;
+    height: 50vmin;
+}
+
+.joinMap {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black
 }

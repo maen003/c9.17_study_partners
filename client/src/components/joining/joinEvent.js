@@ -15,6 +15,9 @@ class JoinEvent extends Component {
 
         this.getJoinData = this.getJoinData.bind(this);
         this.filterEvents = this.filterEvents.bind(this);
+
+        this.renderMapAfterText = this.renderMapAfterText.bind(this);
+        this.joinMap = this.joinMap.bind(this);
     }
 
     componentDidMount() {
@@ -30,6 +33,35 @@ class JoinEvent extends Component {
     filterEvents() {
         console.log('checkbox toggled: ', );
     }
+
+    ///////////////////////MAP/////////////////////
+    renderMapAfterText(){
+        console.log('zipcode input focus changed');
+        // this.props.getAll().then(function(response){
+        //     console.log("map: ", response.payload.data.data);
+        // });
+        this.joinMap();
+    }
+
+    joinMap() {
+        var map_data_array = [{lat: 33.6404952, lng: -117.8442962}, {lat: 33.6471628, lng: -117.8411294}];
+        var zipcode = {lat: 33.6588951, lng: -117.8282121};
+
+        const map = new google.maps.Map(document.getElementById('joinMap'), {
+            zoom: 12,
+            center: zipcode
+        });
+
+        for (var i = 0; i < map_data_array.length; i++) {
+            const latLng = map_data_array[i];
+            const marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                //label: 'z'
+            });
+        }
+    }
+    ///////////////////////MAP/////////////////////
 
     render() {
         return (
@@ -57,13 +89,13 @@ class JoinEvent extends Component {
                         </div>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
-                            <input type="text" className="zipcode form-control" placeholder="Zip Code"/>
+                            <input onBlur={this.renderMapAfterText} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
                     </form>
                     <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
 
                     <div className="map col-sm-12 col-xs-12">
-                        <p>map goes here</p>
+                        <div className="joinMap" id="joinMap"></div>
                     </div>
                 </div>
                 <div className="list col-sm-4 col-xs-12">

@@ -70,6 +70,7 @@ class DetailsModal extends Component {
                             <p>{`Details: ${details.details}`}</p>
                             <p>{`Location: ${details.location}`}</p>
                             <p>map will go here</p>
+                            <div className="singleMap" id="singleMap">loading...</div>
                         </div>
                     </div>
                 </div>

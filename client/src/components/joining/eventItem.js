@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DetailsModal from '../modal/event_details_modal';
+import axios from 'axios';
 
 import './eventItem.css';
 
@@ -12,13 +13,50 @@ class EventDetails extends Component {
         }
 
         this.toggleModal = this.toggleModal.bind(this);
+
+        this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
+        this.singleMap = this.singleMap.bind(this);
+        this.axiosThenFunction = this.axiosThenFunction.bind(this);
     }
 
     toggleModal(event) {
         this.setState({
             showModal: !this.state.showModal
         })
+        this.renderMapAfterClick();
     }
+
+    /////////////////////////MAP////////////////////////
+    renderMapAfterClick(){
+        console.log('More info button clicked');
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+'uci'+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+            .then(this.axiosThenFunction);
+    }
+
+    //***//^^^^^//REPLACE 'UCI' WITH INFO.LOCATION//^^^^^//***//
+
+    axiosThenFunction(response){
+        this.setState({
+            coordinates: response.data.results[0].geometry.location
+        });
+        console.log('coordinates: ', this.state.coordinates);
+        this.singleMap();
+    }
+
+    singleMap() {
+        const uluru = this.state.coordinates;
+        const map = new google.maps.Map(document.getElementById('singleMap'), {
+            zoom: 14,
+            center: uluru
+        });
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            animation: google.maps.Animation.DROP, //BOUNCE //DROP
+            // label: 'z'
+        });
+    }
+    /////////////////////////MAP////////////////////////
 
     render() {
         const {info} = this.props;
