@@ -88,12 +88,25 @@ router.get('/home',
         //setting Login Status on DB
         const sess = req.session.passport.user.id;        
         let isLoggedIn = 'isLoggedIn';
-        let sql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
-        console.log("This is the sql:", sql);
+        let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
+        console.log("This is the Update Sql:", updateSql);
 
-        pool.query(sql, function(err, results, fields) {
+        pool.query(updateSql, function(err, results, fields) {
             if (err) throw err;
             console.log("isLoggedIn status updated on db");
+        });
+
+        // var resObj = {
+        //     success: true,
+        //     data: data
+        // }
+    
+        //retrieving isLoggedIn status from DB
+        let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
+        console.log("This is the Select Sql:", selectSql);
+        pool.query(selectSql, function(err, results, fields) {
+            if (err) throw err;
+            console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
 
         // const sess = req.session;
@@ -110,6 +123,26 @@ router.get('/home',
     }
 );
 
+router.get('/checkLogin', 
+    
+    function(req, res) {
+        console.log("This is the session from the checkLogin route", req.session);
+        //retrieving isLoggedIn status from DB
+        if (req.session.passport === undefined) {
+            res.sendFile(path.resolve("..", "client", "dist", "404.html"))
+        } else {
+            const sess = req.session.passport.user.id;                
+            let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
+            console.log("This is the Select Sql:", selectSql);
+            pool.query(selectSql, function(err, results, fields) {
+                if (err) throw err;
+                console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
+                res.json({ isLoggedIn: true });
+            });
+        }
+    }
+)
+
 router.get('/auth/facebook',
     passport.authenticate('facebook', {
         authType: 'rerequest',
@@ -121,6 +154,9 @@ router.get('/auth/facebook',
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
+        console.log("This is in the auth/facebook/callback route", req.session.passport.user);
+
+
         res.redirect('/home');
     }
 );
@@ -148,7 +184,6 @@ function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
     if (req.isAuthenticated()){
-
         res.redirect('/home');
         return next();
     }
