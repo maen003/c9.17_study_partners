@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import DetailsModal from '../modal/event_details_modal';
 
+import './eventItem.css';
+
 class EventDetails extends Component {
     constructor (props) {
         super (props);
@@ -25,12 +27,16 @@ class EventDetails extends Component {
         const hide = {display: 'none'}
 
         return (
-            <div>
-                <h3>{info.title}</h3>
-                <p>{info.subject}</p>
-                <p>{`On ${info.date} at ${info.time}`}</p>
-                <button className="btn btn-danger" type="button">Delete</button>
-                <button onClick={this.toggleModal} className="btn btn-success" type="button">More Info</button>
+            <div className="col-sm-12 col-xs-12 singleItem">
+                <div className="col-sm-8">
+                    <h4>Title: {info.title}</h4>
+                    <p>Subject: {info.subject}</p>
+                    <p>{`On ${info.date} at ${info.time}`}</p>
+                </div>
+                <div className="col-sm-4 buttonContainer">
+                    <button onClick={this.toggleModal} className="btn btn-success infoButton" type="button">More Info</button>
+                </div>
+                <hr/>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
         );

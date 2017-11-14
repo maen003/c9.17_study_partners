@@ -142,6 +142,40 @@ app.post('/delete_events',function(req, res){
     console.log('got a user request????');
     //res.end('got a user request!!!!!');
 });
+
+app.get('/user_events',function(req, res){
+    passport.authenticate('facebook');
+    console.log("yummy donuts", req.session.passport);
+    const connection = mysql.createConnection(credentials);
+    connection.connect(() => {
+        console.log(arguments);
+        connection.query(
+            `SELECT * FROM events WHERE facebookID = '${req.session.passport.user.id}'`, function(err, results, fields){
+                console.log('query has finished', connection);
+                const output = {
+                    success: true,
+                    data: results
+                };
+                res.end(JSON.stringify(output));
+            });
+        console.log('query has started')
+    });
+    console.log('got a user request????');
+    //res.end('got a user request!!!!!');
+    passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an object for clientID, clientSecret, and callbackURL
+        function (accessToken, refreshToken, profile, cb) {
+            console.log('hello good sir', profile);
+        }));
+    passport.authenticate('facebook');
+    console.log('this is the passport', passport);
+    console.log('this is le cookie', req.cookie);
+    console.log('these is le req', req);
+    console.log('sir here is the response', res);
+    console.log('good day sir', res.cookie);
+    console.log("This is the session data", req.session);
+    console.log('facebook request is here id', req.session.id);
+});
+
 //END CREATE/JOIN EVENTS ROUTES
 
 
