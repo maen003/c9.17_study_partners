@@ -2,8 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAll} from '../../actions';
 import EventList from './listEvents';
+import Checkbox from './Checkbox';
 
 import './joinEvent.css';
+
+const subjects = [
+    'Life Sciences',
+    'Visual and Perfomance Arts',
+    'Liberal Arts',
+    'Engineering and technology',
+    'Business'
+  ];
 
 class JoinEvent extends Component {
     constructor (props) {
@@ -14,6 +23,14 @@ class JoinEvent extends Component {
         }
 
         this.getJoinData = this.getJoinData.bind(this);
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.createCheckbox = this.createCheckbox.bind(this);
+        this.createCheckboxes = this.createCheckboxes.bind(this);
+    }
+
+    componentDidMount() {
+        this.getJoinData();
     }
 
     getJoinData() {
@@ -22,42 +39,61 @@ class JoinEvent extends Component {
         });
     }
 
+    componentWillMount = () => {
+        this.selectedCheckboxes = new Set();
+    }
+
+    toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+            this.selectedCheckboxes.delete(label);
+        } else {
+            this.selectedCheckboxes.add(label);
+        }
+    }
+
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+
+        for (const checkbox of this.selectedCheckboxes) {
+            console.log(checkbox, 'is selected.');
+        }
+    }
+
+    createCheckbox = label => (
+        <Checkbox
+            label={label}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label}
+        />
+    )
+
+    createCheckboxes = () => (
+        subjects.map(this.createCheckbox)
+    )
+
     render() {
         return (
             <div className="container">
-                <div className="filter">
-                    <form>
-                        <div className="col-sm-5 col-xs-12 leftSideFilter">    
-                            <div className="form-group zipInput">
-                                <input type="text" id="zipcode" className="zipcode form-control" placeholder="Zip Code"/>
-                            </div>
-                            <h3>Filter By Subject</h3>
-                            <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
-                            <button className="btn btn-success" type="button">Toh gleh</button>
+                <div className="filterContainer col-sm-8 col-xs-12">
+                    <h3>Filter Results</h3>
+                    <form onSubmit={this.handleFormSubmit}>
+                        <div>
+                            <h4>By Subject</h4>
+                            {this.createCheckboxes()}
                         </div>
-                        <div className="col-sm-7 col-xs-12 rightSideFilter">
-                            <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">
-                                <input type="checkbox" id="lifeSciences" value="Life sciences"/> Filter Subjects
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="vpArts">
-                                <input type="checkbox" id="vpArts" value="Visual and Perfomance Arts"/> Visual and Perfomance Arts
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="libArts">
-                                <input type="checkbox" id="libArts" value="Liberal Arts"/> Liberal Arts
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="engTech">
-                                <input type="checkbox" id="engTech" value="Engineering and technology"/> Engineering and technology
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="business">
-                                <input type="checkbox" id="business" value="Business"/> Business
-                            </label>
+                        <div className="form-group zipInput">
+                            <h4>By Location</h4>
+                            <input type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
                     </form>
+                    <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
+
+                    <div className="map col-sm-12 col-xs-12">
+                        <p>map goes here</p>
+                    </div>
                 </div>
-                <div className="map">
-                    <p>map goes here</p>
-                </div>
-                <div className="list">
+                <div className="list col-sm-4 col-xs-12">
+                    <h3>All Events</h3>
                     <EventList eventList={this.props.events}/>
                 </div>
             </div>

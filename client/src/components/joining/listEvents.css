@@ -1,0 +1,5 @@
+.eventList {
+    overflow-y: auto;
+    height: 85vmin;
+    /* border: 1px dashed lightcoral; */
+}

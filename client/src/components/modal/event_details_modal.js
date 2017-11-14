@@ -30,7 +30,7 @@ class DetailsModal extends Component {
 
     render() { 
         const {showModal, details} = this.state;
-        console.log('details for modal are: ', this.props);
+        // console.log('details for modal are: ', this.props);
 
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} id="detailsModal" role="dialog">

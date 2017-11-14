@@ -2,7 +2,7 @@ import types from './types';
 import axios from 'axios';
 
 export function createEvent(form) {
-    const request = axios.post("http://dev.michaelahn.solutions/add_events", { //change to "/add_events" when pushing
+    const request = axios.post("http://dev.michaelahn.solutions/add_events", {
         title: form.title,
         description: form.description,
         subject: form.subject,
@@ -22,10 +22,19 @@ export function createEvent(form) {
 }
 
 export function getAll() {
-    const request = axios.post("http://dev.michaelahn.solutions/events"); //change to "/events" when pushing
+    const request = axios.get("http://dev.michaelahn.solutions/events");
 
     return {
         type: types.GET_ALL,
+        payload: request
+    }
+}
+
+export function userEvents() {
+    const request = axios.get("http://dev.michaelahn.solutions/user_events");
+
+    return {
+        type: types.USER_EVENTS,
         payload: request
     }
 }
