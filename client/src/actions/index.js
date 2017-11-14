@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // http://dev.michaelahn.solutions
 export function createEvent(form) {
+
     const request = axios.post("http://dev.michaelahn.solutions/add_events", {
         title: form.title,
         description: form.description,
@@ -13,7 +14,8 @@ export function createEvent(form) {
         location: form.location,
         max: form.max,
         phone: form.phone,
-        email:form.email
+        email:form.email,
+        facebookID: '',
     });
 
     return {
@@ -23,6 +25,7 @@ export function createEvent(form) {
 }
 
 export function getAll() {
+
     const request = axios.get("http://dev.michaelahn.solutions/events");
 
     return {
