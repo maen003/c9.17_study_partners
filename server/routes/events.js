@@ -9,7 +9,12 @@ const facebookCreds = require('../facebookCreds.js');
 const session = require('express-session');
 
 // Reading Events
-router.get('/events',function(req, res){
+router.get('/events',
+    passport.authenticate('facebook', { failureRedirect: '/' }),
+    function(req, res){
+        console.log('the data is receiveth');
+        console.log('req is before this');
+        console.log("grumbo!!!!", req.session.passport);
     const connection = mysql.createConnection(credentials);
 
     connection.connect(() => {
