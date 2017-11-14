@@ -8,6 +8,10 @@ export default (state = DEFAULT_STATE, action) => {
             return {
                 all: action.payload.data
             };
+        case types.USER_EVENTS:
+            return {
+                all: action.payload.data
+            };
         default:
             return state;
     }

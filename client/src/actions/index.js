@@ -29,3 +29,12 @@ export function getAll() {
         payload: request
     }
 }
+
+export function userEvents() {
+    const request = axios.get("http://dev.michaelahn.solutions/user_events");
+
+    return {
+        type: types.USER_EVENTS,
+        payload: request
+    }
+}
