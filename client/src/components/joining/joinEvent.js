@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAll} from '../../actions';
 import EventList from './listEvents';
-import Checkbox from './Checkbox';
 
 import './joinEvent.css';
 
