@@ -11,16 +11,16 @@ class CreateEvent extends Component {
 
         this.state = {
             form: {
-                title: '',
-                subject: '',
-                max: '',
+                title: 'asdf',
+                subject: 'Life Sciences',
+                max: '2-5',
                 date: '',
                 time: '',
-                duration: '',
-                phone: '',
-                email: '',
-                location: '',
-                description: ''
+                duration: 'Less than 1 Hour',
+                phone: '1234567890',
+                email: 'asdf@asdf.com',
+                location: 'LFZ',
+                description: 'asdf'
             }
         }
 

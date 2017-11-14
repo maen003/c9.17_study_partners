@@ -3,11 +3,16 @@ import React, {Component} from 'react';
 import './event_details_modal.css';
 
 const display = {
-    display: 'block'
+    display: 'block',
+    animation: 'expandFind 1.5s',
+    animationTimingFunction: 'ease-in-out',
+    animationFillMode: 'forwards'
 }
 
 const hide = {
-    display: 'none'
+    animation: 'closeFind 1s',
+    animationTimingFunction: 'ease-in-out',
+    animationFillMode: 'forwards'
 }
 
 class DetailsModal extends Component {
@@ -28,9 +33,9 @@ class DetailsModal extends Component {
     }
 
     animateModal() {
-        var modal = document.getElementsByClassName("animateModal")[0];
+        var detailModal = document.getElementsByClassName("animateModal")[0];
 
-        if (modal.classList.contains('expandDetails')) {
+        if (detailModal.classList.contains('expandDetails')) {
             join.className += " closeDetails"
         }
     }
