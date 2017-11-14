@@ -19,7 +19,7 @@ class DetailsModal extends Component {
             details: this.props.details
         }
 
-        this.getDomElement = this.getDomElement.bind(this);
+        this.animateModal = this.animateModal.bind(this);
         this.toggleModal = this.props.toggleModal;
     }
 
@@ -28,7 +28,7 @@ class DetailsModal extends Component {
     }
 
     animateModal() {
-        var modal = document.getElementsByClassName("detailsModal")[0];
+        var modal = document.getElementsByClassName("animateModal")[0];
 
         if (modal.classList.contains('expandDetails')) {
             join.className += " closeDetails"
@@ -48,7 +48,7 @@ class DetailsModal extends Component {
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} id="detailsModal" role="dialog">
                 <div className="modal-dialog">
-                    <div className="modal-content">
+                    <div className="modal-content animateModal">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">Details</h4>
