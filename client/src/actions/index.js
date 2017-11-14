@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export function createEvent(form) {
 
-    const request = axios.post("/api/add_events", {
+    const request = axios.post("/add_events", {
         title: form.title,
         description: form.description,
         subject: form.subject,
@@ -25,7 +25,7 @@ export function createEvent(form) {
 
 export function getAll() {
 
-    const request = axios.get("/api/events");
+    const request = axios.get("/events");
 
     return {
         type: types.GET_ALL,
@@ -34,7 +34,7 @@ export function getAll() {
 }
 
 export function userEvents() {
-    const request = axios.get("/api/user_events");
+    const request = axios.get("/user_events");
 
     return {
         type: types.USER_EVENTS,
