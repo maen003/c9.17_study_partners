@@ -36,7 +36,6 @@ class EventDetails extends Component {
                 <div className="col-sm-4 buttonContainer">
                     <button onClick={this.toggleModal} className="btn btn-success infoButton" type="button">More Info</button>
                 </div>
-                <hr/>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
         );

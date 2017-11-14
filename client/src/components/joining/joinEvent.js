@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAll} from '../../actions';
 import EventList from './listEvents';
-import Checkbox from './Checkbox';
+import Checkbox from './checkbox';
 
 import './joinEvent.css';
 
@@ -29,17 +29,14 @@ class JoinEvent extends Component {
         this.createCheckboxes = this.createCheckboxes.bind(this);
     }
 
-    componentDidMount() {
-        this.getJoinData();
-    }
-
     getJoinData() {
         this.props.getAll().then(function(response){
             console.log('response: ', response.payload.data);
         });
     }
 
-    componentWillMount = () => {
+    componentWillMount() {
+        this.getJoinData();
         this.selectedCheckboxes = new Set();
     }
 
@@ -60,11 +57,7 @@ class JoinEvent extends Component {
     }
 
     createCheckbox = label => (
-        <Checkbox
-            label={label}
-            handleCheckboxChange={this.toggleCheckbox}
-            key={label}
-        />
+        <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>
     )
 
     createCheckboxes = () => (
@@ -86,7 +79,7 @@ class JoinEvent extends Component {
                             <input type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
                     </form>
-                    <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
+                    <button className="btn btn-warning" type="submit">Search Again</button>
 
                     <div className="map col-sm-12 col-xs-12">
                         <p>map goes here</p>
