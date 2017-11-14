@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 // import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {createEvent} from '../../actions';
+import axios from 'axios';
 
 import './createEvent.css';
 
@@ -11,22 +12,56 @@ class CreateEvent extends Component {
 
         this.state = {
             form: {
-                title: '',
-                subject: '',
-                max: '',
+                title: 'asdf',
+                subject: 'Life Sciences',
+                max: '2-5',
                 date: '',
                 time: '',
-                duration: '',
-                phone: '',
-                email: '',
-                location: '',
-                description: '',
-            }
+                duration: 'Less than 1 Hour',
+                phone: '1234567890',
+                email: 'asdf@asdf.com',
+                location: 'Learning Fuze',
+                description: 'asdf'
+            },
+            coordinates: ''
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitData = this.submitData.bind(this);
+
+        this.renderMapAfterText = this.renderMapAfterText.bind(this);
+        this.axiosThenFunction = this.axiosThenFunction.bind(this);
+        this.createMap = this.createMap.bind(this);
     }
+
+    ///////////////////////MAP/////////////////////////
+    renderMapAfterText(){
+        console.log('location input focus changed');
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.form.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+            .then(this.axiosThenFunction);
+    }
+
+    axiosThenFunction(response){
+        this.setState({
+            coordinates: response.data.results[0].geometry.location
+        });
+        console.log('coordinates: ', this.state.coordinates);
+        this.createMap();
+    }
+
+    createMap() {
+        const uluru = this.state.coordinates;
+        const map = new google.maps.Map(document.getElementById('createMap'), {
+            zoom: 14,
+            center: uluru
+        });
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            animation: google.maps.Animation.DROP, //BOUNCE //DROP
+        });
+    }
+    ///////////////////////MAP/////////////////////////
 
     handleInputChange(event){
         const {value, name} = event.target;
@@ -39,8 +74,9 @@ class CreateEvent extends Component {
 
     submitData(event) {
         event.preventDefault();
-        console.log('form values: ', this.state.form);
-        this.props.createEvent(this.state.form).then(function(resp){
+        const formData = {...this.state.form, coordinates: this.state.coordinates};
+        console.log('form values: ', formData);
+        this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
             console.log(resp);
         });
@@ -56,10 +92,13 @@ class CreateEvent extends Component {
                 phone: '',
                 email: '',
                 location: '',
-                description: '',
-            }
+                description: ''
+            },
+            coordinates: ''
         })
     }
+
+
 
     render() {
         const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form;
@@ -133,11 +172,11 @@ class CreateEvent extends Component {
                         <div className="col-sm-12 col-xs-12">
                             <div className="col-sm-4 col-xs-12 locationFormComp"> 
                                 <label htmlFor="location">Location of event</label><br/>
-                                    <input value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="form-control"/>
+                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="form-control"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
-                                    <h3>map here</h3>
+                                    <div className="createMap" id="createMap"></div>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +186,7 @@ class CreateEvent extends Component {
                     </div>
                 </form>
                 <div className="bottons col-sm-12 col-xs-12"> {/* bottom buttons */}
-                    <button className="btn btn-danger" type="button">Back</button>
+                    <button className="form-group btn btn-danger" type="button">Back</button>
                     <button className="form-group btn btn-success submitForm" type="submit" onClick={this.submitData}>Create Event</button>
                 </div>
             </div>

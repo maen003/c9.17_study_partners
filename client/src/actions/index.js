@@ -1,6 +1,7 @@
 import types from './types';
 import axios from 'axios';
 
+// http://dev.michaelahn.solutions
 export function createEvent(form) {
 
     const request = axios.post("http://dev.michaelahn.solutions/add_events", {
