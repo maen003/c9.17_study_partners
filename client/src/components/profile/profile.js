@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {userEvents} from '../../actions';
+
 import './profile.css';
 
 class Profile extends Component {
     constructor(props) {
         super(props);
 
+        this.getUserData = this.getUserData.bind(this);
     }
 
+    componentDidMount() {
+        this.getUserData();
+    }
 
-//     </div>
-//     <div className=" ">
-//         <div className="form-group mainContentInfo col-sm-12 col-xs-12">
-//             <div className="profileImg">
-//                 <img src='http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23244_what-is-the-appenzeller-sennenhunde-dog-300x189.jpg' width='200px' height='200px' />
-//             </div>
-//             <div className="profileInfo">
-//                 <h1>FIRST LAST HERE</h1>
-//                 <h5>SCHOOL NAME HERE</h5>
-//                 <h6>SUBJECT HERE</h6>
-//                 <h6>GRADE HERE</h6>
-//                 <h6>CONTACT INFO HERE</h6>
-//             </div>
-//         </div>
-//     </div>
-// </div>
+    getUserData() {
+        this.props.userEvents().then((resp) => {
+            console.log('response for user: ', resp);
+        })
+    }
 
     render() {
         return (
@@ -63,4 +59,4 @@ class Profile extends Component {
         );
     }
 }
-export default Profile;
+export default connect(null, {userEvents})(Profile);

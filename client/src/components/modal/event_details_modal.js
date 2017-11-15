@@ -3,11 +3,16 @@ import React, {Component} from 'react';
 import './event_details_modal.css';
 
 const display = {
-    display: 'block'
+    display: 'block',
+    animation: 'expandFind 1.5s',
+    animationTimingFunction: 'ease-in-out',
+    animationFillMode: 'forwards'
 }
 
 const hide = {
-    display: 'none'
+    animation: 'closeFind 1s',
+    animationTimingFunction: 'ease-in-out',
+    animationFillMode: 'forwards'
 }
 
 class DetailsModal extends Component {
@@ -19,7 +24,20 @@ class DetailsModal extends Component {
             details: this.props.details
         }
 
+        this.animateModal = this.animateModal.bind(this);
         this.toggleModal = this.props.toggleModal;
+    }
+
+    componentDidMount() {
+        this.animateModal();
+    }
+
+    animateModal() {
+        var detailModal = document.getElementsByClassName("animateModal")[0];
+
+        if (detailModal.classList.contains('expandDetails')) {
+            join.className += " closeDetails"
+        }
     }
 
     componentWillReceiveProps(nextProps){
@@ -30,12 +48,12 @@ class DetailsModal extends Component {
 
     render() { 
         const {showModal, details} = this.state;
-        console.log('details for modal are: ', this.props);
+        // console.log('details for modal are: ', this.props);
 
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} id="detailsModal" role="dialog">
                 <div className="modal-dialog">
-                    <div className="modal-content">
+                    <div className="modal-content animateModal">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">Details</h4>
@@ -52,6 +70,7 @@ class DetailsModal extends Component {
                             <p>{`Details: ${details.details}`}</p>
                             <p>{`Location: ${details.location}`}</p>
                             <p>map will go here</p>
+                            <div className="singleMap" id="singleMap">loading...</div>
                         </div>
                     </div>
                 </div>

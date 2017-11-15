@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import EventDetails from './eventItem';
 
+import './listEvents.css';
+
 class EventList extends Component {
     constructor (props) {
         super (props);
@@ -16,8 +18,7 @@ class EventList extends Component {
                 return <EventDetails key={index} info={eventItem}/>
             });
             return (
-                <div className="container">
-                    <h3>All Events</h3>
+                <div className="eventList">
                     <ul>
                         {eventElements}
                     </ul>

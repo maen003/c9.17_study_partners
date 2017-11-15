@@ -10,10 +10,18 @@ class JoinEvent extends Component {
         super (props);
 
         this.state = {
-            eventList: null
+            eventList: null,
         }
 
         this.getJoinData = this.getJoinData.bind(this);
+        this.filterEvents = this.filterEvents.bind(this);
+
+        this.renderMapAfterText = this.renderMapAfterText.bind(this);
+        this.joinMap = this.joinMap.bind(this);
+    }
+
+    componentDidMount() {
+        this.getJoinData();
     }
 
     getJoinData() {
@@ -22,42 +30,76 @@ class JoinEvent extends Component {
         });
     }
 
+    filterEvents() {
+        console.log('checkbox toggled: ', );
+    }
+
+    ///////////////////////MAP/////////////////////
+    renderMapAfterText(){
+        console.log('zipcode input focus changed');
+        // this.props.getAll().then(function(response){
+        //     console.log("map: ", response.payload.data.data);
+        // });
+        this.joinMap();
+    }
+
+    joinMap() {
+        var map_data_array = [{lat: 33.6404952, lng: -117.8442962}, {lat: 33.6471628, lng: -117.8411294}];
+        var zipcode = {lat: 33.6588951, lng: -117.8282121};
+
+        const map = new google.maps.Map(document.getElementById('joinMap'), {
+            zoom: 12,
+            center: zipcode
+        });
+
+        for (var i = 0; i < map_data_array.length; i++) {
+            const latLng = map_data_array[i];
+            const marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                //label: 'z'
+            });
+        }
+    }
+    ///////////////////////MAP/////////////////////
+
     render() {
         return (
             <div className="container">
-                <div className="filter">
+                <div className="filterContainer col-sm-8 col-xs-12">
+                    <h3>Filter Results</h3>
                     <form>
-                        <div className="col-sm-5 col-xs-12 leftSideFilter">    
-                            <div className="form-group zipInput">
-                                <input type="text" id="zipcode" className="zipcode form-control" placeholder="Zip Code"/>
-                            </div>
-                            <h3>Filter By Subject</h3>
-                            <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
-                            <button className="btn btn-success" type="button">Toh gleh</button>
+                        <div>
+                            <h4>By Subject</h4>
+                            <label className="checkbox filterCheck">
+                                <input onChange={this.filterEvents} name="lifeSci" type="checkbox" value="Life sciences"/> Life Sciences
+                            </label>
+                            <label className="checkbox filterCheck">
+                                <input onChange={this.filterEvents} name="vpArts" type="checkbox" value="Visual and Perfomance Arts"/> Visual and Perfomance Arts
+                            </label>
+                            <label className="checkbox filterCheck">
+                                <input onChange={this.filterEvents} name="libArts" type="checkbox" value="Liberal Arts"/> Liberal Arts
+                            </label>
+                            <label className="checkbox filterCheck">
+                                <input onChange={this.filterEvents} name="engTech" type="checkbox" value="Engineering and technology"/> Engineering and technology
+                            </label>
+                            <label className="checkbox filterCheck">
+                                <input onChange={this.filterEvents} name="business" type="checkbox" value="Business"/> Business
+                            </label>
                         </div>
-                        <div className="col-sm-7 col-xs-12 rightSideFilter">
-                            <label className="checkbox-inline filterSubject" htmlFor="lifeSciences">
-                                <input type="checkbox" id="lifeSciences" value="Life sciences"/> Filter Subjects
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="vpArts">
-                                <input type="checkbox" id="vpArts" value="Visual and Perfomance Arts"/> Visual and Perfomance Arts
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="libArts">
-                                <input type="checkbox" id="libArts" value="Liberal Arts"/> Liberal Arts
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="engTech">
-                                <input type="checkbox" id="engTech" value="Engineering and technology"/> Engineering and technology
-                            </label>
-                            <label className="checkbox-inline filterSubject" htmlFor="business">
-                                <input type="checkbox" id="business" value="Business"/> Business
-                            </label>
+                        <div className="form-group zipInput">
+                            <h4>By Location</h4>
+                            <input onBlur={this.renderMapAfterText} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
                     </form>
+                    <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
+
+                    <div className="map col-sm-12 col-xs-12">
+                        <div className="joinMap" id="joinMap"></div>
+                    </div>
                 </div>
-                <div className="map">
-                    <p>map goes here</p>
-                </div>
-                <div className="list">
+                <div className="list col-sm-4 col-xs-12">
+                    <h3>All Events</h3>
                     <EventList eventList={this.props.events}/>
                 </div>
             </div>
