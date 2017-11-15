@@ -113,8 +113,7 @@ class CreateEvent extends Component {
                         </div>
                         <div className="col-sm-12 col-xs-12">
                             <label htmlFor="subjects">Event Subject</label><br/>
-                                <select value={subject} onChange={this.handleInputChange} name="subject" id="subjects" className="form-control">
-                                    <option disabled>Set subject</option>
+                                <select value={subject} onChange={this.handleInputChange} name="subject" id="subjects" className="form-control" placeholder="Set Subject">
                                     <option>Life sciences</option>
                                     <option>Visual and Perfomance Arts</option>
                                     <option>Liberal Arts</option>
@@ -124,8 +123,7 @@ class CreateEvent extends Component {
                         </div>
                         <div className="col-sm-12 col-xs-12">
                                 <label htmlFor="max">Group Size</label><br/>
-                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="form-control">
-                                        <option disabled>Set group size</option>
+                                    <select value={max} onChange={this.handleInputChange} name="max" id="max" className="form-control" placeholder="Set Group Size">
                                         <option>2-5</option>
                                         <option>6-10</option>
                                         <option>11-15</option>
@@ -147,8 +145,7 @@ class CreateEvent extends Component {
                         </div>
                         <div className="col-sm-12 col-xs-12">
                             <label htmlFor="duration">Duration of event</label><br/>
-                                <select value={duration} onChange={this.handleInputChange} name="duration" id="duration" className="form-control">
-                                    <option disabled>Set duration</option>
+                                <select value={duration} onChange={this.handleInputChange} name="duration" id="duration" className="form-control" placeholder="Set Duration">
                                     <option>Less than 1 Hour</option>
                                     <option>1 - 2 Hours</option>
                                     <option>2 - 3 Hours</option>
