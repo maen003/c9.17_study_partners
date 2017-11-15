@@ -59,4 +59,5 @@ class Profile extends Component {
         );
     }
 }
+
 export default connect(null, {userEvents})(Profile);

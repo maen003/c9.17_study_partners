@@ -13,17 +13,9 @@ class EventDetails extends Component {
         }
 
         this.toggleModal = this.toggleModal.bind(this);
-
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
-    }
-
-    toggleModal(event) {
-        this.setState({
-            showModal: !this.state.showModal
-        })
-        this.renderMapAfterClick();
     }
 
     /////////////////////////MAP////////////////////////
@@ -57,6 +49,13 @@ class EventDetails extends Component {
         });
     }
     /////////////////////////MAP////////////////////////
+
+    toggleModal(event) {
+        this.setState({
+            showModal: !this.state.showModal
+        })
+        this.renderMapAfterClick();
+    }
 
     render() {
         const {info} = this.props;
