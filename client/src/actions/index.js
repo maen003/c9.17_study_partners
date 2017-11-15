@@ -14,7 +14,8 @@ export function createEvent(form) {
         location: form.location,
         max: form.max,
         phone: form.phone,
-        email:form.email,
+        email: form.email,
+        coordinates: form.coordinates,
         facebookID: '',
     });
 
