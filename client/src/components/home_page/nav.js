@@ -19,7 +19,7 @@ const Nav =() => {
                         <img src={Logo}/> */}
                     </div>
                     <div className="collapse navbar-collapse">
-                        <ul className="nav navbar-nav navbar-right">
+                        <ul className="nav nav-tabs navbar-right">
                             <li>
                                 <Link to='/'>Home</Link>
                             </li>
