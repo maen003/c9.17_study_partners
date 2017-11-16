@@ -38,7 +38,7 @@ class CreateEvent extends Component {
     renderMapAfterText(){
         console.log('location input focus changed');
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.form.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
-            .then(this.axiosThenFunction).then(this.createMap());
+            .then(this.axiosThenFunction);
     }
 
     axiosThenFunction(response){
@@ -46,6 +46,7 @@ class CreateEvent extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
+        this.createMap();
     }
 
     createMap() {
