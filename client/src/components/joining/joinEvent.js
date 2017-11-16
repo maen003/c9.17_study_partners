@@ -91,6 +91,7 @@ class JoinEvent extends Component {
         for (const checkbox of this.selectedCheckboxes) {
             console.log(checkbox, 'is selected.');
         }
+        this.getJoinData();
     }
     
     createCheckbox = label => (
@@ -106,7 +107,7 @@ class JoinEvent extends Component {
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
-                    <form onSubmit={this.handleFormSubmit}>
+                    <form>
                         <div>
                             <h4>By Subject</h4>
                             {this.createCheckboxes()}
@@ -115,9 +116,9 @@ class JoinEvent extends Component {
                             <h4>By Location</h4>
                             <input onBlur={this.renderMapAfterText} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
-                        <button className="btn btn-default" type="submit">Filter</button>
+                        {/* <button className="btn btn-default" type="submit">Filter</button> */}
                     </form>
-                    <button onClick={this.getJoinData} className="btn btn-warning" type="button">Search Again</button>
+                    <button onClick={this.handleFormSubmit} className="btn btn-warning" type="button">Search Again</button>
 
                     <div className="map col-sm-12 col-xs-12">
                         <div className="joinMap" id="joinMap"></div>
