@@ -201,6 +201,8 @@ app.post('/delete_events',function(req, res){
     //res.end('got a user request!!!!!');
 });
 
+
+// BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/', isLoggedIn,
     function(req, res) {
         // console.log('this is the req: ', req);
@@ -313,6 +315,7 @@ function isLoggedIn(req, res, next) {
         return next();
     }
 }
+// END ROUTING FOR PASSPORT AUTH
 
 // Listen
 app.listen(4000,function(){
