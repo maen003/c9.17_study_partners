@@ -46,10 +46,6 @@ class CreateEvent extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
-        this.createMap();
-    }
-
-    createMap() {
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('createMap'), {
             zoom: 14,
@@ -61,6 +57,7 @@ class CreateEvent extends Component {
             animation: google.maps.Animation.DROP, //BOUNCE //DROP
         });
     }
+
     ///////////////////////MAP/////////////////////////
 
     handleInputChange(event){
