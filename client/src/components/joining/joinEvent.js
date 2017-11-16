@@ -10,7 +10,7 @@ class JoinEvent extends Component {
         super (props);
 
         this.state = {
-            eventList: null,
+            eventList: null
         }
 
         this.getJoinData = this.getJoinData.bind(this);
@@ -30,8 +30,11 @@ class JoinEvent extends Component {
         });
     }
 
-    filterEvents() {
-        console.log('checkbox toggled: ', );
+    filterEvents(event) {
+        const {checked, value} = event.target
+        if(checked === true){
+            console.log('checkbox toggled: ', value);
+        }
     }
 
     ///////////////////////MAP/////////////////////

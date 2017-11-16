@@ -23,7 +23,6 @@ class EventDetails extends Component {
         this.setState({
             showModal: !this.state.showModal
         })
-        this.renderMapAfterClick();
     }
 
     /////////////////////////MAP////////////////////////
@@ -40,6 +39,7 @@ class EventDetails extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
+        this.toggleModal();
         this.singleMap();
     }
 
@@ -72,7 +72,7 @@ class EventDetails extends Component {
                     <p>{`On ${info.date} at ${info.time}`}</p>
                 </div>
                 <div className="col-sm-4 buttonContainer">
-                    <button onClick={this.toggleModal} className="btn btn-success infoButton" type="button">More Info</button>
+                    <button onClick={this.renderMapAfterClick} className="btn btn-success infoButton" type="button">More Info</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
