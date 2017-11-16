@@ -23,8 +23,8 @@ class CreateEvent extends Component {
                 location: 'Learning Fuze',
                 description: 'asdf'
             },
-            coordinates: ''
-        }
+            coordinates: null
+        };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitData = this.submitData.bind(this);
@@ -74,7 +74,7 @@ class CreateEvent extends Component {
 
     submitData(event) {
         event.preventDefault();
-        const formData = {...this.state.form, coordinates: this.state.coordinates};
+        const formData = {...this.state.form, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
