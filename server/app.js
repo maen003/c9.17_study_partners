@@ -6,6 +6,7 @@ const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
 const cookieParser = require('cookie-parser');
 const redis = require('redis');
+const nodemailer = require('./routes/nodeMailer');
 
 const app = express();
 
@@ -249,7 +250,7 @@ app.get('/home',
         //     res.end(JSON.stringify(output));
         //     console.log('this is the output from sessions: ',output);
         // }
-        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
+        // res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 

@@ -1,6 +1,6 @@
 // Require modules
 const nodemailer = require('nodemailer');
-const { USERNAME, PASSWORD } = require('./nodemailerConfig.js');
+const { USERNAME, PASSWORD } = require('../nodemailerConfig.js');
 
 // If you're going to use your own gmail
 // You have to allow less secure apps
@@ -20,9 +20,9 @@ const transporter = nodemailer.createTransport({
 const mailOptions = {
   from: 'kryseno.server@gmail.com',         // Sender of the email
   to: 'kryseno@gmail.com',  // Recipient of the email
-  subject: 'ATTENTION: THIS IS A TEST',              // Subject of the email
+  subject: 'FROM ZE SERVER',              // Subject of the email
   text: 'Sah dooo',                // Message of the email
-  // html: '<h1>Sah dooo</h1>'     // Can be used in place of the text
+  html: '<h1>Sah dooo</h1>'     // Can be used in place of the text
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
@@ -32,3 +32,5 @@ transporter.sendMail(mailOptions, (error, info) => {
     console.log('Email sent successfully' + info.response);
   }
 });
+
+module.exports = nodemailer;
