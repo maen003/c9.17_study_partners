@@ -61,8 +61,8 @@ class CreateEvent extends Component {
             animation: google.maps.Animation.DROP, //BOUNCE //DROP
         });
     }
-    ///////////////////////MAP/////////////////////////
 
+    /* form input + axios to create event */
     handleInputChange(event){
         const {value, name} = event.target;
         const {form} = this.state;

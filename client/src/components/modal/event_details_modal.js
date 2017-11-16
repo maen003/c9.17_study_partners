@@ -55,7 +55,6 @@ class DetailsModal extends Component {
                             <p>{`Contact Email: ${details.email}`}</p>
                             <p>{`Details: ${details.details}`}</p>
                             <p>{`Location: ${details.location}`}</p>
-                            <p>map will go here</p>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
                     </div>
