@@ -74,7 +74,7 @@ class CreateEvent extends Component {
 
     submitData(event) {
         event.preventDefault();
-        const formData = {...this.state.form, coordinates: this.state.coordinates};
+        const formData = {...this.state.form, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
