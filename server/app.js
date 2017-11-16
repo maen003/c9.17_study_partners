@@ -127,7 +127,7 @@ app.get('/events',
 
 app.get('/user_events',function(req, res){
     const connection = mysql.createConnection(credentials);
-
+    console.log('user events here:', req.session.passport);
     connection.connect(() => {
         console.log(arguments);
         connection.query(
