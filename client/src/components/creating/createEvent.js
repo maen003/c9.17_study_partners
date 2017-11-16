@@ -23,8 +23,8 @@ class CreateEvent extends Component {
                 location: 'Learning Fuze',
                 description: 'asdf'
             },
-            coordinates: null;
-
+            coordinates: null
+        };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitData = this.submitData.bind(this);
