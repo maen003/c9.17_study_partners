@@ -34,7 +34,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { firstName, lastName } = this.state;
+        const { firstName, lastName, contact } = this.state;
 
         return (
             <div className="container">
@@ -47,7 +47,7 @@ class Profile extends Component {
                                     <img className="img-circle img-thumbnail" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" />
                                     <div className="" ><h4>First Name: { firstName  }</h4></div>
                                     <div className="" >Last Name: { lastName } </div>
-                                    <div className="" >Contact: { contact }</div>
+                                    <div className="" >Contact: { contact} </div>
                                     <div className="" >School: </div>
                                     <div className="" >Major/Subject: </div>
                                     <div className="" >Grade: </div>
