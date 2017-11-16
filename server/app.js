@@ -226,11 +226,6 @@ app.get('/home',
             console.log("isLoggedIn status updated on db");
         });
 
-        // var resObj = {
-        //     success: true,
-        //     data: data
-        // }
-
         //retrieving isLoggedIn status from DB
         let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
         console.log("This is the Select Sql:", selectSql);
@@ -260,7 +255,6 @@ app.get('/checkLogin',
         //retrieving isLoggedIn status from DB
         if (req.session.passport === undefined) {
             res.json({ isLoggedIn: false });
-            // res.sendFile(path.resolve("..", "client", "dist", "404.html"))
         } else {
             const sess = req.session.passport.user.id;
             let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
@@ -286,8 +280,6 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         console.log("This is in the auth/facebook/callback route", req.session.passport.user);
-
-
         res.redirect('/home');
     }
 );
@@ -320,8 +312,6 @@ function isLoggedIn(req, res, next) {
         res.redirect('/home');
         return next();
     }
-    // res.sendFile(path.resolve("..", "client", "dist", "index.html"));
-
 }
 
 // Listen
