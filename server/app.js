@@ -249,7 +249,7 @@ app.get('/home',
         //     res.end(JSON.stringify(output));
         //     console.log('this is the output from sessions: ',output);
         // }
-        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
+        // res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 
@@ -259,7 +259,8 @@ app.get('/checkLogin',
         console.log("This is the session from the checkLogin route", req.session);
         //retrieving isLoggedIn status from DB
         if (req.session.passport === undefined) {
-            res.sendFile(path.resolve("..", "client", "dist", "404.html"))
+            res.json({ isLoggedIn: false });
+            // res.sendFile(path.resolve("..", "client", "dist", "404.html"))
         } else {
             const sess = req.session.passport.user.id;
             let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
@@ -305,7 +306,9 @@ app.get('/logout',
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log()
-        });
+        })
+
+        req.session.destroy();
     }
 );
 
