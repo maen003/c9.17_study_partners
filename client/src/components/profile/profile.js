@@ -8,6 +8,11 @@ class Profile extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+          firstName: null,
+          lastName: null
+        };
+
         this.getUserData = this.getUserData.bind(this);
     }
 

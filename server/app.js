@@ -129,13 +129,15 @@ app.get('/user_events',function(req, res){
     const connection = mysql.createConnection(credentials);
     console.log('user events here:', req.session.passport);
     connection.connect(() => {
-        console.log(arguments);
+        let query = `SELECT * FROM events WHERE facebookID = '${req.session.passport.id}'`;
+        console.log("iunno dude", query);
         connection.query(
-            `SELECT * FROM events WHERE facebookID = '${req.session.passport.id}'`, function(err, results, fields){
+            query, function(err, results, fields){
                 console.log('query has finished', connection);
                 const output = {
                     success: true,
-                    data: results
+                    data: results,
+                    profile: req.session.passport
                 };
                 res.end(JSON.stringify(output));
             });
