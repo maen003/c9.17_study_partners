@@ -31,7 +31,6 @@ class CreateEvent extends Component {
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
-        this.createMap = this.createMap.bind(this);
     }
 
     ///////////////////////MAP/////////////////////////
