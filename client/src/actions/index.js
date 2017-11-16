@@ -16,7 +16,7 @@ export function createEvent(form) {
         phone: form.phone,
         email:form.email,
         facebookID: '',
-        coordinates: JSON.stringify(form.coordinates)
+        coordinates: form.coordinates
     });
 
     return {
