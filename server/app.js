@@ -129,7 +129,7 @@ app.get('/user_events',function(req, res){
     const connection = mysql.createConnection(credentials);
     console.log('user events here:', req.session.passport);
     connection.connect(() => {
-        let query = `SELECT * FROM events WHERE facebookID = '${req.session.passport.id}'`;
+        let query = `SELECT * FROM events WHERE facebookID = '${req.session.passport.user.id}'`;
         console.log("iunno dude", query);
         connection.query(
             query, function(err, results, fields){
