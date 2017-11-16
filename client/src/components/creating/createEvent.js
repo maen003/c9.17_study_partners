@@ -31,13 +31,14 @@ class CreateEvent extends Component {
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
+        this.createMap = this.createMap.bind(this);
     }
 
     ///////////////////////MAP/////////////////////////
     renderMapAfterText(){
         console.log('location input focus changed');
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.form.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
-            .then(this.axiosThenFunction);
+            .then(this.axiosThenFunction).then(this.createMap());
     }
 
     axiosThenFunction(response){
@@ -45,6 +46,9 @@ class CreateEvent extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
+    }
+
+    createMap() {
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('createMap'), {
             zoom: 14,
@@ -56,7 +60,6 @@ class CreateEvent extends Component {
             animation: google.maps.Animation.DROP, //BOUNCE //DROP
         });
     }
-
     ///////////////////////MAP/////////////////////////
 
     handleInputChange(event){
