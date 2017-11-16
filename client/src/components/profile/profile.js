@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {userEvents} from '../../actions';
+import {userEvents} from '../../actions/index';
 
 import './profile.css';
 
