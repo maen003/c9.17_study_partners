@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import EventDetails from './eventItem';
 
-import './listEvents.css';
+const listDiv = {
+    overflowY: 'auto',
+    height: '85vmin',
+    /* border: '1px dashed lightcoral' */
+}
 
 class EventList extends Component {
     constructor (props) {
@@ -18,7 +22,7 @@ class EventList extends Component {
                 return <EventDetails key={index} info={eventItem}/>
             });
             return (
-                <div className="eventList">
+                <div style={listDiv}>
                     <ul>
                         {eventElements}
                     </ul>
