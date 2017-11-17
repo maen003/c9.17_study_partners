@@ -77,3 +77,11 @@
 		background-position: 100%;
 	}
 }
+
+footer h3 {
+    text-align: center;
+}
+
+.githubLinks > li {
+    display: block;
+}

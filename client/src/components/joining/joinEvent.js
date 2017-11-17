@@ -86,12 +86,14 @@ class JoinEvent extends Component {
     }
     
     handleFormSubmit = formSubmitEvent => {
+        const values = [];
         formSubmitEvent.preventDefault();
     
         for (const checkbox of this.selectedCheckboxes) {
-            console.log(checkbox, 'is selected.');
+            values.push(checkbox);
+            console.log('checkbox value array: ', values);
         }
-        this.getJoinData();
+        // this.getJoinData();
     }
     
     createCheckbox = label => (
