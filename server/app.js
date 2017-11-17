@@ -235,23 +235,11 @@ app.get('/home',
             if (err) throw err;
             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
-
-        // const sess = req.session;
-        // if (sess.passport.user.id) {
-        //     console.log('fb user id from session: ', sess.passport.user.id);
-        //     const output = {
-        //         success: true,
-        //         data: sess.passport.user.id
-        //     };
-        //     res.end(JSON.stringify(output));
-        //     console.log('this is the output from sessions: ',output);
-        // }
-        // res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
+        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 
 app.get('/checkLogin',
-
     function(req, res) {
         console.log("This is the session from the checkLogin route", req.session);
         //retrieving isLoggedIn status from DB
@@ -274,8 +262,7 @@ app.get('/auth/facebook',
     passport.authenticate('facebook', {
             authType: 'rerequest',
             scope: ['email', 'public_profile']
-        }
-    )
+        })
 );
 
 app.get('/auth/facebook/callback',
