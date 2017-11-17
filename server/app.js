@@ -319,18 +319,22 @@ const transporter = nodemailer.createTransport({
   const mailOptions = {
     from: 'kryseno.server@gmail.com',         // Sender of the email
     to: 'kryseno@gmail.com',  // Recipient of the email
-    subject: 'FROM ZE SERVER',              // Subject of the email
+    subject: 'TESTING FROM /nodemailTest!',              // Subject of the email
     text: 'Sah dooo',                // Message of the email
     html: '<h1>Sah dooo</h1>'     // Can be used in place of the text
   };
+
+  app.get('/nodemailTest', function(req, res){
+    res.send('nodemailTest');
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent successfully' + info.response);
+        }
+      });
+  })
   
-//   transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       console.log('Email sent successfully' + info.response);
-//     }
-//   });
 // END NODEMAILER
 
 // Listen
