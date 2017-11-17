@@ -64,11 +64,12 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
 
             if (results.length === 0) {
                 let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
+                let isLoggedIn = 1;
                 console.log('this is the profile: ', profile);
 
-                let sql = "INSERT INTO ??(??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?)";
-                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL',
-                    id, emailVal, givenName, familyName, photoVal];
+                let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
+                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL', 'isLoggedIn',
+                    id, emailVal, givenName, familyName, photoVal, isLoggedIn];
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
 
@@ -229,7 +230,7 @@ app.get('/home',
         });
 
         //retrieving isLoggedIn status from DB
-        let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
+        let selectSql = `SELECT ${isLoggedIn} FROM users WHERE facebookID = ${sess}`;
         console.log("This is the Select Sql:", selectSql);
         pool.query(selectSql, function(err, results, fields) {
             if (err) throw err;
