@@ -45,7 +45,8 @@ class JoinEvent extends Component {
     joinMap() {
         var map_data_array = [{lat: 33.6404952, lng: -117.8442962}, {lat: 33.6471628, lng: -117.8411294}];
         var zipcode = {lat: 33.6588951, lng: -117.8282121};
-
+                //when you loop
+                //use const lng = req.body.coordinates.lng   && const lat = req.body.coordinates.lat
         const map = new google.maps.Map(document.getElementById('joinMap'), {
             zoom: 12,
             center: zipcode
