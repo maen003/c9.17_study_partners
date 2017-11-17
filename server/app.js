@@ -63,12 +63,12 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
             console.log("These are the results from fbStrategy function", results);
 
             if (results.length === 0) {
-                let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
+                let { id, emails: [{value: emailVal}], name: { givenName , familyName}} = profile;
                 console.log('this is the profile: ', profile);
 
                 let sql = "INSERT INTO ??(??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?)";
-                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL',
-                    id, emailVal, givenName, familyName, photoVal];
+                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name',
+                    id, emailVal, givenName, familyName];
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
 
