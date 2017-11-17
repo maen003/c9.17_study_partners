@@ -6,7 +6,8 @@ const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
 const cookieParser = require('cookie-parser');
 const redis = require('redis');
-const nodemailer = require('./routes/nodeMailer');
+const nodemailer = require('nodemailer');
+const { USERNAME, PASSWORD } = require('./nodemailerConfig.js');
 
 const app = express();
 
@@ -304,6 +305,33 @@ function isLoggedIn(req, res, next) {
     }
 }
 // END ROUTING FOR PASSPORT AUTH
+
+// BEGIN NODEMAILER
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: USERNAME,     
+      pass: PASSWORD  
+    }                             
+  });
+  
+  const mailOptions = {
+    from: 'kryseno.server@gmail.com',         // Sender of the email
+    to: 'kryseno@gmail.com',  // Recipient of the email
+    subject: 'FROM ZE SERVER',              // Subject of the email
+    text: 'Sah dooo',                // Message of the email
+    html: '<h1>Sah dooo</h1>'     // Can be used in place of the text
+  };
+  
+//   transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log('Email sent successfully' + info.response);
+//     }
+//   });
+// END NODEMAILER
 
 // Listen
 app.listen(4000,function(){
