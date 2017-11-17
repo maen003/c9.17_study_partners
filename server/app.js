@@ -109,10 +109,10 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
 
         connection.connect(() => {
-            console.log(arguments);
+            // console.log(arguments);
             connection.query(
                 `SELECT * FROM events`, function(err, results, fields){
-                    console.log('query has finished', connection);
+                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results
@@ -129,10 +129,10 @@ app.get('/user_events',function(req, res){
     const connection = mysql.createConnection(credentials);
     console.log('user events here:', req.session.passport);
     connection.connect(() => {
-        console.log(arguments);
+        // console.log(arguments);
         connection.query(
             `SELECT * FROM events WHERE facebookID = '${req.session.passport.id}'`, function(err, results, fields){
-                console.log('query has finished', connection);
+                // console.log('query has finished', connection);
                 const output = {
                     success: true,
                     data: results
@@ -184,11 +184,11 @@ app.post('/delete_events',function(req, res){
     const connection = mysql.createConnection(credentials);
 
     connection.connect(() => {
-        console.log(arguments);
+        // console.log(arguments);
         console.log('this is the ',req.body.event_id);
         connection.query(
             `DELETE FROM events WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
-                console.log('query has finished', connection);
+                // console.log('query has finished', connection);
                 const output = {
                     success: true,
                     data: results
