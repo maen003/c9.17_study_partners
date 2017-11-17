@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {userEvents} from '../../actions/index';
+import EventList from '../joining/listEvents';
 
 import './profile.css';
 
@@ -55,13 +56,13 @@ class Profile extends Component {
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1">
                                     <h1>Events Joined</h1>
                                     <div>   
-                                        LIST OF EVENTS JOINED
+                                        
                                     </div>
                                 </div>
                                 <div id="createDiv"className="col-sm-4">
                                     <h1>Events Created</h1>
                                     <div>   
-
+                                        <EventList eventList={this.props.events}/>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +70,6 @@ class Profile extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }
