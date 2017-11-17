@@ -64,11 +64,13 @@ passport.use(new FacebookStrategy(facebookCreds, // First argument accepts an ob
 
             if (results.length === 0) {
                 let { id, emails: [{value: emailVal}], name: { givenName , familyName}, photos: [{value: photoVal}] } = profile;
+                let isLoggedIn = 1;
                 console.log('this is the profile: ', profile);
 
-                let sql = "INSERT INTO ??(??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?)";
-                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL',
-                    id, emailVal, givenName, familyName, photoVal];
+                let sql = "INSERT INTO ??(??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?)";
+                let inserts = ['users', 'facebookID', 'email', 'first_name', 'last_name', 'pictureURL', 'isLoggedIn',
+                    id, emailVal, givenName, familyName, photoVal, isLoggedIn];
+
                 sql = mysql.format(sql, inserts);
                 console.log("This is the prepared statement", sql);
 
@@ -109,10 +111,10 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
 
         connection.connect(() => {
-            console.log(arguments);
+            // console.log(arguments);
             connection.query(
                 `SELECT * FROM events`, function(err, results, fields){
-                    console.log('query has finished', connection);
+                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results
@@ -127,15 +129,17 @@ app.get('/events',
 
 app.get('/user_events',function(req, res){
     const connection = mysql.createConnection(credentials);
-
+    console.log('user events here:', req.session.passport);
     connection.connect(() => {
-        console.log(arguments);
+        let query = `SELECT * FROM events WHERE facebookID = '${req.session.passport.user.id}'`;
+        console.log("iunno dude", query);
         connection.query(
-            `SELECT * FROM events WHERE facebookID = '${req.session.passport.id}'`, function(err, results, fields){
+            query, function(err, results, fields){
                 console.log('query has finished', connection);
                 const output = {
                     success: true,
-                    data: results
+                    data: results,
+                    profile: req.session.passport
                 };
                 res.end(JSON.stringify(output));
             });
@@ -152,8 +156,12 @@ app.post('/add_events',
         console.log('req is before this');
         console.log("DATA RECEIVEDDDDD!!!!");
         const connection = mysql.createConnection(credentials);
-
-        const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", lat="123", lng="123", facebookID="${req.session.passport.user.id}"`;
+        const lat = req.body.coordinates.lat;
+        const lng = req.body.coordinates.lng;
+        console.log('LOOK HERE:', req.body.coordinates);
+        // Saving for later
+        // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
+        const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}"`;
         console.log(fields);
         console.log('this is a request body', req.body);
         connection.connect(() => {
@@ -180,11 +188,11 @@ app.post('/delete_events',function(req, res){
     const connection = mysql.createConnection(credentials);
 
     connection.connect(() => {
-        console.log(arguments);
+        // console.log(arguments);
         console.log('this is the ',req.body.event_id);
         connection.query(
             `DELETE FROM events WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
-                console.log('query has finished', connection);
+                // console.log('query has finished', connection);
                 const output = {
                     success: true,
                     data: results
@@ -197,6 +205,8 @@ app.post('/delete_events',function(req, res){
     //res.end('got a user request!!!!!');
 });
 
+
+// BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/', isLoggedIn,
     function(req, res) {
         // console.log('this is the req: ', req);
@@ -222,40 +232,23 @@ app.get('/home',
             console.log("isLoggedIn status updated on db");
         });
 
-        // var resObj = {
-        //     success: true,
-        //     data: data
-        // }
-
         //retrieving isLoggedIn status from DB
-        let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
+        let selectSql = `SELECT ${isLoggedIn} FROM users WHERE facebookID = ${sess}`;
         console.log("This is the Select Sql:", selectSql);
         pool.query(selectSql, function(err, results, fields) {
             if (err) throw err;
             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
-
-        // const sess = req.session;
-        // if (sess.passport.user.id) {
-        //     console.log('fb user id from session: ', sess.passport.user.id);
-        //     const output = {
-        //         success: true,
-        //         data: sess.passport.user.id
-        //     };
-        //     res.end(JSON.stringify(output));
-        //     console.log('this is the output from sessions: ',output);
-        // }
         res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 
 app.get('/checkLogin',
-
     function(req, res) {
         console.log("This is the session from the checkLogin route", req.session);
         //retrieving isLoggedIn status from DB
         if (req.session.passport === undefined) {
-            res.sendFile(path.resolve("..", "client", "dist", "404.html"))
+            res.json({ isLoggedIn: false });
         } else {
             const sess = req.session.passport.user.id;
             let selectSql = `SELECT isLoggedIn FROM users WHERE facebookID = ${sess}`;
@@ -273,16 +266,13 @@ app.get('/auth/facebook',
     passport.authenticate('facebook', {
             authType: 'rerequest',
             scope: ['email', 'public_profile']
-        }
-    )
+        })
 );
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         console.log("This is in the auth/facebook/callback route", req.session.passport.user);
-
-
         res.redirect('/home');
     }
 );
@@ -301,7 +291,9 @@ app.get('/logout',
         pool.query(sql, function(err, results, fields) {
             if (err) throw err;
             console.log()
-        });
+        })
+
+        req.session.destroy();
     }
 );
 
@@ -313,9 +305,8 @@ function isLoggedIn(req, res, next) {
         res.redirect('/home');
         return next();
     }
-    // res.sendFile(path.resolve("..", "client", "dist", "index.html"));
-
 }
+// END ROUTING FOR PASSPORT AUTH
 
 // Listen
 app.listen(4000,function(){

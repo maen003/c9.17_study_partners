@@ -23,8 +23,8 @@ class CreateEvent extends Component {
                 location: 'Learning Fuze',
                 description: 'asdf'
             },
-            coordinates: ''
-        }
+            coordinates: null
+        };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.submitData = this.submitData.bind(this);
@@ -74,7 +74,7 @@ class CreateEvent extends Component {
 
     submitData(event) {
         event.preventDefault();
-        const formData = {...this.state.form, coordinates: this.state.coordinates};
+        const formData = {...this.state.form, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
@@ -169,7 +169,7 @@ class CreateEvent extends Component {
                         <div className="col-sm-12 col-xs-12">
                             <div className="col-sm-4 col-xs-12 locationFormComp"> 
                                 <label htmlFor="location">Location of event</label><br/>
-                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="form-control"/>
+                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" id="location" className="form-control"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
