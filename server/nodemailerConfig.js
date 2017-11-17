@@ -1,6 +1,6 @@
 const nodeMailerCreds = {
-    USERNAME: 'kryseno.server@gmail.com',
-    PASSWORD: 'KE_lfz9200'
+    USERNAME: 'studies.with.stubbies@gmail.com',
+    PASSWORD: 'stubbies123'
 }
 
 module.exports = nodeMailerCreds;
