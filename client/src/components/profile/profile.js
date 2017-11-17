@@ -18,6 +18,7 @@ class Profile extends Component {
     getUserData() {
         this.props.userEvents().then((resp) => {
             console.log('response for user: ', resp);
+            console.log(this.props);
         })
     }
 
