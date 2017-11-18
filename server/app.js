@@ -110,25 +110,6 @@ const transporter = nodemailer.createTransport({
       pass: PASSWORD  
     }                             
   });
-  
-  const mailOptions = {
-    from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',         // Sender of the email
-    to: 'kryseno@gmail.com',  // Recipient of the email
-    subject: 'Event Created!',              // Subject of the email
-    text: 'Sah dooo',                // Message of the email
-    html: '<h1>Here are the details of your event!</h1><p><i>Event details here.</i></p>'     // Can be used in place of the text
-  };
-
-//   app.get('/nodemailTest', function(req, res){
-//     res.send('nodemailTest');
-//     transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//           console.log('Error: ', error);
-//         } else {
-//           console.log('Email sent successfully' + info.response);
-//         }
-//       });
-//   })
 // END NODEMAILER
 
 // Reading Events
@@ -212,7 +193,14 @@ app.post('/add_events',
             to: 'kryseno@gmail.com',  // Recipient of the email
             subject: 'Event Created!',              // Subject of the email
             text: 'Sah dooo',                // Message of the email
-            html: `<h1>Here are the details of your event!</h1><p><b>${req.body.title}</b>will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>`     // Can be used in place of the text
+            html: `<h1>Here are the details of your event!</h1>
+                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                    <p><b>Description:</b> ${req.body.description}</p>
+                    <p><b>Duration:</b> ${req.body.duration}</p>
+                    <p><b>Event Subject:</b> ${req.body.subject}</b></p>
+                    <p><b>Where:</b> ${req.body.location}</p>
+                    <p><b>Phone Provided:</b> ${req.body.phone}</p>
+                    <p><b>Email Provided:</b> ${req.body.email}</p>`
           };
 
         transporter.sendMail(mailOptions, (error, info) => {
