@@ -192,7 +192,6 @@ app.post('/add_events',
             from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
             to: 'kryseno@gmail.com',
             subject: 'Event Created!',
-            text: 'Sah dooo',
             html: `
                     <div style='background-color: white; text-align: center; font: 12px tahoma'>
                     <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
