@@ -6,6 +6,8 @@ const path = require('path');
 const morgan = require('morgan'); // Logger middleware for terminal
 const cookieParser = require('cookie-parser');
 const redis = require('redis');
+const nodemailer = require('nodemailer');
+const { USERNAME, PASSWORD } = require('./nodemailerConfig.js');
 
 const app = express();
 
@@ -101,6 +103,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// BEGIN NODEMAILER
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: USERNAME,     
+      pass: PASSWORD  
+    }                             
+  });
+// END NODEMAILER
+
 // Reading Events
 app.get('/events',
     function(req, res){
@@ -178,6 +191,38 @@ app.post('/add_events',
         });
         console.log('got a event request');
         //res.end('got a user request!!!!!');
+
+        const mailOptions = {
+            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+            to: 'kryseno@gmail.com',    // replace w/ when deployed: `${req.body.email}`
+            subject: 'Event Created!',
+            html: `
+                    <div style='background-color: white; text-align: center; font: 12px tahoma'>
+                    <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                    <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                    <hr>
+                        <div style='text-align: left'>
+                        <h3>Here are the details of your event!</h3>
+                        <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                        <p><b>Where:</b> ${req.body.location}</p>
+                        <p><b>Description:</b> ${req.body.description}</p>
+                        <p><b>Duration:</b> ${req.body.duration}</p>
+                        <p><b>Subject:</b> ${req.body.subject}</b></p>
+                        <p><b>Group Size:</b> ${req.body.max}</p>
+                        <p><b>Phone Provided:</b> ${req.body.phone}</p>
+                        <p><b>Email Provided:</b> ${req.body.email}</p>
+                        </div>
+                    </div>
+                    `
+          };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error: ', error);
+            } else {
+              console.log('Email sent successfully' + info.response);
+            }
+          });
     });
 
 // Deleting Events

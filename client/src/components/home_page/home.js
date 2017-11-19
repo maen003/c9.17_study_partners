@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './home.css';
 
@@ -29,12 +30,22 @@ export default () => {
             <footer>
                 <div className="col-sm-6 col-xs-12">
                     <h3>GitHub</h3>
-                    <ul>
-                        <li><a href="https://github.com/maen003" target="_blank">Michael - Back End</a></li>
-                        <li><a href="https://github.com/kryseno" target="_blank">Krystal - Back End</a></li>
-                        <li><a href="https://github.com/pk316" target="_blank">Prosith - Front End</a></li>
-                        <li><a href="https://github.com/ericyoon1" target="_blank">Eric - Front End</a></li>
-                        <li><a href="https://github.com/oowretep" target="_blank">Peter - Front End</a></li>
+                    <ul className="githubLinks">
+                        <li>
+                            <Link to="https://github.com/maen003" target="_blank">Michael - Back End</Link>
+                        </li>
+                        <li>                    
+                            <Link to="https://github.com/kryseno" target="_blank">Krystal - Back End</Link>
+                        </li>
+                        <li>
+                            <Link to="https://github.com/pk316" target="_blank">Prosith - Front End</Link>
+                        </li>
+                        <li>
+                            <Link to="https://github.com/ericyoon1" target="_blank">Eric - Front End</Link>
+                        </li>
+                        <li>
+                            <Link to="https://github.com/oowretep" target="_blank">Peter - Front End</Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="col-sm-6 col-xs-12">
