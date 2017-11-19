@@ -61,8 +61,8 @@ class CreateEvent extends Component {
             animation: google.maps.Animation.DROP, //BOUNCE //DROP
         });
     }
-    ///////////////////////MAP/////////////////////////
 
+    /* form input + axios to create event */
     handleInputChange(event){
         const {value, name} = event.target;
         const {form} = this.state;
@@ -169,7 +169,7 @@ class CreateEvent extends Component {
                         <div className="col-sm-12 col-xs-12">
                             <div className="col-sm-4 col-xs-12 locationFormComp"> 
                                 <label htmlFor="location">Location of event</label><br/>
-                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" name="location" id="location" className="form-control"/>
+                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" id="location" className="form-control"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
