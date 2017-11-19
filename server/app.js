@@ -190,7 +190,7 @@ app.post('/add_events',
 
         const mailOptions = {
             from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-            to: 'kryseno@gmail.com',
+            to: 'kryseno@gmail.com',    // replace w/ when deployed: `${req.body.email}`
             subject: 'Event Created!',
             html: `
                     <div style='background-color: white; text-align: center; font: 12px tahoma'>
