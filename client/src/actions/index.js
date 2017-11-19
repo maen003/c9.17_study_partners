@@ -45,7 +45,7 @@ export function userEvents() {
 }
 
 export function userAuth() {
-    const request = axios.get("http://dev.michaelahn.solutions/checkLogin");
+    const request = axios.get("/checkLogin");
 
     return {
         type: types.USER_AUTH,
