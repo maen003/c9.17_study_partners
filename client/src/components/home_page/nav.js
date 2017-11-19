@@ -19,6 +19,11 @@ const Nav =() => {
                         <img src={Logo}/> */}
                     </div>
                     <div className="collapse navbar-collapse">
+                         <ul className="navbar-right">
+                            <li className="facebookLogin">
+                                <FacebookLogin />
+                            </li>
+                        </ul>
                         <ul className="nav nav-tabs navbar-right">
                             <li>
                                 <Link to='/'>Home</Link>
@@ -31,9 +36,6 @@ const Nav =() => {
                             </li>
                             <li>
                                 <Link to='/profile'>Profile</Link>
-                            </li>
-                            <li className="facebookLogin">
-                                <FacebookLogin/>
                             </li>
                         </ul>
                     </div>

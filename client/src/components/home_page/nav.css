@@ -27,6 +27,8 @@
     letter-spacing: 10px;
 }
 
-/* .facebookLogin {
-    top: 1em;
-} */
+.facebookLogin {
+    list-style-type: none;
+    text-decoration: none;
+    padding-top: .8em;
+}
