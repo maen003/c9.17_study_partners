@@ -192,10 +192,11 @@ app.post('/add_events',
         console.log('got a event request');
         //res.end('got a user request!!!!!');
 
+        //Start Nodemailer: Sending Email Notification of Event Created
         const mailOptions = {
             from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-            to: `${req.body.email}`,    // replace w/ when deployed: `${req.body.email}`
-            subject: 'Event Created!',
+            to: `${req.body.email}`,
+            subject: 'Study Group Created!',
             html: `
                     <div style='background-color: white; text-align: center; font-family: tahoma'>
                     <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
@@ -223,6 +224,7 @@ app.post('/add_events',
               console.log('Email sent successfully' + info.response);
             }
           });
+          //End Nodemailer
     });
 
 // Deleting Events
