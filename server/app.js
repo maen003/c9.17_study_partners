@@ -192,12 +192,12 @@ app.post('/add_events',
         console.log('got a event request');
         //res.end('got a user request!!!!!');
 
-        //Start Nodemailer: Sending Email Notification of Event Created
+        //Start Nodemailer: Email for Event CREATED
         const mailOptions = {
             from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
             to: `${req.body.email}`,
             subject: 'Study Group Created!',
-            html: `
+            html:   `
                     <div style='background-color: white; text-align: center; font-family: tahoma'>
                     <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
                     <span><i>You don't have to study lonely, with Stubbies!</i></span>
@@ -250,6 +250,34 @@ app.post('/delete_events',function(req, res){
     });
     console.log('got a user request????');
     //res.end('got a user request!!!!!');
+
+    //Start Nodemailer: Email for Event DELETED
+    const mailOptions = {
+        from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+        to: `${req.body.email}`,
+        subject: 'Study Group Deleted',
+        html:   `
+                <div style='background-color: white; text-align: center; font-family: tahoma'>
+                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                <hr>
+                    <div style='text-align: left'>
+                    <h2>You have successfully deleted your event.</h2>
+                    <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
+                    <p><b>If you wish to undo this, recreate your study group <a href="http://localhost:4000/create-event">here</a>.</b></p>
+                    </div>
+                </div>
+                `
+      };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log('Error: ', error);
+        } else {
+          console.log('Email sent successfully' + info.response);
+        }
+      });
+      //End Nodemailer
 });
 
 
