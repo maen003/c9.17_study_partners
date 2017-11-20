@@ -197,12 +197,12 @@ app.post('/add_events',
             to: 'kryseno@gmail.com',    // replace w/ when deployed: `${req.body.email}`
             subject: 'Event Created!',
             html: `
-                    <div style='background-color: white; text-align: center; font: 12px tahoma'>
+                    <div style='width: 70%; background-color: white; text-align: center; font-family: tahoma'>
                     <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
                     <span><i>You don't have to study lonely, with Stubbies!</i></span>
                     <hr>
                         <div style='text-align: left'>
-                        <h3>Here are the details of your event!</h3>
+                        <h2>Here are the details of your event!</h2>
                         <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
                         <p><b>Where:</b> ${req.body.location}</p>
                         <p><b>Description:</b> ${req.body.description}</p>
