@@ -197,7 +197,7 @@ app.post('/add_events',
             to: 'kryseno@gmail.com',    // replace w/ when deployed: `${req.body.email}`
             subject: 'Event Created!',
             html: `
-                    <div style='width: 70%; background-color: white; text-align: center; font-family: tahoma'>
+                    <div style='background-color: white; text-align: center; font-family: tahoma'>
                     <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
                     <span><i>You don't have to study lonely, with Stubbies!</i></span>
                     <hr>
