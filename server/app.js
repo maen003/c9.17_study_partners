@@ -149,7 +149,7 @@ app.get('/user_events',function(req, res){
             console.log("iunno dude", query);
             connection.query(
                 query, function(err, results, fields){
-                    console.log('query has finished', connection);
+                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results,
