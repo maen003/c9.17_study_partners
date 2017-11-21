@@ -1,0 +1,11 @@
+.singleItem {
+    border-top: 1px dashed lightcoral;
+}
+
+.buttonContainer {
+    margin-top: 1%;
+}
+
+.infoButton {
+    margin-bottom: 3%;
+}

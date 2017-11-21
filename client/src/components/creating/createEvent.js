@@ -76,9 +76,11 @@ class CreateEvent extends Component {
         event.preventDefault();
         const formData = {...this.state.form, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
-        this.props.createEvent(formData).then(function(resp){
+        this.props.createEvent(formData).then(function(resp) {
             console.log('add events successful');
             console.log(resp);
+        }).catch(error => {
+            console.log(error);
         });
 
         this.setState({
@@ -97,8 +99,6 @@ class CreateEvent extends Component {
             coordinates: ''
         })
     }
-
-
 
     render() {
         const {title, subject, max, date, time, duration, phone, email, location, description} = this.state.form;
@@ -182,7 +182,7 @@ class CreateEvent extends Component {
                         <textarea value={description} onChange={this.handleInputChange} name="description" className="form-group col-sm-12 col-xs-12" rows="3" id="description" placeholder="Description of event..."></textarea>
                     </div>
                 </form>
-                <div className="bottons col-sm-12 col-xs-12"> {/* bottom buttons */}
+                <div className="bottons col-sm-12 col-xs-12">
                     <button className="form-group btn btn-danger" type="button">Back</button>
                     <button className="form-group btn btn-success submitForm" type="submit" onClick={this.submitData}>Create Event</button>
                 </div>
