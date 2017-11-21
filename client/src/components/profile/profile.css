@@ -1,0 +1,8 @@
+#joinDiv{
+    border: 2px solid black;
+    height: 100vh;
+}
+#createDiv {
+    border: 2px solid red;
+    height: 100vh;
+}

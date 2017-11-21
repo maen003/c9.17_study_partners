@@ -1,0 +1,87 @@
+.jumbotron {
+    margin: 0;
+    opacity: .7;
+    text-align: center;
+    background-image: url('../../assets/images/open_book.png');
+    background-size: contain;
+    background-position: 50% 50%;
+}
+
+/* app name - randomness */
+.letter{
+    display: inline-block;
+    font-weight: 900;
+    font-size: 250%;
+    margin: 0.2em;
+    position: relative;
+    color: lightcoral;
+    transform-style: preserve-3d;
+    perspective: 400px;
+    z-index: 1;
+}
+
+.letter:before, .letter:after {
+    position: absolute;
+    content: attr(data-letter);
+    transform-origin: top left;
+    top: 0;
+    left: 0;
+}
+
+/* .letter, .letter:before, .letter:after {
+    transition: all 0.2s ease-in-out;
+} */
+
+/* .letter:before {
+    color: white;
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8);
+    z-index: 3;
+    transform: rotateX(0deg) rotateY(-15deg) rotateZ(0deg);
+} */
+
+/* .letter:after {
+    color: rgba(0,0,0,.11);
+    z-index:2;
+    transform: scale(1.08,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg,1deg);
+} */
+
+.letter:before { /*hover */
+    color: whitesmoke;
+    transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8); /* delete if using hover */
+    z-index: 3; /* delete if using hover */
+}
+
+.letter:after { /* hover */
+    transform: scale(1.08,1) rotateX(0deg) rotateY(40deg) rotateZ(0deg) skew(0deg,22deg);
+    color: rgba(0,0,0,.11); /* delete if using hover */
+    z-index: 2; /* delete if using hover */
+}
+
+.jumbotron > h2 {
+	background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+    background-size: 150px;
+    -webkit-background-size: 150px;
+    color: rgba(104, 169, 196, 0.228);
+    background-clip: text;
+	-webkit-background-clip: text;
+	animation: shine 2s infinite;
+	text-shadow: 0 0px 0px rgba(104, 169, 196, 0.228);
+}
+
+@keyframes shine {
+	0% {
+		background-position: 0;
+	}
+	100% {
+		background-position: 100%;
+	}
+}
+
+footer h3 {
+    text-align: center;
+}
+
+.githubLinks > li {
+    display: block;
+}
