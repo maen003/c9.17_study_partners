@@ -53,3 +53,12 @@ export function userAuth() {
         payload: request
     }
 }
+
+export function userJoin() {
+    const request = axios.post();
+
+    return {
+        type: types.USER_JOIN,
+        payload: request
+    }
+}
