@@ -28,7 +28,9 @@ class EventDetails extends Component {
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
         console.log('More info button clicked');
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+'uci'+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+        const {info} = this.props;
+        console.log('event location: ', info.location);
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
@@ -44,6 +46,7 @@ class EventDetails extends Component {
     }
 
     singleMap() {
+        console.log('SINGLE MAP CALLED', document.getElementById('singleMap'));
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('singleMap'), {
             zoom: 14,

@@ -33,6 +33,7 @@ class DetailsModal extends Component {
     }
 
     animateModal() {
+        if(!this.state.showModal) return ;
         var detailModal = document.getElementsByClassName("animateModal")[0];
 
         if (detailModal.classList.contains('expandDetails')) {
@@ -49,6 +50,10 @@ class DetailsModal extends Component {
     render() { 
         const {showModal, details} = this.state;
         // console.log('details for modal are: ', this.props);
+
+        if(!showModal){
+            return null;
+        }
 
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} id="detailsModal" role="dialog">
