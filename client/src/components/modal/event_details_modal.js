@@ -36,6 +36,10 @@ class DetailsModal extends Component {
     render() { 
         const {showModal, details} = this.state;
 
+        if(!showModal){
+            return null;
+        }
+
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
                 <div className="modal-dialog">
