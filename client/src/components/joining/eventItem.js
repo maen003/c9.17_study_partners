@@ -21,21 +21,23 @@ class EventDetails extends Component {
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
         console.log('More info button clicked');
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+'uci'+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+        const {info} = this.props;
+        console.log('event location: ', info.location);
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
-
-    //***//^^^^^//REPLACE 'UCI' WITH INFO.LOCATION//^^^^^//***//
 
     axiosThenFunction(response){
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
+        this.toggleModal();
         this.singleMap();
     }
 
     singleMap() {
+        console.log('SINGLE MAP CALLED', document.getElementById('singleMap'));
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('singleMap'), {
             zoom: 14,
@@ -54,7 +56,6 @@ class EventDetails extends Component {
         this.setState({
             showModal: !this.state.showModal
         })
-        this.renderMapAfterClick();
     }
 
     render() {
@@ -71,7 +72,7 @@ class EventDetails extends Component {
                     <p>{`On ${info.date} at ${info.time}`}</p>
                 </div>
                 <div className="col-sm-4 buttonContainer">
-                    <button onClick={this.toggleModal} className="btn btn-success infoButton" type="button">More Info</button>
+                    <button onClick={this.renderMapAfterClick} className="btn btn-success infoButton" type="button">More Info</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
