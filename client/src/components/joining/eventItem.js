@@ -13,16 +13,9 @@ class EventDetails extends Component {
         }
 
         this.toggleModal = this.toggleModal.bind(this);
-
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
-    }
-
-    toggleModal(event) {
-        this.setState({
-            showModal: !this.state.showModal
-        })
     }
 
     /////////////////////////MAP////////////////////////
@@ -33,8 +26,6 @@ class EventDetails extends Component {
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
-
-    //***//^^^^^//REPLACE 'UCI' WITH INFO.LOCATION//^^^^^//***//
 
     axiosThenFunction(response){
         this.setState({
@@ -60,6 +51,12 @@ class EventDetails extends Component {
         });
     }
     /////////////////////////MAP////////////////////////
+
+    toggleModal(event) {
+        this.setState({
+            showModal: !this.state.showModal
+        })
+    }
 
     render() {
         const {info} = this.props;

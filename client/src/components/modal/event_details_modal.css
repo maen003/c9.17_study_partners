@@ -27,7 +27,6 @@
 
 /* keyframe animation */
 .expandDetails {
-    display: block;
     animation: expandFind 1.5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
@@ -40,16 +39,15 @@
     }
     50% {
         height: 0;
-        width: 100%;
+        width: 75vmin;
     }
     100% {
-        height: 100%;
-        width: 100%;
+        height: 75vmin;
+        width: 75vmin;
     }
 }
   
 .closeDetails {
-    display: block;
     animation: closeFind 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
@@ -57,11 +55,11 @@
   
 @keyframes closeDetails {
     0% {
-        height: 100%;
-        width: 100%;
+        height: 75vmin;
+        width: 75vmin;
     }
     50% {
-        height: 100%;
+        height: 75vmin;
         width: 0;
     }
     100% {

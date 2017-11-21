@@ -3,8 +3,17 @@ import {connect} from 'react-redux';
 import {getAll} from '../../actions';
 import EventList from './listEvents';
 import axios from 'axios';
+import Checkbox from './checkbox';
 
 import './joinEvent.css';
+
+const filterCheck = [
+    'Life sciences',
+    'Visual and Perfomance Arts',
+    'Liberal Arts',
+    'Engineering and technology',
+    'Business'
+];
 
 class JoinEvent extends Component {
     constructor (props) {
@@ -15,10 +24,13 @@ class JoinEvent extends Component {
             zipcode: null
         }
 
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.createCheckbox = this.createCheckbox.bind(this);
+        this.createCheckboxes = this.createCheckboxes.bind(this);
         this.getJoinData = this.getJoinData.bind(this);
-        this.filterEvents = this.filterEvents.bind(this);
-        this.zipcode = this.zipcode.bind(this);
 
+        this.zipcode = this.zipcode.bind(this);
         this.renderMapAfterSubmit = this.renderMapAfterSubmit.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.joinMap = this.joinMap.bind(this);
@@ -34,13 +46,7 @@ class JoinEvent extends Component {
         });
     }
 
-    filterEvents(event) {
-        const {checked, value} = event.target
-        if(checked === true){
-            console.log('checkbox toggled: ', value);
-        }
-    }
-
+    ///////////////////////MAP/////////////////////
     zipcode(event) {
         const {value} = event.target;
         console.log('zipcode: ', value);
@@ -49,8 +55,8 @@ class JoinEvent extends Component {
         })
     }
 
-    ///////////////////////MAP/////////////////////
     renderMapAfterSubmit(){
+        this.handleFormSubmit();
         console.log('zipcode input focus changed');
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.zipcode+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
@@ -85,7 +91,49 @@ class JoinEvent extends Component {
         // var map_data_array = [{lat: 33.6404952, lng: -117.8442962}, {lat: 33.6471628, lng: -117.8411294}];
         // var zipcode = {lat: 33.6588951, lng: -117.8282121};
     }
-    ///////////////////////MAP/////////////////////
+
+    /* getting all events from axios call */
+    componentDidMount() {
+        this.getJoinData();
+    }
+
+    getJoinData() {
+        this.props.getAll().then(function(response){
+            console.log('response: ', response.payload.data);
+        });
+    }
+
+    /* checkboxes */
+    componentWillMount = () => {
+        this.selectedCheckboxes = new Set();
+    }
+    
+    toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+            this.selectedCheckboxes.delete(label);
+        } else {
+            this.selectedCheckboxes.add(label);
+        }
+    }
+    
+    handleFormSubmit = formSubmitEvent => {
+        const values = [];
+        formSubmitEvent.preventDefault();
+    
+        for (const checkbox of this.selectedCheckboxes) {
+            values.push(checkbox);
+            console.log('checkbox value array: ', values);
+        }
+        // this.getJoinData();
+    }
+    
+    createCheckbox = label => (
+        <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>
+    )
+    
+    createCheckboxes = () => (
+        filterCheck.map(this.createCheckbox)
+    )
 
     render() {
         return (
@@ -95,26 +143,13 @@ class JoinEvent extends Component {
                     <form>
                         <div>
                             <h4>By Subject</h4>
-                            <label className="checkbox filterCheck">
-                                <input onChange={this.filterEvents} name="lifeSci" type="checkbox" value="Life sciences"/> Life Sciences
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onChange={this.filterEvents} name="vpArts" type="checkbox" value="Visual and Perfomance Arts"/> Visual and Perfomance Arts
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onChange={this.filterEvents} name="libArts" type="checkbox" value="Liberal Arts"/> Liberal Arts
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onChange={this.filterEvents} name="engTech" type="checkbox" value="Engineering and technology"/> Engineering and technology
-                            </label>
-                            <label className="checkbox filterCheck">
-                                <input onChange={this.filterEvents} name="business" type="checkbox" value="Business"/> Business
-                            </label>
+                            {this.createCheckboxes()}
                         </div>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
                             <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
+                        {/* <button className="btn btn-default" type="submit">Filter</button> */}
                     </form>
                     <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
 

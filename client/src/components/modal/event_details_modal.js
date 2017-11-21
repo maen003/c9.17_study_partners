@@ -2,19 +2,6 @@ import React, {Component} from 'react';
 
 import './event_details_modal.css';
 
-const display = {
-    display: 'block',
-    animation: 'expandFind 1.5s',
-    animationTimingFunction: 'ease-in-out',
-    animationFillMode: 'forwards'
-}
-
-const hide = {
-    animation: 'closeFind 1s',
-    animationTimingFunction: 'ease-in-out',
-    animationFillMode: 'forwards'
-}
-
 class DetailsModal extends Component {
     constructor (props) {
         super(props);
@@ -24,22 +11,21 @@ class DetailsModal extends Component {
             details: this.props.details
         }
 
-        this.animateModal = this.animateModal.bind(this);
-        this.toggleModal = this.props.toggleModal;
+        this.toggleModal = this.props.toggleModal; /*passed by prop*/
+        // this.animateModal = this.animateModal.bind(this);
     }
 
-    componentDidMount() {
-        this.animateModal();
-    }
+    // componentDidMount() {
+    //     this.animateModal();
+    // }
 
-    animateModal() {
-        if(!this.state.showModal) return ;
-        var detailModal = document.getElementsByClassName("animateModal")[0];
+    // animateModal() {
+    //     var detailModal = document.getElementsByClassName("animateModal")[0];
 
-        if (detailModal.classList.contains('expandDetails')) {
-            join.className += " closeDetails"
-        }
-    }
+    //     if (detailModal.classList.contains('expandDetails')) {
+    //         join.className += " closeDetails"
+    //     }
+    // }
 
     componentWillReceiveProps(nextProps){
         this.setState({
@@ -49,14 +35,13 @@ class DetailsModal extends Component {
 
     render() { 
         const {showModal, details} = this.state;
-        // console.log('details for modal are: ', this.props);
 
         if(!showModal){
             return null;
         }
 
         return (
-            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} id="detailsModal" role="dialog">
+            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
                 <div className="modal-dialog">
                     <div className="modal-content animateModal">
                         <div className="modal-header">
@@ -74,7 +59,6 @@ class DetailsModal extends Component {
                             <p>{`Contact Email: ${details.email}`}</p>
                             <p>{`Details: ${details.details}`}</p>
                             <p>{`Location: ${details.location}`}</p>
-                            <p>map will go here</p>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
                     </div>
@@ -85,5 +69,3 @@ class DetailsModal extends Component {
 }
 
 export default DetailsModal;
-
-  

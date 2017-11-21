@@ -14,7 +14,8 @@ export function createEvent(form) {
         location: form.location,
         max: form.max,
         phone: form.phone,
-        email:form.email,
+        email: form.email,
+        coordinates: form.coordinates,
         facebookID: '',
         coordinates: form.coordinates
     });
@@ -40,6 +41,15 @@ export function userEvents() {
 
     return {
         type: types.USER_EVENTS,
+        payload: request
+    }
+}
+
+export function userAuth() {
+    const request = axios.get("/checkLogin");
+
+    return {
+        type: types.USER_AUTH,
         payload: request
     }
 }
