@@ -28,5 +28,6 @@
 }
 
 .facebookLogin {
-    top: 1em;
+    list-style-type: none;
+    padding-top: .8em;
 }

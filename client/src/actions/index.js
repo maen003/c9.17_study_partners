@@ -44,3 +44,12 @@ export function userEvents() {
         payload: request
     }
 }
+
+export function userAuth() {
+    const request = axios.get("/checkLogin");
+
+    return {
+        type: types.USER_AUTH,
+        payload: request
+    }
+}
