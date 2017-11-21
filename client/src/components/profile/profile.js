@@ -12,7 +12,8 @@ class Profile extends Component {
         this.state = {
           firstName: null,
           lastName: null,
-            contact: null
+            contact: null,
+            photo: null,
         };
 
         this.getUserData = this.getUserData.bind(this);
@@ -28,14 +29,15 @@ class Profile extends Component {
             this.setState({
                 firstName: resp.payload.data.profile.user.name.givenName,
                 lastName: resp.payload.data.profile.user.name.familyName,
-                contact: resp.payload.data.profile.user.emails[0].value
+                contact: resp.payload.data.profile.user.emails[0].value,
+                photo: resp.payload.data.profile.user.photos[0].value
             });
             console.log(this.props);
         })
     }
 
     render() {
-        const { firstName, lastName, contact } = this.state;
+        const { firstName, lastName, contact, photo } = this.state;
 
         return (
             <div className="container">
@@ -45,7 +47,7 @@ class Profile extends Component {
                             <div className="panel-heading">  <h3 >User Profile</h3></div>
                             <div className="panel-body">
                                 <div className="col-sm-3">                                   
-                                    <img className="img-circle img-thumbnail" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" />
+                                    <img className="img-circle img-thumbnail" src={photo} />
                                     <div className="" ><h4>First Name: { firstName  }</h4></div>
                                     <div className="" >Last Name: { lastName } </div>
                                     <div className="" >Contact: { contact} </div>
