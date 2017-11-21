@@ -118,7 +118,7 @@ class JoinEvent extends Component {
     
     handleFormSubmit = formSubmitEvent => {
         const values = [];
-        formSubmitEvent.preventDefault();
+        // formSubmitEvent.preventDefault();
     
         for (const checkbox of this.selectedCheckboxes) {
             values.push(checkbox);
