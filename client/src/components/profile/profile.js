@@ -44,7 +44,7 @@ class Profile extends Component {
                 <div className="row">
                     <div className="col-xs-12 ">
                         <div className="panel panel-default">
-                            {/* <div className="panel-heading">  <h3 >User Profile</h3></div> */}
+                            <div className="panel-heading">  <h3 >User Profile</h3></div>
                             <div className="panel-body">
                                 <div className="col-sm-3">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />

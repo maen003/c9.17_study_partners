@@ -15,56 +15,23 @@ class EventList extends Component {
 
     render() { 
         console.log('LIST EVENTS - props: ', this.props);
-        if (this.props.filterValues.length > 0) {
-            const arrayCheck = this.props.events;
-            if (arrayCheck.length !== 0) {
-                const acceptedValues = [];
-                const eventArray = this.props.events.data;
-                for (var f = 0; f < this.props.filterValues.length; f++) {
-                    for (var i = 0; i < eventArray.length; i++) {
-                        if (eventArray[i].subject === this.props.filterValues[f]) {
-                            acceptedValues.push(eventArray[i]);
-                        }
-                    }
-                }
-                if (acceptedValues.length > 0) {
-                    const eventElements = acceptedValues.map((eventItem, index) => {
-                        return <EventDetails key={index} info={eventItem}/>
-                    });
-                    return (
-                        <div style={listDiv}>
-                            <ul style={{padding: 0}}>
-                                {eventElements}
-                            </ul>
-                        </div>
-                    )
-                } else {
-                    return (
-                        <div>
-                            <h3>No Events Match Filtered Values</h3>
-                        </div>
-                    )
-                }
-            }
+        const arrayCheck = this.props.events;
+        if (arrayCheck.length !== 0) {
+            const eventArray = this.props.events.data;
+            const eventElements = eventArray.map((eventItem, index) => {
+                return <EventDetails key={index} info={eventItem}/>
+            });
+            return (
+                <div style={listDiv}>
+                    <ul style={{padding: 0}}>
+                        {eventElements}
+                    </ul>
+                </div>
+            )
         } else {
-            const arrayCheck = this.props.events;
-            if (arrayCheck.length !== 0) {
-                const eventArray = this.props.events.data;
-                const eventElements = eventArray.map((eventItem, index) => {
-                    return <EventDetails key={index} info={eventItem}/>
-                });
-                return (
-                    <div style={listDiv}>
-                        <ul style={{padding: 0}}>
-                            {eventElements}
-                        </ul>
-                    </div>
-                )
-            } else {
-                return (
-                    <div>No events found</div>
-                )
-            }
+            return (
+                <div>No events found</div>
+            )
         }
     }
 }
