@@ -8,10 +8,10 @@ import Checkbox from './checkbox';
 import './joinEvent.css';
 
 const filterCheck = [
-    'Life sciences',
+    'Life Sciences',
     'Visual and Perfomance Arts',
     'Liberal Arts',
-    'Engineering and technology',
+    'Engineering and Technology',
     'Business'
 ];
 
