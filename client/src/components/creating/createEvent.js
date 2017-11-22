@@ -114,10 +114,10 @@ class CreateEvent extends Component {
                         <div className="col-sm-12 col-xs-12">
                             <label htmlFor="subjects">Event Subject</label><br/>
                                 <select value={subject} onChange={this.handleInputChange} name="subject" id="subjects" className="form-control" placeholder="Set Subject">
-                                    <option>Life sciences</option>
+                                    <option>Life Sciences</option>
                                     <option>Visual and Perfomance Arts</option>
                                     <option>Liberal Arts</option>
-                                    <option>Engineering and technology</option>
+                                    <option>Engineering and Technology</option>
                                     <option>Business</option>
                                 </select>
                         </div>
