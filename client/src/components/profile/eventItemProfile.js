@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {userJoin} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
-import './eventItem.css';
+import './eventItemProfile.css';
 
 class EventDetails extends Component {
     constructor (props) {
