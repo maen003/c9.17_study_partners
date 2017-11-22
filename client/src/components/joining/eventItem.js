@@ -67,8 +67,7 @@ class EventDetails extends Component {
 
         this.props.getAll().then(function(response){
             console.log("Response from getAll in eventItem.js", response);
-            debugger
-            console.log('brz:', this.props);
+            debugger;
             console.log(this);
         });
         console.log('You joined this event');
