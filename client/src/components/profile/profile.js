@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {userEvents} from '../../actions/index';
-import EventList from '../joining/listEvents';
+import EventList from './listEventsProfile';
 
 import './profile.css';
 

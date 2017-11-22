@@ -57,7 +57,7 @@ class DetailsModal extends Component {
                             <p>{`Duration of Event: ${details.duration}`}</p>
                             <p>{`Contact Phone: ${details.phone}`}</p>
                             <p>{`Contact Email: ${details.email}`}</p>
-                            <p>{`Details: ${details.details}`}</p>
+                            <p>{`Description: ${details.description}`}</p>
                             <p>{`Location: ${details.location}`}</p>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
