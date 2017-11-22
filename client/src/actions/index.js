@@ -55,7 +55,7 @@ export function userAuth() {
 }
 
 export function userJoin() {
-    const request = axios.post("http://dev.michaelahn.solutions/join_events");
+    const request = axios.get("http://dev.michaelahn.solutions/join_events");
 
     return {
         type: types.USER_JOIN,

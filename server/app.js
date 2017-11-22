@@ -264,7 +264,7 @@ app.post('/delete_events',function(req, res){
 
 
 // Joining Events
-app.post('/join_events', function (req, res){
+app.get('/join_events', function (req, res){
     console.log("You have joined!");
     if (req.session.passport !== undefined){
         const connection = mysql.createConnection(credentials);

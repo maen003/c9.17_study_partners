@@ -68,12 +68,14 @@ class EventDetails extends Component {
         this.props.getAll().then(function(response){
             console.log("Response from getAll in eventItem.js", response);
             getAllData = this.props.getAll();
+            console.log('brz:', getAllData);
+            console.log(this);
         });
         console.log('You joined this event');
-        this.props.userJoin().then(function(response){
-            console.log('response from eventItem: ', this);
-            console.log('information: ', response);
-        });
+        // this.props.userJoin().then(function(response){
+        //     console.log('response from eventItem: ', this);
+        //     console.log('information: ', response);
+        // });
     }
 
     render() {
