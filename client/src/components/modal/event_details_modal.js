@@ -42,7 +42,7 @@ class DetailsModal extends Component {
 
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog">
+                <div className="modal-dialog modal-lg">
                     <div className="modal-content animateModal">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
@@ -57,7 +57,7 @@ class DetailsModal extends Component {
                             <p>{`Duration of Event: ${details.duration}`}</p>
                             <p>{`Contact Phone: ${details.phone}`}</p>
                             <p>{`Contact Email: ${details.email}`}</p>
-                            <p>{`Description: ${details.description}`}</p>
+                            <p>{`Details: ${details.details}`}</p>
                             <p>{`Location: ${details.location}`}</p>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
