@@ -91,7 +91,7 @@ class JoinEvent extends Component {
 
     getJoinData() {
         this.props.getAll().then(function(response){
-            console.log('response: ', response.payload.data);
+            console.log('response from join event: ', response.payload.data);
         });
     }
 
