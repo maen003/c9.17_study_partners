@@ -272,7 +272,7 @@ app.post('/join_events', function (req, res){
         connection.connect(() => {
             console.log("Joining events connected", req);
             connection.query(
-                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.payload.data}"`, function (err, results) {
+                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.payload}"`, function (err, results) {
                     const output = {
                         success: true,
                         data: results
