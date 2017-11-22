@@ -65,8 +65,8 @@ class EventDetails extends Component {
     userJoinEvent() {
         console.log('You joined this event');
         this.props.userJoin().then(function(response){
-            console.log('response from eventItem: ', response.payload);
-            console.log('information: ')
+            console.log('response from eventItem: ', this.props);
+            console.log('information: ', response);
         });
     }
 
