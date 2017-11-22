@@ -17,12 +17,12 @@
 }
 
 .singleMap {
-    height: 320px;
-    width: 60%;
+    height: 90%;
+    width: 55%;
     border: 1px solid black;
     position: absolute;
-    bottom: 20px;
-    left: 220px;
+    bottom: 2%;
+    right: 1%;
 }
 
 /* keyframe animation */
@@ -68,3 +68,4 @@
         display: none;
     }
 }
+
