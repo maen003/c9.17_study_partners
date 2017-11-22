@@ -21,7 +21,8 @@ class JoinEvent extends Component {
 
         this.state = {
             eventList: null,
-            zipcode: null
+            zipcode: null,
+            filterValues: []
         }
 
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
@@ -36,18 +37,9 @@ class JoinEvent extends Component {
         this.joinMap = this.joinMap.bind(this);
     }
 
-    componentDidMount() {
-        this.getJoinData();
-    }
-
-    getJoinData() {
-        this.props.getAll().then(function(response){
-            console.log('response: ', response.payload.data);
-        });
-    }
-
     ///////////////////////MAP/////////////////////
     zipcode(event) {
+        event.preventDefault();
         const {value} = event.target;
         console.log('zipcode: ', value);
         this.setState({
@@ -103,6 +95,19 @@ class JoinEvent extends Component {
         });
     }
 
+    handleFormSubmit() {
+        // = formSubmitEvent => 
+        const filterCheckbox = [];
+        // formSubmitEvent.preventDefault();
+    
+        for (const checkbox of this.selectedCheckboxes) {
+            filterCheckbox.push(checkbox);
+        }
+        this.setState({
+            filterValues: filterCheckbox
+        })
+    }
+
     /* checkboxes */
     componentWillMount = () => {
         this.selectedCheckboxes = new Set();
@@ -116,17 +121,6 @@ class JoinEvent extends Component {
         }
     }
     
-    handleFormSubmit = formSubmitEvent => {
-        const values = [];
-        // formSubmitEvent.preventDefault();
-    
-        for (const checkbox of this.selectedCheckboxes) {
-            values.push(checkbox);
-            console.log('checkbox value array: ', values);
-        }
-        // this.getJoinData();
-    }
-    
     createCheckbox = label => (
         <Checkbox label={label} handleCheckboxChange={this.toggleCheckbox} key={label}/>
     )
@@ -136,11 +130,12 @@ class JoinEvent extends Component {
     )
 
     render() {
+        console.log('filter values: ', this.state.filterValues);
         return (
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
-                    <form>
+                    <form onSubmit={this.zipcode}>
                         <div>
                             <h4>By Subject</h4>
                             {this.createCheckboxes()}
@@ -159,7 +154,7 @@ class JoinEvent extends Component {
                 </div>
                 <div className="list col-sm-4 col-xs-12">
                     <h3>All Events</h3>
-                    <EventList eventList={this.props.events}/>
+                    <EventList eventList={this.props.events} filterValues={this.state.filterValues}/>
                 </div>
             </div>
             
