@@ -264,7 +264,7 @@ app.post('/delete_events',function(req, res){
 
 
 // Joining Events
-app.get('/join_events', function (req, res){
+app.post('/join_events', function (req, res){
     console.log("You have joined!");
     if (req.session.passport !== undefined){
         const connection = mysql.createConnection(credentials);
@@ -275,7 +275,7 @@ app.get('/join_events', function (req, res){
             console.log("BODY: ", req.body);
             console.log("EVENT_ID: ", req.body.event_id);
             connection.query(
-                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.payload}"`, function (err, results) {
+                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body}"`, function (err, results) {
                     const output = {
                         success: true,
                         data: results
