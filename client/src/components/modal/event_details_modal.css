@@ -69,3 +69,8 @@
     }
 }
 
+.event-info{
+    width: 40%;
+    word-wrap: break-word;
+}
+

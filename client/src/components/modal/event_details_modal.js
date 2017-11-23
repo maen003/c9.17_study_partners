@@ -49,16 +49,18 @@ class DetailsModal extends Component {
                             <h4 className="modal-title">Details</h4>
                         </div>
                         <div className="modal-body">
-                            <p>{`Title: ${details.title}`}</p>
-                            <p>{`Subject: ${details.subject}`}</p>
-                            <p>{`Max Group Size: ${details.max}`}</p>
-                            <p>{`Date of Event: ${details.date}`}</p>
-                            <p>{`Time of Event: ${details.time}`}</p>
-                            <p>{`Duration of Event: ${details.duration}`}</p>
-                            <p>{`Contact Phone: ${details.phone}`}</p>
-                            <p>{`Contact Email: ${details.email}`}</p>
-                            <p>{`Details: ${details.description}`}</p>
-                            <p>{`Location: ${details.location}`}</p>
+                            <div className="event-info">
+                                <p>{`Title: ${details.title}`}</p>
+                                <p>{`Subject: ${details.subject}`}</p>
+                                <p>{`Max Group Size: ${details.max}`}</p>
+                                <p>{`Date of Event: ${details.date}`}</p>
+                                <p>{`Time of Event: ${details.time}`}</p>
+                                <p>{`Duration of Event: ${details.duration}`}</p>
+                                <p>{`Contact Phone: ${details.phone}`}</p>
+                                <p>{`Contact Email: ${details.email}`}</p>
+                                <p>{`Details: ${details.description}`}</p>
+                                <p>{`Location: ${details.location}`}</p>
+                            </div>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
                     </div>
