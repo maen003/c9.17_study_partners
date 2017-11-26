@@ -50,16 +50,16 @@ class DetailsModal extends Component {
                         </div>
                         <div className="modal-body">
                             <div className="event-info">
-                                <p>{`Title: ${details.title}`}</p>
-                                <p>{`Subject: ${details.subject}`}</p>
-                                <p>{`Max Group Size: ${details.max}`}</p>
-                                <p>{`Date of Event: ${details.date}`}</p>
-                                <p>{`Time of Event: ${details.time}`}</p>
-                                <p>{`Duration of Event: ${details.duration}`}</p>
-                                <p>{`Contact Phone: ${details.phone}`}</p>
-                                <p>{`Contact Email: ${details.email}`}</p>
-                                <p>{`Details: ${details.description}`}</p>
-                                <p>{`Location: ${details.location}`}</p>
+                                <p><b>Title: </b> {details.title}</p>
+                                <p><b>Subject: </b>{details.subject}</p>
+                                <p><b>Max Group Size: </b>{details.max}</p>
+                                <p><b>Date of Event: </b>{details.date}</p>
+                                <p><b>Time of Event: </b>{details.time}</p>
+                                <p><b>Duration of Event: </b>{details.duration}</p>
+                                <p><b>Contact Phone: </b>{details.phone}</p>
+                                <p><b>Contact Email: </b>{details.email}</p>
+                                <p><b>Description: </b>{details.description}</p>
+                                <p><b>Location: </b>{details.location}</p>
                             </div>
                             <div className="singleMap" id="singleMap">loading...</div>
                         </div>
