@@ -12,16 +12,16 @@ class CreateEvent extends Component {
 
         this.state = {
             form: {
-                title: 'asdf',
+                title: '',
                 subject: 'Life Sciences',
                 max: '2-5',
                 date: '',
                 time: '',
                 duration: 'Less than 1 Hour',
-                phone: '1234567890',
-                email: 'asdf@asdf.com',
-                location: 'Learning Fuze',
-                description: 'asdf'
+                phone: '',
+                email: '',
+                location: '',
+                description: ''
             },
             coordinates: null
         };
@@ -158,18 +158,18 @@ class CreateEvent extends Component {
                     <div className="form-group">
                         <div className="col-sm-12 col-xs-12">
                             <label htmlFor="phone">Phone Number</label><br/>
-                                <input value={phone} onChange={this.handleInputChange} name="phone" type="tel" id="phone" className="form-control"/>
+                                <input value={phone} onChange={this.handleInputChange} name="phone" type="tel" id="phone" placeholder='e.g. 2131234567' className="form-control"/>
                         </div>
                         <div className="col-sm-12 col-xs-12">
                             <label htmlFor="email">Email</label><br/>
-                                <input value={email} onChange={this.handleInputChange} name="email" type="email" id="email" className="form-control"/>
+                                <input value={email} onChange={this.handleInputChange} name="email" type="email" id="email" placeholder='e.g. johnSmith@gmail.com' className="form-control"/>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12 col-xs-12">
                             <div className="col-sm-4 col-xs-12 locationFormComp"> 
                                 <label htmlFor="location">Location of event</label><br/>
-                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" id="location" className="form-control"/>
+                                    <input onBlur={this.renderMapAfterText} value={location} onChange={this.handleInputChange} name="location" id="location" placeholder='e.g. Learningfuze or 9200 Irvine Center Drive' className="form-control"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
