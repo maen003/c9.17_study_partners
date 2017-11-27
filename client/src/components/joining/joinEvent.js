@@ -131,6 +131,7 @@ class JoinEvent extends Component {
 
     render() {
         console.log('filter values: ', this.state.filterValues);
+        
         return (
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">

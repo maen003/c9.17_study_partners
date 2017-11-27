@@ -5,19 +5,18 @@ import axios from 'axios';
 export function createEvent(form) {
 
     const request = axios.post("http://dev.michaelahn.solutions/add_events", {
-        title: form.title,
-        description: form.description,
-        subject: form.subject,
-        date: form.date,
-        time: form.time,
-        duration: form.duration,
-        location: form.location,
-        max: form.max,
-        phone: form.phone,
-        email: form.email,
+        title: form.values.title,
+        description: form.values.description,
+        subject: form.values.subject,
+        date: form.values.date,
+        time: form.values.time,
+        duration: form.values.duration,
+        location: form.values.location,
+        max: form.values.max,
+        phone: form.values.phone,
+        email: form.values.email,
         coordinates: form.coordinates,
         facebookID: '',
-        coordinates: form.coordinates
     });
 
     return {

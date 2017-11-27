@@ -10,17 +10,17 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            toggleTech: true
+            // toggleTech: true
         };
     
-        this.clickHandler = this.clickHandler.bind(this);
+        // this.clickHandler = this.clickHandler.bind(this);
     }
     
-    clickHandler() {
-        this.setState(prevState => ({
-            toggleTech: !prevState.toggleTech
-        }));
-    }
+    // clickHandler() {
+    //     this.setState(prevState => ({
+    //         toggleTech: !prevState.toggleTech
+    //     }));
+    // }
 
     render() {
         return (
@@ -51,7 +51,8 @@ class Home extends Component {
                 <div className="info col-sm-4 col-xs-12">
                     <h2 onClick={this.clickHandler} style={{cursor: 'pointer', textAlign: 'center'}}>Tech Stack</h2>
                     <hr/>
-                    <div style={this.state.toggleTech ? {display: 'none'} : {height: 'auto'}}>
+                    {/* style={this.state.toggleTech ? {display: 'none'} : {height: 'auto'}} */}
+                    <div>
                         <div className="col-sm-12 techCategory">
                             <h4>Front End</h4>
                             <ul className="listTech">
