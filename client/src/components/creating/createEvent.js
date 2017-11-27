@@ -97,11 +97,11 @@ class CreateEvent extends Component {
                                 <label htmlFor="subject">Subject</label>
                                 <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
                                     <option disabled>Select a Subject</option>
-                                    <option>Life Sciences</option>
-                                    <option>Visual and Perfomance Arts</option>
-                                    <option>Liberal Arts</option>
-                                    <option>Engineering and Technology</option>
-                                    <option>Business</option>
+                                    <option value="1">Life Sciences</option>
+                                    <option value="2">Visual and Perfomance Arts</option>
+                                    <option value="3">Liberal Arts</option>
+                                    <option value="4">Engineering and Technology</option>
+                                    <option value="5">Business</option>
                                 </Field>
                             </div>
                             <div className="col-sm-4 col-xs-12">
