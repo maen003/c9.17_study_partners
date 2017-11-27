@@ -61,3 +61,12 @@ export function userJoin() {
         payload: request
     }
 }
+
+export function deleteEvent() {
+    const request = axios.post("http://dev.michaelahn.solutions/join_events");
+
+    return {
+        type: types.USER_JOIN,
+        payload: request
+    }
+}
