@@ -46,22 +46,19 @@ class DetailsModal extends Component {
                     <div className="modal-content animateModal">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
-                            <h4 className="modal-title">Details</h4>
+                            <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
                         <div className="modal-body">
-                            <div className="event-info">
-                                <p><b>Title: </b> {details.title}</p>
-                                <p><b>Subject: </b>{details.subject}</p>
-                                <p><b>Max Group Size: </b>{details.max}</p>
-                                <p><b>Date of Event: </b>{details.date}</p>
-                                <p><b>Time of Event: </b>{details.time}</p>
-                                <p><b>Duration of Event: </b>{details.duration}</p>
-                                <p><b>Contact Phone: </b>{details.phone}</p>
-                                <p><b>Contact Email: </b>{details.email}</p>
-                                <p><b>Description: </b>{details.description}</p>
-                                <p><b>Location: </b>{details.location}</p>
-                            </div>
-                            <div className="singleMap" id="singleMap">loading...</div>
+                            <p><b>Subject: </b>{details.subject}</p>
+                            <p><b>Max Group Size: </b>{details.max}</p>
+                            <p><b>Date of Event: </b>{details.date}</p>
+                            <p><b>Time of Event: </b>{details.time}</p>
+                            <p><b>Duration of Event: </b>{details.duration}</p>
+                            <p><b>Contact Phone: </b>{details.phone}</p>
+                            <p><b>Contact Email: </b>{details.email}</p>
+                            <p><b>Description: </b>{details.description}</p>
+                            <p><b>Location: </b>{details.location}</p>
+                            <div className="singleMap" id="singleMap"></div>
                         </div>
                     </div>
                 </div>

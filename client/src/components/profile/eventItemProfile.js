@@ -12,7 +12,7 @@ class EventDetails extends Component {
 
         this.state = {
             showModal: false
-        }
+        };
 
         this.toggleModal = this.toggleModal.bind(this);
         this.userJoinEvent = this.userJoinEvent.bind(this);
