@@ -63,7 +63,7 @@ export function userJoin(eventInfo) {
 }
 
 export function deleteEvent(eventInfo) {
-    const request = axios.delete("http://dev.michaelahn.solutions/delete_events");
+    const request = axios.post("http://dev.michaelahn.solutions/delete_events");
 
     return {
         type: types.DELETE_EVENT,

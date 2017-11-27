@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {deleteEvent} from '../../actions';
+import {deleteEvent, } from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
