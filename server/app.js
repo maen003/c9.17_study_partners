@@ -274,17 +274,29 @@ app.post('/join_events', function (req, res){
             console.log("BODY: ", req.body);
             console.log("EVENT_ID: ", req.body.event_id);
             console.log("PAYLOAD:", req.payload);
+
             connection.query(
-                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body}"`, function (err, results) {
-                    const output = {
-                        success: true,
-                        data: results
-                    };
-                    res.end(JSON.stringify(output));
+                `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
+                    if (err) throw err;
+                    if (results.length<10){
+                        connection.query(
+                            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                                const output = {
+                                    success: true,
+                                    data: results
+                                };
+                                res.end(JSON.stringify(output));
+                            }
+                            // console.log("the fb id is: ", req.session.passport.user.id);
+                            // console.log("The event id is: ", req.payload.data);
+                        )
+                    }
+                    else {
+                        console.log("EVENT ES FULLO")
+                    }
                 }
-                // console.log("the fb id is: ", req.session.passport.user.id);
-                // console.log("The event id is: ", req.payload.data);
             )
+
         });
     }
 })
