@@ -84,7 +84,7 @@ class EventDetails extends Component {
             <div className="col-sm-12 col-xs-12 singleItem">
                 <div className="col-sm-12">
                     <h4>Title: {info.title}</h4>
-                    <p>Subject: {info.subject}</p>
+                    <p>Subject: {info.e_s_subj}</p>
                     <p>{`On ${info.date} at ${info.time}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
