@@ -46,10 +46,9 @@ class DetailsModal extends Component {
                     <div className="modal-content animateModal">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
-                            <h4 className="modal-title">Details</h4>
+                            <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
                         <div className="modal-body">
-                            <p>{`Title: ${details.title}`}</p>
                             <p>{`Subject: ${details.subject}`}</p>
                             <p>{`Max Group Size: ${details.max}`}</p>
                             <p>{`Date of Event: ${details.date}`}</p>
@@ -59,7 +58,7 @@ class DetailsModal extends Component {
                             <p>{`Contact Email: ${details.email}`}</p>
                             <p>{`Description: ${details.description}`}</p>
                             <p>{`Location: ${details.location}`}</p>
-                            <div className="singleMap" id="singleMap">loading...</div>
+                            <div className="singleMap" id="singleMap"></div>
                         </div>
                     </div>
                 </div>

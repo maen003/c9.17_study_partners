@@ -24,11 +24,11 @@ class CreateEvent extends Component {
         this.createMap = this.createMap.bind(this);
     }
 
-    renderInputText({className, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
+    renderInputText({className, placeholder, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
         return (
             <div className={className}>
                 <label>{label}</label>
-                <input {... input} type={type}/>
+                <input {... input} type={type} placeholder={placeholder} className="form-control"/>
                 <p style={{color: 'red'}}>{touched && error}</p>
             </div>
         )
@@ -76,7 +76,6 @@ class CreateEvent extends Component {
         });
 
         this.toggleModal();
-
         this.setState({
             coordinates: ''
         })
@@ -90,43 +89,54 @@ class CreateEvent extends Component {
             <div className="container">
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
-                        <Field className="form-control" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
+                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
                         <div className="allSelect">
-                            <Field className="form-control selectInput" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
-                                <option disabled>Select a Subject</option>
-                                <option>Life Sciences</option>
-                                <option>Visual and Perfomance Arts</option>
-                                <option>Liberal Arts</option>
-                                <option>Engineering and Technology</option>
-                                <option>Business</option>
-                            </Field>
-                            <Field className="form-control selectInput" name="max" component="select" placeholder="Group Size" label="Max Group Size">
-                                <option disabled>Select a group size</option>
-                                <option>2-5</option>
-                                <option>6-10</option>
-                                <option>11-15</option>
-                                <option>16-20</option>
-                                <option>21-25</option>
-                                <option>26-30</option>
-                                <option>> 30</option>
-                            </Field>
-                            <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
-                                <option disabled>Select event duration</option>
-                                <option>Less than 1 Hour</option>
-                                <option>1 - 2 Hours</option>
-                                <option>2 - 3 Hours</option>
-                                <option>3 - 4 Hours</option>
-                                <option>4 - 5 Hours</option>
-                                <option>> 5 Hours</option>
-                            </Field>
+                            <div className="col-sm-4 col-xs-12">
+                                <label htmlFor="subject">Subject</label>
+                                <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
+                                    <option disabled>Select a Subject</option>
+                                    <option>Life Sciences</option>
+                                    <option>Visual and Perfomance Arts</option>
+                                    <option>Liberal Arts</option>
+                                    <option>Engineering and Technology</option>
+                                    <option>Business</option>
+                                </Field>
+                            </div>
+                            <div className="col-sm-4 col-xs-12">
+                                <label>Max Group Size</label>
+                                <Field className="form-control selectInput" name="max" component="select" placeholder="Group Size" label="Max Group Size">
+                                    <option disabled>Select a group size</option>
+                                    <option>2-5</option>
+                                    <option>6-10</option>
+                                    <option>11-15</option>
+                                    <option>16-20</option>
+                                    <option>21-25</option>
+                                    <option>26-30</option>
+                                    <option>> 30</option>
+                                </Field>
+                            </div>
+                            <div className="col-sm-4 col-xs-12">
+                                <label>Event Duration</label>
+                                <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
+                                    <option disabled>Select event duration</option>
+                                    <option>Less than 1 Hour</option>
+                                    <option>1 - 2 Hours</option>
+                                    <option>2 - 3 Hours</option>
+                                    <option>3 - 4 Hours</option>
+                                    <option>4 - 5 Hours</option>
+                                    <option>> 5 Hours</option>
+                                </Field>
+                            </div>
                         </div>
-                        <Field className="form-control col-sm-4 col-sm-offset-1" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
-                        <Field className="form-control col-sm-4 col-sm-offset-2" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
-                        <Field className="form-control col-sm-4 col-sm-offset-1" name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="888-888-8888"/>
-                        <Field className="form-control col-sm-4 col-sm-offset-2" name="email" component={this.renderInputText} type="email" label="Email" placeholder="example@example.com"/>
-                        <div className="locationFormComp">
-                            <Field className="form-control col-sm-4" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
-                            <div className="col-sm-8 col-xs-12">
+                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
+                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
+                        <div className="col-sm-12 col-xs-12">
+                            <div className="leftOfMap col-sm-4">
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxxxxxxxxx"/>
+                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="johndoe@gmail.com"/>
+                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
+                            </div>
+                            <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
                                     <div className="createMap" id="createMap"></div>
                                 </div>

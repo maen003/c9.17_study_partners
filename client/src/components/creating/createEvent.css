@@ -24,6 +24,14 @@
 
 .locationFormComp {
     height: 50vmin;
+    margin: 1% 0;
+}
+
+.locationPadding {
+    padding-top: 10%;
+}
+
+.leftOfMap {
     margin-top: 1%;
 }
 
@@ -32,6 +40,8 @@
 }
 
 .allSelect {
+    height: 10vmin;
+    width: 100%;
     display: flex;
     justify-content: space-around;
 }
@@ -91,3 +101,30 @@
         display: none;
     }
 } */
+
+@media screen and (max-width: 667px) {
+    .allSelect {
+        display: block;
+        height: auto;
+    }
+
+    .allSelect > label {
+        margin: 0 0 5px 5%;
+    }
+
+    .selectInput {
+        margin: 0 0 10px 0;
+    }
+
+    .locationPadding {
+        padding: 0;
+    }
+
+    .locationFormComp {
+        padding: 0;
+    }
+    
+    .leftOfMap {
+        padding: 0;
+    }
+}

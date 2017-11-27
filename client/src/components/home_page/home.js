@@ -95,7 +95,7 @@ class Home extends Component {
                             </ul>
                         </div>
                         <div className="col-sm-12 techCategory">
-                            <h4>Others</h4>
+                            <h4>Misc</h4>
                             <ul className="listTech">
                                 <li>
                                     <img className="meistertask" src={MeisterTask}/>

@@ -1,8 +1,19 @@
 #joinDiv{
     border: 2px solid black;
-    height: 100vh;
+    height: 100%;
+    overflow-y: hidden;
 }
+
 #createDiv {
     border: 2px solid red;
-    height: 100vh;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.panel {
+    margin-bottom: 0;
+}
+
+.panel-body {
+    height: 90vmin;
 }
