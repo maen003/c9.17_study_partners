@@ -14,7 +14,7 @@
     font-size: 250%;
     margin: 0.2em;
     position: relative;
-    color: lightcoral;
+    color: black;
     transform-style: preserve-3d;
     perspective: 400px;
     z-index: 1;
@@ -46,9 +46,9 @@
 } */
 
 .letter:before { /*hover */
-    color: whitesmoke;
+    color: slategray;
     transform: rotateX(0deg) rotateY(-40deg) rotateZ(0deg);
-    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 1px 0px 1px rgba(0,0,0,.8); /* delete if using hover */
+    text-shadow: -1px 0px 1px rgba(255,255,255,.1), 1px 0px 1px rgba(0,0,0,.1); /* delete if using hover */
     z-index: 3; /* delete if using hover */
 }
 
@@ -78,10 +78,82 @@
 	}
 }
 
-footer h3 {
+.deviconicon {
+    font-size: 4em;
+}
+
+.passport, .meistertask {
+    height: 7vmin;
+}
+
+.listTech {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.listTech li {
+    list-style-type: none;
     text-align: center;
 }
 
-.githubLinks > li {
-    display: block;
+.techCategory h4 {
+    text-align: center;
+    border: 1px inset lightgrey;
+    box-shadow: 4px 4px 0 slategray;
+}
+
+.info h3 {
+    text-align: center;
+}
+
+.indiv {
+    margin: 0.9% 0;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+    width: 87%;
+}
+
+@media screen and (max-width: 667px) {
+    .letter {
+        font-size: 249%;
+        margin: 0;
+    }
+
+    .jumbotron > h2 {
+        background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.3, #fff)) 0 0 no-repeat;
+        background-size: 100px;
+        -webkit-background-size: 100px;
+        color: rgba(104, 169, 196, 0.228);
+        background-clip: text;
+        -webkit-background-clip: text;
+        animation: shine 3s infinite;
+    }
+
+    .about > h2 {
+        text-align: center;
+    }
+
+    .passport, .meistertask {
+        height: 15.5vmin;
+    }
+
+    .indiv {
+        text-align: center;
+    }
+
+    .footer h4 {
+        text-align: center;
+    }
+
+    .footer {
+        position: relative;
+        border: none;
+        width: auto;
+    }
 }

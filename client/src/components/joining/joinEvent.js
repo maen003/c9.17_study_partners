@@ -136,15 +136,14 @@ class JoinEvent extends Component {
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
                     <form onSubmit={this.zipcode}>
-                        <div>
-                            <h4>By Subject</h4>
-                            {this.createCheckboxes()}
-                        </div>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
                             <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
-                        {/* <button className="btn btn-default" type="submit">Filter</button> */}
+                        <div>
+                            <h4>By Subject</h4>
+                            {this.createCheckboxes()}
+                        </div>
                     </form>
                     <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
 
