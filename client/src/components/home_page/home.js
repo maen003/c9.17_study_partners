@@ -46,6 +46,25 @@ class Home extends Component {
                     <p>Click <b>create</b> to create an event that others can join.</p>
                     <p>Click <b>Join</b> to browse through all the events to find the one you want</p>
                     <p><b>Warning</b>: must be signed in to create or join an event!</p>
+
+                    <div className="col-sm-12 col-xs-12">
+                        <h4 className="col-sm-2">GitHub Links<i className="devicon-github-plain"></i></h4>
+                        <div className="col-sm-2 col-xs-6 indiv">
+                            <Link to="https://github.com/maen003" target="_blank">Michael - Back End</Link>
+                        </div>
+                        <div className="col-sm-2 col-xs-6 indiv">                    
+                            <Link to="https://github.com/kryseno" target="_blank">Krystal - Back End</Link>
+                        </div>
+                        <div className="col-sm-2 col-xs-6 indiv">
+                            <Link to="https://github.com/pk316" target="_blank">Prosith - Front End</Link>
+                        </div>
+                        <div className="col-sm-2 col-xs-6 indiv">
+                            <Link to="https://github.com/ericyoon1" target="_blank">Eric - Front End</Link>
+                        </div>
+                        <div className="col-sm-2 col-xs-12 indiv">
+                            <Link to="https://github.com/oowretep" target="_blank">Peter - Front End</Link>
+                        </div>
+                    </div>
                 </div>
     
                 <div className="info col-sm-4 col-xs-12">
@@ -116,26 +135,6 @@ class Home extends Component {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <hr/>
-                    
-                <div className="col-sm-12 col-xs-12 footer">
-                    <h4 className="col-sm-2">GitHub Links<i className="devicon-github-plain"></i></h4>
-                    <div className="col-sm-2 col-xs-6 indiv">
-                        <Link to="https://github.com/maen003" target="_blank">Michael - Back End</Link>
-                    </div>
-                    <div className="col-sm-2 col-xs-6 indiv">                    
-                        <Link to="https://github.com/kryseno" target="_blank">Krystal - Back End</Link>
-                    </div>
-                    <div className="col-sm-2 col-xs-6 indiv">
-                        <Link to="https://github.com/pk316" target="_blank">Prosith - Front End</Link>
-                    </div>
-                    <div className="col-sm-2 col-xs-6 indiv">
-                        <Link to="https://github.com/ericyoon1" target="_blank">Eric - Front End</Link>
-                    </div>
-                    <div className="col-sm-2 col-xs-12 indiv">
-                        <Link to="https://github.com/oowretep" target="_blank">Peter - Front End</Link>
                     </div>
                 </div>
             </div>
