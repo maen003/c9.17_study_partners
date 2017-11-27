@@ -66,7 +66,7 @@ class EventDetails extends Component {
         const {info} = this.props;
 
         console.log('You joined this event');
-        this.props.userJoin().then(function(response){
+        this.props.userJoin(info).then(function(response){
             console.log('response from eventItem: ', this);
             console.log('le response: ', response);
             console.log('la informacion: ', info);
