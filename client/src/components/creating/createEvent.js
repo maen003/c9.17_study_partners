@@ -61,24 +61,26 @@ class CreateEvent extends Component {
         });
     }
 
-    toggleModal(event) {
+    toggleModal() {
         this.setState({
             showModal: !this.state.showModal
         })
     }
 
     submitData(values) {
+        const {reset} = this.props;
         const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
             console.log(resp);
+            reset();
+            this.toggleModal();
         });
 
-        this.toggleModal();
-        this.setState({
-            coordinates: ''
-        })
+        // this.setState({
+        //     coordinates: ''
+        // })
     }
 
     render() {
