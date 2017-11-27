@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin} from '../../actions';
+import {userJoin, deleteEvent} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
@@ -16,6 +16,7 @@ class EventDetails extends Component {
 
         this.toggleModal = this.toggleModal.bind(this);
         this.userJoinEvent = this.userJoinEvent.bind(this);
+        this.deleteEvent = this.deleteEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
@@ -69,6 +70,10 @@ class EventDetails extends Component {
         });
     }
 
+    deleteEvent() {
+        console.log('delete button was clicked');
+    }
+
     render() {
         const {info} = this.props;
         // console.log('info passed down: ', info);
@@ -83,8 +88,9 @@ class EventDetails extends Component {
                     <p>{`On ${info.date} at ${info.time}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
+                    <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
+                    <button onClick={this.deleteEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
+                    <button onClick={this.userJoinEvent} className="col-sm-4 btn btn-success infoButton" type="button">Join Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
@@ -92,4 +98,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin})(EventDetails);
+export default connect(null, {userJoin, deleteEvent})(EventDetails);
