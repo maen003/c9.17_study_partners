@@ -263,18 +263,40 @@ app.post('/delete_events',function(req, res){
 });
 
 
+// Joining Events
+app.post('/join_events', function (req, res){
+    console.log("You have joined!");
+    if (req.session.passport !== undefined){
+        const connection = mysql.createConnection(credentials);
+
+        connection.connect(() => {
+            console.log("Joining events connected", req);
+            console.log("PASSPORT: ", req.session.passport.user.id);
+            console.log("BODY: ", req.body);
+            console.log("EVENT_ID: ", req.body.event_id);
+            connection.query(
+                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body}"`, function (err, results) {
+                    const output = {
+                        success: true,
+                        data: results
+                    };
+                    res.end(JSON.stringify(output));
+                }
+                // console.log("the fb id is: ", req.session.passport.user.id);
+                // console.log("The event id is: ", req.payload.data);
+            )
+        });
+    }
+})
+
 // BEGIN ROUTING FOR PASSPORT AUTH
-app.get('/', isLoggedIn,
+app.get('/',
     function(req, res) {
         // console.log('this is the req: ', req);
         // console.log('this is the res: ', res);
         // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-        res.send('this is the root yo');
-    }
-);
+        // res.send('this is the root yo');
 
-app.get('/home',
-    function(req, res) {
         console.log("user has logged in");
         console.log("This is the session data", req.session);
 
@@ -296,9 +318,36 @@ app.get('/home',
             if (err) throw err;
             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
-        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
+        // res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
+
+// app.get('/home',
+//     function(req, res) {
+//         console.log("user has logged in");
+//         console.log("This is the session data", req.session);
+
+//         //setting Login Status on DB
+//         const sess = req.session.passport.user.id;
+//         let isLoggedIn = 'isLoggedIn';
+//         let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
+//         console.log("This is the Update Sql:", updateSql);
+
+//         pool.query(updateSql, function(err, results, fields) {
+//             if (err) throw err;
+//             console.log("isLoggedIn status updated on db");
+//         });
+
+//         //retrieving isLoggedIn status from DB
+//         let selectSql = `SELECT ${isLoggedIn} FROM users WHERE facebookID = ${sess}`;
+//         console.log("This is the Select Sql:", selectSql);
+//         pool.query(selectSql, function(err, results, fields) {
+//             if (err) throw err;
+//             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
+//         });
+//         res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
+//     }
+// );
 
 app.get('/checkLogin',
     function(req, res) {
@@ -330,7 +379,7 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         console.log("This is in the auth/facebook/callback route", req.session.passport.user);
-        res.redirect('/home');
+        res.redirect('/');
     }
 );
 
@@ -354,15 +403,16 @@ app.get('/logout',
     }
 );
 
-function isLoggedIn(req, res, next) {
+// function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on
-    console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
-    if (req.isAuthenticated()){
-        res.redirect('/home');
-        return next();
-    }
-}
+//     // if user is authenticated in the session, carry on
+//     console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
+//     if (req.isAuthenticated()){
+//         res.redirect('/');
+//         return next();
+//     }
+// }
+
 // END ROUTING FOR PASSPORT AUTH
 
 // Listen

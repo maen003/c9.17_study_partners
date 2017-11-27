@@ -21,6 +21,11 @@
     height: 57%;
 }
 
+.event-info{
+    width: 40%;
+    word-wrap: break-word;
+}
+
 #singleMap {
     height: 320px;
     width: 60%;
@@ -92,3 +97,4 @@
         left: 0;
     }
 }
+

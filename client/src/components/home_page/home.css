@@ -1,3 +1,7 @@
+.container{
+    background-color: white;
+    opacity: .9;
+}
 .jumbotron {
     margin: 0;
     opacity: .7;
