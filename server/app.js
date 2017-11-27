@@ -248,7 +248,7 @@ app.post('/delete_events',function(req, res){
         // console.log(arguments);
         console.log('this is the ',req.body.event_id);
         connection.query(
-            `DELETE FROM events WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
+            `UPDATE events SET isActive = 0 WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
                 // console.log('query has finished', connection);
                 const output = {
                     success: true,
