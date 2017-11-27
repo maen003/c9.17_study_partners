@@ -15,8 +15,7 @@ class EventDetails extends Component {
         };
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.userJoinEvent = this.userJoinEvent.bind(this);
-        this.deleteEvent = this.deleteEvent.bind(this);
+        this.deleteUserEvent = this.deleteUserEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
@@ -64,7 +63,7 @@ class EventDetails extends Component {
     }
 
 
-    deleteEvent() {
+    deleteUserEvent() {
         const {info} = this.props;
 
         console.log('delete button was clicked');
@@ -88,7 +87,7 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.deleteEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
+                    <button onClick={this.deleteUserEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
