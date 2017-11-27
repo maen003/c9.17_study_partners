@@ -124,10 +124,8 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
 
         connection.connect(() => {
-            // console.log(arguments);
             connection.query(
                 `SELECT * FROM events`, function(err, results, fields){
-                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results
@@ -137,7 +135,6 @@ app.get('/events',
             console.log('query has started')
         });
         console.log('got a user request????');
-        //res.end('got a user request!!!!!');
     });
 
 app.get('/user_events',function(req, res){
@@ -149,7 +146,6 @@ app.get('/user_events',function(req, res){
             console.log("iunno dude", query);
             connection.query(
                 query, function(err, results, fields){
-                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results,
@@ -160,7 +156,6 @@ app.get('/user_events',function(req, res){
             console.log('query has started')
         });
         console.log('got a user request????');
-        //res.end('got a user request!!!!!');
     } else {
         console.log('***** ERROR: user must log into Facebook *****');        
         // res.statusCode(404).redirect('/404');    //client side should create 404 route & 404 page for redirect if user isn't logged in
@@ -196,7 +191,6 @@ app.post('/add_events',
                 console.log('query has started')
             });
             console.log('got a event request');
-            //res.end('got a user request!!!!!');
 
             //Start Nodemailer: Email for Event CREATED
             const mailOptions = {
@@ -245,11 +239,9 @@ app.post('/delete_events',function(req, res){
     const connection = mysql.createConnection(credentials);
 
     connection.connect(() => {
-        // console.log(arguments);
         console.log('this is the ',req.body.event_id);
         connection.query(
             `DELETE FROM events WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
-                // console.log('query has finished', connection);
                 const output = {
                     success: true,
                     data: results
@@ -259,18 +251,12 @@ app.post('/delete_events',function(req, res){
         console.log('query has started')
     });
     console.log('got a user request????');
-    //res.end('got a user request!!!!!');
 });
 
 
 // BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/',
     function(req, res) {
-        // console.log('this is the req: ', req);
-        // console.log('this is the res: ', res);
-        // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-        // res.send('this is the root yo');
-
         console.log("user has logged in");
         console.log("This is the session data", req.session);
 
@@ -292,36 +278,8 @@ app.get('/',
             if (err) throw err;
             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
-        // res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
-
-// app.get('/home',
-//     function(req, res) {
-//         console.log("user has logged in");
-//         console.log("This is the session data", req.session);
-
-//         //setting Login Status on DB
-//         const sess = req.session.passport.user.id;
-//         let isLoggedIn = 'isLoggedIn';
-//         let updateSql = `UPDATE users SET ${isLoggedIn} = 1 WHERE facebookID = ${sess}`;
-//         console.log("This is the Update Sql:", updateSql);
-
-//         pool.query(updateSql, function(err, results, fields) {
-//             if (err) throw err;
-//             console.log("isLoggedIn status updated on db");
-//         });
-
-//         //retrieving isLoggedIn status from DB
-//         let selectSql = `SELECT ${isLoggedIn} FROM users WHERE facebookID = ${sess}`;
-//         console.log("This is the Select Sql:", selectSql);
-//         pool.query(selectSql, function(err, results, fields) {
-//             if (err) throw err;
-//             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
-//         });
-//         res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
-//     }
-// );
 
 app.get('/checkLogin',
     function(req, res) {
@@ -376,17 +334,6 @@ app.get('/logout',
         req.session.destroy();
     }
 );
-
-// function isLoggedIn(req, res, next) {
-
-//     // if user is authenticated in the session, carry on
-//     console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
-//     if (req.isAuthenticated()){
-//         res.redirect('/');
-//         return next();
-//     }
-// }
-
 // END ROUTING FOR PASSPORT AUTH
 
 // Listen
