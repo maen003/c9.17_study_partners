@@ -109,14 +109,14 @@
 }
 
 .indiv {
-    margin: 0.9% 0;
+    margin: 0.5% 0;
 }
 
 .footer {
     position: absolute;
     bottom: 0;
     padding: 0;
-    width: 87%;
+    width: 70%;
 }
 
 @media screen and (max-width: 667px) {
