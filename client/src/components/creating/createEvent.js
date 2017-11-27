@@ -16,7 +16,7 @@ class CreateEvent extends Component {
             showModal: false
         };
 
-        this.toggleModal = this.toggleModal.bind(this);
+        // this.toggleModal = this.toggleModal.bind(this);
         this.submitData = this.submitData.bind(this);
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
@@ -61,11 +61,11 @@ class CreateEvent extends Component {
         });
     }
 
-    toggleModal() {
-        this.setState({
-            showModal: !this.state.showModal
-        })
-    }
+    // toggleModal() {
+    //     this.setState({
+    //         showModal: !this.state.showModal
+    //     })
+    // }
 
     submitData(values) {
         const {reset} = this.props;
@@ -75,7 +75,7 @@ class CreateEvent extends Component {
             console.log('add events successful');
             console.log(resp);
             reset();
-            this.toggleModal();
+            // this.toggleModal();
         });
 
         // this.setState({
@@ -150,7 +150,7 @@ class CreateEvent extends Component {
                             <button className="form-group btn btn-success submitForm">Create Event</button>
                         </div>
                     </form>
-                    <ConfirmationModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>
+                    {/*<ConfirmationModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>*/}
                 </div>
             </div>
         )

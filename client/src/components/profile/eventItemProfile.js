@@ -69,6 +69,7 @@ class EventDetails extends Component {
         console.log('delete button was clicked');
         this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
+            console.log("delete info: ,", info)
         });
     }
 
