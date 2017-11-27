@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin} from '../../actions';
+import {userJoin, getAll} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItem.css';
@@ -63,9 +63,14 @@ class EventDetails extends Component {
     }
 
     userJoinEvent() {
+        const {info} = this.props;
+
         console.log('You joined this event');
         this.props.userJoin().then(function(response){
-            console.log('response: ', response.payload.data);
+            console.log('response from eventItem: ', this);
+            console.log('le response: ', response);
+            console.log('la informacion: ', info);
+
         });
     }
 
@@ -92,4 +97,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin})(EventDetails);
+export default connect(null, {userJoin, getAll})(EventDetails);

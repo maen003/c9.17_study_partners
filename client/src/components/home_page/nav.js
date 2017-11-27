@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import FacebookLogin from './fbLogin';
 import {getAll} from '../../actions';
+import ProfileToggle from './profile_toggle';
 
 
 import './nav.css';
@@ -35,7 +36,7 @@ const Nav =() => {
                                 <Link to='/create-event'>Create</Link>
                             </li>
                             <li>
-                                <Link to='/profile'>Profile</Link>
+                                <ProfileToggle/>
                             </li>
                         </ul>
                     </div>
