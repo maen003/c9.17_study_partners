@@ -158,6 +158,8 @@ class CreateEvent extends Component {
 }
 
 function validation(values) {
+    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/
+    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/
     const error = {};
     if (!values.title) {
         error.title = 'Please enter a title';
@@ -168,10 +170,10 @@ function validation(values) {
     if (!values.time) {
         error.time = 'Please specify the event time';
     }
-    if (!values.phone) {
-        error.phone = 'Please enter your phone number';
+    if (!phoneRegex.test(values.phone)) {
+        error.phone = 'Please enter a 10 digit number';
     }
-    if (!values.email) {
+    if (!emailRegex.test(values.email)) {
         error.email = 'Please enter your email';
     }
     if (!values.location) {
