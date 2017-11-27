@@ -31,6 +31,15 @@
     margin: 2% 0;
 }
 
+.allSelect {
+    display: flex;
+    justify-content: space-around;
+}
+
+.selectInput {
+    margin: 1%;
+}
+
 .bottons {
     width: 100%;
     display: flex;

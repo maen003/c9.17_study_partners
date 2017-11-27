@@ -17,7 +17,6 @@ class CreateEvent extends Component {
         };
 
         this.toggleModal = this.toggleModal.bind(this);
-
         this.submitData = this.submitData.bind(this);
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
@@ -25,10 +24,9 @@ class CreateEvent extends Component {
         this.createMap = this.createMap.bind(this);
     }
 
-    renderInputText({input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
-        // console.log('renderInput: ', props);
+    renderInputText({className, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
         return (
-            <div>
+            <div className={className}>
                 <label>{label}</label>
                 <input {... input} type={type}/>
                 <p style={{color: 'red'}}>{touched && error}</p>
@@ -93,41 +91,45 @@ class CreateEvent extends Component {
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
                         <Field className="form-control" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
-                        <Field className="form-control" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
-                            <option disabled>Select a Subject</option>
-                            <option>Life Sciences</option>
-                            <option>Visual and Perfomance Arts</option>
-                            <option>Liberal Arts</option>
-                            <option>Engineering and Technology</option>
-                            <option>Business</option>
-                        </Field>
-                        <Field className="form-control" name="max" component="select" placeholder="Group Size" label="Max Group Size">
-                            <option disabled>Select a group size</option>
-                            <option>2-5</option>
-                            <option>6-10</option>
-                            <option>11-15</option>
-                            <option>16-20</option>
-                            <option>21-25</option>
-                            <option>26-30</option>
-                            <option>> 30</option>
-                        </Field>
-                        <Field className="form-control" name="duration" component="select" placeholder="Duration" label="Event Duration">
-                            <option disabled>Select event duration</option>
-                            <option>Less than 1 Hour</option>
-                            <option>1 - 2 Hours</option>
-                            <option>2 - 3 Hours</option>
-                            <option>3 - 4 Hours</option>
-                            <option>4 - 5 Hours</option>
-                            <option>> 5 Hours</option>
-                        </Field>
-                        <Field className="form-control" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
-                        <Field className="form-control" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
-                        <Field className="form-control" name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="888-888-8888"/>
-                        <Field className="form-control" name="email" component={this.renderInputText} type="email" label="Email" placeholder="example@example.com"/>
-                        <Field className="form-control" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
-                        <div className="col-sm-8 col-xs-12 locationFormComp">
-                            <div className="mapView">
-                                <div className="createMap" id="createMap"></div>
+                        <div className="allSelect">
+                            <Field className="form-control selectInput" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
+                                <option disabled>Select a Subject</option>
+                                <option>Life Sciences</option>
+                                <option>Visual and Perfomance Arts</option>
+                                <option>Liberal Arts</option>
+                                <option>Engineering and Technology</option>
+                                <option>Business</option>
+                            </Field>
+                            <Field className="form-control selectInput" name="max" component="select" placeholder="Group Size" label="Max Group Size">
+                                <option disabled>Select a group size</option>
+                                <option>2-5</option>
+                                <option>6-10</option>
+                                <option>11-15</option>
+                                <option>16-20</option>
+                                <option>21-25</option>
+                                <option>26-30</option>
+                                <option>> 30</option>
+                            </Field>
+                            <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
+                                <option disabled>Select event duration</option>
+                                <option>Less than 1 Hour</option>
+                                <option>1 - 2 Hours</option>
+                                <option>2 - 3 Hours</option>
+                                <option>3 - 4 Hours</option>
+                                <option>4 - 5 Hours</option>
+                                <option>> 5 Hours</option>
+                            </Field>
+                        </div>
+                        <Field className="form-control col-sm-4 col-sm-offset-1" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
+                        <Field className="form-control col-sm-4 col-sm-offset-2" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
+                        <Field className="form-control col-sm-4 col-sm-offset-1" name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="888-888-8888"/>
+                        <Field className="form-control col-sm-4 col-sm-offset-2" name="email" component={this.renderInputText} type="email" label="Email" placeholder="example@example.com"/>
+                        <div className="locationFormComp">
+                            <Field className="form-control col-sm-4" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
+                            <div className="col-sm-8 col-xs-12">
+                                <div className="mapView">
+                                    <div className="createMap" id="createMap"></div>
+                                </div>
                             </div>
                         </div>
                         <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..."/>
