@@ -238,7 +238,7 @@ app.post('/add_events',
     });
 
 // Deleting Events
-app.post('/delete_events',function(req, res){
+app.delete('/delete_events',function(req, res){
     // console.log(req.body.name);
 
     console.log("Data is being deleted!!!!");
