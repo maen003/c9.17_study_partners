@@ -61,7 +61,7 @@ class CreateEvent extends Component {
         });
     }
 
-    toggleModal(event) {
+    toggleModal() {
         this.setState({
             showModal: !this.state.showModal
         })
