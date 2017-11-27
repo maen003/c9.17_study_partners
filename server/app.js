@@ -243,11 +243,13 @@ app.post('/delete_events',function(req, res){
 
     console.log("Data is being deleted!!!!");
     const connection = mysql.createConnection(credentials);
+    const query = `UPDATE events SET isActive = 0 WHERE event_id = '${req.body.event_id}'`;
 
     connection.connect(() => {
         console.log('this is the ',req.body.event_id);
+        console.log("para aqui: ", query);
         connection.query(
-            `UPDATE events SET isActive = 0 WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
+            query, function(err, results, fields){
                 const output = {
                     success: true,
                     data: results
