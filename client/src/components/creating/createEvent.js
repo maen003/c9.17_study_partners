@@ -160,20 +160,11 @@ function validation(values) {
     if (!values.title) {
         error.title = 'Please enter a title';
     }
-    if (values.subject === 'Select a Subject') {
-        error.subject = 'Please enter a subject';
-    }
-    if (values.max === 'Select a group size') {
-        error.max = 'Please enter a max group size';
-    }
     if (!values.date) {
         error.date = 'Please specify the event date';
     }
     if (!values.time) {
         error.time = 'Please specify the event time';
-    }
-    if (values.duration === 'Select event duration') {
-        error.duration = 'Please specify the event duration';
     }
     if (!values.phone) {
         error.phone = 'Please enter your phone number';
