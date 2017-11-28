@@ -185,6 +185,8 @@ app.post('/add_events',
             console.log(fields);
             const userJoin =  `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${res.insertId}"`;
             console.log('this is a request body', req.body);
+            console.log("LOOKIE HERE:", res.body.insertId);
+            console.log("INSERT UR EYEDEE:", res.insertId);
             connection.connect(() => {
                 connection.query(
                     fields
