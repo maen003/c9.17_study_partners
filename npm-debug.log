@@ -5,7 +5,7 @@
 4 verbose stack Error: ENOENT: no such file or directory, open '/Users/Krystal/Desktop/lfz/c9.17_study_partners/package.json'
 4 verbose stack     at Error (native)
 5 verbose cwd /Users/Krystal/Desktop/lfz/c9.17_study_partners
-6 error Darwin 17.0.0
+6 error Darwin 17.2.0
 7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
 8 error node v6.11.4
 9 error npm  v3.10.10

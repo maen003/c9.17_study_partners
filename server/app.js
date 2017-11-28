@@ -122,12 +122,13 @@ app.get('/events',
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
+        const query = `SELECT events.*, events_subjects.subject AS e_s_subj
+        FROM events
+        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1`;
 
         connection.connect(() => {
-            // console.log(arguments);
             connection.query(
-                `SELECT * FROM events`, function(err, results, fields){
-                    // console.log('query has finished', connection);
+                query, function(err, results, fields){
                     const output = {
                         success: true,
                         data: results
@@ -137,7 +138,6 @@ app.get('/events',
             console.log('query has started')
         });
         console.log('got a user request????');
-        //res.end('got a user request!!!!!');
     });
 
 app.get('/user_events',function(req, res){
@@ -145,11 +145,13 @@ app.get('/user_events',function(req, res){
         const connection = mysql.createConnection(credentials);
         console.log('user events here:', req.session.passport);
         connection.connect(() => {
-            let query = `SELECT * FROM events WHERE facebookID = '${req.session.passport.user.id}'`;
+            const query = `SELECT events.*, events_subjects.subject AS e_s_subj
+            FROM events
+            JOIN events_subjects on events.subject = events_subjects.id
+            WHERE isActive = 1 AND facebookID = '${req.session.passport.user.id}'`;
             console.log("iunno dude", query);
             connection.query(
                 query, function(err, results, fields){
-                    // console.log('query has finished', connection);
                     const output = {
                         success: true,
                         data: results,
@@ -160,7 +162,6 @@ app.get('/user_events',function(req, res){
             console.log('query has started')
         });
         console.log('got a user request????');
-        //res.end('got a user request!!!!!');
     } else {
         console.log('***** ERROR: user must log into Facebook *****');        
         // res.statusCode(404).redirect('/404');    //client side should create 404 route & 404 page for redirect if user isn't logged in
@@ -180,13 +181,28 @@ app.post('/add_events',
             console.log('LOOK HERE:', req.body.coordinates);
             // Saving for later
             // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
-            const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}"`;
+            const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}", isActive = '1'`;
             console.log(fields);
-            console.log('this is a request body', req.body);
+            console.log('this is a respond body', res);
             connection.connect(() => {
                 connection.query(
                     fields
                     , function(err, results, fields){
+                        console.log("INSERT UR EYEDEE:", results.insertId);
+                        if (err) throw err;
+                        else {
+                            console.log("THE USER JOIN: ", results.insertId);
+                            connection.query(
+                                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${results.insertId}"` , function(err, results){
+                                    const output = {
+                                        success: true,
+                                        data: results
+                                    };
+                                    res.end(JSON.stringify(output));
+                                }
+                            )
+
+                        }
                         const output = {
                             success: true,
                             data: results
@@ -196,7 +212,6 @@ app.post('/add_events',
                 console.log('query has started')
             });
             console.log('got a event request');
-            //res.end('got a user request!!!!!');
 
             //Start Nodemailer: Email for Event CREATED
             const mailOptions = {
@@ -209,7 +224,7 @@ app.post('/add_events',
                         <span><i>You don't have to study lonely, with Stubbies!</i></span>
                         <hr>
                             <div style='text-align: left'>
-                            <h2>Here are the details of your event!</h2>
+                            <h2>Here are the details of your study group!</h2>
                             <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
                             <p><b>Where:</b> ${req.body.location}</p>
                             <p><b>Description:</b> ${req.body.description}</p>
@@ -243,13 +258,13 @@ app.post('/delete_events',function(req, res){
 
     console.log("Data is being deleted!!!!");
     const connection = mysql.createConnection(credentials);
+    const query = `UPDATE events SET isActive = 0 WHERE event_id = '${req.body.event_id}'`;
 
     connection.connect(() => {
-        // console.log(arguments);
         console.log('this is the ',req.body.event_id);
+        console.log("para aqui: ", query);
         connection.query(
-            `DELETE FROM events WHERE event_id = '${req.body.event_id}'`, function(err, results, fields){
-                // console.log('query has finished', connection);
+            query, function(err, results, fields){
                 const output = {
                     success: true,
                     data: results
@@ -259,49 +274,87 @@ app.post('/delete_events',function(req, res){
         console.log('query has started')
     });
     console.log('got a user request????');
-    //res.end('got a user request!!!!!');
+});
 
-    //Start Nodemailer: Email for Event DELETED
-    const mailOptions = {
-        from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-        to: `${req.body.email}`,
-        subject: 'Study Group Deleted',
-        html:   `
+
+// Joining Events
+app.post('/join_events', function (req, res){
+    console.log("You have joined!");
+    if (req.session.passport !== undefined){
+        const connection = mysql.createConnection(credentials);
+
+        connection.connect(() => {
+            // console.log("Joining events connected", req);
+            console.log("PASSPORT: ", req.session.passport.user.id);
+            console.log("BODY: ", req.body);
+            console.log("EVENT_ID: ", req.body.event_id);
+            console.log("PAYLOAD:", req.payload);
+
+            connection.query(
+                `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
+                    console.log("Le results:", results);
+                    // console.log("Le response:", res);
+                    console.log("Le response body:", res.body);
+                    if (err) throw err;
+                    if (results.length<10){
+                        connection.query(
+                            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                                const output = {
+                                    success: true,
+                                    data: results
+                                };
+                                res.end(JSON.stringify(output));
+                            }
+                            // console.log("the fb id is: ", req.session.passport.user.id);
+                            // console.log("The event id is: ", req.payload.data);
+                        )
+                    }
+                    else {
+                        console.log("EVENT ES FULLO")
+                    }
+                }
+            )
+
+        });
+
+        console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
+        const userEmail = req.session.passport.user._json.email;
+        const userName = req.session.passport.user._json.first_name;
+        //Start Nodemailer: Email for Event JOINED
+        const mailOptions = {
+            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+            to: `${userEmail}`,
+            subject: 'Study Group Joined!',
+            html:   `
                 <div style='background-color: white; text-align: center; font-family: tahoma'>
                 <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
                 <span><i>You don't have to study lonely, with Stubbies!</i></span>
                 <hr>
-                    <div style='text-align: left'>
-                    <h2>You have successfully deleted your event.</h2>
-                    <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
-                    <p><b>If you wish to undo this, recreate your study group <a href="http://localhost:4000/create-event">here</a>.</b></p>
-                    </div>
+                <div style='text-align: left'>
+                    <h2>Hi, ${userName}! You have joined a study group!</h2>
+                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                    <p>If you wish to contact the group creator prior to your study session, their email is <b>${req.body.email}</b>.</p>
                 </div>
-                `
-      };
+                </div>
+                    `
+        };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log('Error: ', error);
-        } else {
-          console.log('Email sent successfully' + info.response);
-        }
-      });
-      //End Nodemailer
-});
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.log('Error: ', error);
+            } else {
+            console.log('Email sent successfully' + info.response);
+            }
+        });
+        //End Nodemailer
 
+    } else {
+            console.log('***** ERROR: user must log into Facebook *****');
+    }
+})
 
 // BEGIN ROUTING FOR PASSPORT AUTH
-app.get('/', isLoggedIn,
-    function(req, res) {
-        // console.log('this is the req: ', req);
-        // console.log('this is the res: ', res);
-        // res.sendFile(path.resolve('../client', 'dist', 'index.html'));
-        res.send('this is the root yo');
-    }
-);
-
-app.get('/home',
+app.get('/',
     function(req, res) {
         console.log("user has logged in");
         console.log("This is the session data", req.session);
@@ -324,7 +377,6 @@ app.get('/home',
             if (err) throw err;
             console.log("isLoggedIn status pulled from db", results[0].isLoggedIn);
         });
-        res.sendFile(path.resolve('..', 'client', 'dist', 'logout.html'));
     }
 );
 
@@ -358,7 +410,7 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
         console.log("This is in the auth/facebook/callback route", req.session.passport.user);
-        res.redirect('/home');
+        res.redirect('/');
     }
 );
 
@@ -381,16 +433,6 @@ app.get('/logout',
         req.session.destroy();
     }
 );
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on
-    console.log("This is the result of req.isAuthenticated()", req.isAuthenticated());
-    if (req.isAuthenticated()){
-        res.redirect('/home');
-        return next();
-    }
-}
 // END ROUTING FOR PASSPORT AUTH
 
 // Listen
