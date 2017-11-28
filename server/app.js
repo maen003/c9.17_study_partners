@@ -124,7 +124,7 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
         const query = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
-        JOIN events_subjects on events.subject = events_subjects.id`;
+        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1`;
 
         connection.connect(() => {
             connection.query(
@@ -148,7 +148,7 @@ app.get('/user_events',function(req, res){
             const query = `SELECT events.*, events_subjects.subject AS e_s_subj
             FROM events
             JOIN events_subjects on events.subject = events_subjects.id
-            WHERE facebookID = '${req.session.passport.user.id}'`;
+            WHERE isActive = 1 AND facebookID = '${req.session.passport.user.id}'`;
             console.log("iunno dude", query);
             connection.query(
                 query, function(err, results, fields){
