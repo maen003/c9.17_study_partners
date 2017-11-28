@@ -45,7 +45,7 @@
     margin: 0;
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 768px) {
     .infoButton {
         margin: 0 2%;
     }

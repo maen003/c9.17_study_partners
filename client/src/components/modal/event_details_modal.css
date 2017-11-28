@@ -21,6 +21,10 @@
     height: 70vmin;
 }
 
+.modal-body {
+    height: 93%;
+}
+
 .event-info{
     width: 40%;
     word-wrap: break-word;
@@ -79,7 +83,7 @@
     }
 } */
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 768px) {
     .modal-dialog {
         width: 100%;
     }
@@ -93,7 +97,7 @@
         width: 100%;
         border: 1px solid black;
         position: absolute;
-        top: 92%;
+        top: 50%;
         left: 0;
     }
 }
