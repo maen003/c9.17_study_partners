@@ -296,35 +296,17 @@ app.post('/join_events', function (req, res){
                     console.log("Le response:", JSON.stringify(results.RowDataPacket));
                     if (err) throw err;
                     if (results.length<10){
-                        const query = `SELECT * FROM joined_events WHERE facebookID = "${req.session.passport.user.id}"`;
-                        console.log(query);
                         connection.query(
-                            query, function(err, results){
+                            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
                                 const output = {
                                     success: true,
                                     data: results
                                 };
-                                console.log("Join events query:" , results);
                                 res.end(JSON.stringify(output));
-                                if (results === []){
-                                    const query =  `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`;
-                                    console.log("Inner most query:", query);
-                                    connection.query(
-                                        query, function (err, results) {
-                                            const output = {
-                                                success: true,
-                                                data: results
-                                            };
-                                            res.end(JSON.stringify(output));
-                                        }
-                                        // console.log("the fb id is: ", req.session.passport.user.id);
-                                        // console.log("The event id is: ", req.payload.data);
-                                    )
-                                }
                             }
+                            // console.log("the fb id is: ", req.session.passport.user.id);
+                            // console.log("The event id is: ", req.payload.data);
                         )
-
-
                     }
                     else {
                         console.log("EVENT ES FULLO")
