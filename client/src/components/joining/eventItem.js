@@ -70,16 +70,13 @@ class EventDetails extends Component {
             console.log('response from eventItem: ', this);
             console.log('le response: ', response);
             console.log('la informacion: ', info);
-
         });
     }
 
     render() {
         const {info} = this.props;
         // console.log('info passed down: ', info);
-        const display = {display: 'block'}
-        const hide = {display: 'none'}
-
+        
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
                 <div className="col-sm-12">
