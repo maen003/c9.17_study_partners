@@ -30,6 +30,19 @@ class EventList extends Component {
                 console.log('filtered events:', acceptedValues);
                 console.log('zipcode:', this.props.zipcodeCoords);
                 if (acceptedValues.length > 0) {
+                    const map = new google.maps.Map(document.getElementById('joinMap'), {
+                        zoom: 10,
+                        center: this.props.zipcodeCoords
+                    });
+
+                    for (var i = 0; i < acceptedValues.length; i++) {
+                        const latLng = JSON.parse(acceptedValues[i].coordinates)
+                        const marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+                    }
+                    
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });
