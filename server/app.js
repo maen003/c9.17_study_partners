@@ -296,16 +296,20 @@ app.post('/join_events', function (req, res){
                     console.log("Le response:", JSON.stringify(results.RowDataPacket));
                     if (err) throw err;
                     if (results.length<10){
+                        const query = `SELECT * FROM joined_events WHERE facebookID = "${req.session.passport.user.id}"`;
+                        console.log(query);
                         connection.query(
-                            `SELECT * FROM joined_events WHERE facebookID = "${req.session.passport.user.id}"` , function(err, results){
+                            query, function(err, results){
                                 const output = {
                                     success: true,
                                     data: results
                                 };
                                 res.end(JSON.stringify(output));
                                 if (results.length === 0){
+                                    const query =  `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`;
+                                    console.log("Inner most query:", query);
                                     connection.query(
-                                        `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                                        query, function (err, results) {
                                             const output = {
                                                 success: true,
                                                 data: results
