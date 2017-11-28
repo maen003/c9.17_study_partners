@@ -37,16 +37,16 @@ class EventList extends Component {
 
                     for (var i = 0; i < acceptedValues.length; i++) {
                         const contentString = '</div>'+
-                        '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
-                        '<p>Location: '+response.payload.data.data[i].location+'</p>'+
-                        '<p>Subject: '+response.payload.data.data[i].subject+'</p>'+
-                        '<p>Max Group Size: '+response.payload.data.data[i].max+'</p>'+
-                        '<p>Date of Event: '+response.payload.data.data[i].date+'</p>'+
-                        '<p>Time of Event: '+response.payload.data.data[i].time+'</p>'+
-                        '<p>Duration of Event: '+response.payload.data.data[i].duration+'</p>'+
-                        '<p>Contact Phone: '+response.payload.data.data[i].phone+'</p>'+
-                        '<p>Contact Email: '+response.payload.data.data[i].email+'</p>'+
-                        '<p>Description: '+response.payload.data.data[i].description+'</p>'+
+                        '<h5><u>'+acceptedValues[i].title+'</u></h5>'+
+                        '<p>Location: '+acceptedValues[i].location+'</p>'+
+                        '<p>Subject: '+acceptedValues[i].subject+'</p>'+
+                        '<p>Max Group Size: '+acceptedValues[i].max+'</p>'+
+                        '<p>Date of Event: '+acceptedValues[i].date+'</p>'+
+                        '<p>Time of Event: '+acceptedValues[i].time+'</p>'+
+                        '<p>Duration of Event: '+acceptedValues[i].duration+'</p>'+
+                        '<p>Contact Phone: '+acceptedValues[i].phone+'</p>'+
+                        '<p>Contact Email: '+acceptedValues[i].email+'</p>'+
+                        '<p>Description: '+acceptedValues[i].description+'</p>'+
                         '</div>';
                         const infoWindow = new google.maps.InfoWindow({
                             content: contentString
