@@ -16,7 +16,7 @@ class CreateEvent extends Component {
             showModal: false
         };
 
-        this.toggleModal = this.toggleModal.bind(this);
+        // this.toggleModal = this.toggleModal.bind(this);
         this.submitData = this.submitData.bind(this);
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
@@ -83,24 +83,26 @@ class CreateEvent extends Component {
 
     /////////////////////////
 
-    toggleModal(event) {
-        this.setState({
-            showModal: !this.state.showModal
-        })
-    }
+    // toggleModal() {
+    //     this.setState({
+    //         showModal: !this.state.showModal
+    //     })
+    // }
 
     submitData(values) {
+        const {reset} = this.props;
         const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
             console.log('add events successful');
             console.log(resp);
+            reset();
+            // this.toggleModal();
         });
 
-        this.toggleModal();
-        this.setState({
-            coordinates: ''
-        })
+        // this.setState({
+        //     coordinates: ''
+        // })
     }
 
     render() {
@@ -117,11 +119,11 @@ class CreateEvent extends Component {
                                 <label htmlFor="subject">Subject</label>
                                 <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
                                     <option disabled>Select a Subject</option>
-                                    <option>Life Sciences</option>
-                                    <option>Visual and Perfomance Arts</option>
-                                    <option>Liberal Arts</option>
-                                    <option>Engineering and Technology</option>
-                                    <option>Business</option>
+                                    <option value="1">Life Sciences</option>
+                                    <option value="2">Visual and Perfomance Arts</option>
+                                    <option value="3">Liberal Arts</option>
+                                    <option value="4">Engineering and Technology</option>
+                                    <option value="5">Business</option>
                                 </Field>
                             </div>
                             <div className="col-sm-4 col-xs-12">
@@ -154,9 +156,9 @@ class CreateEvent extends Component {
                         <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
-                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxxxxxxxxx"/>
-                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="johndoe@gmail.com"/>
-                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx"/>
+                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com"/>
+                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
@@ -170,7 +172,7 @@ class CreateEvent extends Component {
                             <button className="form-group btn btn-success submitForm">Create Event</button>
                         </div>
                     </form>
-                    <ConfirmationModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>
+                    {/*<ConfirmationModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>*/}
                 </div>
             </div>
         )
@@ -178,6 +180,8 @@ class CreateEvent extends Component {
 }
 
 function validation(values) {
+    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/
+    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/
     const error = {};
     if (!values.title) {
         error.title = 'Please enter a title';
@@ -188,10 +192,10 @@ function validation(values) {
     if (!values.time) {
         error.time = 'Please specify the event time';
     }
-    if (!values.phone) {
-        error.phone = 'Please enter your phone number';
+    if (!phoneRegex.test(values.phone)) {
+        error.phone = 'Please enter a valid phone number';
     }
-    if (!values.email) {
+    if (!emailRegex.test(values.email)) {
         error.email = 'Please enter your email';
     }
     if (!values.location) {

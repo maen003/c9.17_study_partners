@@ -49,7 +49,7 @@ class DetailsModal extends Component {
                             <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
                         <div className="modal-body">
-                            <p><b>Subject: </b>{details.subject}</p>
+                            <p><b>Subject: </b>{details.e_s_subj}</p>
                             <p><b>Max Group Size: </b>{details.max}</p>
                             <p><b>Date of Event: </b>{details.date}</p>
                             <p><b>Time of Event: </b>{details.time}</p>

@@ -53,11 +53,20 @@ export function userAuth() {
     }
 }
 
-export function userJoin() {
-    const request = axios.post("http://dev.michaelahn.solutions/join_events");
+export function userJoin(eventInfo) {
+    const request = axios.post("http://dev.michaelahn.solutions/join_events", eventInfo);
 
     return {
         type: types.USER_JOIN,
+        payload: request
+    }
+}
+
+export function deleteEvent(eventInfo) {
+    const request = axios.post("http://dev.michaelahn.solutions/delete_events", eventInfo);
+
+    return {
+        type: types.DELETE_EVENT,
         payload: request
     }
 }
