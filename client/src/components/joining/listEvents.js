@@ -22,7 +22,7 @@ class EventList extends Component {
                 const eventArray = this.props.events.data;
                 for (var f = 0; f < this.props.filterValues.length; f++) {
                     for (var i = 0; i < eventArray.length; i++) {
-                        if (eventArray[i].subject === this.props.filterValues[f]) {
+                        if (eventArray[i].e_s_subj === this.props.filterValues[f]) {
                             acceptedValues.push(eventArray[i]);
                         }
                     }
