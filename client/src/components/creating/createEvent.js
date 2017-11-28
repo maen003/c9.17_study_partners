@@ -134,9 +134,9 @@ class CreateEvent extends Component {
                         <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
-                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxxxxxxxxx"/>
-                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="johndoe@gmail.com"/>
-                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="Starbucks, Irvine"/>
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx"/>
+                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com"/>
+                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center"/>
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
