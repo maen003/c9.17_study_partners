@@ -57,12 +57,12 @@ class EventList extends Component {
                             position: latLng,
                             map: map
                         });
-        
+
                         marker.addListener('click', function() {
                             infoWindow.open(map, marker);
                         });
                     }
-
+                    
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });
