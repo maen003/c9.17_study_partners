@@ -297,7 +297,7 @@ app.post('/join_events', function (req, res){
                     console.log("Le response:", res);
                     console.log("Le response body:", res.body);
                     if (err) throw err;
-                    if (results.length<10){
+                    if (results.length<req.body.max){
                         connection.query(
                             `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
                                 const output = {
