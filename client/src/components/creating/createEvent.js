@@ -118,44 +118,30 @@ class CreateEvent extends Component {
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
                         <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
-                        <div className="allSelect">
-                            <div className="col-sm-4 col-xs-12">
-                                <label htmlFor="subject">Subject</label>
-                                <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
-                                    <option disabled>Select a Subject</option>
-                                    <option value="1">Life Sciences</option>
-                                    <option value="2">Visual and Perfomance Arts</option>
-                                    <option value="3">Liberal Arts</option>
-                                    <option value="4">Engineering and Technology</option>
-                                    <option value="5">Business</option>
-                                </Field>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <label>Max Group Size</label>
-                                <Field className="form-control selectInput" name="max" component="select" placeholder="Group Size" label="Max Group Size">
-                                    <option disabled>Select a group size</option>
-                                    <option>2-5</option>
-                                    <option>6-10</option>
-                                    <option>11-15</option>
-                                    <option>16-20</option>
-                                    <option>21-25</option>
-                                    <option>26-30</option>
-                                    <option>> 30</option>
-                                </Field>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <label>Event Duration</label>
-                                <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
-                                    <option disabled>Select event duration</option>
-                                    <option>Less than 1 Hour</option>
-                                    <option>1 - 2 Hours</option>
-                                    <option>2 - 3 Hours</option>
-                                    <option>3 - 4 Hours</option>
-                                    <option>4 - 5 Hours</option>
-                                    <option>> 5 Hours</option>
-                                </Field>
-                            </div>
+                        <div className="col-sm-4 col-xs-12">
+                            <label htmlFor="subject">Subject</label>
+                            <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
+                                <option disabled>Select a Subject</option>
+                                <option value="1">Life Sciences</option>
+                                <option value="2">Visual and Perfomance Arts</option>
+                                <option value="3">Liberal Arts</option>
+                                <option value="4">Engineering and Technology</option>
+                                <option value="5">Business</option>
+                            </Field>
                         </div>
+                        <div className="col-sm-4 col-xs-12">
+                            <label>Event Duration</label>
+                            <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
+                                <option disabled>Select event duration</option>
+                                <option>Less than 1 Hour</option>
+                                <option>1 - 2 Hours</option>
+                                <option>2 - 3 Hours</option>
+                                <option>3 - 4 Hours</option>
+                                <option>4 - 5 Hours</option>
+                                <option>> 5 Hours</option>
+                            </Field>
+                        </div>
+                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" placeholder="Group Size" label="Max Group Size"/>
                         <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
                         <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
                         <div className="col-sm-12 col-xs-12">
