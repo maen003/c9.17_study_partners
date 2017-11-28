@@ -1,0 +1,100 @@
+.detailsModal {
+    position: fixed;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 1000;
+}
+
+.modal-dialog {
+    width: 120vmin;
+}
+
+.modal-content {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    height: 70vmin;
+}
+
+.event-info{
+    width: 40%;
+    word-wrap: break-word;
+}
+
+#singleMap {
+    height: 50vmin;
+    width: 60%;
+    border: 1px solid black;
+    position: absolute;
+    top: 5%;
+    left: 40%;
+}
+
+/* keyframe animation */
+/* .expandDetails {
+    animation: expandFind 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes expandDetails {
+    0% {
+        height: 0;
+        width: 0;
+    }
+    50% {
+        height: 0;
+        width: 75vmin;
+    }
+    100% {
+        height: 75vmin;
+        width: 75vmin;
+    }
+}
+  
+.closeDetails {
+    animation: closeFind 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes closeDetails {
+    0% {
+        height: 75vmin;
+        width: 75vmin;
+    }
+    50% {
+        height: 75vmin;
+        width: 0;
+    }
+    100% {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+} */
+
+@media screen and (max-width: 667px) {
+    .modal-dialog {
+        width: 100%;
+    }
+
+    .modal-content {
+        height: 100%;
+    }
+
+    #singleMap {
+        height: 45vmin;
+        width: 100%;
+        border: 1px solid black;
+        position: absolute;
+        top: 92%;
+        left: 0;
+    }
+}
+

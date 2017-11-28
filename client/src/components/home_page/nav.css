@@ -1,0 +1,33 @@
+.navbar {
+    width: 100%;
+    margin: 0;
+}
+
+.leftNav li, .rightNav li {
+    padding: 5% 0 0 3%;
+}
+
+.rightNav {
+    padding: 0 0 0 8%;
+}
+
+/* .mouseHeader {
+    color: whitesmoke;
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8), 2px 0px 2px rgba(0,0,0,1);
+    text-decoration: line-through;
+}
+
+.mouseHeader:hover {
+    color: black;
+    text-shadow: -1px 0px 1px rgba(255,255,255,.8);
+} */
+
+.headerName {
+    text-align: center;
+    letter-spacing: 10px;
+}
+
+.facebookLogin {
+    list-style-type: none;
+    padding-top: .8em;
+}
