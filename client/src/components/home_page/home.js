@@ -62,7 +62,7 @@ class Home extends Component {
                 <div className="info col-sm-4 col-xs-12">
                     <h2>Tech Stack</h2>
                     {/* onClick={this.clickHandler} style={{cursor: 'pointer', textAlign: 'center'}} */}
-                    <hr style={{'border-top': '1px solid black'}}/>
+                    <hr style={{borderTop: '1px solid black'}}/>
                     {/* style={this.state.toggleTech ? {display: 'none'} : {height: 'auto'}} */}
                     <div>
                         <div className="col-sm-12 techCategory">
