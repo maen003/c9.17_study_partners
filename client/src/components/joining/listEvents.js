@@ -61,6 +61,10 @@ class EventList extends Component {
                         marker.addListener('click', function() {
                             infoWindow.open(map, marker);
                         });
+
+                        map.addListener('click', function() {
+                            infoWindow.close();
+                        });
                     }
 
                     const eventElements = acceptedValues.map((eventItem, index) => {
