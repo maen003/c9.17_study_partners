@@ -22,6 +22,7 @@ class CreateEvent extends Component {
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.createMap = this.createMap.bind(this);
+        this.createMapOnLoad = this.createMapOnLoad.bind(this);
     }
 
     renderInputText({className, placeholder, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
@@ -60,6 +61,27 @@ class CreateEvent extends Component {
             animation: google.maps.Animation.DROP, //BOUNCE //DROP
         });
     }
+
+    /* Map Display on Load */
+
+    createMapOnLoad() {
+        const map = new google.maps.Map(document.getElementById('createMap'), {
+            zoom: 3,
+            center: {lat: 37.09024, lng: -95.712891}
+        });
+    }
+
+    componentDidMount() {
+        window.addEventListener('load', this.createMapOnLoad);
+        this.createMapOnLoad();
+    }
+
+    // componentDidUpdate() {
+    //     this.createMapOnLoad();
+    //     console.log('hi');
+    // }
+
+    /////////////////////////
 
     toggleModal(event) {
         this.setState({
