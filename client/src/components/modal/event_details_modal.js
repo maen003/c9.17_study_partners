@@ -12,6 +12,7 @@ class DetailsModal extends Component {
         }
 
         this.toggleModal = this.props.toggleModal; /*passed by prop*/
+        this.modalClickDetect = this.modalClickDetect.bind(this);
         // this.animateModal = this.animateModal.bind(this);
     }
 
@@ -33,6 +34,14 @@ class DetailsModal extends Component {
         })
     }
 
+    modalClickDetect(event) {
+        if (document.getElementById("modal-content").contains(event.target)) {
+            console.log('clicked inside modal');
+        } else {
+            console.log('clicked outside modal');
+        }
+    }
+
     render() { 
         const {showModal, details} = this.state;
 
@@ -41,9 +50,9 @@ class DetailsModal extends Component {
         }
 
         return (
-            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content animateModal">
+            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog" onClick={this.modalClickDetect}>
+                <div className="modal-dialog" id="modal-content">
+                    <div className="modal-content animateModal" onClick={this.modalClickDetect}>
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">{`Details: ${details.title}`}</h4>
