@@ -36,10 +36,30 @@ class EventList extends Component {
                     });
 
                     for (var i = 0; i < acceptedValues.length; i++) {
-                        const latLng = JSON.parse(acceptedValues[i].coordinates)
+                        const contentString = '</div>'+
+                        '<h5><u>'+acceptedValues[i].title+'</u></h5>'+
+                        '<p>Location: '+acceptedValues[i].location+'</p>'+
+                        '<p>Subject: '+acceptedValues[i].subject+'</p>'+
+                        '<p>Max Group Size: '+acceptedValues[i].max+'</p>'+
+                        '<p>Date of Event: '+acceptedValues[i].date+'</p>'+
+                        '<p>Time of Event: '+acceptedValues[i].time+'</p>'+
+                        '<p>Duration of Event: '+acceptedValues[i].duration+'</p>'+
+                        '<p>Contact Phone: '+acceptedValues[i].phone+'</p>'+
+                        '<p>Contact Email: '+acceptedValues[i].email+'</p>'+
+                        '<p>Description: '+acceptedValues[i].description+'</p>'+
+                        '</div>';
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+        
+                        const latLng = JSON.parse(acceptedValues[i].coordinates);
                         const marker = new google.maps.Marker({
                             position: latLng,
                             map: map
+                        });
+
+                        marker.addListener('click', function() {
+                            infoWindow.open(map, marker);
                         });
                     }
                     
