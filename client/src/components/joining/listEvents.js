@@ -27,7 +27,42 @@ class EventList extends Component {
                         }
                     }
                 }
+                console.log('filtered events:', acceptedValues);
+                console.log('zipcode:', this.props.zipcodeCoords);
                 if (acceptedValues.length > 0) {
+                    const map = new google.maps.Map(document.getElementById('joinMap'), {
+                        zoom: 10,
+                        center: this.props.zipcodeCoords
+                    });
+
+                    for (var i = 0; i < acceptedValues.length; i++) {
+                        const contentString = '</div>'+
+                        '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
+                        '<p>Location: '+response.payload.data.data[i].location+'</p>'+
+                        '<p>Subject: '+response.payload.data.data[i].subject+'</p>'+
+                        '<p>Max Group Size: '+response.payload.data.data[i].max+'</p>'+
+                        '<p>Date of Event: '+response.payload.data.data[i].date+'</p>'+
+                        '<p>Time of Event: '+response.payload.data.data[i].time+'</p>'+
+                        '<p>Duration of Event: '+response.payload.data.data[i].duration+'</p>'+
+                        '<p>Contact Phone: '+response.payload.data.data[i].phone+'</p>'+
+                        '<p>Contact Email: '+response.payload.data.data[i].email+'</p>'+
+                        '<p>Description: '+response.payload.data.data[i].description+'</p>'+
+                        '</div>';
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+        
+                        const latLng = JSON.parse(acceptedValues[i].coordinates);
+                        const marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+        
+                        marker.addListener('click', function() {
+                            infoWindow.open(map, marker);
+                        });
+                    }
+
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });
