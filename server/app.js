@@ -300,6 +300,11 @@ app.post('/join_events', function (req, res){
                         connection.query(
                             `SELECT * FROM joined_events WHERE facebookID = "${req.session.passport.user.id}"`, function(err, results) {
                                 console.log("Inner query results: ", results);
+                                const output = {
+                                    success: true,
+                                    data: results
+                                };
+                                res.end(JSON.stringify(output));
                             }
                         );
                         connection.query(
