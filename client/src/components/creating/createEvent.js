@@ -194,7 +194,7 @@ function validation(values) {
     if (!values.description) {
         error.description = 'Please enter description of event';
     }
-    if (values.max <= 1) {
+    if (values.max <= 1 || values.max > 100) {
         error.max = 'Please enter a number between 2-100';
     }
     return error;
