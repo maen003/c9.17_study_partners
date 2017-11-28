@@ -20,9 +20,9 @@ class JoinEvent extends Component {
         super (props);
 
         this.state = {
-            eventList: null,
             zipcode: null,
-            filterValues: []
+            filterValues: [],
+            coords: null
         }
 
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
@@ -35,6 +35,7 @@ class JoinEvent extends Component {
         this.renderMapAfterSubmit = this.renderMapAfterSubmit.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.joinMap = this.joinMap.bind(this);
+        this.joinMapOnLoad = this.joinMapOnLoad.bind(this);
     }
 
     ///////////////////////MAP/////////////////////
@@ -56,7 +57,7 @@ class JoinEvent extends Component {
 
     axiosThenFunction(response){
         this.setState({
-            zipcode: response.data.results[0].geometry.location
+            coords: response.data.results[0].geometry.location
         });
         console.log('zipcode coords: ', this.state.zipcode);
         this.joinMap();
@@ -66,32 +67,67 @@ class JoinEvent extends Component {
         this.props.getAll().then((response) => {
             console.log("data: ", response.payload.data.data);
             console.log("data coords: ", response.payload.data.data[0].coordinates);
+            if(this.state.filterValues.length < 1){
             const map = new google.maps.Map(document.getElementById('joinMap'), {
                 zoom: 10,
-                center: this.state.zipcode
+                center: this.state.coords
             });
-    
+            
             for (var i = 0; i < response.payload.data.data.length; i++) {
+                const contentString = '</div>'+
+                '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
+                '<p>Location: '+response.payload.data.data[i].location+'</p>'+
+                '<p>Subject: '+response.payload.data.data[i].subject+'</p>'+
+                '<p>Max Group Size: '+response.payload.data.data[i].max+'</p>'+
+                '<p>Date of Event: '+response.payload.data.data[i].date+'</p>'+
+                '<p>Time of Event: '+response.payload.data.data[i].time+'</p>'+
+                '<p>Duration of Event: '+response.payload.data.data[i].duration+'</p>'+
+                '<p>Contact Phone: '+response.payload.data.data[i].phone+'</p>'+
+                '<p>Contact Email: '+response.payload.data.data[i].email+'</p>'+
+                '<p>Description: '+response.payload.data.data[i].description+'</p>'+
+                '</div>';
+                const infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
                 const latLng = JSON.parse(response.payload.data.data[i].coordinates);
                 const marker = new google.maps.Marker({
                     position: latLng,
-                    map: map,
-                    //label: 'z'
+                    map: map
+                });
+
+                marker.addListener('click', function() {
+                    infoWindow.open(map, marker);
                 });
             }
+        }
         });
-        // var map_data_array = [{lat: 33.6404952, lng: -117.8442962}, {lat: 33.6471628, lng: -117.8411294}];
-        // var zipcode = {lat: 33.6588951, lng: -117.8282121};
     }
+
+    /* Map Display on Load */
+
+    joinMapOnLoad() {
+        const map = new google.maps.Map(document.getElementById('joinMap'), {
+            zoom: 3,
+            center: {lat: 37.09024, lng: -95.712891}
+        });
+    }
+
+    // componentDidUpdate() {
+    //     this.joinMapOnLoad();
+    //     console.log('hi');
+    // }
 
     /* getting all events from axios call */
     componentDidMount() {
         this.getJoinData();
+        window.addEventListener('load', this.joinMapOnLoad);
+        this.joinMapOnLoad();
     }
 
     getJoinData() {
         this.props.getAll().then(function(response){
-            console.log('response: ', response.payload.data);
+            console.log('response from join event: ', response.payload.data);
         });
     }
 
@@ -131,20 +167,20 @@ class JoinEvent extends Component {
 
     render() {
         console.log('filter values: ', this.state.filterValues);
+        
         return (
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">
                     <h3>Filter Results</h3>
                     <form onSubmit={this.zipcode}>
-                        <div>
-                            <h4>By Subject</h4>
-                            {this.createCheckboxes()}
-                        </div>
                         <div className="form-group zipInput">
                             <h4>By Location</h4>
                             <input onBlur={this.zipcode} type="text" className="zipcode form-control" placeholder="Zip Code"/>
                         </div>
-                        {/* <button className="btn btn-default" type="submit">Filter</button> */}
+                        <div>
+                            <h4>By Subject</h4>
+                            {this.createCheckboxes()}
+                        </div>
                     </form>
                     <button onClick={this.renderMapAfterSubmit} className="btn btn-warning" type="button">Search</button>
 
@@ -154,7 +190,7 @@ class JoinEvent extends Component {
                 </div>
                 <div className="list col-sm-4 col-xs-12">
                     <h3>All Events</h3>
-                    <EventList eventList={this.props.events} filterValues={this.state.filterValues}/>
+                    <EventList filterValues={this.state.filterValues} zipcodeCoords={this.state.coords}/>
                 </div>
             </div>
             

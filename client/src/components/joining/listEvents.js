@@ -22,12 +22,47 @@ class EventList extends Component {
                 const eventArray = this.props.events.data;
                 for (var f = 0; f < this.props.filterValues.length; f++) {
                     for (var i = 0; i < eventArray.length; i++) {
-                        if (eventArray[i].subject === this.props.filterValues[f]) {
+                        if (eventArray[i].e_s_subj === this.props.filterValues[f]) {
                             acceptedValues.push(eventArray[i]);
                         }
                     }
                 }
+                console.log('filtered events:', acceptedValues);
+                console.log('zipcode:', this.props.zipcodeCoords);
                 if (acceptedValues.length > 0) {
+                    const map = new google.maps.Map(document.getElementById('joinMap'), {
+                        zoom: 10,
+                        center: this.props.zipcodeCoords
+                    });
+
+                    for (var i = 0; i < acceptedValues.length; i++) {
+                        const contentString = '</div>'+
+                        '<h5><u>'+acceptedValues[i].title+'</u></h5>'+
+                        '<p>Location: '+acceptedValues[i].location+'</p>'+
+                        '<p>Subject: '+acceptedValues[i].subject+'</p>'+
+                        '<p>Max Group Size: '+acceptedValues[i].max+'</p>'+
+                        '<p>Date of Event: '+acceptedValues[i].date+'</p>'+
+                        '<p>Time of Event: '+acceptedValues[i].time+'</p>'+
+                        '<p>Duration of Event: '+acceptedValues[i].duration+'</p>'+
+                        '<p>Contact Phone: '+acceptedValues[i].phone+'</p>'+
+                        '<p>Contact Email: '+acceptedValues[i].email+'</p>'+
+                        '<p>Description: '+acceptedValues[i].description+'</p>'+
+                        '</div>';
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+        
+                        const latLng = JSON.parse(acceptedValues[i].coordinates);
+                        const marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+
+                        marker.addListener('click', function() {
+                            infoWindow.open(map, marker);
+                        });
+                    }
+
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });

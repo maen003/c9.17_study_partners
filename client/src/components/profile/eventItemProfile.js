@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin} from '../../actions';
+import {deleteEvent, } from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
@@ -12,10 +12,10 @@ class EventDetails extends Component {
 
         this.state = {
             showModal: false
-        }
+        };
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.userJoinEvent = this.userJoinEvent.bind(this);
+        this.deleteUserEvent = this.deleteUserEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
@@ -62,10 +62,14 @@ class EventDetails extends Component {
         })
     }
 
-    userJoinEvent() {
-        console.log('You joined this event');
-        this.props.userJoin().then(function(response){
+
+    deleteUserEvent() {
+        const {info} = this.props;
+
+        console.log('delete button was clicked');
+        this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
+            console.log("delete info: ,", info)
         });
     }
 
@@ -83,8 +87,8 @@ class EventDetails extends Component {
                     <p>{`On ${info.date} at ${info.time}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
+                    <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
+                    <button onClick={this.deleteUserEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
@@ -92,4 +96,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin})(EventDetails);
+export default connect(null, {deleteEvent})(EventDetails);

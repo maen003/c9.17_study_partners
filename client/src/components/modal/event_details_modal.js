@@ -12,6 +12,7 @@ class DetailsModal extends Component {
         }
 
         this.toggleModal = this.props.toggleModal; /*passed by prop*/
+        this.modalClickDetect = this.modalClickDetect.bind(this);
         // this.animateModal = this.animateModal.bind(this);
     }
 
@@ -33,6 +34,14 @@ class DetailsModal extends Component {
         })
     }
 
+    modalClickDetect(event) {
+        if (document.getElementById("modal-content").contains(event.target)) {
+            console.log('clicked inside modal');
+        } else {
+            console.log('clicked outside modal');
+        }
+    }
+
     render() { 
         const {showModal, details} = this.state;
 
@@ -41,25 +50,24 @@ class DetailsModal extends Component {
         }
 
         return (
-            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content animateModal">
+            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog" onClick={this.modalClickDetect}>
+                <div className="modal-dialog" id="modal-content">
+                    <div className="modal-content animateModal" onClick={this.modalClickDetect}>
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
-                            <h4 className="modal-title">Details</h4>
+                            <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
                         <div className="modal-body">
-                            <p>{`Title: ${details.title}`}</p>
-                            <p>{`Subject: ${details.subject}`}</p>
-                            <p>{`Max Group Size: ${details.max}`}</p>
-                            <p>{`Date of Event: ${details.date}`}</p>
-                            <p>{`Time of Event: ${details.time}`}</p>
-                            <p>{`Duration of Event: ${details.duration}`}</p>
-                            <p>{`Contact Phone: ${details.phone}`}</p>
-                            <p>{`Contact Email: ${details.email}`}</p>
-                            <p>{`Description: ${details.description}`}</p>
-                            <p>{`Location: ${details.location}`}</p>
-                            <div className="singleMap" id="singleMap">loading...</div>
+                            <p><b>Subject: </b>{details.e_s_subj}</p>
+                            <p><b>Max Group Size: </b>{details.max}</p>
+                            <p><b>Date of Event: </b>{details.date}</p>
+                            <p><b>Time of Event: </b>{details.time}</p>
+                            <p><b>Duration of Event: </b>{details.duration}</p>
+                            <p><b>Contact Phone: </b>{details.phone}</p>
+                            <p><b>Contact Email: </b>{details.email}</p>
+                            <p><b>Description: </b>{details.description}</p>
+                            <p><b>Location: </b>{details.location}</p>
+                            <div className="singleMap" id="singleMap"></div>
                         </div>
                     </div>
                 </div>

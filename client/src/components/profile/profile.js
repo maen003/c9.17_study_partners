@@ -44,16 +44,11 @@ class Profile extends Component {
                 <div className="row">
                     <div className="col-xs-12 ">
                         <div className="panel panel-default">
-                            <div className="panel-heading">  <h3 >User Profile</h3></div>
                             <div className="panel-body">
                                 <div className="col-sm-3">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
-                                    <div className="" ><h4>First Name: { firstName  }</h4></div>
-                                    <div className="" >Last Name: { lastName } </div>
-                                    <div className="" >Contact: { contact} </div>
-                                    <div className="" >School: </div>
-                                    <div className="" >Major/Subject: </div>
-                                    <div className="" >Grade: </div>
+                                    <div className="" ><h4>{firstName} {lastName} </h4></div>
+                                    <div className="" >{ contact} </div>
                                 </div>
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1">
                                     <h1>Events Joined</h1>
