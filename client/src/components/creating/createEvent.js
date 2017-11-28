@@ -171,7 +171,7 @@ function validation(values) {
         error.time = 'Please specify the event time';
     }
     if (!phoneRegex.test(values.phone)) {
-        error.phone = 'Please enter a 10 digit number';
+        error.phone = 'Please enter a valid phone number';
     }
     if (!emailRegex.test(values.email)) {
         error.email = 'Please enter your email';
