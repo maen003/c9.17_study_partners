@@ -92,6 +92,7 @@ class CreateEvent extends Component {
     }
 
     submitData(values) {
+        const self = this;
         const {reset} = this.props;
         const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
@@ -99,9 +100,9 @@ class CreateEvent extends Component {
             console.log('add events successful');
             console.log(resp);
             reset();
-            this.toggleModal("success");
+            self.toggleModal("success");
         }).catch(() => {
-            toggleModal("error");
+            self.toggleModal("error");
         });
 
         this.setState({
