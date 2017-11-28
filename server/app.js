@@ -289,6 +289,7 @@ app.post('/join_events', function (req, res){
             console.log("BODY: ", req.body);
             console.log("EVENT_ID: ", req.body.event_id);
             console.log("PAYLOAD:", req.payload);
+            console.log("NUMBERS:", req.body.max);
 
             connection.query(
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
