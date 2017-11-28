@@ -292,8 +292,16 @@ app.post('/join_events', function (req, res){
 
             connection.query(
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
+                    console.log("Le results:", results);
+                    console.log("Le response:", JSON.stringify(results.RowDataPacket));
                     if (err) throw err;
+                    if (results.RowDataPacket)
                     if (results.length<10){
+                        connection.query(
+                            `SELECT * FROM joined_events WHERE facebookID = "${req.session.passport.user.id}"`, function(err, results) {
+                                console.log("Inner query results: ", results);
+                            }
+                        );
                         connection.query(
                             `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
                                 const output = {
