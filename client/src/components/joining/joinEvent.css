@@ -38,14 +38,14 @@
 .joinMap {
     height: 100%;
     width: 100%;
-    border: 1px solid black
+    border: 1px solid #428bca;
 }
 
 .form-group {
     margin: 0;
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 768px) {
     .infoButton {
         margin: 0 2%;
     }

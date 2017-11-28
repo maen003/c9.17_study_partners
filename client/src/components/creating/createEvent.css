@@ -10,7 +10,7 @@
 .createMap {
     height: 100%;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid #428bca;
 }
 
 .locationForm {
@@ -102,7 +102,7 @@
     }
 } */
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 768px) {
     .allSelect {
         display: block;
         height: auto;

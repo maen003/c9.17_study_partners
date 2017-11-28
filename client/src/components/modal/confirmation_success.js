@@ -3,6 +3,12 @@ import React, {Component} from 'react';
 import './confirmation_success.css';
 
 class ConfirmationModal extends Component {
+    constructor (props) {
+        super (props);
+
+        this.toggleModal = this.props.toggleModal; /*passed by prop*/
+    }
+    
     componentWillReceiveProps(nextProps){
         this.setState({
             showModal: nextProps.showModal

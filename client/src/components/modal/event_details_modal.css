@@ -21,6 +21,10 @@
     height: 70vmin;
 }
 
+.modal-body {
+    height: 93%;
+}
+
 .event-info{
     width: 40%;
     word-wrap: break-word;
@@ -29,7 +33,7 @@
 #singleMap {
     height: 50vmin;
     width: 60%;
-    border: 1px solid black;
+    border: 1px solid #428bca;
     position: absolute;
     top: 5%;
     left: 40%;
@@ -79,7 +83,7 @@
     }
 } */
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 768px) {
     .modal-dialog {
         width: 100%;
     }
@@ -91,9 +95,9 @@
     #singleMap {
         height: 45vmin;
         width: 100%;
-        border: 1px solid black;
+        border: 1px solid #428bca;
         position: absolute;
-        top: 92%;
+        top: 50%;
         left: 0;
     }
 }
