@@ -183,6 +183,7 @@ app.post('/add_events',
             // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
             const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}", isActive = '1'`;
             console.log(fields);
+            const userJoin =  `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`;
             console.log('this is a request body', req.body);
             connection.connect(() => {
                 connection.query(
@@ -190,8 +191,9 @@ app.post('/add_events',
                     , function(err, results, fields){
                         if (err) throw err;
                         else {
+                            console.log("THE USER JOIN: ", userJoin);
                             connection.query(
-                                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function(err, results){
+                               userJoin , function(err, results){
                                     const output = {
                                         success: true,
                                         data: results
@@ -199,7 +201,7 @@ app.post('/add_events',
                                     res.end(JSON.stringify(output));
                                 }
                             )
-                            
+
                         }
                         const output = {
                             success: true,
