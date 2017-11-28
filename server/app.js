@@ -188,6 +188,10 @@ app.post('/add_events',
                 connection.query(
                     fields
                     , function(err, results, fields){
+                        if (err) throw err;
+                        else {
+                            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`
+                        }
                         const output = {
                             success: true,
                             data: results

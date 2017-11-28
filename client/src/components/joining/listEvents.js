@@ -42,7 +42,7 @@ class EventList extends Component {
                             map: map
                         });
                     }
-                    
+
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });
