@@ -293,7 +293,8 @@ app.post('/join_events', function (req, res){
             connection.query(
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
                     console.log("Le results:", results);
-                    console.log("Le response:", JSON.stringify(results.RowDataPacket));
+                    console.log("Le response:", res);
+                    console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length<10){
                         connection.query(
