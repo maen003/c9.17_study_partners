@@ -72,7 +72,7 @@ export function deleteEvent(eventInfo) {
 }
 
 export function getProfileJoin() {
-    const request = axios.get("http://dev.michaelahn.solutions/user_events");
+    const request = axios.get("http://dev.michaelahn.solutions/user_joined_events");
 
     return {
         type: types.GET_JOIN_PROFILE,

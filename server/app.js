@@ -385,6 +385,29 @@ app.post('/join_events', function (req, res){
     }
 })
 
+//Display events user joined
+app.post('/user_joined_events', function (req,res){
+    console.log("Showing user events");
+    if (req.session.passport !== undefined){
+        const connection = mysql.createConnection(credentials);
+        console.log("DUH request:", req);
+        console.log("DUH response:", res);
+        connection.connect(() => {
+            connection.query(
+                `SELECT * FROM events WHERE facebookID = "${req.session.passport.user.id}"`, function (err, results) {
+                    const output = {
+                        success: true,
+                        data: results
+                    };
+                    res.end(JSON.stringify(output))
+                }
+            )
+        })
+    }
+    }
+
+);
+
 // BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/',
     function(req, res) {
