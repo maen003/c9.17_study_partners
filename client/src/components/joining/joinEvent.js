@@ -189,7 +189,7 @@ class JoinEvent extends Component {
                     </div>
                 </div>
                 <div className="list col-sm-4 col-xs-12">
-                    <h3>All Events</h3>
+                    <h3>All Current Events</h3>
                     <EventList filterValues={this.state.filterValues} zipcodeCoords={this.state.coords}/>
                 </div>
             </div>
