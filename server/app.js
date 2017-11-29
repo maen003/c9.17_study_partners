@@ -321,7 +321,7 @@ app.post('/join_events', function (req, res){
 })
 
 //Display events user joined
-app.post('/user_joined_events', function (req,res){
+app.get('/user_joined_events', function (req,res){
     console.log("Showing user events");
     if (req.session.passport !== undefined){
         const connection = mysql.createConnection(credentials);
