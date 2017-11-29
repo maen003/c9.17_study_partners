@@ -275,6 +275,7 @@ app.post('/delete_events',function(req, res){
     });
     console.log('got a user request????');
 
+    console.log('KRYSTAL REQ SESSION PASSPORT', req.session.passport.user._json);
     //Start Nodemailer: Email for Event DELETED
     const userEmail = req.session.passport.user._json.email;
     const userName = req.session.passport.user._json.first_name;
@@ -290,7 +291,7 @@ app.post('/delete_events',function(req, res){
             <div style='text-align: left'>
                 <h2>Hi ${userName}! You have successfully deleted your study group event.</h2>
                 <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
-                <p><b>If you wish to undo this, recreate your study group <a href="http://localhost:4000/create-event">here</a>.</b></p>
+                <p><b>If you wish to undo this, recreate your study group <a href="http://dev.michaelahn.solutions/create-event">here</a>.</b></p>
             </div>
             </div>
                 `
@@ -364,7 +365,7 @@ app.post('/join_events', function (req, res){
                 <div style='text-align: left'>
                     <h2>Hi, ${userName}! You have joined a study group!</h2>
                     <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
-                    <p>If you wish to contact the group creator prior to your study session, their email is <b>${req.body.email}</b>.</p>
+                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
                 </div>
                 </div>
                     `
