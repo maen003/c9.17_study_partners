@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { userAuth } from '../../actions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
-class FacebookLogin extends Component {
+class ProfileLinkToggle extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isLoggedIn: false
         }
-        this.renderLogin = this.renderLogin.bind(this);
+        this.renderProfileLink = this.renderProfileLink.bind(this);
     }
 
     componentWillMount() {
-        this.renderLogin();
+        this.renderProfileLink();
     }
 
-    renderLogin() {
+    renderProfileLink() {
 
         this.props.userAuth().then((resp) => {
             console.log('response: ', resp);
@@ -33,9 +34,9 @@ class FacebookLogin extends Component {
     render() {
         const { isLoggedIn } = this.state;
         if (isLoggedIn) {
-            return <a href="/logout" className="btn-sm btn-primary"><span className="fa fa-facebook"></span> Log Out</a>
+            return <Link to='/profile'>Profile</Link>;
         } else {
-            return <a href="/auth/facebook" className="btn-sm btn-primary"><span className="fa fa-facebook"></span> Log in With Facebook</a>
+            return null;
         }
     }
 }
@@ -46,4 +47,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { userAuth })(FacebookLogin);
+export default connect(mapStateToProps, { userAuth })(ProfileLinkToggle);

@@ -9,9 +9,8 @@
     display: none;
 }
 
-.filter {
-    width: 100%;
-    height: 25%;
+.filterContainer > h3{
+    text-align: center;
 }
 
 .filter > form {
@@ -22,84 +21,32 @@
     margin: 0;
 }
 
-.filterSubject input {
-    margin-left: 10%;
+.filterCheck {
+    padding-left: 5%;
 }
 
-.leftSideFilter, .rightSideFilter {
+.list > h3 {
+    text-align: center;
+}
+
+.map {
+    /* border: 1px solid black; */
+    margin-top: 1%;
+    height: 50vmin;
+}
+
+.joinMap {
     height: 100%;
-    padding-top: 3%;
-}
-
-.checkbox-inline:first-child {
-    margin: 0 0 0 3.5%;
-}
-
-.checkbox-inline {
-    display: block;
-    padding: 0 0 0 10%;
-    margin: 0 0 0 10%; 
-}
-
-/* .map {
-    height: 75%;
     width: 100%;
-    background-color: lightpink;
+    border: 1px solid #428bca;
 }
 
-/* animation */
-.moveHeaderUp {
-    top: 0;
-    transition: top 1.5s ease;
+.form-group {
+    margin: 0;
 }
 
-.moveHeaderDown {
-    top: 46%;
-    transition: top 3s ease;
-}
-
-/* keyframe animation */
-.animateExpandFind {
-    display: block;
-    animation: expandFind 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes expandFind {
-    0% {
-        height: 0;
-        width: 0;
-    }
-    50% {
-        height: 0;
-        width: 100%;
-    }
-    100% {
-        height: 68vmin;
-        width: 100%;
-    }
-}
-  
-.animateCloseFind {
-    display: block;
-    animation: closeFind 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes closeFind {
-    0% {
-        height: 68vmin;
-        width: 100%;
-    }
-    50% {
-        height: 68vmin;
-        width: 0;
-    }
-    100% {
-        height: 0;
-        width: 0;
-        display: none;
+@media screen and (max-width: 768px) {
+    .infoButton {
+        margin: 0 2%;
     }
 }

@@ -1,31 +1,16 @@
 .createEvent {
     position: relative;
-    margin-top: 1%;
-    height: 0;
-    width: 0;
-    border: 1px solid black;
-    display: block;
-    overflow: hidden;
-    overflow-y: auto;
-}
-
-.createEvent > form {
-    height: 90%;
-    width: 100%;
-}
-
-.row1, .row2, .row3 {
-    height: 12%;
-}
-
-.row4 {
-    height: 40%;
 }
 
 .mapView {
     width: 100%;
     height: 100%;
-    background-color: pink;
+}
+
+.createMap {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #428bca;
 }
 
 .locationForm {
@@ -34,19 +19,24 @@
 }
 
 .locationFormComp:first-child {
-    padding-top: 15%;
+    padding-top: 1%;
 }
 
 .locationFormComp {
-    height: 100%;
+    height: 50vmin;
+    margin: 1% 0;
 }
 
-.inputArea {
-    text-align: center;
+.locationPadding {
+    padding-top: 10%;
+}
+
+.leftOfMap {
+    margin-top: 1%;
 }
 
 .form-group {
-    margin-bottom: 2%;
+    margin: 1% 0;
 }
 
 .bottons {
@@ -55,19 +45,8 @@
     justify-content: space-around;
 }
 
-/* animation */
-.moveHeaderUp {
-    top: 0;
-    transition: top 1.5s ease;
-}
-
-.moveHeaderDown {
-    top: 46%;
-    transition: top 3s ease;
-}
-
 /* keyframe animation */
-.animateExpandCreate {
+/* .animateExpandCreate {
     display: block;
     animation: expandCreate 1.5s;
     animation-timing-function: ease-in-out;
@@ -109,5 +88,32 @@
         height: 0;
         width: 0;
         display: none;
+    }
+} */
+
+@media screen and (max-width: 768px) {
+    .allSelect {
+        display: block;
+        height: auto;
+    }
+
+    .allSelect > label {
+        margin: 0 0 5px 5%;
+    }
+
+    .selectInput {
+        margin: 0 0 10px 0;
+    }
+
+    .locationPadding {
+        padding: 0;
+    }
+
+    .locationFormComp {
+        padding: 0;
+    }
+    
+    .leftOfMap {
+        padding: 0;
     }
 }
