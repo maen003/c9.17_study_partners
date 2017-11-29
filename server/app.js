@@ -171,19 +171,19 @@ app.get('/user_events',function(req, res){
 // Adding Events
 app.post('/add_events',
     function(req, res){
-        console.log('the data is receiveth');
-        console.log('req is before this');
+        // console.log('the data is receiveth');
+        // console.log('req is before this');
         console.log("DATA RECEIVEDDDDD!!!!");
         if(req.session.passport !== undefined){
             const connection = mysql.createConnection(credentials);
             const lat = req.body.coordinates.lat;
             const lng = req.body.coordinates.lng;
-            console.log('LOOK HERE:', req.body.coordinates);
+            // console.log('LOOK HERE:', req.body.coordinates);
             // Saving for later
             // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
             const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}", isActive = '1'`;
             console.log(fields);
-            console.log('this is a respond body', res);
+            // console.log('this is a respond body', res);
             // connection.connect(() => {
             //     connection.query(
             //         fields
@@ -394,7 +394,7 @@ app.get('/user_joined_events', function (req,res){
         console.log("DUH response:", res);
         connection.connect(() => {
             connection.query(
-                `SELECT joined_events.*, events.isActive
+                `SELECT joined_events.*, events.*
                 FROM joined_events
                 JOIN events on joined_events.event_id = events.event_id
                 WHERE joined_events.facebookID = ${req.session.passport.user.id} AND isActive = 1`, function (err, results) {
