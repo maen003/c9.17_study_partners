@@ -224,7 +224,7 @@ app.post('/add_events',
                         <span><i>You don't have to study lonely, with Stubbies!</i></span>
                         <hr>
                             <div style='text-align: left'>
-                            <h2>Here are the details of your event!</h2>
+                            <h2>Here are the details of your study group!</h2>
                             <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
                             <p><b>Where:</b> ${req.body.location}</p>
                             <p><b>Description:</b> ${req.body.description}</p>
@@ -274,6 +274,37 @@ app.post('/delete_events',function(req, res){
         console.log('query has started')
     });
     console.log('got a user request????');
+
+    console.log('KRYSTAL REQ SESSION PASSPORT', req.session.passport.user._json);
+    //Start Nodemailer: Email for Event DELETED
+    const userEmail = req.session.passport.user._json.email;
+    const userName = req.session.passport.user._json.first_name;
+    const mailOptions = {
+        from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+        to: `${userEmail}`,
+        subject: 'Study Group Deleted!',
+        html:   `
+            <div style='background-color: white; text-align: center; font-family: tahoma'>
+            <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+            <span><i>You don't have to study lonely, with Stubbies!</i></span>
+            <hr>
+            <div style='text-align: left'>
+                <h2>Hi ${userName}! You have successfully deleted your study group event.</h2>
+                <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
+                <p><b>If you wish to undo this, recreate your study group <a href="http://dev.michaelahn.solutions/create-event">here</a>.</b></p>
+            </div>
+            </div>
+                `
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+        console.log('Error: ', error);
+        } else {
+        console.log('Email sent successfully' + info.response);
+        }
+    });
+    //End Nodemailer
 });
 
 
@@ -284,7 +315,7 @@ app.post('/join_events', function (req, res){
         const connection = mysql.createConnection(credentials);
 
         connection.connect(() => {
-            console.log("Joining events connected", req);
+            // console.log("Joining events connected", req);
             console.log("PASSPORT: ", req.session.passport.user.id);
             console.log("BODY: ", req.body);
             console.log("EVENT_ID: ", req.body.event_id);
@@ -294,7 +325,7 @@ app.post('/join_events', function (req, res){
             connection.query(
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
                     console.log("Le results:", results);
-                    console.log("Le response:", res);
+                    // console.log("Le response:", res);
                     console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length<req.body.max){
@@ -317,6 +348,40 @@ app.post('/join_events', function (req, res){
             )
 
         });
+
+        //Start Nodemailer: Email for Event JOINED
+        console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
+        const userEmail = req.session.passport.user._json.email;
+        const userName = req.session.passport.user._json.first_name;
+        const mailOptions = {
+            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+            to: `${userEmail}`,
+            subject: 'Study Group Joined!',
+            html:   `
+                <div style='background-color: white; text-align: center; font-family: tahoma'>
+                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                <hr>
+                <div style='text-align: left'>
+                    <h2>Hi, ${userName}! You have joined a study group!</h2>
+                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
+                </div>
+                </div>
+                    `
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.log('Error: ', error);
+            } else {
+            console.log('Email sent successfully' + info.response);
+            }
+        });
+        //End Nodemailer
+
+    } else {
+            console.log('***** ERROR: user must log into Facebook *****');
     }
 })
 
