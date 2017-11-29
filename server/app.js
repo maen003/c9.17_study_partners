@@ -183,11 +183,26 @@ app.post('/add_events',
             // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
             const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}", isActive = '1'`;
             console.log(fields);
-            console.log('this is a request body', req.body);
+            console.log('this is a respond body', res);
             connection.connect(() => {
                 connection.query(
                     fields
                     , function(err, results, fields){
+                        console.log("INSERT UR EYEDEE:", results.insertId);
+                        if (err) throw err;
+                        else {
+                            console.log("THE USER JOIN: ", results.insertId);
+                            connection.query(
+                                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${results.insertId}"` , function(err, results){
+                                    const output = {
+                                        success: true,
+                                        data: results
+                                    };
+                                    res.end(JSON.stringify(output));
+                                }
+                            )
+
+                        }
                         const output = {
                             success: true,
                             data: results
@@ -209,7 +224,7 @@ app.post('/add_events',
                         <span><i>You don't have to study lonely, with Stubbies!</i></span>
                         <hr>
                             <div style='text-align: left'>
-                            <h2>Here are the details of your event!</h2>
+                            <h2>Here are the details of your study group!</h2>
                             <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
                             <p><b>Where:</b> ${req.body.location}</p>
                             <p><b>Description:</b> ${req.body.description}</p>
@@ -259,6 +274,37 @@ app.post('/delete_events',function(req, res){
         console.log('query has started')
     });
     console.log('got a user request????');
+
+    console.log('KRYSTAL REQ SESSION PASSPORT', req.session.passport.user._json);
+    //Start Nodemailer: Email for Event DELETED
+    const userEmail = req.session.passport.user._json.email;
+    const userName = req.session.passport.user._json.first_name;
+    const mailOptions = {
+        from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+        to: `${userEmail}`,
+        subject: 'Study Group Deleted!',
+        html:   `
+            <div style='background-color: white; text-align: center; font-family: tahoma'>
+            <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+            <span><i>You don't have to study lonely, with Stubbies!</i></span>
+            <hr>
+            <div style='text-align: left'>
+                <h2>Hi ${userName}! You have successfully deleted your study group event.</h2>
+                <p><b>${req.body.title}</b> scheduled for <b>${req.body.date}</b> at <b>${req.body.time}</b> was deleted.</p>
+                <p><b>If you wish to undo this, recreate your study group <a href="http://dev.michaelahn.solutions/create-event">here</a>.</b></p>
+            </div>
+            </div>
+                `
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+        console.log('Error: ', error);
+        } else {
+        console.log('Email sent successfully' + info.response);
+        }
+    });
+    //End Nodemailer
 });
 
 
@@ -269,16 +315,20 @@ app.post('/join_events', function (req, res){
         const connection = mysql.createConnection(credentials);
 
         connection.connect(() => {
-            console.log("Joining events connected", req);
+            // console.log("Joining events connected", req);
             console.log("PASSPORT: ", req.session.passport.user.id);
             console.log("BODY: ", req.body);
             console.log("EVENT_ID: ", req.body.event_id);
             console.log("PAYLOAD:", req.payload);
+            console.log("NUMBERS:", req.body.max);
 
             connection.query(
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
+                    console.log("Le results:", results);
+                    // console.log("Le response:", res);
+                    console.log("Le response body:", res.body);
                     if (err) throw err;
-                    if (results.length<10){
+                    if (results.length<req.body.max){
                         connection.query(
                             `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
                                 const output = {
@@ -298,8 +348,65 @@ app.post('/join_events', function (req, res){
             )
 
         });
+
+        //Start Nodemailer: Email for Event JOINED
+        console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
+        const userEmail = req.session.passport.user._json.email;
+        const userName = req.session.passport.user._json.first_name;
+        const mailOptions = {
+            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+            to: `${userEmail}`,
+            subject: 'Study Group Joined!',
+            html:   `
+                <div style='background-color: white; text-align: center; font-family: tahoma'>
+                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                <hr>
+                <div style='text-align: left'>
+                    <h2>Hi, ${userName}! You have joined a study group!</h2>
+                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
+                </div>
+                </div>
+                    `
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.log('Error: ', error);
+            } else {
+            console.log('Email sent successfully' + info.response);
+            }
+        });
+        //End Nodemailer
+
+    } else {
+            console.log('***** ERROR: user must log into Facebook *****');
     }
 })
+
+//Display events user joined
+app.get('/user_joined_events', function (req,res){
+    console.log("Showing user events");
+    if (req.session.passport !== undefined){
+        const connection = mysql.createConnection(credentials);
+        console.log("DUH request:", req);
+        console.log("DUH response:", res);
+        connection.connect(() => {
+            connection.query(
+                `SELECT * FROM events WHERE facebookID = "${req.session.passport.user.id}"`, function (err, results) {
+                    const output = {
+                        success: true,
+                        data: results
+                    };
+                    res.end(JSON.stringify(output))
+                }
+            )
+        })
+    }
+    }
+
+);
 
 // BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/',
@@ -382,6 +489,10 @@ app.get('/logout',
     }
 );
 // END ROUTING FOR PASSPORT AUTH
+
+app.get('*', function(req, res) {
+    res.sendFile(path.resolve('..', 'client', 'dist', 'index.html'));
+});
 
 // Listen
 app.listen(4000,function(){
