@@ -39,7 +39,7 @@ class EventList extends Component {
                         const contentString = '</div>'+
                         '<h5><u>'+acceptedValues[i].title+'</u></h5>'+
                         '<p>Location: '+acceptedValues[i].location+'</p>'+
-                        '<p>Subject: '+acceptedValues[i].subject+'</p>'+
+                        '<p>Subject: '+acceptedValues[i].e_s_subj+'</p>'+
                         '<p>Max Group Size: '+acceptedValues[i].max+'</p>'+
                         '<p>Date of Event: '+acceptedValues[i].date+'</p>'+
                         '<p>Time of Event: '+acceptedValues[i].time+'</p>'+
