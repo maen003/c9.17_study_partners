@@ -12,6 +12,10 @@ export default (state = DEFAULT_STATE, action) => {
             return {
                 all: action.payload.data
             };
+        case types.GET_JOIN_PROFILE:
+            return {
+                all: action.payload.data
+            };
         case types.USER_JOIN:
             console.log(action.payload);
         default:
