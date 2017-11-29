@@ -402,6 +402,10 @@ app.get('/logout',
 );
 // END ROUTING FOR PASSPORT AUTH
 
+app.get('*', function(req, res) {
+    res.sendFile(path.resolve('..', 'client', 'dist', 'index.html'));
+});
+
 // Listen
 app.listen(4000,function(){
     console.log('the server is started on Port 4000');
