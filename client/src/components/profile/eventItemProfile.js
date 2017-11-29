@@ -11,7 +11,8 @@ class EventDetails extends Component {
         super (props);
 
         this.state = {
-            showModal: false
+            showModal: false,
+            info: this.props.info
         };
 
         this.toggleModal = this.toggleModal.bind(this);
