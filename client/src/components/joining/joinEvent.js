@@ -42,7 +42,7 @@ class JoinEvent extends Component {
     zipcode(event) {
         event.preventDefault();
         const {value} = event.target;
-        console.log('zipcode: ', value);
+        //console.log('zipcode: ', value);
         this.setState({
             zipcode: value
         })
@@ -50,29 +50,79 @@ class JoinEvent extends Component {
 
     renderMapAfterSubmit(){
         this.handleFormSubmit();
-        console.log('zipcode input focus changed');
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.zipcode+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
-            .then(this.axiosThenFunction);
+        //console.log('zipcode input focus changed', this.state.zipcode);
+        if(this.state.zipcode === null) {
+            this.joinMapOnLoad();
+        } else {
+            axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.zipcode+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+                .then(this.axiosThenFunction);
+        }
     }
 
     axiosThenFunction(response){
         this.setState({
             coords: response.data.results[0].geometry.location
         });
-        console.log('zipcode coords: ', this.state.zipcode);
+        //console.log('zipcode coords: ', this.state.zipcode);
         this.joinMap();
     }
 
     joinMap() {
         this.props.getAll().then((response) => {
-            console.log("data: ", response.payload.data.data);
-            console.log("data coords: ", response.payload.data.data[0].coordinates);
-            if(this.state.filterValues.length < 1){
+            //console.log("data: ", response.payload.data.data);
+            //console.log("data coords: ", response.payload.data.data[0].coordinates);
+
+            if(this.state.filterValues.length < 1) {
+                const map = new google.maps.Map(document.getElementById('joinMap'), {
+                    zoom: 10,
+                    center: this.state.coords
+                });
+                
+                for (var i = 0; i < response.payload.data.data.length; i++) {
+                    const contentString = '</div>'+
+                    '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
+                    '<p>Location: '+response.payload.data.data[i].location+'</p>'+
+                    '<p>Subject: '+response.payload.data.data[i].subject+'</p>'+
+                    '<p>Max Group Size: '+response.payload.data.data[i].max+'</p>'+
+                    '<p>Date of Event: '+response.payload.data.data[i].date+'</p>'+
+                    '<p>Time of Event: '+response.payload.data.data[i].time+'</p>'+
+                    '<p>Duration of Event: '+response.payload.data.data[i].duration+'</p>'+
+                    '<p>Contact Phone: '+response.payload.data.data[i].phone+'</p>'+
+                    '<p>Contact Email: '+response.payload.data.data[i].email+'</p>'+
+                    '<p>Description: '+response.payload.data.data[i].description+'</p>'+
+                    '</div>';
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
+                    const latLng = JSON.parse(response.payload.data.data[i].coordinates);
+                    const marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map
+                    });
+
+                    marker.addListener('click', function() {
+                        infoWindow.open(map, marker);
+                    });
+
+                    map.addListener('click', function() {
+                        infoWindow.close();
+                    });
+                }
+            }
+        });
+    }
+
+    /* Map Display on Load */
+
+    joinMapOnLoad() {
+        this.props.getAll().then((response) => {
+
             const map = new google.maps.Map(document.getElementById('joinMap'), {
-                zoom: 10,
-                center: this.state.coords
+                zoom: 3,
+                center: {lat: 37.09024, lng: -95.712891}
             });
-            
+
             for (var i = 0; i < response.payload.data.data.length; i++) {
                 const contentString = '</div>'+
                 '<h5><u>'+response.payload.data.data[i].title+'</u></h5>'+
@@ -104,23 +154,8 @@ class JoinEvent extends Component {
                     infoWindow.close();
                 });
             }
-        }
         });
     }
-
-    /* Map Display on Load */
-
-    joinMapOnLoad() {
-        const map = new google.maps.Map(document.getElementById('joinMap'), {
-            zoom: 3,
-            center: {lat: 37.09024, lng: -95.712891}
-        });
-    }
-
-    // componentDidUpdate() {
-    //     this.joinMapOnLoad();
-    //     console.log('hi');
-    // }
 
     /* getting all events from axios call */
     componentDidMount() {
