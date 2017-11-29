@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {createEvent, userAuth} from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
-import SignInModal from '../modal/sign_in_modal';
 
 import './createEvent.css';
 
@@ -26,7 +25,6 @@ class CreateEvent extends Component {
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.createMap = this.createMap.bind(this);
         this.createMapOnLoad = this.createMapOnLoad.bind(this);
-        this.toggleSignInModal = this.toggleSignInModal.bind(this);
     }
 
     renderInputText({className, placeholder, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
@@ -125,23 +123,12 @@ class CreateEvent extends Component {
             coordinates: ''
         })
     }
-    toggleSignInModal() {
-        this.setState({
-            showModal: !this.state.showModal,
-        })
-    }
 
 
     render() {
         // console.log('props: ', this.props);
         const {handleSubmit, reset} = this.props;
         const {isLoggedIn} = this.state;
-
-        {   isLoggedIn ? 
-                null
-            :
-                this.toggleSignInModal
-        }
 
         return (
             <div className="container">
@@ -198,12 +185,6 @@ class CreateEvent extends Component {
                         </div>
                     </form>
                     <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
-                    {
-                        isLoggedIn ?
-                            (<SignInModal showModal = { this.state.showModal } toggleSignInModal={this.toggleSignInModal}/>)
-                        :
-                        null
-                    }
                 </div>
             </div>
         )

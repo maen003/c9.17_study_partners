@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin, getAll, userAuth} from '../../actions';
+import {userJoin, getAll} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItem.css';
@@ -12,7 +12,6 @@ class EventDetails extends Component {
 
         this.state = {
             showModal: false,
-            isLoggedIn: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -73,19 +72,6 @@ class EventDetails extends Component {
             console.log('la informacion: ', info);
         });
     }
-    componentWillMount() {
-        this.checkLogin();
-    }
-    checkLogin() {
-        this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
-            this.setState({
-                isLoggedIn: resp.payload.data.isLoggedIn
-            })
-        }).catch((resp) => {
-            console.log("This is the error", resp);
-        })
-    }
 
     render() {
         const {info} = this.props;
@@ -101,12 +87,7 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    {
-                        isLoggedIn ?
-                            <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
-                            :
-                            (<button disabled={!isLoggedIn} className="form-group btn btn-success submitForm">Log in to Join </button>)
-                    }
+                    <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
@@ -114,4 +95,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin, getAll, userAuth})(EventDetails);
+export default connect(null, {userJoin, getAll})(EventDetails);
