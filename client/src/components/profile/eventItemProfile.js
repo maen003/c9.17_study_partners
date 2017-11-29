@@ -62,7 +62,6 @@ class EventDetails extends Component {
         })
     }
 
-
     deleteUserEvent() {
         const {info} = this.props;
 
