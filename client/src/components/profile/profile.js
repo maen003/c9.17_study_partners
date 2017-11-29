@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {userEvents} from '../../actions/index';
+import {userEvents, getProfileJoin} from '../../actions/index';
 import EventList from './listEventsProfile';
 
 import './profile.css';
@@ -16,14 +16,16 @@ class Profile extends Component {
             photo: null,
         };
 
-        this.getUserData = this.getUserData.bind(this);
+        this.getUserDataCreate = this.getUserDataCreate.bind(this);
+        this.getJoinedEvents = this.getJoinedEvents.bind(this);
     }
 
     componentWillMount() {
-        this.getUserData();
+        this.getUserDataCreate();
+        this.getJoinedEvents();
     }
 
-    getUserData() {
+    getUserDataCreate() {
         this.props.userEvents().then((resp) => {
             console.log('response for user: ', resp);
             this.setState({
@@ -33,6 +35,12 @@ class Profile extends Component {
                 photo: resp.payload.data.profile.user.photos[0].value
             });
             console.log(this.props);
+        })
+    }
+
+    getJoinedEvents() {
+        this.props.getProfileJoin().then((resp) => {
+            console.log('response for events joined: ', resp);
         })
     }
 
@@ -71,4 +79,4 @@ class Profile extends Component {
     }
 }
 
-export default connect(null, {userEvents})(Profile);
+export default connect(null, {userEvents, getProfileJoin})(Profile);
