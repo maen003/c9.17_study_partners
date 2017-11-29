@@ -12,7 +12,8 @@ class EventDetails extends Component {
         super (props);
 
         this.state = {
-            showModal: false
+            showModal: false,
+            info: this.props.info
         };
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -63,7 +64,6 @@ class EventDetails extends Component {
         })
     }
 
-
     deleteUserEvent() {
         const {info} = this.props;
 
@@ -75,9 +75,41 @@ class EventDetails extends Component {
         });
     }
 
+    convertDate() {
+        var date = this.state.info.date;
+        var time = this.state.info.time;
+        var convert = new Date(`${date} " " ${ time}`);
+        var newDate = convert.toLocaleDateString();
+        return newDate;
+    }
+
+    convertTime() {
+        var date = this.state.info.date;
+        var time = this.state.info.time;
+        var d = new Date(`${date} " " ${ time}`);
+        var hh = d.getHours();
+        var m = d.getMinutes();
+        var dd = "AM";
+        var h = hh;
+        if (h >= 12) {
+          h = hh - 12;
+          dd = "PM";
+        }
+        if (h == 0) {
+          h = 12;
+        }
+        m = m < 10 ? "0" + m : m;
+      
+        var pattern = new RegExp("0?" + hh + ":" + m);
+      
+        var replacement = h + ":" + m;
+        replacement += " " + dd;
+        return replacement;
+    }
+
     render() {
         const {info} = this.props;
-        // console.log('info passed down: ', info);
+        console.log('info passed down FOR CREATE: ', this.state.info);
         const display = {display: 'block'}
         const hide = {display: 'none'}
 
@@ -86,7 +118,7 @@ class EventDetails extends Component {
                 <div className="col-sm-12">
                     <h4>Title: {info.title}</h4>
                     <p>Subject: {info.e_s_subj}</p>
-                    <p>{`On ${info.date} at ${info.time}`}</p>
+                    <p>{`On ${this.convertDate()} at ${this.convertTime()}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>

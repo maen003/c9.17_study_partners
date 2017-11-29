@@ -32,56 +32,9 @@
 
 #singleMap {
     height: 50vmin;
-    width: 60%;
+    width: 50%;
     border: 1px solid #428bca;
-    position: absolute;
-    top: 5%;
-    left: 40%;
 }
-
-/* keyframe animation */
-/* .expandDetails {
-    animation: expandFind 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes expandDetails {
-    0% {
-        height: 0;
-        width: 0;
-    }
-    50% {
-        height: 0;
-        width: 75vmin;
-    }
-    100% {
-        height: 75vmin;
-        width: 75vmin;
-    }
-}
-  
-.closeDetails {
-    animation: closeFind 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes closeDetails {
-    0% {
-        height: 75vmin;
-        width: 75vmin;
-    }
-    50% {
-        height: 75vmin;
-        width: 0;
-    }
-    100% {
-        height: 0;
-        width: 0;
-        display: none;
-    }
-} */
 
 @media screen and (max-width: 768px) {
     .modal-dialog {

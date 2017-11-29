@@ -13,20 +13,7 @@ class DetailsModal extends Component {
 
         this.toggleModal = this.props.toggleModal; /*passed by prop*/
         this.modalClickDetect = this.modalClickDetect.bind(this);
-        // this.animateModal = this.animateModal.bind(this);
     }
-
-    // componentDidMount() {
-    //     this.animateModal();
-    // }
-
-    // animateModal() {
-    //     var detailModal = document.getElementsByClassName("animateModal")[0];
-
-    //     if (detailModal.classList.contains('expandDetails')) {
-    //         join.className += " closeDetails"
-    //     }
-    // }
 
     componentWillReceiveProps(nextProps){
         this.setState({
@@ -35,11 +22,43 @@ class DetailsModal extends Component {
     }
 
     modalClickDetect(event) {
-        if (document.getElementById("modal-content").contains(event.target)) {
+        if (document.getElementById("modalBody").contains(event.target)) {
             console.log('clicked inside modal');
         } else {
             console.log('clicked outside modal');
         }
+    }
+
+    convertDate() {
+        var date = this.state.details.date;
+        var time = this.state.details.time;
+        var convert = new Date(`${date} " " ${ time}`);
+        var newDate = convert.toLocaleDateString();
+        return newDate;
+    }
+
+    convertTime() {
+        var date = this.state.details.date;
+        var time = this.state.details.time;
+        var d = new Date(`${date} " " ${ time}`);
+        var hh = d.getHours();
+        var m = d.getMinutes();
+        var dd = "AM";
+        var h = hh;
+        if (h >= 12) {
+          h = hh - 12;
+          dd = "PM";
+        }
+        if (h == 0) {
+          h = 12;
+        }
+        m = m < 10 ? "0" + m : m;
+      
+        var pattern = new RegExp("0?" + hh + ":" + m);
+      
+        var replacement = h + ":" + m;
+        replacement += " " + dd;
+        return replacement;
     }
 
     render() { 
@@ -50,24 +69,26 @@ class DetailsModal extends Component {
         }
 
         return (
-            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog" onClick={this.modalClickDetect}>
-                <div className="modal-dialog" id="modal-content">
-                    <div className="modal-content animateModal" onClick={this.modalClickDetect}>
+            <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
+                <div className="modal-dialog">
+                    <div className="modal-content modalBody" id="modalBody">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
-                        <div className="modal-body">
-                            <p><b>Subject: </b>{details.e_s_subj}</p>
-                            <p><b>Max Group Size: </b>{details.max}</p>
-                            <p><b>Date of Event: </b>{details.date}</p>
-                            <p><b>Time of Event: </b>{details.time}</p>
-                            <p><b>Duration of Event: </b>{details.duration}</p>
-                            <p><b>Contact Phone: </b>{details.phone}</p>
-                            <p><b>Contact Email: </b>{details.email}</p>
-                            <p><b>Description: </b>{details.description}</p>
-                            <p><b>Location: </b>{details.location}</p>
-                            <div className="singleMap" id="singleMap"></div>
+                        <div className="modal-body col-sm-12">
+                            <div className="col-sm-6 col-xs-12">
+                                <p><b>Subject: </b>{details.e_s_subj}</p>
+                                <p><b>Max Group Size: </b>{details.max}</p>
+                                <p><b>Date of Event: </b>{this.convertDate()}</p>
+                                <p><b>Time of Event: </b>{this.convertTime()}</p>
+                                <p><b>Duration of Event: </b>{details.duration}</p>
+                                <p><b>Contact Phone: </b>{details.phone}</p>
+                                <p><b>Contact Email: </b>{details.email}</p>
+                                <p><b>Description: </b>{details.description}</p>
+                                <p><b>Location: </b>{details.location}</p>
+                            </div>
+                            <div className="singleMap col-sm-6 col-xs-12" id="singleMap"></div>
                         </div>
                     </div>
                 </div>
