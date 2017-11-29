@@ -15,7 +15,7 @@ class EventDetails extends Component {
         };
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.deleteUserEvent = this.deleteUserEvent.bind(this);
+        this.cancelJoinEvent = this.cancelJoinEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
@@ -63,14 +63,8 @@ class EventDetails extends Component {
     }
 
 
-    deleteUserEvent() {
-        const {info} = this.props;
-
-        console.log('delete button was clicked');
-        this.props.deleteEvent(info).then(function(response){
-            console.log('response: ', response.payload.data);
-            console.log("delete info: ,", info)
-        });
+    cancelJoinEvent() {
+        console.log('you are no longer part of this event');
     }
 
     render() {
@@ -88,7 +82,7 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.deleteUserEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
+                    <button onClick={this.cancelJoinEvent} className="col-sm-4 btn btn-warning infoButton" type="button">Leave Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
