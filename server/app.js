@@ -394,7 +394,7 @@ app.get('/user_joined_events', function (req,res){
         console.log("DUH response:", res);
         connection.connect(() => {
             connection.query(
-                `SELECT joined_events.*, events.facebookID, events.title, events.isActive
+                `SELECT joined_events.*, events.*
         FROM joined_events
         JOIN events on joined_events.event_id = events.event_id
         WHERE joined_events.facebookID = ${req.session.passport.user.id} AND isActive = 1`, function (err, results) {
