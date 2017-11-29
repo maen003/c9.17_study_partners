@@ -171,46 +171,46 @@ app.get('/user_events',function(req, res){
 // Adding Events
 app.post('/add_events',
     function(req, res){
-        console.log('the data is receiveth');
-        console.log('req is before this');
+        // console.log('the data is receiveth');
+        // console.log('req is before this');
         console.log("DATA RECEIVEDDDDD!!!!");
         if(req.session.passport !== undefined){
             const connection = mysql.createConnection(credentials);
             const lat = req.body.coordinates.lat;
             const lng = req.body.coordinates.lng;
-            console.log('LOOK HERE:', req.body.coordinates);
+            // console.log('LOOK HERE:', req.body.coordinates);
             // Saving for later
             // lat="${req.body.coordinates.lat}", lng="${req.body.coordinates.lng}"
             const fields = `INSERT INTO events SET title = "${req.body.title}", description = "${req.body.description}", subject = "${req.body.subject}", date = "${req.body.date}", time = "${req.body.time}", duration = "${req.body.duration}", location = "${req.body.location}", max = "${req.body.max}", phone = "${req.body.phone}", email = "${req.body.email}", coordinates = '${req.body.coordinates}', facebookID="${req.session.passport.user.id}", isActive = '1'`;
             console.log(fields);
-            console.log('this is a respond body', res);
-            connection.connect(() => {
-                connection.query(
-                    fields
-                    , function(err, results, fields){
-                        console.log("INSERT UR EYEDEE:", results.insertId);
-                        if (err) throw err;
-                        else {
-                            console.log("THE USER JOIN: ", results.insertId);
-                            connection.query(
-                                `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${results.insertId}"` , function(err, results){
-                                    const output = {
-                                        success: true,
-                                        data: results
-                                    };
-                                    res.end(JSON.stringify(output));
-                                }
-                            )
+            // console.log('this is a respond body', res);
+            // connection.connect(() => {
+            //     connection.query(
+            //         fields
+            //         , function(err, results, fields){
+            //             console.log("INSERT UR EYEDEE:", results.insertId);
+            //             if (err) throw err;
+            //             else {
+            //                 console.log("THE USER JOIN: ", results.insertId);
+            //                 connection.query(
+            //                     `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${results.insertId}"` , function(err, results){
+            //                         const output = {
+            //                             success: true,
+            //                             data: results
+            //                         };
+            //                         res.end(JSON.stringify(output));
+            //                     }
+            //                 )
 
-                        }
-                        const output = {
-                            success: true,
-                            data: results
-                        };
-                        res.end(JSON.stringify(output));
-                    });
-                console.log('query has started')
-            });
+            //             }
+            //             const output = {
+            //                 success: true,
+            //                 data: results
+            //             };
+            //             res.end(JSON.stringify(output));
+            //         });
+            //     console.log('query has started')
+            // });
             console.log('got a event request');
 
             //Start Nodemailer: Email for Event CREATED
@@ -394,11 +394,15 @@ app.get('/user_joined_events', function (req,res){
         console.log("DUH response:", res);
         connection.connect(() => {
             connection.query(
-                `SELECT * FROM events WHERE facebookID = "${req.session.passport.user.id}"`, function (err, results) {
+                `SELECT joined_events.*, events.*
+                FROM joined_events
+                JOIN events on joined_events.event_id = events.event_id
+                WHERE joined_events.facebookID = ${req.session.passport.user.id} AND isActive = 1`, function (err, results) {
                     const output = {
                         success: true,
                         data: results
                     };
+                    console.log('the output from display user join events: ',output);
                     res.end(JSON.stringify(output))
                 }
             )
