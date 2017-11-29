@@ -1,14 +1,14 @@
 {
-  "name": "react_starter",
+  "name": "study_app",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "Join and/or create study events to meet with other people who are studying the same subject as you",
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
     "bundle": "node_modules/.bin/webpack --config webpack.deploy.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Scott Bowler",
+  "author": "Prosith, Eric, Michael, Krystal, Peter",
   "license": "ISC",
   "repository": {
     "type": "git",
