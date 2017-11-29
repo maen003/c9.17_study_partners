@@ -4,7 +4,7 @@ import axios from 'axios';
 // http://dev.michaelahn.solutions
 export function createEvent(form) {
 
-    const request = axios.post("http://dev.michaelahn.solutions/add_events", {
+    const request = axios.post("http://http://dev.michaelahn.solutions/add_events", {
         title: form.values.title,
         description: form.values.description,
         subject: form.values.subject,
@@ -27,7 +27,7 @@ export function createEvent(form) {
 
 export function getAll() {
 
-    const request = axios.get("http://dev.michaelahn.solutions/events");
+    const request = axios.get("http://http://dev.michaelahn.solutions/events");
 
     return {
         type: types.GET_ALL,
@@ -36,7 +36,7 @@ export function getAll() {
 }
 
 export function userEvents() {
-    const request = axios.get("http://dev.michaelahn.solutions/user_events");
+    const request = axios.get("http://http://dev.michaelahn.solutions/user_events");
 
     return {
         type: types.USER_EVENTS,
@@ -45,7 +45,7 @@ export function userEvents() {
 }
 
 export function userAuth() {
-    const request = axios.get("http://dev.michaelahn.solutions/checkLogin");
+    const request = axios.get("http://http://dev.michaelahn.solutions/checkLogin");
 
     return {
         type: types.USER_AUTH,
@@ -54,7 +54,7 @@ export function userAuth() {
 }
 
 export function userJoin(eventInfo) {
-    const request = axios.post("http://dev.michaelahn.solutions/join_events", eventInfo);
+    const request = axios.post("http://http://dev.michaelahn.solutions/join_events", eventInfo);
 
     return {
         type: types.USER_JOIN,
@@ -63,7 +63,7 @@ export function userJoin(eventInfo) {
 }
 
 export function deleteEvent(eventInfo) {
-    const request = axios.post("http://dev.michaelahn.solutions/delete_events", eventInfo);
+    const request = axios.post("http://http://dev.michaelahn.solutions/delete_events", eventInfo);
 
     return {
         type: types.DELETE_EVENT,
@@ -72,7 +72,7 @@ export function deleteEvent(eventInfo) {
 }
 
 export function getProfileJoin() {
-    const request = axios.get("http://dev.michaelahn.solutions/user_joined_events");
+    const request = axios.get("http://http://dev.michaelahn.solutions/user_joined_events");
 
     return {
         type: types.GET_JOIN_PROFILE,
