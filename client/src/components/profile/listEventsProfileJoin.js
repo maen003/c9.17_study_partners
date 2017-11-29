@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import EventDetails from './eventItemProfile';
+import EventDetails from './eventItemJoin';
 
 const listDiv = {
     overflowY: 'auto',
@@ -15,9 +15,10 @@ class EventList extends Component {
 
     render() { 
         console.log('LIST EVENTS - props: ', this.props);
-        const arrayCheck = this.props.events;
+        console.log('ALL USER JOINED EVENTS: ', this.props.joinedEvents);
+        const arrayCheck = this.props.joinedEvents;
         if (arrayCheck.length !== 0) {
-            const eventArray = this.props.events.data;
+            const eventArray = this.props.joinedEvents;
             const eventElements = eventArray.map((eventItem, index) => {
                 return <EventDetails key={index} info={eventItem}/>
             });
