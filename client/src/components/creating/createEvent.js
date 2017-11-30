@@ -5,6 +5,7 @@ import { createEvent, userAuth } from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
 import SignInModal from '../modal/sign_in_modal';
+import FacebookLogin from '../home_page/fbLogin';
 
 import './createEvent.css';
 
@@ -192,7 +193,7 @@ class CreateEvent extends Component {
                                 isLoggedIn ?
                                     <button className="form-group btn btn-success submitForm">Create Event</button>
                                     :
-                                    <button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>
+                                    <div className="form-group btn btn-primary "><FacebookLogin /></div>
                             }
                         </div>
                     </form>
