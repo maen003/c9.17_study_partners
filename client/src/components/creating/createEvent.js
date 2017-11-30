@@ -110,11 +110,11 @@ class CreateEvent extends Component {
     }
 
     submitData(values) {
-        if (this.state.coordinates !== 'null'){
             const self = this;
             const { reset } = this.props;
             const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
             console.log('form values: ', formData);
+        if (formData.coordinates !== 'null'){
             this.props.createEvent(formData).then(function (resp) {
                 console.log('add events successful');
                 console.log(resp);
@@ -130,7 +130,7 @@ class CreateEvent extends Component {
         } else {
             self.toggleModal("error")
         }
-        
+
     }
 
     toggleSignInModal() {
