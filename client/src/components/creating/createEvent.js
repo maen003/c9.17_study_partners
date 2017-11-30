@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {createEvent, userAuth} from '../../actions';
 import axios from 'axios';
-import ConfirmationModal from '../modal/confirmation_success';
+import ConfirmationModalCreate from '../modal/confirmation_success';
 
 import './createEvent.css';
 
