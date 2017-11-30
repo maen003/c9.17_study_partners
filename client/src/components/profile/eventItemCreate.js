@@ -61,7 +61,7 @@ class EventDetails extends Component {
     }
 
     deleteUserEvent() {
-        const {info} = this.props;
+        const {info, renderList} = this.props;
 
         this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);

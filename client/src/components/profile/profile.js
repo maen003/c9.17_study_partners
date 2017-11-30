@@ -19,16 +19,16 @@ class Profile extends Component {
             userJoined: []
         };
 
-        this.getUserDataCreate = this.getUserDataCreate.bind(this);
+        this.getUserCreate = this.getUserCreate.bind(this);
         this.getJoinedEvents = this.getJoinedEvents.bind(this);
     }
 
     componentWillMount() {
-        this.getUserDataCreate();
+        this.getUserCreate();
         this.getJoinedEvents();
     }
 
-    getUserDataCreate() {
+    getUserCreate() {
         this.props.userEvents().then((resp) => {
             this.setState({
                 firstName: resp.payload.data.profile.user.name.givenName,
@@ -71,7 +71,7 @@ class Profile extends Component {
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} renderList={this.getUserDataCreate}/>
+                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} renderList={this.getUserCreate}/>
                                     </div>
                                 </div>
                             </div>
