@@ -16,7 +16,6 @@ class ConfirmationModalJoin extends Component {
     }
 
     render() {
-        console.log("PROPS FOR CONFIRM JOIN EVENT MODAL: ", this.props);
         const {showModal, confirmStatus} = this.props;
         const status = {
             joinStatus: null,

@@ -7,22 +7,6 @@ import MeisterTask from '../../assets/images/meistertask.png';
 import Logo from '../../assets/images/logo.png';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            // toggleTech: true
-        };
-    
-        // this.clickHandler = this.clickHandler.bind(this);
-    }
-    
-    // clickHandler() {
-    //     this.setState(prevState => ({
-    //         toggleTech: !prevState.toggleTech
-    //     }));
-    // }
-
     render() {
         return (
             <div className="container">
@@ -61,9 +45,7 @@ class Home extends Component {
     
                 <div className="info col-sm-4 col-xs-12">
                     <h2>Tech Stack</h2>
-                    {/* onClick={this.clickHandler} style={{cursor: 'pointer', textAlign: 'center'}} */}
                     <hr style={{borderTop: '1px solid black'}}/>
-                    {/* style={this.state.toggleTech ? {display: 'none'} : {height: 'auto'}} */}
                     <div>
                         <div className="col-sm-12 techCategory">
                             <h4>Front End</h4>

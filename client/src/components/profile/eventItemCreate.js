@@ -26,9 +26,7 @@ class EventDetails extends Component {
 
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
-        console.log('More info button clicked');
         const {info} = this.props;
-        console.log('event location: ', info.location);
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
@@ -37,13 +35,11 @@ class EventDetails extends Component {
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
-        console.log('coordinates: ', this.state.coordinates);
         this.toggleModal();
         this.singleMap();
     }
 
     singleMap() {
-        console.log('SINGLE MAP CALLED', document.getElementById('singleMap'));
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('singleMap'), {
             zoom: 14,
@@ -67,10 +63,8 @@ class EventDetails extends Component {
     deleteUserEvent() {
         const {info} = this.props;
 
-        console.log('delete button was clicked');
         this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
-            console.log("delete info: ,", info)
             this.props.history.push('/profile');
         });
     }
@@ -87,31 +81,28 @@ class EventDetails extends Component {
         var date = this.state.info.date;
         var time = this.state.info.time;
         var d = new Date(`${date} " " ${ time}`);
-        var hh = d.getHours();
-        var m = d.getMinutes();
-        var dd = "AM";
-        var h = hh;
-        if (h >= 12) {
-          h = hh - 12;
-          dd = "PM";
+        var hr24 = d.getHours();
+        var min = d.getMinutes();
+        var clock = "AM";
+        var hr12 = hr24;
+        if (hr12 >= 12) {
+          hr12 = hr24 - 12;
+          clock = "PM";
         }
-        if (h == 0) {
-          h = 12;
+        if (hr12 == 0) {
+          hr12 = 12;
         }
-        m = m < 10 ? "0" + m : m;
+        min = min < 10 ? "0" + min : min;
       
-        var pattern = new RegExp("0?" + hh + ":" + m);
+        var pattern = new RegExp("0?" + hr24 + ":" + min);
       
-        var replacement = h + ":" + m;
-        replacement += " " + dd;
+        var replacement = hr12 + ":" + min;
+        replacement += " " + clock;
         return replacement;
     }
 
     render() {
         const {info} = this.props;
-        console.log('info passed down FOR CREATE: ', this.state.info);
-        const display = {display: 'block'}
-        const hide = {display: 'none'}
 
         return (
             <div className="col-sm-12 col-xs-12 singleItem">

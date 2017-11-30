@@ -25,14 +25,10 @@ class EventDetails extends Component {
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
-
-        this.testFunction = this.testFunction.bind(this);
     }
 
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
-        console.log('More info button clicked');
-        console.log('event location: ', this.state.location);
         axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
@@ -41,13 +37,11 @@ class EventDetails extends Component {
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
-        console.log('coordinates: ', this.state.coordinates);
         this.toggleModalDetails();
         this.singleMap();
     }
 
     singleMap() {
-        console.log('SINGLE MAP CALLED', document.getElementById('singleMap'));
         const uluru = this.state.coordinates;
         const map = new google.maps.Map(document.getElementById('singleMap'), {
             zoom: 14,
@@ -69,13 +63,10 @@ class EventDetails extends Component {
     }
 
     toggleModalConf(message) {
-        console.log('this is the message', message);
         this.setState({
             showModalConf: !this.state.showModalConf,
             modalMessageConfirm: message
         })
-        console.log("confirmation modal state: ", this.state.showModalConf);
-        console.log("confirmation modal message: ", this.state.modalMessageConfirm);
     }
 
     convertDate() {
@@ -90,29 +81,28 @@ class EventDetails extends Component {
         var date = this.state.info.date;
         var time = this.state.info.time;
         var d = new Date(`${date} " " ${ time}`);
-        var hh = d.getHours();
-        var m = d.getMinutes();
-        var dd = "AM";
-        var h = hh;
-        if (h >= 12) {
-          h = hh - 12;
-          dd = "PM";
+        var hr24 = d.getHours();
+        var min = d.getMinutes();
+        var clock = "AM";
+        var hr12 = hr24;
+        if (hr12 >= 12) {
+          hr12 = hr24 - 12;
+          clock = "PM";
         }
-        if (h == 0) {
-          h = 12;
+        if (hr12 == 0) {
+          hr12 = 12;
         }
-        m = m < 10 ? "0" + m : m;
+        min = min < 10 ? "0" + min : min;
       
-        var pattern = new RegExp("0?" + hh + ":" + m);
+        var pattern = new RegExp("0?" + hr24 + ":" + min);
       
-        var replacement = h + ":" + m;
-        replacement += " " + dd;
+        var replacement = hr12 + ":" + min;
+        replacement += " " + clock;
         return replacement;
     }
 
     userJoinEvent() {
         const self = this;
-        console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
             if (response.payload.data.success === true) {
@@ -127,15 +117,9 @@ class EventDetails extends Component {
         });
     }
 
-    testFunction() {
-        this.toggleModalConf("error2");
-    }
-
     render() {
         const {info} = this.props;
         const {isLoggedIn} = this.state;
-        console.log('confrim status IN EVENT ITEM: ', this.state.modalMessageConfirm);
-        // console.log('info passed down: ', info);
         
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
@@ -147,7 +131,6 @@ class EventDetails extends Component {
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
                     <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
-                    <button onClick={this.testFunction} className="col-sm-12 btn btn-primary" type="button">MODAL</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
                 <ConfirmationModalJoin confirmStatus={this.state.modalMessageConfirm} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>

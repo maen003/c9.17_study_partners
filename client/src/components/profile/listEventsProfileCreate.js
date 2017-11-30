@@ -14,8 +14,6 @@ class EventList extends Component {
     }
 
     render() { 
-        console.log('LIST EVENTS CREATED- props: ', this.props);
-        console.log('ALL USER CREATED EVENTS: ', this.props.createdEvents);
         const arrayCheck = this.props.createdEvents;
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.createdEvents;

@@ -106,7 +106,6 @@ class CreateEvent extends Component {
         const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
         console.log('form values: ', formData);
         this.props.createEvent(formData).then(function(resp){
-            console.log('add events successful');
             console.log(resp);
             reset();
             self.toggleModal("success");
@@ -121,7 +120,6 @@ class CreateEvent extends Component {
 
 
     render() {
-        // console.log('props: ', this.props);
         const {handleSubmit, reset} = this.props;
         const {isLoggedIn} = this.state;
 
