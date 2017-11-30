@@ -22,7 +22,7 @@
 }
 
 .modal-body {
-    height: 93%;
+    height: 82%;
 }
 
 .event-info{
@@ -49,9 +49,6 @@
         height: 45vmin;
         width: 100%;
         border: 1px solid #428bca;
-        position: absolute;
-        top: 50%;
-        left: 0;
     }
 }
 

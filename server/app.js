@@ -332,9 +332,8 @@ app.post('/join_events', function (req, res){
                     // console.log("Le response:", res);
                     console.log("Donde esta la pizza", res);
                     function insertUserIntoEvent() {
-                            if (results.length<req.body.max){
                                 connection.query(
-                                    `INSERT INTO joined_events (facebookID, event_id ) VALUES ( "${req.session.passport.user.id}", "${req.body.event_id}") ON DUPLICATE KEY UPDATE facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                                    `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
                                         const output = {
                                             success: true,
                                             data: results
@@ -342,14 +341,10 @@ app.post('/join_events', function (req, res){
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
                                         res.end(JSON.stringify(output));
                                         console.log("Donde esta la pizza", results);
-                                        if (results.insertId == 0) {
-                                            console.log("You have joined this event already")
-                                        }
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
                                     // console.log("The event id is: ", req.payload.data);
                                 )
-                            }
                         }
                     console.log("Le response body:", res.body);
                     if (err) throw err;
@@ -387,12 +382,20 @@ app.post('/join_events', function (req, res){
                         //End Nodemailer
                     }
                     else if (results.length !==0 && results.length < req.body.max) {
-                        insertUserIntoEvent();
+                        connection.query(
+                            `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}" AND facebookId = "${req.session.passport.user.id}"`, function (err, results){
+                                if (results.length == 0) {
+                                    insertUserIntoEvent();
+                                }
+                                else {
+                                    console.log("Duplicate results:", results);
+                                    res.end('duplicate');
+                                }
+                            }
+                            )
                     }
                     else {
                         console.log("The event has been filled");
-                        console.log("Full event:", res);
-                        console.log("No space:", req);
                         res.end("max")
                     }
                     // const parsedResults = JSON.parse(JSON.stringify(results));

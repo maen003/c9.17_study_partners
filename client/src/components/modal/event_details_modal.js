@@ -12,21 +12,12 @@ class DetailsModal extends Component {
         }
 
         this.toggleModal = this.props.toggleModal; /*passed by prop*/
-        this.modalClickDetect = this.modalClickDetect.bind(this);
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
             showModal: nextProps.showModal
         })
-    }
-
-    modalClickDetect(event) {
-        if (document.getElementById("modalBody").contains(event.target)) {
-            console.log('clicked inside modal');
-        } else {
-            console.log('clicked outside modal');
-        }
     }
 
     convertDate() {
@@ -41,29 +32,28 @@ class DetailsModal extends Component {
         var date = this.state.details.date;
         var time = this.state.details.time;
         var d = new Date(`${date} " " ${ time}`);
-        var hh = d.getHours();
-        var m = d.getMinutes();
-        var dd = "AM";
-        var h = hh;
-        if (h >= 12) {
-          h = hh - 12;
-          dd = "PM";
+        var hr24 = d.getHours();
+        var min = d.getMinutes();
+        var clock = "AM";
+        var hr12 = hr24;
+        if (hr12 >= 12) {
+          hr12 = hr24 - 12;
+          clock = "PM";
         }
-        if (h == 0) {
-          h = 12;
+        if (hr12 == 0) {
+          hr12 = 12;
         }
-        m = m < 10 ? "0" + m : m;
+        min = min < 10 ? "0" + min : min;
       
-        var pattern = new RegExp("0?" + hh + ":" + m);
+        var pattern = new RegExp("0?" + hr24 + ":" + min);
       
-        var replacement = h + ":" + m;
-        replacement += " " + dd;
+        var replacement = hr12 + ":" + min;
+        replacement += " " + clock;
         return replacement;
     }
 
     render() { 
         const {showModal, details} = this.state;
-
         if(!showModal){
             return null;
         }
@@ -90,8 +80,8 @@ class DetailsModal extends Component {
                             </div>
                             <div className="singleMap col-sm-6 col-xs-12" id="singleMap"></div>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                        <div className="modal-footer col-sm-12 col-xs-12">
+                            <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleModal}>Close</button>
                         </div>
                     </div>
                 </div>

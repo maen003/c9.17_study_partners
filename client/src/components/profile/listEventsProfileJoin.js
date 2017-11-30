@@ -14,8 +14,6 @@ class EventList extends Component {
     }
 
     render() { 
-        console.log('LIST EVENTS - props: ', this.props);
-        console.log('ALL USER JOINED EVENTS: ', this.props.joinedEvents);
         const arrayCheck = this.props.joinedEvents;
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.joinedEvents;

@@ -42,7 +42,6 @@ class JoinEvent extends Component {
     zipcode(event) {
         event.preventDefault();
         const {value} = event.target;
-        //console.log('zipcode: ', value);
         this.setState({
             zipcode: value
         })
@@ -50,7 +49,6 @@ class JoinEvent extends Component {
 
     renderMapAfterSubmit(){
         this.handleFormSubmit();
-        //console.log('zipcode input focus changed', this.state.zipcode);
         if(this.state.zipcode === null) {
             this.joinMapOnLoad();
         } else {
@@ -63,15 +61,11 @@ class JoinEvent extends Component {
         this.setState({
             coords: response.data.results[0].geometry.location
         });
-        //console.log('zipcode coords: ', this.state.zipcode);
         this.joinMap();
     }
 
     joinMap() {
         this.props.getAll().then((response) => {
-            //console.log("data: ", response.payload.data.data);
-            //console.log("data coords: ", response.payload.data.data[0].coordinates);
-
             if(this.state.filterValues.length < 1) {
                 const map = new google.maps.Map(document.getElementById('joinMap'), {
                     zoom: 10,
@@ -171,10 +165,7 @@ class JoinEvent extends Component {
 
     /* checkboxes */
     handleFormSubmit() {
-        // = formSubmitEvent => 
-        const filterCheckbox = [];
-        // formSubmitEvent.preventDefault();
-    
+        const filterCheckbox = [];    
         for (const checkbox of this.selectedCheckboxes) {
             filterCheckbox.push(checkbox);
         }
@@ -203,9 +194,7 @@ class JoinEvent extends Component {
         filterCheck.map(this.createCheckbox)
     )
 
-    render() {
-        console.log('filter values: ', this.state.filterValues);
-        
+    render() {        
         return (
             <div className="container">
                 <div className="filterContainer col-sm-8 col-xs-12">

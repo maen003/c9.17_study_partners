@@ -30,7 +30,6 @@ class Profile extends Component {
 
     getUserDataCreate() {
         this.props.userEvents().then((resp) => {
-            console.log('response for user CREATED: ', resp);
             this.setState({
                 firstName: resp.payload.data.profile.user.name.givenName,
                 lastName: resp.payload.data.profile.user.name.familyName,
@@ -38,13 +37,11 @@ class Profile extends Component {
                 photo: resp.payload.data.profile.user.photos[0].value,
                 userCreated: resp.payload.data.data
             });
-            console.log(this.props);
         })
     }
 
     getJoinedEvents() {
         this.props.getProfileJoin().then((resp) => {
-            console.log('response for events joined: ', resp);
             this.setState({
                 userJoined: resp.payload.data.data
             })
@@ -53,8 +50,7 @@ class Profile extends Component {
 
     render() {
         const { firstName, lastName, contact, photo } = this.state;
-        console.log('props', this.props)
-        console.log('events: ', this.props.events)
+
         return (
             <div className="container">
                 <div className="row">
