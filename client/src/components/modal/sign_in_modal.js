@@ -39,7 +39,7 @@ class SignInModal extends Component {
                             <FacebookLogin/>  
                         </div>
                         <div className="modal-footer col-sm-12 col-xs-12">
-                            <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleModal}>Close</button>
+                            <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleSignInModal}>Close</button>
                         </div>
                     </div>
                 </div>
