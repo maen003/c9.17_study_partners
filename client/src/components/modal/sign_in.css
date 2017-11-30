@@ -9,7 +9,7 @@
     z-index: 1000;
 }
 
-.modal-content {
+.signinContent {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
     margin: auto;
     padding: 20px;
@@ -17,17 +17,26 @@
     height: 50%;
 }
 
-.modal-dialog {
+.signinDialog {
     width: 60vmin;
     margin-top: 10%;
 }
 
-.modal-body {
-    height: 70%;
+.signinBody {
+    height: 63%;
 }
 
 @media screen and (max-width: 768px) {
-    .modal-dialog {
+    .signinDialog {
         margin: auto;
+        width: 85vmin;
+    }
+
+    .signinBody {
+        height: 50%;
+    }
+
+    .signinContent {
+        height: 65vmin;
     }
 }

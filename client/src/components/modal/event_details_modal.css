@@ -9,15 +9,11 @@
     z-index: 1000;
 }
 
-.modal-content {
+.detailsContent {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
     margin: auto;
     padding: 20px;
     background-color: white;
-    height: 70vmin;
-}
-
-.modalBody {
     height: 73vmin;
 }
 
@@ -32,18 +28,27 @@
     border: 1px solid #428bca;
 }
 
-.modal-dialog {
-    width: 100vmin;
+.detailsDialog {
+    width: 120vmin;
     margin-top: 3%;
 }
 
+.detailsBody {
+    height: 55vmin;
+}
+
 @media screen and (max-width: 768px) {
-    .modal-dialog {
+    .detailsDialog {
         width: 100%;
+        margin-top: 1%;
     }
 
-    .modalBody {
-        height: 157vmin;
+    .detailsContent {
+        height: 153vmin;
+    }
+
+    .detailsBody {
+        height: 81%;
     }
 
     #singleMap {

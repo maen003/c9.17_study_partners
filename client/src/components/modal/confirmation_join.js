@@ -41,13 +41,13 @@ class ConfirmationModalJoin extends Component {
 
         return (
             <div className={`modal confirmModal ${showModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content">
+                <div className="modal-dialog confirmDialog">
+                    <div className="modal-content confirmContent">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">{status.statusHeader}</h4>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body confirmBody">
                             <p>{status.joinStatus}</p>
                         </div>
                         <div className="modal-footer col-sm-12 col-xs-12">
