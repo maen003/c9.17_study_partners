@@ -40,7 +40,7 @@ class EventDetails extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
-        this.toggleModal();
+        this.toggleModalDetails();
         this.singleMap();
     }
 

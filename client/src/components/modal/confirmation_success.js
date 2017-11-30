@@ -11,7 +11,7 @@ class ConfirmationModal extends Component {
             confirmStatus: this.props.confirmStatus
         }
 
-        this.toggleModal = this.props.toggleModal; /*passed by prop*/
+        this.toggleModal = this.props.toggleModal;
     }
     
     componentWillReceiveProps(nextProps){
@@ -38,7 +38,7 @@ class ConfirmationModal extends Component {
                             </div>
                             <div className="modal-body">
                                 <p>Your event has been created! A confirmation email will be sent within the hour.</p><br/>
-                                <p>You can check the event you created on your profile or the Join page.</p>
+                                <p>You can check the event you created in your profile or the Join page.</p>
                             </div>
                         </div>
                     </div>
