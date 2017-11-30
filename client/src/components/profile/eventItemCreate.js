@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin, getAll} from '../../actions';
+import {Link} from 'react-router-dom';
+import {deleteEvent, } from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
-import './eventItem.css';
+import './eventItemProfile.css';
 
 class EventDetails extends Component {
     constructor (props) {
@@ -13,10 +14,10 @@ class EventDetails extends Component {
         this.state = {
             showModal: false,
             info: this.props.info
-        }
+        };
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.userJoinEvent = this.userJoinEvent.bind(this);
+        this.deleteUserEvent = this.deleteUserEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
@@ -26,8 +27,9 @@ class EventDetails extends Component {
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
         console.log('More info button clicked');
-        console.log('event location: ', this.state.location);
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+        const {info} = this.props;
+        console.log('event location: ', info.location);
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
@@ -62,6 +64,17 @@ class EventDetails extends Component {
         })
     }
 
+    deleteUserEvent() {
+        const {info} = this.props;
+
+        console.log('delete button was clicked');
+        this.props.deleteEvent(info).then(function(response){
+            console.log('response: ', response.payload.data);
+            console.log("delete info: ,", info)
+            this.props.history.push('/profile');
+        });
+    }
+
     convertDate() {
         var date = this.state.info.date;
         var time = this.state.info.time;
@@ -94,20 +107,12 @@ class EventDetails extends Component {
         return replacement;
     }
 
-    userJoinEvent() {
-        console.log('You joined this event');
-        this.props.userJoin(this.state.info).then(function(response){
-            console.log('response from eventItem: ', this);
-            console.log('le response: ', response);
-            console.log('la informacion: ', info);
-        });
-    }
-
     render() {
         const {info} = this.props;
-        const {isLoggedIn} = this.state;
-        // console.log('info passed down: ', info);
-        
+        console.log('info passed down FOR CREATE: ', this.state.info);
+        const display = {display: 'block'}
+        const hide = {display: 'none'}
+
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
                 <div className="col-sm-12">
@@ -116,8 +121,8 @@ class EventDetails extends Component {
                     <p>{`On ${this.convertDate()} at ${this.convertTime()}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
+                    <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
+                    <button onClick={this.deleteUserEvent} className="col-sm-4 btn btn-danger infoButton" type="button">Delete Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
@@ -125,4 +130,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin, getAll})(EventDetails);
+export default connect(null, {deleteEvent})(EventDetails);

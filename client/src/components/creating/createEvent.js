@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {createEvent} from '../../actions';
+import {createEvent, userAuth} from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
 
@@ -14,7 +14,8 @@ class CreateEvent extends Component {
         this.state = {
             coordinates: null,
             showModal: false,
-            modalMessage: null
+            modalMessage: null,
+            isLoggedIn: false
         };
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -76,6 +77,19 @@ class CreateEvent extends Component {
         window.addEventListener('load', this.createMapOnLoad);
         this.createMapOnLoad();
     }
+    componentWillMount() {
+        this.checkLogin();
+    }
+    checkLogin() {
+        this.props.userAuth().then((resp) => {
+            console.log('response: ', resp);
+            this.setState({
+                isLoggedIn: resp.payload.data.isLoggedIn
+            })
+        }).catch((resp) => {
+            console.log("This is the error", resp);
+        })
+    }
 
     // componentDidUpdate() {
     //     this.createMapOnLoad();
@@ -110,9 +124,11 @@ class CreateEvent extends Component {
         })
     }
 
+
     render() {
         // console.log('props: ', this.props);
         const {handleSubmit, reset} = this.props;
+        const {isLoggedIn} = this.state;
 
         return (
             <div className="container">
@@ -160,7 +176,12 @@ class CreateEvent extends Component {
                         <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..."/>
                         <div className="bottons col-sm-12 col-xs-12">
                             <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
-                            <button className="form-group btn btn-success submitForm">Create Event</button>
+                            {
+                                isLoggedIn ? 
+                                (<button className="form-group btn btn-success submitForm">Create Event</button>)
+                                :
+                                (<button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>)
+                            }
                         </div>
                     </form>
                     <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
@@ -206,4 +227,4 @@ CreateEvent = reduxForm({
     validate: validation
 })(CreateEvent);
 
-export default connect(null, {createEvent})(CreateEvent);
+export default connect(null, {createEvent, userAuth})(CreateEvent);
