@@ -394,37 +394,6 @@ app.post('/join_events', function (req, res){
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
-                                //Start Nodemailer: Email for Event JOINED
-                                console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
-                                const userEmail = req.session.passport.user._json.email;
-                                const userName = req.session.passport.user._json.first_name;
-                                const mailOptions = {
-                                    from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
-                                    to: `${userEmail}`,
-                                    subject: 'Study Group Joined!',
-                                    html:   `
-                <div style='background-color: white; text-align: center; font-family: tahoma'>
-                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                <hr>
-                <div style='text-align: left'>
-                    <h2>Hi, ${userName}! You have joined a study group!</h2>
-                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
-                    <p>To view more details about the event you've joined, check out your profile page <a href="dev.michaelahn.solutions/profile">here</a>.</p>
-                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
-                </div>
-                </div>
-                    `
-                                };
-
-                                transporter.sendMail(mailOptions, (error, info) => {
-                                    if (error) {
-                                        console.log('Error: ', error);
-                                    } else {
-                                        console.log('Email sent successfully' + info.response);
-                                    }
-                                });
-                                //End Nodemailer
                             }
                         })
                     }
@@ -465,6 +434,102 @@ app.get('/user_joined_events', function (req,res){
     }
 
 );
+
+//Leaving Events from Profile Page
+app.post('/leave_event', function (req, res){
+    console.log("You have left the event!");
+    if (req.session.passport !== undefined){
+        const connection = mysql.createConnection(credentials);
+
+        connection.connect(() => {
+            // console.log("Joining events connected", req);
+            // console.log("PASSPORT: ", req.session.passport.user.id);
+            // console.log("BODY: ", req.body);
+            // console.log("EVENT_ID: ", req.body.event_id);
+            // console.log("PAYLOAD:", req.payload);
+            // console.log("NUMBERS:", req.body.max);
+
+            connection.query(
+                `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
+                    // console.log("Le results:", results);
+                    // console.log("Le response:", res);
+                        function deleteUserFromEvent() {
+                            if (results.length<req.body.max){
+                                connection.query(
+                                    `DELETE FROM joined_events WHERE facebookID = "${req.session.passport.user.id}" AND event_id = "${req.body.event_id}"`, function (err, results) {
+                                        const output = {
+                                            success: true,
+                                            data: results
+                                        };
+                                        console.log("User", req.session.passport.user.id, "has left the event", req.body.event_id);
+                                        res.end(JSON.stringify(output));
+                                    }
+                                    // console.log("the fb id is: ", req.session.passport.user.id);
+                                    // console.log("The event id is: ", req.payload.data);
+                                )
+                            }
+                        }
+                    // console.log("Le response body:", res.body);
+                    if (err) throw err;
+                    if (results.length == 0) {
+                        deleteUserFromEvent();
+                        //Start Nodemailer: Email for LEAVING Event
+                        console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
+                        const userEmail = req.session.passport.user._json.email;
+                        const userName = req.session.passport.user._json.first_name;
+                        const mailOptions = {
+                            from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
+                            to: `${userEmail}`,
+                            subject: 'You Left A Study Group!',
+                            html:   `
+                            <div style='background-color: white; text-align: center; font-family: tahoma'>
+                            <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                            <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                            <hr>
+                            <div style='text-align: left'>
+                                <h2>You have left ${req.body.title}!</h2>
+                                <p>Your study buddies are sad to see you go :( Hope to see you in another group!</p>
+                                <p>If this was a mistake, rejoin the group before it fills up! Join again by clicking 'Join' on the event <a href="dev.michaelahn.solutions/join-event">here</a>.</p>
+                                </div>
+                            </div>
+                    `
+                        };
+
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                console.log('Error: ', error);
+                            } else {
+                                console.log('Email sent successfully' + info.response);
+                            }
+                        });
+                        //End Nodemailer
+                    }
+                    // const parsedResults = JSON.parse(JSON.stringify(results));
+                    // const map = Array.prototype.map;
+                    //     console.log("The events log:", parsedResults);
+                    //     console.log("The user who joined:", req.session.passport.user.id);
+                    // function checkDuplicates() {
+                    //     map.call(parsedResults, function (events){
+                    //         if (events.facebookID == req.session.passport.user.id){
+                    //             console.log("This user has already joined this event");
+                    //             console.log("The events log:", events);
+                    //             console.log("The user who joined:", req.session.passport.user.id);
+                    //         }
+                    //         else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
+                    //             insertUserIntoEvent();
+                    //         }
+                    //     })
+                    // }
+                    // checkDuplicates();
+                }
+            )
+
+        });
+
+    } else {
+            console.log('***** ERROR: user must log into Facebook *****');
+    }
+})
 
 // BEGIN ROUTING FOR PASSPORT AUTH
 app.get('/',
