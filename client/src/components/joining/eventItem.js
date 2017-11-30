@@ -115,16 +115,14 @@ class EventDetails extends Component {
         console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
-            console.log('Then axios call:');
             if (response.payload.data.success === true) {
                 self.toggleModalConf("success");
-            } else if (response.payload === 'duplicate') {
+            } else if (response.payload.data === 'duplicate') {
                 self.toggleModalConf("error1");
-            } else if (response.payload === 'max') {
+            } else if (response.payload.data === 'max') {
                 self.toggleModalConf("error2");
             }
         }).catch((err) => {
-            console.log('ERROR JOIN EVENT:', err);
             self.toggleModalConf("error");
         });
     }
