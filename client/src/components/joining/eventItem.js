@@ -25,6 +25,8 @@ class EventDetails extends Component {
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
+
+        this.testFunction = this.testFunction.bind(this);
     }
 
     /////////////////////////MAP////////////////////////
@@ -67,6 +69,7 @@ class EventDetails extends Component {
     }
 
     toggleModalConf(message) {
+        console.log('this is the message', message);
         this.setState({
             showModalConf: !this.state.showModalConf,
             modalMessageConfirm: message
@@ -113,15 +116,22 @@ class EventDetails extends Component {
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
             console.log('event info for join event action: ', info);
+            console.log('Then axios call:');
             self.toggleModalConf("success");
-        }).catch(() => {
+        }).catch((err) => {
+            console.log('ERROR JOIN EVENT:', err);
             self.toggleModalConf("error");
         });
+    }
+
+    testFunction() {
+        this.toggleModalConf("success");
     }
 
     render() {
         const {info} = this.props;
         const {isLoggedIn} = this.state;
+        console.log('confrim status IN EVENT ITEM: ', this.state.modalMessageConfirm);
         // console.log('info passed down: ', info);
         
         return (
@@ -134,6 +144,7 @@ class EventDetails extends Component {
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
                     <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
+                    <button onClick={this.testFunction} className="col-sm-12 btn btn-primary" type="button">MODAL</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
                 <ConfirmationModalJoin confirmStatus={this.state.modalMessageConfirm} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
