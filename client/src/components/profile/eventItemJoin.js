@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {deleteEvent, } from '../../actions';
+import {leaveEvent} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
@@ -65,7 +65,13 @@ class EventDetails extends Component {
 
 
     cancelJoinEvent() {
+        const {info} = this.props;
+        
         console.log('you are no longer part of this event');
+        this.props.leaveEvent(info).then(function(response){
+            console.log('response: ', response.payload.data);
+            console.log("delete info: ,", info)
+        });
     }
 
     convertDate() {
@@ -123,4 +129,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {deleteEvent})(EventDetails);
+export default connect(null, {leaveEvent})(EventDetails);
