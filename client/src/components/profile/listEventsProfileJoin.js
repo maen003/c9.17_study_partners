@@ -4,7 +4,7 @@ import EventDetails from './eventItemJoin';
 
 const listDiv = {
     overflowY: 'auto',
-    height: '85vmin',
+    height: '77vmin',
     /* border: '1px dashed lightcoral' */
 }
 

@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 
 import './confirmation_join.css';
 
-class ConfirmationModal extends Component {
+class ConfirmationModalJoin extends Component {
     constructor (props) {
         super (props);
-
-        this.state = {
-            showModal: this.props.showModal,
-            confirmStatus: this.props.confirmStatus
-        }
 
         this.toggleModal = this.props.toggleModal;
     }
@@ -20,7 +15,8 @@ class ConfirmationModal extends Component {
         })
     }
 
-    render() { 
+    render() {
+        console.log("PROPS FOR CONFIRM JOIN EVENT MODAL: ", this.props);
         const {showModal, confirmStatus} = this.props;
 
         if(!showModal){
@@ -40,6 +36,9 @@ class ConfirmationModal extends Component {
                                 <p>You have joined this event! A confirmation email will be sent within the hour.</p><br/>
                                 <p>You can check the event you joined in your profile.</p>
                             </div>
+                            <div className="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,6 +56,9 @@ class ConfirmationModal extends Component {
                                 <p>Can not join this event</p>
                                 <p>Check profile to see if you are already registered in this event</p>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,4 +67,4 @@ class ConfirmationModal extends Component {
     }
 }
 
-export default ConfirmationModal;
+export default ConfirmationModalJoin;

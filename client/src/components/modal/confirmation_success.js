@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 
 import './confirmation_success.css';
 
-class ConfirmationModal extends Component {
+class ConfirmationModalCreate extends Component {
     constructor (props) {
         super (props);
-
-        this.state = {
-            showModal: this.props.showModal,
-            confirmStatus: this.props.confirmStatus
-        }
 
         this.toggleModal = this.props.toggleModal;
     }
@@ -40,6 +35,9 @@ class ConfirmationModal extends Component {
                                 <p>Your event has been created! A confirmation email will be sent within the hour.</p><br/>
                                 <p>You can check the event you created in your profile or the Join page.</p>
                             </div>
+                            <div className="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,6 +54,9 @@ class ConfirmationModal extends Component {
                             <div className="modal-body">
                                 <p>Something went wrong. Your event has not been created. Try again!</p>
                             </div>
+                            <div className="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,4 +65,4 @@ class ConfirmationModal extends Component {
     }
 }
 
-export default ConfirmationModal;
+export default ConfirmationModalCreate;

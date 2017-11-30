@@ -103,8 +103,8 @@ class EventDetails extends Component {
     render() {
         const {info} = this.props;
         console.log('info passed down FOR JOIN EVENT USER: ', this.state.info);
-        const display = {display: 'block'}
-        const hide = {display: 'none'}
+        // const display = {display: 'block'}
+        // const hide = {display: 'none'}
 
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
@@ -114,8 +114,8 @@ class EventDetails extends Component {
                     <p>{`On ${this.convertDate()} at ${this.convertTime()}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.cancelJoinEvent} className="col-sm-4 btn btn-warning infoButton" type="button">Leave Event</button>
+                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
+                    <button onClick={this.cancelJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-warning infoButton" type="button">Leave Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
