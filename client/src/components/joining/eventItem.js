@@ -122,6 +122,7 @@ class EventDetails extends Component {
     render() {
         const {info} = this.props;
         const {isLoggedIn} = this.state;
+        console.log('confrim status IN EVENT ITEM: ', this.state.modalMessageConfirm);
         // console.log('info passed down: ', info);
         
         return (
