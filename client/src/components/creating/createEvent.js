@@ -114,7 +114,8 @@ class CreateEvent extends Component {
             const { reset } = this.props;
             const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
             console.log('form values: ', formData);
-        if (formData.coordinates !== 'null'){
+            console.log("these are the coordinates", formData.coordinates);
+        if (formData.coordinates !== "null"){
             this.props.createEvent(formData).then(function (resp) {
                 console.log('add events successful');
                 console.log(resp);
