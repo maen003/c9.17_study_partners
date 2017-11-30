@@ -395,7 +395,7 @@ app.post('/join_events', function (req, res){
                                 res.status(500).send("Duplicate");
                             }
                             else if (results.length>=req.body.max) {
-                                res.status(500).send("Max");
+                                res.status(400).send("Max");
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
