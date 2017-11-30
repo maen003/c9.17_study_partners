@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {userJoin, getAll} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
+import ConfirmationModal from '../modal/confirmation_join';
 
 import './eventItem.css';
 
@@ -11,11 +12,14 @@ class EventDetails extends Component {
         super (props);
 
         this.state = {
-            showModal: false,
-            info: this.props.info
+            showModalDetails: false,
+            info: this.props.info,
+            modalMessage: null,
+            showModalConf: false
         }
 
-        this.toggleModal = this.toggleModal.bind(this);
+        this.toggleModalDetails = this.toggleModalDetails.bind(this);
+        this.toggleModalConf = this.toggleModalConf.bind(this);
         this.userJoinEvent = this.userJoinEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
@@ -56,9 +60,16 @@ class EventDetails extends Component {
     }
     /////////////////////////MAP////////////////////////
 
-    toggleModal(event) {
+    toggleModalDetails(event) {
         this.setState({
-            showModal: !this.state.showModal
+            showModalDetails: !this.state.showModalDetails
+        })
+    }
+
+    toggleModalConf(message) {
+        this.setState({
+            showModalConf: !this.state.showModalConf,
+            modalMessage: message
         })
     }
 
@@ -95,11 +106,15 @@ class EventDetails extends Component {
     }
 
     userJoinEvent() {
+        const self = this;
         console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from eventItem: ', this);
             console.log('le response: ', response);
             console.log('la informacion: ', info);
+            self.toggleModalConf("success");
+        }).catch(() => {
+            self.toggleModalConf("error");
         });
     }
 
@@ -119,7 +134,8 @@ class EventDetails extends Component {
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
                     <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
                 </div>
-                <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
+                <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
+                <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
             </div>
         );
     }

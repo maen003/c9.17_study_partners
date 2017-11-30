@@ -65,7 +65,6 @@ class CreateEvent extends Component {
     }
 
     /* Map Display on Load */
-
     createMapOnLoad() {
         const map = new google.maps.Map(document.getElementById('createMap'), {
             zoom: 3,
@@ -77,9 +76,12 @@ class CreateEvent extends Component {
         window.addEventListener('load', this.createMapOnLoad);
         this.createMapOnLoad();
     }
+    /////////////////////////
+
     componentWillMount() {
         this.checkLogin();
     }
+
     checkLogin() {
         this.props.userAuth().then((resp) => {
             console.log('response: ', resp);
@@ -90,13 +92,6 @@ class CreateEvent extends Component {
             console.log("This is the error", resp);
         })
     }
-
-    // componentDidUpdate() {
-    //     this.createMapOnLoad();
-    //     console.log('hi');
-    // }
-
-    /////////////////////////
 
     toggleModal(message) {
         this.setState({
