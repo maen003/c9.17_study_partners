@@ -134,6 +134,7 @@ app.get('/events',
                         success: true,
                         data: results
                     };
+                    console.log('KRYSTAL output in the the /events', output);
                     res.end(JSON.stringify(output));
                 });
             console.log('query has started')
@@ -158,6 +159,7 @@ app.get('/user_events',function(req, res){
                         data: results,
                         profile: req.session.passport
                     };
+                    console.log('KRYSTAL output in the the /user_events', output);                    
                     res.end(JSON.stringify(output));
                 });
             console.log('query has started')
@@ -470,9 +472,10 @@ app.get('/user_joined_events', function (req,res){
         console.log("DUH response:", res);
         connection.connect(() => {
             connection.query(
-                `SELECT joined_events.*, events.*
-                FROM joined_events
-                JOIN events on joined_events.event_id = events.event_id
+                `SELECT joined_events.*, events.*, events_subjects.id, events_subjects.subject AS e_s_subj
+                FROM events
+                INNER JOIN joined_events on joined_events.event_id = events.event_id
+                INNER JOIN events_subjects on events_subjects.id = events.subject
                 WHERE joined_events.facebookID = ${req.session.passport.user.id} AND isActive = 1`, function (err, results) {
                     const output = {
                         success: true,
