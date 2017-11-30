@@ -113,8 +113,8 @@ class EventDetails extends Component {
                     <p>{`On ${this.convertDate()} at ${this.convertTime()}`}</p>
                 </div>
                 <div className="col-sm-12 buttonContainer">
-                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.cancelJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-warning infoButton" type="button">Leave Event</button>
+                    <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 col-xs-6 btn btn-primary" type="button">More Info</button>
+                    <button onClick={this.cancelJoinEvent} className="col-sm-4 col-sm-offset-3 col-xs-6 btn btn-warning" type="button">Leave Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>

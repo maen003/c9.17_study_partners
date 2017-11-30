@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './confirmation_join.css';
+import './confirmation_modal.css';
 
 class ConfirmationModalJoin extends Component {
     constructor (props) {
@@ -50,8 +50,8 @@ class ConfirmationModalJoin extends Component {
                         <div className="modal-body">
                             <p>{status.joinStatus}</p>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-default" onClick={this.toggleModal}>Close</button>
+                        <div className="modal-footer col-sm-12 col-xs-12">
+                            <button type="button" className="btn btn-default col-sm-12 col-xs-12" onClick={this.toggleModal}>Close</button>
                         </div>
                     </div>
                 </div>
