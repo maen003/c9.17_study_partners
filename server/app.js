@@ -340,6 +340,7 @@ app.post('/join_events', function (req, res){
                                         };
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
                                         res.end(JSON.stringify(output));
+                                        console.log("Donde esta la pizza", res)
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
                                     // console.log("The event id is: ", req.payload.data);
@@ -349,7 +350,6 @@ app.post('/join_events', function (req, res){
                     console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length == 0) {
-                        console.log(res);
                         insertUserIntoEvent();
                         //Start Nodemailer: Email for Event JOINED
                         console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
