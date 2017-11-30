@@ -391,6 +391,7 @@ app.post('/join_events', function (req, res){
                     }
                     else {
                         console.log("The event has been filled");
+                        console.log("Full event:", results)
                         res.end("max")
                     }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
