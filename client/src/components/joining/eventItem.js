@@ -14,7 +14,7 @@ class EventDetails extends Component {
         this.state = {
             showModalDetails: false,
             info: this.props.info,
-            modalMessage: null,
+            modalMessageConfirm: null,
             showModalConf: false
         }
 
@@ -69,10 +69,10 @@ class EventDetails extends Component {
     toggleModalConf(message) {
         this.setState({
             showModalConf: !this.state.showModalConf,
-            modalMessage: message
+            modalMessageConfirm: message
         })
         console.log("confirmation modal state: ", this.state.showModalConf);
-        console.log("confirmation modal message: ", this.state.modalMessage);
+        console.log("confirmation modal message: ", this.state.modalMessageConfirm);
     }
 
     convertDate() {
@@ -111,7 +111,6 @@ class EventDetails extends Component {
         const self = this;
         console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
-            console.log('response from eventItem: ', this);
             console.log('response from server about join event action: ', response);
             console.log('event info for join event action: ', info);
             self.toggleModalConf("success");
