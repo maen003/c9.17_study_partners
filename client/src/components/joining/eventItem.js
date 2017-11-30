@@ -105,12 +105,12 @@ class EventDetails extends Component {
         const self = this;
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
-            if (response.payload.data.success === true) {
-                self.toggleModalConf("success");
-            } else if (response.payload.data.fillCount === 0) {
+            if (response.payload.data === 'duplicate') {
                 self.toggleModalConf("error1");
             } else if (response.payload.data === 'max') {
                 self.toggleModalConf("error2");
+            } else if (response.payload.data.success === true) {
+                self.toggleModalConf("success");
             }
         }).catch((err) => {
             self.toggleModalConf("error");

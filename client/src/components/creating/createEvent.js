@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {connect} from 'react-redux';
-import {createEvent, userAuth} from '../../actions';
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createEvent, userAuth } from '../../actions';
 import axios from 'axios';
-import ConfirmationModalCreate from '../modal/confirmation_success';
+import ConfirmationModal from '../modal/confirmation_success';
+import SignInModal from '../modal/sign_in_modal';
 
 import './createEvent.css';
 
 class CreateEvent extends Component {
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
 
         this.state = {
             coordinates: null,
@@ -25,25 +26,26 @@ class CreateEvent extends Component {
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.createMap = this.createMap.bind(this);
         this.createMapOnLoad = this.createMapOnLoad.bind(this);
+        this.toggleSignInModal = this.toggleSignInModal.bind(this);
     }
 
-    renderInputText({className, placeholder, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
+    renderInputText({ className, placeholder, input, label, type, meta: { touched, error } }) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
         return (
             <div className={className}>
                 <label>{label}</label>
-                <input {... input} type={type} placeholder={placeholder} className="form-control"/>
-                <p style={{color: 'red'}}>{touched && error}</p>
+                <input {...input} type={type} placeholder={placeholder} className="form-control" />
+                <p style={{ color: 'red' }}>{touched && error}</p>
             </div>
         )
     }
 
     ///////////////////////MAP/////////////////////////
-    renderMapAfterText(location){
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+location.currentTarget.value+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+    renderMapAfterText(location) {
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address=' + location.currentTarget.value + '&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
-    axiosThenFunction(response){
+    axiosThenFunction(response) {
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
@@ -68,7 +70,7 @@ class CreateEvent extends Component {
     createMapOnLoad() {
         const map = new google.maps.Map(document.getElementById('createMap'), {
             zoom: 3,
-            center: {lat: 37.09024, lng: -95.712891}
+            center: { lat: 37.09024, lng: -95.712891 }
         });
     }
 
@@ -83,17 +85,24 @@ class CreateEvent extends Component {
     }
 
     checkLogin() {
+        const isLoggedIn = null;
         this.props.userAuth().then((resp) => {
             console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })
+            if (isLoggedIn) {
+                null
+            } else {
+                this.toggleSignInModal();
+            }
         }).catch((resp) => {
             console.log("This is the error", resp);
         })
     }
 
     toggleModal(message) {
+        console.log('toggling confirm modal');
         this.setState({
             showModal: !this.state.showModal,
             modalMessage: message
@@ -102,10 +111,11 @@ class CreateEvent extends Component {
 
     submitData(values) {
         const self = this;
-        const {reset} = this.props;
-        const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
+        const { reset } = this.props;
+        const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
         console.log('form values: ', formData);
-        this.props.createEvent(formData).then(function(resp){
+        this.props.createEvent(formData).then(function (resp) {
+            console.log('add events successful');
             console.log(resp);
             reset();
             self.toggleModal("success");
@@ -118,16 +128,23 @@ class CreateEvent extends Component {
         })
     }
 
+    toggleSignInModal() {
+        console.log('toggle sign in modal')
+        this.setState({
+            showSignInModal: !this.state.showSignInModal,
+        })
+    }
+
 
     render() {
-        const {handleSubmit, reset} = this.props;
-        const {isLoggedIn} = this.state;
+        const { handleSubmit, reset } = this.props;
+        const { isLoggedIn } = this.state;
 
         return (
             <div className="container">
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
-                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
+                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
                         <div className="col-sm-4 col-xs-12">
                             <label htmlFor="subject">Subject</label>
                             <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
@@ -151,14 +168,14 @@ class CreateEvent extends Component {
                                 <option>> 5 Hours</option>
                             </Field>
                         </div>
-                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min="2" max="100" placeholder="Group Size" label="Max Group Size"/>
-                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
-                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
+                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min="2" max="100" placeholder="Group Size" label="Max Group Size" />
+                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
+                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
-                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx"/>
-                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com"/>
-                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center"/>
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx" />
+                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com" />
+                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center" />
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
@@ -166,18 +183,24 @@ class CreateEvent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..."/>
+                        <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
                         <div className="bottons col-sm-12 col-xs-12">
                             <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
                             {
-                                isLoggedIn ? 
-                                (<button className="form-group btn btn-success submitForm">Create Event</button>)
-                                :
-                                (<button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>)
+                                isLoggedIn ?
+                                    <button className="form-group btn btn-success submitForm">Create Event</button>
+                                    :
+                                    <button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>
                             }
                         </div>
                     </form>
-                    <ConfirmationModalCreate confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
+                    <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal} />
+                    {
+                        isLoggedIn ?
+                            null
+                            :
+                            <SignInModal showSignInModal={this.state.showSignInModal} toggleSignInModal={this.toggleSignInModal} />
+                    }
                 </div>
             </div>
         )
@@ -185,8 +208,8 @@ class CreateEvent extends Component {
 }
 
 function validation(values) {
-    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/
-    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/
+    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/;
+    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/;
     const error = {};
     if (!values.title) {
         error.title = 'Please enter a title';
@@ -220,4 +243,4 @@ CreateEvent = reduxForm({
     validate: validation
 })(CreateEvent);
 
-export default connect(null, {createEvent, userAuth})(CreateEvent);
+export default connect(null, { createEvent, userAuth })(CreateEvent);
