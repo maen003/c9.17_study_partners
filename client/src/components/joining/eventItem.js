@@ -117,7 +117,13 @@ class EventDetails extends Component {
             console.log('response from server about join event action: ', response);
             console.log('event info for join event action: ', this.state.info);
             console.log('Then axios call:');
-            self.toggleModalConf("success");
+            if (response === '') {
+                self.toggleModalConf("success");
+            } else if (response === 'duplicate') {
+                self.toggleModalConf("error1");
+            } else if (response === 'max') {
+                self.toggleModalConf("error2");
+            }
         }).catch((err) => {
             console.log('ERROR JOIN EVENT:', err);
             self.toggleModalConf("error");
