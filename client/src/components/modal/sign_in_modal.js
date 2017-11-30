@@ -28,13 +28,13 @@ class SignInModal extends Component {
         }
         return (
             <div className={`modal signInModal ${showSignInModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content">
+                <div className="modal-dialog signinDialog">
+                    <div className="modal-content signinContent">
                         <div className="modal-header">
                             <button onClick={this.toggleSignInModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">Please Log In</h4>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body signinBody">
                             <p>Please Log in if you would like to create an event.</p>
                             <FacebookLogin/>  
                         </div>

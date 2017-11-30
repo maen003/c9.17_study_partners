@@ -9,20 +9,21 @@
     z-index: 1000;
 }
 
-.modal-content {
+.confirmBody {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
     margin: auto;
     padding: 20px;
     background-color: white;
+    height: 63%;
 }
 
-.modal-dialog {
-    width: 75vmin;
+.confirmDialog {
+    width: 80vmin;
     margin-top: 5%;
 }
 
 @media screen and (max-width: 768px) {
-    .modal-dialog {
+    .confirmDialog {
         margin: auto;
     }
 }

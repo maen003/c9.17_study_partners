@@ -60,13 +60,13 @@ class DetailsModal extends Component {
 
         return (
             <div className={`modal detailsModal ${showModal ? '' : ' hidden'}`} role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content modalBody" id="modalBody">
+                <div className="modal-dialog detailsDialog">
+                    <div className="modal-content detailsContent">
                         <div className="modal-header">
                             <button onClick={this.toggleModal} type="button" className="close">&times;</button>
                             <h4 className="modal-title">{`Details: ${details.title}`}</h4>
                         </div>
-                        <div className="modal-body col-sm-12">
+                        <div className="modal-body detailsBody col-sm-12">
                             <div className="col-sm-6 col-xs-12">
                                 <p><b>Subject: </b>{details.e_s_subj}</p>
                                 <p><b>Max Group Size: </b>{details.max}</p>
