@@ -9,10 +9,6 @@
     z-index: 1000;
 }
 
-.modal-dialog {
-    width: 120vmin;
-}
-
 .modal-content {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .6);
     margin: auto;
@@ -21,8 +17,8 @@
     height: 70vmin;
 }
 
-.modal-body {
-    height: 82%;
+.modalBody {
+    height: 73vmin;
 }
 
 .event-info{
@@ -36,13 +32,18 @@
     border: 1px solid #428bca;
 }
 
+.modal-dialog {
+    width: 100vmin;
+    margin-top: 3%;
+}
+
 @media screen and (max-width: 768px) {
     .modal-dialog {
         width: 100%;
     }
 
-    .modal-content {
-        height: 100%;
+    .modalBody {
+        height: 157vmin;
     }
 
     #singleMap {
