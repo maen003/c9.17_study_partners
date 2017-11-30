@@ -392,10 +392,10 @@ app.post('/join_events', function (req, res){
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
                                 //THIS IS WHERE I CHANGE THE ERROR MODAL
-                                res.status(500).send("User already in this event!");
+                                res.status(500).send(2);
                             }
                             else if (results.length>=req.body.max) {
-                                res.status(500).send("This event is full!");
+                                res.status(500).send(3);
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
