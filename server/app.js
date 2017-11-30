@@ -388,12 +388,11 @@ app.post('/join_events', function (req, res){
                                     insertUserIntoEvent();
                                 }
                                 else {
-                                    console.log("Duplicate results:", results)
+                                    console.log("Duplicate results:", results);
+                                    res.end('duplicate');
                                 }
                             }
-
                             )
-
                     }
                     else {
                         console.log("The event has been filled");
