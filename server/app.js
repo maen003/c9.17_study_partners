@@ -124,7 +124,8 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
         const query = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
-        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1`;
+        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1
+        WHERE facebookID != ${req.session.passport.user.id}`;
 
         connection.connect(() => {
             connection.query(
@@ -214,6 +215,8 @@ app.post('/add_events',
             console.log('got a event request');
 
             //Start Nodemailer: Email for Event CREATED
+            const subjArray = ["Life Sciences", "Visual and Performance Arts", "Liberal Arts", "Engineering and Technology", "Business"];
+            const nodeMailSubj = subjArray[`${req.body.subject}`-1];
             const mailOptions = {
                 from: '"Stubbies: Find Your Study Buddies!" <studies.with.stubbies@gmail.com>',
                 to: `${req.body.email}`,
@@ -229,7 +232,7 @@ app.post('/add_events',
                             <p><b>Where:</b> ${req.body.location}</p>
                             <p><b>Description:</b> ${req.body.description}</p>
                             <p><b>Duration:</b> ${req.body.duration}</p>
-                            <p><b>Subject:</b> ${req.body.subject}</b></p>
+                            <p><b>Subject:</b> ${nodeMailSubj}</b></p>
                             <p><b>Group Size:</b> ${req.body.max}</p>
                             <p><b>Phone Provided:</b> ${req.body.phone}</p>
                             <p><b>Email Provided:</b> ${req.body.email}</p>
@@ -365,6 +368,7 @@ app.post('/join_events', function (req, res){
                 <div style='text-align: left'>
                     <h2>Hi, ${userName}! You have joined a study group!</h2>
                     <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                    <p>To view more details about the event you've joined, check out your profile page <a href="dev.michaelahn.solutions/profile">here</a>.</p>
                     <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
                 </div>
                 </div>
