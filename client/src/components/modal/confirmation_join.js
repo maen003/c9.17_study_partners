@@ -52,7 +52,7 @@ class ConfirmationModalJoin extends Component {
                             <p>{status.joinStatus}</p>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            <button type="button" className="btn btn-default" onClick={this.toggleModal}>Close</button>
                         </div>
                     </div>
                 </div>

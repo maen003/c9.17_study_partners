@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin, getAll} from '../../actions';
+import {userJoin} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 import ConfirmationModalJoin from '../modal/confirmation_join';
 
@@ -116,7 +116,7 @@ class EventDetails extends Component {
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
             console.log('Then axios call:');
-            if (response === '') {
+            if (response.payload.data.success === true) {
                 self.toggleModalConf("success");
             } else if (response === 'duplicate') {
                 self.toggleModalConf("error1");
@@ -130,7 +130,7 @@ class EventDetails extends Component {
     }
 
     testFunction() {
-        this.toggleModalConf("success");
+        this.toggleModalConf("error2");
     }
 
     render() {
@@ -158,4 +158,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin, getAll})(EventDetails);
+export default connect(null, {userJoin})(EventDetails);
