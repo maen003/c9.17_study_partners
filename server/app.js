@@ -394,7 +394,7 @@ app.post('/join_events', function (req, res){
                                 //THIS IS WHERE I CHANGE THE ERROR MODAL
                                 res.writeHead(500,"duplicate")
                             }
-                            else if (results.length>=req.body.max) {
+                            else if (results.length>req.body.max) {
                                 res.writeHead(500,"max");
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
