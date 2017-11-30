@@ -367,6 +367,7 @@ app.post('/join_events', function (req, res){
                                     <div style='text-align: left'>
                                         <h2>Hi, ${userName}! You have joined a study group!</h2>
                                         <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                                        <p>To view more details about the event you've joined, check out your profile page <a href="http://dev.michaelahn.solutions/profile">here</a>.</p>
                                         <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
                                     </div>
                                     </div>
@@ -473,7 +474,7 @@ app.post('/leave_event', function (req, res){
                         <div style='text-align: left'>
                             <h2>You have left ${req.body.title}!</h2>
                             <p>Your study buddies are sad to see you go :( Hope to see you in another group!</p>
-                            <p>If this was a mistake, rejoin the group before it fills up! Join again by clicking 'Join' on the event <a href="dev.michaelahn.solutions/join-event">here</a>.</p>
+                            <p>If this was a mistake, rejoin the group before it fills up! Join again by clicking 'Join' on the event <a href="http://dev.michaelahn.solutions/join-event">here</a>.</p>
                             </div>
                         </div>
                 `
