@@ -522,7 +522,7 @@ app.post('/leave_event', function (req, res){
                         <div style='text-align: left'>
                             <h2>You have left ${req.body.title}!</h2>
                             <p>Your study buddies are sad to see you go :( Hope to see you in another group!</p>
-                            <p>If this was a mistake, rejoin the group before it fills up! Join again by clicking 'Join' on the event <a href="http://dev.michaelahn.solutions/join-event">here</a>.</p>
+                            <p>If this was a mistake, rejoin ${req.body.title} before it fills up! Join again by clicking 'Join' on the event <a href="http://dev.michaelahn.solutions/join-event">here</a>.</p>
                             </div>
                         </div>
                 `
