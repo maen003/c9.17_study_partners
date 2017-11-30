@@ -330,7 +330,8 @@ app.post('/join_events', function (req, res){
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
                     console.log("Le results:", results);
                     // console.log("Le response:", res);
-                        function insertUserIntoEvent() {
+                    console.log("Donde esta la pizza", res);
+                    function insertUserIntoEvent() {
                             if (results.length<req.body.max){
                                 connection.query(
                                     `INSERT INTO joined_events (facebookID, event_id ) VALUES ( "${req.session.passport.user.id}", "${req.body.event_id}") ON DUPLICATE KEY UPDATE facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
@@ -340,7 +341,6 @@ app.post('/join_events', function (req, res){
                                         };
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
                                         res.end(JSON.stringify(output));
-                                        console.log("Donde esta la pizza", res)
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
                                     // console.log("The event id is: ", req.payload.data);
