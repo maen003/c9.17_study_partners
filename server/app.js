@@ -315,6 +315,7 @@ function insertUserIntoEvent() {
                     success: true,
                     data: results
                 };
+                console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
                 res.end(JSON.stringify(output));
             }
             // console.log("the fb id is: ", req.session.passport.user.id);
@@ -346,9 +347,13 @@ app.post('/join_events', function (req, res){
                     if (err) throw err;
                     const parsedResults = JSON.parse(JSON.stringify(results));
                     const map = Array.prototype.map;
+                        console.log("The events log:", parsedResults);
+                        console.log("The user who joined:", req.session.passport.user.id);
                     const checkDuplicates = map.call(parsedResults, function (events){
                         if (events.facebookID == req.session.passport.user.id){
                             console.log("This user has already joined this event");
+                            console.log("The events log:", events);
+                            console.log("The user who joined:", req.session.passport.user.id);
                         } else if (results.length == 0){
                             insertUserIntoEvent();
                         }
