@@ -90,6 +90,9 @@ class DetailsModal extends Component {
                             </div>
                             <div className="singleMap col-sm-6 col-xs-12" id="singleMap"></div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

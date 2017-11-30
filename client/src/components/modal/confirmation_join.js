@@ -40,6 +40,9 @@ class ConfirmationModal extends Component {
                                 <p>You have joined this event! A confirmation email will be sent within the hour.</p><br/>
                                 <p>You can check the event you joined in your profile.</p>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,6 +59,9 @@ class ConfirmationModal extends Component {
                             <div className="modal-body">
                                 <p>Can not join this event</p>
                                 <p>Check profile to see if you are already registered in this event</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
                             </div>
                         </div>
                     </div>
