@@ -349,19 +349,21 @@ app.post('/join_events', function (req, res){
                     const map = Array.prototype.map;
                         console.log("The events log:", parsedResults);
                         console.log("The user who joined:", req.session.passport.user.id);
-                    const checkDuplicates = map.call(parsedResults, function (events){
-                        if (events.facebookID == req.session.passport.user.id){
-                            console.log("This user has already joined this event");
-                            console.log("The events log:", events);
-                            console.log("The user who joined:", req.session.passport.user.id);
-                        } else if (results.length == 0){
-                            insertUserIntoEvent();
-                        }
-                        else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
-                            insertUserIntoEvent();
-                        }
-                    })
-
+                    function checkDuplicates() {
+                        map.call(parsedResults, function (events){
+                            if (events.facebookID == req.session.passport.user.id){
+                                console.log("This user has already joined this event");
+                                console.log("The events log:", events);
+                                console.log("The user who joined:", req.session.passport.user.id);
+                            } else if (results.length == 0){
+                                insertUserIntoEvent();
+                            }
+                            else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
+                                insertUserIntoEvent();
+                            }
+                        })
+                    }
+                    checkDuplicates();
                 }
             )
 
