@@ -46,7 +46,7 @@
 }
 
 .maxSizeNote {
-    color: lightgray;
+    color: gray;
     margin-left: 1.5%;
 }
 
@@ -78,7 +78,7 @@
     }
 
     .maxSizeNote {
-        color: lightgray;
+        color: gray;
         display: inline-block;
         margin: 0 0 10px 5%;
     }
