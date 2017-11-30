@@ -114,7 +114,7 @@ class EventDetails extends Component {
         console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
-            console.log('event info for join event action: ', info);
+            console.log('event info for join event action: ', this.state.info);
             self.toggleModalConf("success");
         }).catch((err) => {
             console.log('ERROR JOIN EVENT:', err);
