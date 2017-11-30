@@ -14,6 +14,7 @@ class EventList extends Component {
     }
 
     render() { 
+        console.log('PROPS FOR CREATE LIST: ', this.props);
         const arrayCheck = this.props.createdEvents;
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.createdEvents;

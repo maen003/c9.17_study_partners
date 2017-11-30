@@ -102,6 +102,7 @@ class EventDetails extends Component {
     }
 
     render() {
+        console.log('PROPS FOR CREATE EVENT ITEM: ', this.props);
         const {info} = this.props;
 
         return (
