@@ -391,7 +391,8 @@ app.post('/join_events', function (req, res){
                     }
                     else {
                         console.log("The event has been filled");
-                        console.log("Full event:", results)
+                        console.log("Full event:", res);
+                        console.log("No space:", req);
                         res.end("max")
                     }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
