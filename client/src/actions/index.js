@@ -79,3 +79,12 @@ export function getProfileJoin() {
         payload: request
     }
 }
+
+export function leaveEvent(eventInfo) {
+    const request = axios.post("http://dev.michaelahn.solutions/leave_event", eventInfo);
+
+    return {
+        type: types.LEAVE_EVENT,
+        payload: request
+    }
+}
