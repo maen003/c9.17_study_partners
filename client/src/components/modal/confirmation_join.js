@@ -36,7 +36,7 @@ class ConfirmationModalJoin extends Component {
                                 <p>You have joined this event! A confirmation email will be sent within the hour.</p><br/>
                                 <p>You can check the event you joined in your profile.</p>
                             </div>
-                            <div class="modal-footer">
+                            <div className="modal-footer">
                                 <button type="button" class="btn btn-default" onClick={this.toggleModal}>Close</button>
                             </div>
                         </div>
