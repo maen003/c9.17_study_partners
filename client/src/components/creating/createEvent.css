@@ -45,51 +45,11 @@
     justify-content: space-around;
 }
 
-/* keyframe animation */
-/* .animateExpandCreate {
-    display: block;
-    animation: expandCreate 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
+.maxSizeNote {
+    color: lightgray;
+    margin-left: 1.5%;
 }
 
-@keyframes expandCreate {
-    0% {
-        height: 0;
-        width: 0;
-    }
-    50% {
-        height: 0;
-        width: 100%;
-    }
-    100% {
-        height: 68vmin;
-        width: 100%;
-    }
-}
-  
-.animateCloseCreate {
-    display: block;
-    animation: closeCreate 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-  
-@keyframes closeCreate {
-    0% {
-        height: 68vmin;
-        width: 100%;
-    }
-    50% {
-        height: 68vmin;
-        width: 0;
-    }
-    100% {
-        height: 0;
-        width: 0;
-        display: none;
-    }
-} */
 
 @media screen and (max-width: 768px) {
     .allSelect {
@@ -102,7 +62,7 @@
     }
 
     .selectInput {
-        margin: 0 0 10px 0;
+        margin: 0;
     }
 
     .locationPadding {
@@ -115,5 +75,15 @@
     
     .leftOfMap {
         padding: 0;
+    }
+
+    .maxSizeNote {
+        color: lightgray;
+        display: inline-block;
+        margin: 0 0 10px 5%;
+    }
+
+    .selectDivContainer > select {
+        margin-bottom: 10px
     }
 }

@@ -152,7 +152,7 @@ class CreateEvent extends Component {
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
                         <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
-                        <div className="col-sm-4 col-xs-12">
+                        <div className="col-sm-4 col-xs-12 selectDivContainer">
                             <label htmlFor="subject">Subject</label>
                             <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
                                 <option disabled>Select a Subject</option>
@@ -163,7 +163,7 @@ class CreateEvent extends Component {
                                 <option value="5">Business</option>
                             </Field>
                         </div>
-                        <div className="col-sm-4 col-xs-12">
+                        <div className="col-sm-4 col-xs-12 selectDivContainer">
                             <label>Event Duration</label>
                             <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
                                 <option disabled>Select event duration</option>
@@ -175,7 +175,10 @@ class CreateEvent extends Component {
                                 <option>> 5 Hours</option>
                             </Field>
                         </div>
-                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min={2} max={100} placeholder="Group Size" label="Max Group Size" />
+                        <div>
+                            <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min={2} max={100} placeholder="Group Size" label="Max Group Size" />
+                            <p className="maxSizeNote">Note: Max group size includes event creator.</p>
+                        </div>
                         <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
                         <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         <div className="col-sm-12 col-xs-12">
