@@ -114,7 +114,6 @@ class JoinEvent extends Component {
     }
 
     /* Map Display on Load */
-
     joinMapOnLoad() {
         this.props.getAll().then((response) => {
 
@@ -170,6 +169,7 @@ class JoinEvent extends Component {
         });
     }
 
+    /* checkboxes */
     handleFormSubmit() {
         // = formSubmitEvent => 
         const filterCheckbox = [];
@@ -183,7 +183,6 @@ class JoinEvent extends Component {
         })
     }
 
-    /* checkboxes */
     componentWillMount = () => {
         this.selectedCheckboxes = new Set();
     }
