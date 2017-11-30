@@ -383,9 +383,9 @@ app.post('/join_events', function (req, res){
                         });
                         //End Nodemailer
                     }
-                    // else if (results.length !==0) {
-                    //     insertUserIntoEvent();
-                    // }
+                    else if (results.length !==0) {
+                        insertUserIntoEvent();
+                    }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
                     // const map = Array.prototype.map;
                     //     console.log("The events log:", parsedResults);
