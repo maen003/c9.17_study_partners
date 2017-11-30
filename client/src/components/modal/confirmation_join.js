@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 
 import './confirmation_join.css';
 
-class ConfirmationModal extends Component {
+class ConfirmationModalJoin extends Component {
     constructor (props) {
         super (props);
-
-        this.state = {
-            showModal: this.props.showModal,
-            confirmStatus: this.props.confirmStatus
-        }
 
         this.toggleModal = this.props.toggleModal;
     }
@@ -72,4 +67,4 @@ class ConfirmationModal extends Component {
     }
 }
 
-export default ConfirmationModal;
+export default ConfirmationModalJoin;

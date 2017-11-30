@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {userJoin, getAll} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
-import ConfirmationModal from '../modal/confirmation_join';
+import ConfirmationModalJoin from '../modal/confirmation_join';
 
 import './eventItem.css';
 
@@ -136,7 +136,7 @@ class EventDetails extends Component {
                     <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
-                <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
+                <ConfirmationModalJoin confirmStatus={this.state.modalMessageConfirm} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
             </div>
         );
     }

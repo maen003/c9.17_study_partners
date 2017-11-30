@@ -103,8 +103,8 @@ class EventDetails extends Component {
     render() {
         const {info} = this.props;
         console.log('info passed down FOR JOIN EVENT USER: ', this.state.info);
-        const display = {display: 'block'}
-        const hide = {display: 'none'}
+        // const display = {display: 'block'}
+        // const hide = {display: 'none'}
 
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
