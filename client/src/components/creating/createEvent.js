@@ -179,7 +179,7 @@ class CreateEvent extends Component {
                             }
                         </div>
                     </form>
-                    <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
+                    <ConfirmationModalCreate confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
                 </div>
             </div>
         )
