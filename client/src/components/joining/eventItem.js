@@ -109,7 +109,7 @@ class EventDetails extends Component {
                 self.toggleModalConf("error1");
             } else if (response.payload.data === 'max') {
                 self.toggleModalConf("error2");
-            } else if (response.payload.data.success === true && !response.payload.data.success.data) {
+            } else if (response.payload.data.success === true && this.state.coordinates !== "null") {
                 self.toggleModalConf("success");
             }
         }).catch((err) => {
