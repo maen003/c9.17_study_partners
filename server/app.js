@@ -392,10 +392,10 @@ app.post('/join_events', function (req, res){
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
                                 //THIS IS WHERE I CHANGE THE ERROR MODAL
-                                res.status(500).send(2);
+                                res.status(500).send("Duplicate");
                             }
                             else if (results.length>=req.body.max) {
-                                res.status(500).send(3);
+                                res.status(500).send("Max");
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
