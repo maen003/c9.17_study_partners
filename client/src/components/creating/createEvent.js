@@ -110,22 +110,27 @@ class CreateEvent extends Component {
     }
 
     submitData(values) {
-        const self = this;
-        const { reset } = this.props;
-        const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
-        console.log('form values: ', formData);
-        this.props.createEvent(formData).then(function (resp) {
-            console.log('add events successful');
-            console.log(resp);
-            reset();
-            self.toggleModal("success");
-        }).catch(() => {
-            self.toggleModal("error");
-        });
+        if (this.state.coordinates !== 'null'){
+            const self = this;
+            const { reset } = this.props;
+            const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
+            console.log('form values: ', formData);
+            this.props.createEvent(formData).then(function (resp) {
+                console.log('add events successful');
+                console.log(resp);
+                reset();
+                self.toggleModal("success");
+            }).catch(() => {
+                self.toggleModal("error");
+            });
 
-        this.setState({
-            coordinates: ''
-        })
+            this.setState({
+                coordinates: ''
+            })
+        } else {
+            self.toggleModal("error")
+        }
+        
     }
 
     toggleSignInModal() {
@@ -226,7 +231,7 @@ function validation(values) {
     if (!emailRegex.test(values.email)) {
         error.email = 'Please enter your email';
     }
-    if (!values.location || this.state.coordinates == "null") {
+    if (!values.location) {
         error.location = 'Please enter a valid event location';
     }
     if (!values.description) {
