@@ -32,8 +32,11 @@
 
 .facebookLogin {
     list-style-type: none;
-    padding-top: .2em;
     margin: 0;
+}
+
+.nav > li:last-child a {
+    padding-top: 13px;
 }
 
 .navNarrow {
