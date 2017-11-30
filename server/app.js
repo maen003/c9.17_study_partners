@@ -339,6 +339,9 @@ app.post('/join_events', function (req, res){
                                             data: results
                                         };
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
+                                            if (!res) {
+                                                console.log("User not added")
+                                            }
                                         res.end(JSON.stringify(output));
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
