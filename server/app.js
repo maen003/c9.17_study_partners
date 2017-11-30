@@ -351,7 +351,7 @@ app.post('/join_events', function (req, res){
                                 )
                             }
                         }
-                    }
+                    })
                     console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length == 0) {
@@ -397,8 +397,7 @@ app.post('/join_events', function (req, res){
                         res.end("max")
                     }
 
-                }
-            )
+                })
     } else {
             console.log('***** ERROR: user must log into Facebook *****');
     }
