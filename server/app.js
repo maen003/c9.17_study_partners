@@ -307,22 +307,6 @@ app.post('/delete_events',function(req, res){
     //End Nodemailer
 });
 
-function insertUserIntoEvent() {
-    if (results.length<req.body.max){
-        connection.query(
-            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
-                const output = {
-                    success: true,
-                    data: results
-                };
-                console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
-                res.end(JSON.stringify(output));
-            }
-            // console.log("the fb id is: ", req.session.passport.user.id);
-            // console.log("The event id is: ", req.payload.data);
-        )
-    }
-}
 
 
 // Joining Events
@@ -343,6 +327,22 @@ app.post('/join_events', function (req, res){
                 `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}"`, function (err, results){
                     console.log("Le results:", results);
                     // console.log("Le response:", res);
+                        function insertUserIntoEvent() {
+                            if (results.length<req.body.max){
+                                connection.query(
+                                    `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                                        const output = {
+                                            success: true,
+                                            data: results
+                                        };
+                                        console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
+                                        res.end(JSON.stringify(output));
+                                    }
+                                    // console.log("the fb id is: ", req.session.passport.user.id);
+                                    // console.log("The event id is: ", req.payload.data);
+                                )
+                            }
+                        }
                     console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length == 0) {
@@ -358,7 +358,7 @@ app.post('/join_events', function (req, res){
                                 console.log("This user has already joined this event");
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
-                            } 
+                            }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
                             }
