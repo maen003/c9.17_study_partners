@@ -67,6 +67,7 @@ class EventDetails extends Component {
     }
 
     toggleModalConf(message) {
+        console.log('this is the message', message);
         this.setState({
             showModalConf: !this.state.showModalConf,
             modalMessageConfirm: message
@@ -113,6 +114,7 @@ class EventDetails extends Component {
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
             console.log('event info for join event action: ', info);
+            console.log('Then axios call:');
             self.toggleModalConf("success");
         }).catch(() => {
             self.toggleModalConf("error");
