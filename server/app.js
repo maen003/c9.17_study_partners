@@ -130,7 +130,7 @@ app.get('/events',
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1"
         `;
-        if (req.session.passport.user.id == "undefined") {
+        if (req.session.passport == "undefined") {
             connection.connect(() => {
                 connection.query(
                     queryNotLoggedIn, function(err, results, fields){
