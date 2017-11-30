@@ -339,9 +339,6 @@ app.post('/join_events', function (req, res){
                                             data: results
                                         };
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
-                                            if (!res) {
-                                                console.log("User not added")
-                                            }
                                         res.end(JSON.stringify(output));
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
@@ -352,6 +349,7 @@ app.post('/join_events', function (req, res){
                     console.log("Le response body:", res.body);
                     if (err) throw err;
                     if (results.length == 0) {
+                        console.log(res);
                         insertUserIntoEvent();
                         //Start Nodemailer: Email for Event JOINED
                         console.log('KRYSTAL: SESSION PASSPORT DATA JSON:', req.session.passport.user._json);
@@ -384,6 +382,9 @@ app.post('/join_events', function (req, res){
                         });
                         //End Nodemailer
                     }
+                    // else if (results.length !==0) {
+                    //     insertUserIntoEvent();
+                    // }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
                     // const map = Array.prototype.map;
                     //     console.log("The events log:", parsedResults);
