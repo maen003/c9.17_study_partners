@@ -341,6 +341,7 @@ app.post('/join_events', function (req, res){
                                         };
                                         console.log("User", req.session.passport.user.id, "has joined event", req.body.event_id);
                                         res.end(JSON.stringify(output));
+                                        console.log("Donde esta la pizza", results);
                                     }
                                     // console.log("the fb id is: ", req.session.passport.user.id);
                                     // console.log("The event id is: ", req.payload.data);
