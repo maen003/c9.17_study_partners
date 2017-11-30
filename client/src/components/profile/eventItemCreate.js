@@ -113,7 +113,7 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 col-xs-6 btn btn-primary" type="button">More Info</button>
-                    <button onClick={this.deleteUserEvent} className="col-sm-4 col-sm-offset-3 col-xs-6 btn btn-danger" type="button">Delete Event</button>
+                    <button onClick={this.deleteUserEvent} className="col-sm-4 col-sm-offset-1 col-xs-6 btn btn-danger" type="button">Delete Event</button>
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
