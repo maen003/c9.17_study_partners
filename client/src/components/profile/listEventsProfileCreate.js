@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import EventDetails from './eventItemCreate';
 
 const listDiv = {
@@ -18,7 +18,7 @@ class EventList extends Component {
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.createdEvents;
             const eventElements = eventArray.map((eventItem, index) => {
-                return <EventDetails key={index} info={eventItem}/>
+                return <EventDetails key={index} info={eventItem} buttonClick={this.getUserDataCreate}/>
             });
             return (
                 <div style={listDiv}>
