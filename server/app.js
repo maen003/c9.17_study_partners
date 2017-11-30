@@ -345,6 +345,9 @@ app.post('/join_events', function (req, res){
                     // console.log("Le response:", res);
                     console.log("Le response body:", res.body);
                     if (err) throw err;
+                    if (results.length == 0) {
+                        insertUserIntoEvent();
+                    }
                     const parsedResults = JSON.parse(JSON.stringify(results));
                     const map = Array.prototype.map;
                         console.log("The events log:", parsedResults);
@@ -355,9 +358,7 @@ app.post('/join_events', function (req, res){
                                 console.log("This user has already joined this event");
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
-                            } else if (results.length == 0){
-                                insertUserIntoEvent();
-                            }
+                            } 
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
                             }
