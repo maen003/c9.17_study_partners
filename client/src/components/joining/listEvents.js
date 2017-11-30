@@ -13,8 +13,7 @@ class EventList extends Component {
         super (props);
     }
 
-    render() { 
-        console.log('LIST EVENTS - props: ', this.props);
+    render() {         
         if (this.props.filterValues.length > 0) {
             const arrayCheck = this.props.events;
             if (arrayCheck.length !== 0) {
@@ -27,8 +26,6 @@ class EventList extends Component {
                         }
                     }
                 }
-                console.log('filtered events:', acceptedValues);
-                console.log('zipcode:', this.props.zipcodeCoords);
                 if (acceptedValues.length > 0) {
                     const map = new google.maps.Map(document.getElementById('joinMap'), {
                         zoom: 10,

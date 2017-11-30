@@ -137,10 +137,8 @@ class CreateEvent extends Component {
 
 
     render() {
-        // console.log('props: ', this.props);
         const { handleSubmit, reset } = this.props;
         const { isLoggedIn } = this.state;
-
 
         return (
             <div className="container">
