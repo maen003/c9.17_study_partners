@@ -307,6 +307,22 @@ app.post('/delete_events',function(req, res){
     //End Nodemailer
 });
 
+function insertUserIntoEvent() {
+    if (results.length<req.body.max){
+        connection.query(
+            `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
+                const output = {
+                    success: true,
+                    data: results
+                };
+                res.end(JSON.stringify(output));
+            }
+            // console.log("the fb id is: ", req.session.passport.user.id);
+            // console.log("The event id is: ", req.payload.data);
+        )
+    }
+}
+
 
 // Joining Events
 app.post('/join_events', function (req, res){
@@ -333,20 +349,11 @@ app.post('/join_events', function (req, res){
                     const checkDuplicates = map.call(parsedResults, function (events){
                         if (events.facebookID == req.session.passport.user.id){
                             console.log("This user has already joined this event");
-                        } else {
-                            if (results.length<req.body.max){
-                                connection.query(
-                                    `INSERT INTO joined_events SET facebookID = "${req.session.passport.user.id}", event_id = "${req.body.event_id}"`, function (err, results) {
-                                        const output = {
-                                            success: true,
-                                            data: results
-                                        };
-                                        res.end(JSON.stringify(output));
-                                    }
-                                    // console.log("the fb id is: ", req.session.passport.user.id);
-                                    // console.log("The event id is: ", req.payload.data);
-                                )
-                            }
+                        } else if (results.length == 0){
+                            insertUserIntoEvent();
+                        }
+                        else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
+                            insertUserIntoEvent();
                         }
                     })
 
