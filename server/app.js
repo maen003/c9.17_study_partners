@@ -390,6 +390,7 @@ app.post('/join_events', function (req, res){
                         insertUserIntoEvent();
                     }
                     else {
+                        console.log("The event has been filled");
                         res.end("max")
                     }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
