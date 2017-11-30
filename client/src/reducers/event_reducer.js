@@ -22,7 +22,7 @@ export default (state = DEFAULT_STATE, action) => {
                 all: action.payload.data
             };
         case types.USER_JOIN:
-            console.log(action.payload);
+            console.log('USER JOINING AN EVENT REDUCER: ', action.payload);
         default:
             return state;
     }
