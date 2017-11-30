@@ -125,7 +125,7 @@ app.get('/events',
         const query = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1
-        WHERE facebookID != ${req.session.passport.user.id}`;
+        `;
 
         connection.connect(() => {
             connection.query(
