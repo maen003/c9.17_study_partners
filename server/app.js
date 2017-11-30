@@ -386,8 +386,11 @@ app.post('/join_events', function (req, res){
                         });
                         //End Nodemailer
                     }
-                    else if (results.length !==0) {
+                    else if (results.length !==0 && results.length < req.body.max) {
                         insertUserIntoEvent();
+                    }
+                    else {
+                        res.end("max")
                     }
                     // const parsedResults = JSON.parse(JSON.stringify(results));
                     // const map = Array.prototype.map;
