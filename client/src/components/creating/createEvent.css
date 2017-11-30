@@ -36,18 +36,7 @@
 }
 
 .form-group {
-    margin: 2% 0;
-}
-
-.allSelect {
-    height: 10vmin;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.selectInput {
-    margin: 1%;
+    margin: 1% 0;
 }
 
 .bottons {

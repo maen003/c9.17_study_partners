@@ -1,47 +1,51 @@
-import React, {Component} from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {connect} from 'react-redux';
-import {createEvent} from '../../actions';
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createEvent, userAuth } from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
+import SignInModal from '../modal/sign_in_modal';
 
 import './createEvent.css';
 
 class CreateEvent extends Component {
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
 
         this.state = {
             coordinates: null,
-            showModal: false
+            showModal: false,
+            modalMessage: null,
+            isLoggedIn: false
         };
 
-        // this.toggleModal = this.toggleModal.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
         this.submitData = this.submitData.bind(this);
 
         this.renderMapAfterText = this.renderMapAfterText.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
         this.createMap = this.createMap.bind(this);
         this.createMapOnLoad = this.createMapOnLoad.bind(this);
+        this.toggleSignInModal = this.toggleSignInModal.bind(this);
     }
 
-    renderInputText({className, placeholder, input, label, type, meta: {touched, error}}) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
+    renderInputText({ className, placeholder, input, label, type, meta: { touched, error } }) { //deconstructing (es6) prop values so you dont have to write "prop." before everything
         return (
             <div className={className}>
                 <label>{label}</label>
-                <input {... input} type={type} placeholder={placeholder} className="form-control"/>
-                <p style={{color: 'red'}}>{touched && error}</p>
+                <input {...input} type={type} placeholder={placeholder} className="form-control" />
+                <p style={{ color: 'red' }}>{touched && error}</p>
             </div>
         )
     }
 
     ///////////////////////MAP/////////////////////////
-    renderMapAfterText(location){
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+location.currentTarget.value+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+    renderMapAfterText(location) {
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address=' + location.currentTarget.value + '&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
-    axiosThenFunction(response){
+    axiosThenFunction(response) {
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
@@ -63,11 +67,10 @@ class CreateEvent extends Component {
     }
 
     /* Map Display on Load */
-
     createMapOnLoad() {
         const map = new google.maps.Map(document.getElementById('createMap'), {
             zoom: 3,
-            center: {lat: 37.09024, lng: -95.712891}
+            center: { lat: 37.09024, lng: -95.712891 }
         });
     }
 
@@ -75,90 +78,106 @@ class CreateEvent extends Component {
         window.addEventListener('load', this.createMapOnLoad);
         this.createMapOnLoad();
     }
-
-    // componentDidUpdate() {
-    //     this.createMapOnLoad();
-    //     console.log('hi');
-    // }
-
     /////////////////////////
 
-    // toggleModal() {
-    //     this.setState({
-    //         showModal: !this.state.showModal
-    //     })
-    // }
+    componentWillMount() {
+        this.checkLogin();
+    }
+
+    checkLogin() {
+        const isLoggedIn = null;
+        this.props.userAuth().then((resp) => {
+            console.log('response: ', resp);
+            this.setState({
+                isLoggedIn: resp.payload.data.isLoggedIn
+            })
+            if (isLoggedIn) {
+                null
+            } else {
+                this.toggleSignInModal();
+            }
+        }).catch((resp) => {
+            console.log("This is the error", resp);
+        })
+    }
+
+    toggleModal(message) {
+        console.log('toggling confirm modal');
+        this.setState({
+            showModal: !this.state.showModal,
+            modalMessage: message
+        })
+    }
 
     submitData(values) {
-        const {reset} = this.props;
-        const formData = {values, coordinates: JSON.stringify(this.state.coordinates)};
+        const self = this;
+        const { reset } = this.props;
+        const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
         console.log('form values: ', formData);
-        this.props.createEvent(formData).then(function(resp){
+        this.props.createEvent(formData).then(function (resp) {
             console.log('add events successful');
             console.log(resp);
             reset();
-            // this.toggleModal();
+            self.toggleModal("success");
+        }).catch(() => {
+            self.toggleModal("error");
         });
 
-        // this.setState({
-        //     coordinates: ''
-        // })
+        this.setState({
+            coordinates: ''
+        })
     }
+
+    toggleSignInModal() {
+        console.log('toggle sign in modal')
+        this.setState({
+            showSignInModal: !this.state.showSignInModal,
+        })
+    }
+
 
     render() {
         // console.log('props: ', this.props);
-        const {handleSubmit, reset} = this.props;
+        const { handleSubmit, reset } = this.props;
+        const { isLoggedIn } = this.state;
+
 
         return (
             <div className="container">
                 <div className="form-group">
                     <form onSubmit={handleSubmit((values) => this.submitData(values))}>
-                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event"/>
-                        <div className="allSelect">
-                            <div className="col-sm-4 col-xs-12">
-                                <label htmlFor="subject">Subject</label>
-                                <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
-                                    <option disabled>Select a Subject</option>
-                                    <option value="1">Life Sciences</option>
-                                    <option value="2">Visual and Perfomance Arts</option>
-                                    <option value="3">Liberal Arts</option>
-                                    <option value="4">Engineering and Technology</option>
-                                    <option value="5">Business</option>
-                                </Field>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <label>Max Group Size</label>
-                                <Field className="form-control selectInput" name="max" component="select" placeholder="Group Size" label="Max Group Size">
-                                    <option disabled>Select a group size</option>
-                                    <option>2-5</option>
-                                    <option>6-10</option>
-                                    <option>11-15</option>
-                                    <option>16-20</option>
-                                    <option>21-25</option>
-                                    <option>26-30</option>
-                                    <option>> 30</option>
-                                </Field>
-                            </div>
-                            <div className="col-sm-4 col-xs-12">
-                                <label>Event Duration</label>
-                                <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
-                                    <option disabled>Select event duration</option>
-                                    <option>Less than 1 Hour</option>
-                                    <option>1 - 2 Hours</option>
-                                    <option>2 - 3 Hours</option>
-                                    <option>3 - 4 Hours</option>
-                                    <option>4 - 5 Hours</option>
-                                    <option>> 5 Hours</option>
-                                </Field>
-                            </div>
+                        <Field className="col-sm-12 col-xs-12" name="title" component={this.renderInputText} type="text" label="Title" placeholder="Title of Event" />
+                        <div className="col-sm-4 col-xs-12">
+                            <label htmlFor="subject">Subject</label>
+                            <Field className="form-control selectInput" id="subject" name="subject" component="select" placeholder="Set Subject" label="Event Subject">
+                                <option disabled>Select a Subject</option>
+                                <option value="1">Life Sciences</option>
+                                <option value="2">Visual and Perfomance Arts</option>
+                                <option value="3">Liberal Arts</option>
+                                <option value="4">Engineering and Technology</option>
+                                <option value="5">Business</option>
+                            </Field>
                         </div>
-                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event"/>
-                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event"/>
+                        <div className="col-sm-4 col-xs-12">
+                            <label>Event Duration</label>
+                            <Field className="form-control selectInput" name="duration" component="select" placeholder="Duration" label="Event Duration">
+                                <option disabled>Select event duration</option>
+                                <option>Less than 1 Hour</option>
+                                <option>1 - 2 Hours</option>
+                                <option>2 - 3 Hours</option>
+                                <option>3 - 4 Hours</option>
+                                <option>4 - 5 Hours</option>
+                                <option>> 5 Hours</option>
+                            </Field>
+                        </div>
+                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min="2" max="100" placeholder="Group Size" label="Max Group Size" />
+                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
+                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
-                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx"/>
-                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com"/>
-                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center"/>
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx" />
+                                <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com" />
+                                <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center" />
                             </div>
                             <div className="col-sm-8 col-xs-12 locationFormComp">
                                 <div className="mapView">
@@ -166,13 +185,24 @@ class CreateEvent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..."/>
+                        <Field className="form-control" name="description" component="textarea" type="text" label="Event Description" placeholder="Description here..." />
                         <div className="bottons col-sm-12 col-xs-12">
                             <button className="form-group btn btn-danger" type="button" onClick={reset}>Reset From</button>
-                            <button className="form-group btn btn-success submitForm">Create Event</button>
+                            {
+                                isLoggedIn ?
+                                    <button className="form-group btn btn-success submitForm">Create Event</button>
+                                    :
+                                    <button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>
+                            }
                         </div>
                     </form>
-                    {/*<ConfirmationModal showModal={this.state.showModal} toggleModal={this.toggleModal}/>*/}
+                    <ConfirmationModal confirmStatus={this.state.modalMessage} showModal={this.state.showModal} toggleModal={this.toggleModal} />
+                    {
+                        isLoggedIn ?
+                            null
+                            :
+                            <SignInModal showSignInModal={this.state.showSignInModal} toggleSignInModal={this.toggleSignInModal} />
+                    }
                 </div>
             </div>
         )
@@ -180,8 +210,8 @@ class CreateEvent extends Component {
 }
 
 function validation(values) {
-    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/
-    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/
+    const emailRegex = /^[a-zA-Z0-9&$._%-]+@[a-zA-Z0-9._%-]+\.[a-zA-Z]{2,4}\s*$/;
+    const phoneRegex = /^[1]?[- ]?[(]?([0-9]{3})[)]?[- ]*?([0-9]{3})[- ]*?([0-9]{4})$/;
     const error = {};
     if (!values.title) {
         error.title = 'Please enter a title';
@@ -204,6 +234,9 @@ function validation(values) {
     if (!values.description) {
         error.description = 'Please enter description of event';
     }
+    if (values.max <= 1 || values.max > 100) {
+        error.max = 'Please enter a number between 2-100';
+    }
     return error;
 }
 
@@ -212,4 +245,4 @@ CreateEvent = reduxForm({
     validate: validation
 })(CreateEvent);
 
-export default connect(null, {createEvent})(CreateEvent);
+export default connect(null, { createEvent, userAuth })(CreateEvent);

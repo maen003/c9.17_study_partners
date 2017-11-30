@@ -1,39 +1,35 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin} from '../../actions';
+import {Link} from 'react-router-dom';
+import {deleteEvent, } from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
-import ConfirmationModalJoin from '../modal/confirmation_join';
 
-import './eventItem.css';
+import './eventItemProfile.css';
 
 class EventDetails extends Component {
     constructor (props) {
         super (props);
 
         this.state = {
-            showModalDetails: false,
-            info: this.props.info,
-            modalMessageConfirm: null,
-            showModalConf: false
-        }
+            showModal: false,
+            info: this.props.info
+        };
 
-        this.toggleModalDetails = this.toggleModalDetails.bind(this);
-        this.toggleModalConf = this.toggleModalConf.bind(this);
-        this.userJoinEvent = this.userJoinEvent.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.deleteUserEvent = this.deleteUserEvent.bind(this);
 
         this.renderMapAfterClick = this.renderMapAfterClick.bind(this);
         this.singleMap = this.singleMap.bind(this);
         this.axiosThenFunction = this.axiosThenFunction.bind(this);
-
-        this.testFunction = this.testFunction.bind(this);
     }
 
     /////////////////////////MAP////////////////////////
     renderMapAfterClick(){
         console.log('More info button clicked');
-        console.log('event location: ', this.state.location);
-        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+this.state.info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
+        const {info} = this.props;
+        console.log('event location: ', info.location);
+        axios.post('https://maps.googleapis.com/maps/api/geocode/json?address='+info.location+'&key=AIzaSyBtOIVlRonYB8yoKftnhmhRT_Z8Ef-op3o')
             .then(this.axiosThenFunction);
     }
 
@@ -42,7 +38,7 @@ class EventDetails extends Component {
             coordinates: response.data.results[0].geometry.location
         });
         console.log('coordinates: ', this.state.coordinates);
-        this.toggleModalDetails();
+        this.toggleModal();
         this.singleMap();
     }
 
@@ -62,20 +58,21 @@ class EventDetails extends Component {
     }
     /////////////////////////MAP////////////////////////
 
-    toggleModalDetails(event) {
+    toggleModal(event) {
         this.setState({
-            showModalDetails: !this.state.showModalDetails
+            showModal: !this.state.showModal
         })
     }
 
-    toggleModalConf(message) {
-        console.log('this is the message', message);
-        this.setState({
-            showModalConf: !this.state.showModalConf,
-            modalMessageConfirm: message
-        })
-        console.log("confirmation modal state: ", this.state.showModalConf);
-        console.log("confirmation modal message: ", this.state.modalMessageConfirm);
+    deleteUserEvent() {
+        const {info} = this.props;
+
+        console.log('delete button was clicked');
+        this.props.deleteEvent(info).then(function(response){
+            console.log('response: ', response.payload.data);
+            console.log("delete info: ,", info)
+            this.props.history.push('/profile');
+        });
     }
 
     convertDate() {
@@ -110,33 +107,12 @@ class EventDetails extends Component {
         return replacement;
     }
 
-    userJoinEvent() {
-        const self = this;
-        console.log('You joined this event');
-        this.props.userJoin(this.state.info).then(function(response){
-            console.log('response from server about join event action: ', response);
-            if (response.payload.data.data.insertId === 0) {
-                self.toggleModalConf("error1");
-            } else if (response.payload.data === 'max') {
-                self.toggleModalConf("error2");
-            } else if (response.payload.data.success === true) {
-                self.toggleModalConf("success");
-            }
-        }).catch((err) => {
-            self.toggleModalConf("error");
-        });
-    }
-
-    testFunction() {
-        this.toggleModalConf("error2");
-    }
-
     render() {
         const {info} = this.props;
-        const {isLoggedIn} = this.state;
-        console.log('confrim status IN EVENT ITEM: ', this.state.modalMessageConfirm);
-        // console.log('info passed down: ', info);
-        
+        console.log('info passed down FOR CREATE: ', this.state.info);
+        const display = {display: 'block'}
+        const hide = {display: 'none'}
+
         return (
             <div className="col-sm-12 col-xs-12 singleItem">
                 <div className="col-sm-12">
@@ -146,14 +122,12 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 btn btn-primary infoButton" type="button">More Info</button>
-                    <button onClick={this.userJoinEvent} className="col-sm-4 col-sm-offset-3 btn btn-success infoButton" type="button">Join Event</button>
-                    <button onClick={this.testFunction} className="col-sm-12 btn btn-primary" type="button">MODAL</button>
+                    <button onClick={this.deleteUserEvent} className="col-sm-4 col-sm-offset-3 btn btn-danger infoButton" type="button">Delete Event</button>
                 </div>
-                <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
-                <ConfirmationModalJoin confirmStatus={this.state.modalMessageConfirm} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
+                <DetailsModal details={info} showModal={this.state.showModal} toggleModal={this.toggleModal}/>
             </div>
         );
     }
 }
 
-export default connect(null, {userJoin})(EventDetails);
+export default connect(null, {deleteEvent})(EventDetails);

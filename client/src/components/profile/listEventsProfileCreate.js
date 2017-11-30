@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import EventDetails from './eventItemProfile';
+import EventDetails from './eventItemCreate';
 
 const listDiv = {
     overflowY: 'auto',
-    height: '85vmin',
+    height: '77vmin',
     /* border: '1px dashed lightcoral' */
 }
 
@@ -14,10 +14,11 @@ class EventList extends Component {
     }
 
     render() { 
-        console.log('LIST EVENTS - props: ', this.props);
-        const arrayCheck = this.props.events;
+        console.log('LIST EVENTS CREATED- props: ', this.props);
+        console.log('ALL USER CREATED EVENTS: ', this.props.createdEvents);
+        const arrayCheck = this.props.createdEvents;
         if (arrayCheck.length !== 0) {
-            const eventArray = this.props.events.data;
+            const eventArray = this.props.createdEvents;
             const eventElements = eventArray.map((eventItem, index) => {
                 return <EventDetails key={index} info={eventItem}/>
             });

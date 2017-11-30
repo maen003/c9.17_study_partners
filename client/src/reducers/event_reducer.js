@@ -12,8 +12,17 @@ export default (state = DEFAULT_STATE, action) => {
             return {
                 all: action.payload.data
             };
+        case types.GET_JOIN_PROFILE:
+            console.log('user joined events REDUCER: ', action.payload);
+            return {
+                all: action.payload.data
+            };
+        case types.DELETE_EVENT:
+            return {
+                all: action.payload.data
+            };
         case types.USER_JOIN:
-            console.log(action.payload);
+            console.log('USER JOINING AN EVENT REDUCER: ', action.payload);
         default:
             return state;
     }
