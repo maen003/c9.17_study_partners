@@ -71,7 +71,7 @@ class Profile extends Component {
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} buttonClick={this.getUserDataCreate}/>
+                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} renderList={this.getUserDataCreate}/>
                                     </div>
                                 </div>
                             </div>

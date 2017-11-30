@@ -19,7 +19,7 @@ class EventList extends Component {
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.createdEvents;
             const eventElements = eventArray.map((eventItem, index) => {
-                return <EventDetails key={index} info={eventItem} buttonClick={this.props.getUserDataCreate}/>
+                return <EventDetails key={index} info={eventItem} renderList={this.props.renderList}/>
             });
             return (
                 <div style={listDiv}>

@@ -65,7 +65,7 @@ class EventDetails extends Component {
 
         this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
-            this.props.getUserDataCreate();
+            this.props.renderList();
         });
     }
 
