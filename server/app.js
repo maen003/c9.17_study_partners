@@ -125,7 +125,7 @@ app.get('/events',
         const query = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1
-        WHERE facebookID != ${req.session.passport.user.id}`;
+        `;
 
         connection.connect(() => {
             connection.query(
@@ -359,17 +359,17 @@ app.post('/join_events', function (req, res){
                             to: `${userEmail}`,
                             subject: 'Study Group Joined!',
                             html:   `
-                <div style='background-color: white; text-align: center; font-family: tahoma'>
-                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                <hr>
-                <div style='text-align: left'>
-                    <h2>Hi, ${userName}! You have joined a study group!</h2>
-                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
-                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
-                </div>
-                </div>
-                    `
+                            <div style='background-color: white; text-align: center; font-family: tahoma'>
+                            <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                            <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                            <hr>
+                            <div style='text-align: left'>
+                                <h2>Hi, ${userName}! You have joined a study group!</h2>
+                                <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                                <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
+                            </div>
+                            </div>
+                                `
                         };
 
                         transporter.sendMail(mailOptions, (error, info) => {
@@ -391,6 +391,11 @@ app.post('/join_events', function (req, res){
                                 console.log("This user has already joined this event");
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
+                                //THIS IS WHERE I CHANGE THE ERROR MODAL
+                                res.end("duplicate");
+                            }
+                            else if (results.length>=req.body.max) {
+                                res.end("max");
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
@@ -403,18 +408,18 @@ app.post('/join_events', function (req, res){
                                     to: `${userEmail}`,
                                     subject: 'Study Group Joined!',
                                     html:   `
-                <div style='background-color: white; text-align: center; font-family: tahoma'>
-                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
-                <span><i>You don't have to study lonely, with Stubbies!</i></span>
-                <hr>
-                <div style='text-align: left'>
-                    <h2>Hi, ${userName}! You have joined a study group!</h2>
-                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
-                    <p>To view more details about the event you've joined, check out your profile page <a href="dev.michaelahn.solutions/profile">here</a>.</p>
-                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
-                </div>
-                </div>
-                    `
+                                <div style='background-color: white; text-align: center; font-family: tahoma'>
+                                <p><img src="http://i66.tinypic.com/nzkq47.png"></p>
+                                <span><i>You don't have to study lonely, with Stubbies!</i></span>
+                                <hr>
+                                <div style='text-align: left'>
+                                    <h2>Hi, ${userName}! You have joined a study group!</h2>
+                                    <p><b>${req.body.title}</b> will take place on <b>${req.body.date}</b> at <b>${req.body.time}</b>.</p>
+                                    <p>To view more details about the event you've joined, check out your profile page <a href="dev.michaelahn.solutions/profile">here</a>.</p>
+                                    <p>If you wish to contact the group creator prior to your study session, shoot them a message at <b>${req.body.email}</b>.</p>
+                                </div>
+                                </div>
+                                    `
                                 };
 
                                 transporter.sendMail(mailOptions, (error, info) => {
