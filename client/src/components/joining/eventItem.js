@@ -115,7 +115,7 @@ class EventDetails extends Component {
         console.log('You joined this event');
         this.props.userJoin(this.state.info).then(function(response){
             console.log('response from server about join event action: ', response);
-            if (response.payload.data.insertId === 0) {
+            if (response.payload.data.data.insertId === 0) {
                 self.toggleModalConf("error1");
             } else if (response.payload.data === 'max') {
                 self.toggleModalConf("error2");
