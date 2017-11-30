@@ -14,4 +14,20 @@
     margin: auto;
     padding: 20px;
     background-color: white;
+    height: 50%;
+}
+
+.modal-dialog {
+    width: 60vmin;
+    margin-top: 10%;
+}
+
+.modal-body {
+    height: 70%;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-dialog {
+        margin: auto;
+    }
 }

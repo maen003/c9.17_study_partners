@@ -124,7 +124,7 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
         const query = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
-        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1
+        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
         `;
 
         connection.connect(() => {
@@ -383,7 +383,7 @@ app.post('/join_events', function (req, res){
                         });
                         //End Nodemailer
                     }
-                    else if (results.length !==0 && results.length < req.body.max) {
+                    else if (results.length !==0 && results.length < req.body.max-1) {
                         connection.query(
                             `SELECT * FROM joined_events WHERE event_id = "${req.body.event_id}" AND facebookId = "${req.session.passport.user.id}"`, function (err, results){
                                 if (results.length == 0) {

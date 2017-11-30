@@ -15,3 +15,14 @@
     padding: 20px;
     background-color: white;
 }
+
+.modal-dialog {
+    width: 75vmin;
+    margin-top: 5%;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-dialog {
+        margin: auto;
+    }
+}

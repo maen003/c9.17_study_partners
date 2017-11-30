@@ -54,21 +54,21 @@ class Profile extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-12 ">
+                    <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <div className="col-sm-3">                                   
+                                <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
                                     <div className="" ><h4>{firstName} {lastName} </h4></div>
                                     <div className="" >{ contact} </div>
                                 </div>
-                                <div id="joinDiv"className="col-sm-4 col-sm-offset-1">
+                                <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
                                         <EventListJoin joinedEvents={this.state.userJoined} eventList={this.props.events}/>
                                     </div>
                                 </div>
-                                <div id="createDiv"className="col-sm-4">
+                                <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
                                         <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events}/>

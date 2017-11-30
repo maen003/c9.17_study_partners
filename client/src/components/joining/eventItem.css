@@ -3,9 +3,5 @@
 }
 
 .buttonContainer {
-    margin-top: 1%;
-}
-
-.infoButton {
-    margin-bottom: 3%;
+    margin: 1% 0 3% 0;
 }

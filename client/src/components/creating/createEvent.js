@@ -5,6 +5,7 @@ import { createEvent, userAuth } from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
 import SignInModal from '../modal/sign_in_modal';
+import FacebookLogin from '../home_page/fbLogin';
 
 import './createEvent.css';
 
@@ -110,22 +111,28 @@ class CreateEvent extends Component {
     }
 
     submitData(values) {
-        const self = this;
-        const { reset } = this.props;
-        const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
-        console.log('form values: ', formData);
-        this.props.createEvent(formData).then(function (resp) {
-            console.log('add events successful');
-            console.log(resp);
-            reset();
-            self.toggleModal("success");
-        }).catch(() => {
-            self.toggleModal("error");
-        });
+            const self = this;
+            const { reset } = this.props;
+            const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
+            console.log('form values: ', formData);
+            console.log("these are the coordinates", formData.coordinates);
+        if (formData.coordinates !== "null"){
+            this.props.createEvent(formData).then(function (resp) {
+                console.log('add events successful');
+                console.log(resp);
+                reset();
+                self.toggleModal("success");
+            }).catch(() => {
+                self.toggleModal("error");
+            });
 
-        this.setState({
-            coordinates: ''
-        })
+            this.setState({
+                coordinates: ''
+            })
+        } else {
+            self.toggleModal("error")
+        }
+
     }
 
     toggleSignInModal() {
@@ -168,7 +175,7 @@ class CreateEvent extends Component {
                                 <option>> 5 Hours</option>
                             </Field>
                         </div>
-                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min="2" max="100" placeholder="Group Size" label="Max Group Size" />
+                        <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min={2} max={100} placeholder="Group Size" label="Max Group Size" />
                         <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
                         <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
                         <div className="col-sm-12 col-xs-12">
@@ -190,7 +197,7 @@ class CreateEvent extends Component {
                                 isLoggedIn ?
                                     <button className="form-group btn btn-success submitForm">Create Event</button>
                                     :
-                                    <button disabled={!isLoggedIn} className="form-group btn btn-success submitForm"> Please Log in to Create Event</button>
+                                    <div className="form-group btn btn-primary"><FacebookLogin/></div>
                             }
                         </div>
                     </form>
@@ -227,7 +234,7 @@ function validation(values) {
         error.email = 'Please enter your email';
     }
     if (!values.location) {
-        error.location = 'Please enter the event location';
+        error.location = 'Please enter a valid event location';
     }
     if (!values.description) {
         error.description = 'Please enter description of event';
