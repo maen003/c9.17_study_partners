@@ -387,11 +387,15 @@ app.post('/join_events', function (req, res){
                         console.log("The user who joined:", req.session.passport.user.id);
                     function checkDuplicates() {
                         map.call(parsedResults, function (events){
-                            if (events.facebookID == req.session.passport.user.id || results.length>=req.body.max){
+                            if (events.facebookID == req.session.passport.user.id){
                                 console.log("This user has already joined this event");
                                 console.log("The events log:", events);
                                 console.log("The user who joined:", req.session.passport.user.id);
-                                throw err;
+                                //THIS IS WHERE I CHANGE THE ERROR MODAL
+                                res.status(500).send("User already in this event!");
+                            }
+                            else if (results.length>=req.body.max) {
+                                res.status(500).send("This event is full!");
                             }
                             else if (results.length !== 0 && events.facebookID !== req.session.passport.user.id) {
                                 insertUserIntoEvent();
