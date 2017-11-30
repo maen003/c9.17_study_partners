@@ -118,9 +118,9 @@ class EventDetails extends Component {
             console.log('Then axios call:');
             if (response.payload.data.success === true) {
                 self.toggleModalConf("success");
-            } else if (response === 'duplicate') {
+            } else if (response.payload === 'duplicate') {
                 self.toggleModalConf("error1");
-            } else if (response === 'max') {
+            } else if (response.payload === 'max') {
                 self.toggleModalConf("error2");
             }
         }).catch((err) => {
