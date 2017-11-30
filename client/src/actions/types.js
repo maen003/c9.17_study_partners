@@ -5,5 +5,6 @@ export default {
     USER_JOIN: 'user_join', //when user wants to join specific event
     USER_AUTH: 'user_auth', //facebook
     DELETE_EVENT: 'delete_event',
-    GET_JOIN_PROFILE: 'get_join_profile' //display events that the user joined on their profile
+    GET_JOIN_PROFILE: 'get_join_profile', //display events that the user joined on their profile
+    LEAVE_EVENT: 'leave_event',
 }
