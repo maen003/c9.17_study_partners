@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {userEvents, getProfileJoin} from '../../actions/index';
+import {allCreateEvent, allJoinEvent} from '../../actions';
 import EventListCreate from './listEventsProfileCreate';
 import EventListJoin from './listEventsProfileJoin';
 
@@ -11,25 +11,24 @@ class Profile extends Component {
         super(props);
 
         this.state = {
-          firstName: null,
-          lastName: null,
+            firstName: null,
+            lastName: null,
             contact: null,
-            photo: null,
-            userCreated: [],
-            userJoined: []
-        };
+            photo: null
+        }
 
-        this.getUserCreate = this.getUserCreate.bind(this);
-        this.getJoinedEvents = this.getJoinedEvents.bind(this);
+        this.getUserDataCreate = this.getUserDataCreate.bind(this);
     }
 
-    componentWillMount() {
-        this.getUserCreate();
-        this.getJoinedEvents();
+    componentWillMount() {  
+        this.props.allCreateEvent();
+        this.props.allJoinEvent();
+
+        this.getUserDataCreate();
     }
 
-    getUserCreate() {
-        this.props.userEvents().then((resp) => {
+    getUserDataCreate() {
+        this.props.allCreateEvent().then((resp) => {
             this.setState({
                 firstName: resp.payload.data.profile.user.name.givenName,
                 lastName: resp.payload.data.profile.user.name.familyName,
@@ -40,16 +39,8 @@ class Profile extends Component {
         })
     }
 
-    getJoinedEvents() {
-        this.props.getProfileJoin().then((resp) => {
-            this.setState({
-                userJoined: resp.payload.data.data
-            })
-        })
-    }
-
     render() {
-        const { firstName, lastName, contact, photo } = this.state;
+        const {firstName, lastName, contact, photo} = this.state;
 
         return (
             <div className="container">
@@ -59,19 +50,19 @@ class Profile extends Component {
                             <div className="panel-body">
                                 <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
-                                    <div className="" ><h4>{firstName} {lastName} </h4></div>
-                                    <div className="" >{ contact} </div>
+                                    <div><h4>{firstName} {lastName} </h4></div>
+                                    <div>{contact}</div>
                                 </div>
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
-                                        <EventListJoin joinedEvents={this.state.userJoined} eventList={this.props.events}/>
+                                        <EventListJoin joinedEvents={this.props.joined} eventList={this.props.events}/>
                                     </div>
                                 </div>
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} renderList={this.getUserCreate}/>
+                                        <EventListCreate createdEvents={this.props.created} eventList={this.props.events}/>
                                     </div>
                                 </div>
                             </div>
@@ -83,4 +74,11 @@ class Profile extends Component {
     }
 }
 
-export default connect(null, {userEvents, getProfileJoin})(Profile);
+function mapStateToProps(state){
+    return {
+        created: state.event.userCreatedEvents,
+        joined: state.event.userJoinedEvents
+    }
+}
+
+export default connect(mapStateToProps, {allCreateEvent, allJoinEvent})(Profile);

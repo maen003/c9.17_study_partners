@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {userJoin} from '../../actions';
+import {userJoin, userAuth} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 import ConfirmationModalJoin from '../modal/confirmation_join';
 
@@ -15,7 +15,8 @@ class EventDetails extends Component {
             showModalDetails: false,
             info: this.props.info,
             modalMessageConfirm: null,
-            showModalConf: false
+            showModalConf: false,
+            isLoggedIn: false
         }
 
         this.toggleModalDetails = this.toggleModalDetails.bind(this);
@@ -55,6 +56,10 @@ class EventDetails extends Component {
         });
     }
     /////////////////////////MAP////////////////////////
+
+    componentWillMount() {
+        this.checkLogin();
+    }
 
     toggleModalDetails(event) {
         this.setState({
@@ -117,6 +122,17 @@ class EventDetails extends Component {
         });
     }
 
+    checkLogin() {
+        this.props.userAuth().then((resp) => {
+            console.log('response: ', resp);
+            this.setState({
+                isLoggedIn: resp.payload.data.isLoggedIn
+            })
+        }).catch((resp) => {
+            console.log("This is the error", resp);
+        })
+    }
+
     render() {
         const {info} = this.props;
         const {isLoggedIn} = this.state;
@@ -130,7 +146,12 @@ class EventDetails extends Component {
                 </div>
                 <div className="col-sm-12 buttonContainer">
                     <button onClick={this.renderMapAfterClick} className="col-sm-4 col-sm-offset-1 col-xs-6 btn btn-primary" type="button">More Info</button>
-                    <button onClick={this.userJoinEvent} className="col-sm-5 col-sm-offset-1 col-xs-6 btn btn-success" type="button">Join Event</button>
+                    {
+                        isLoggedIn ?
+                            <button onClick={this.userJoinEvent} className="col-sm-5 col-sm-offset-1 col-xs-6 btn btn-success" type="button">Join Event</button>
+                            :
+                            null
+                    }               
                 </div>
                 <DetailsModal details={info} showModal={this.state.showModalDetails} toggleModal={this.toggleModalDetails}/>
                 <ConfirmationModalJoin confirmStatus={this.state.modalMessageConfirm} showModal={this.state.showModalConf} toggleModal={this.toggleModalConf}/>
@@ -139,4 +160,4 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {userJoin})(EventDetails);
+export default connect(null, {userJoin, userAuth})(EventDetails);
