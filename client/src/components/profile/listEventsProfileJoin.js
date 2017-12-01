@@ -12,11 +12,10 @@ class EventList extends Component {
     }
 
     render() { 
-        const arrayCheck = this.props.joinedEvents;
+        const arrayCheck = this.props.joined;
         
         if (arrayCheck.length !== 0) {
-            const eventArray = this.props.joinedEvents;
-            const eventElements = eventArray.map((eventItem, index) => {
+            const eventElements = arrayCheck.map((eventItem, index) => {
                 return <EventDetails key={index} info={eventItem}/>
             });
             return (
