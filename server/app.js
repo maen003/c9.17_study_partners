@@ -117,17 +117,17 @@ const transporter = nodemailer.createTransport({
 // Reading Events
 app.get('/events',
     function(req, res){
+        console.log("The req.session.passport", req.session.passport);
+        console.log('the data is receiveth');
+        console.log('req is before this');
+        console.log("grumbo!!!!", req.session.passport);
+        const connection = mysql.createConnection(credentials);
         if (req.session.passport !== undefined) {
             loggedIn();
         }
         else {
             notLoggedIn();
         }
-        console.log("The req.session.passport", req.session.passport);
-        console.log('the data is receiveth');
-        console.log('req is before this');
-        console.log("grumbo!!!!", req.session.passport);
-        const connection = mysql.createConnection(credentials);
         const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
