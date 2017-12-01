@@ -122,22 +122,12 @@ app.get('/events',
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
-        if (req.session.passport !== undefined) {
-            loggedIn();
-        }
-        else {
-            notLoggedIn();
-        }
-        const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
-        FROM events
-        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
-        `;
-        const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
-        FROM events
-        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1"
-        `;
         console.log('The passport before undefined:', req.session.passport);
         function loggedIn(){
+            const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+                FROM events
+                JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
+                `;
             connection.connect(() => {
                 connection.query(
                     queryLoggedIn, function(err, results, fields){
@@ -152,6 +142,10 @@ app.get('/events',
             });
         }
             function notLoggedIn() {
+                const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+                FROM events
+                JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1"
+                `;
                 connection.connect(() => {
                     connection.query(
                         queryNotLoggedIn, function(err, results, fields){
@@ -166,7 +160,12 @@ app.get('/events',
                 });
             }
         console.log('got a user request????');
-
+        if (req.session.passport !== undefined) {
+            loggedIn();
+        }
+        else {
+            notLoggedIn();
+        }
     });
 
 app.get('/user_events',function(req, res){
