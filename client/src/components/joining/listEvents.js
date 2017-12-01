@@ -19,7 +19,7 @@ class EventList extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillReceiveProps() {
         this.setState({
             acceptedValues: this.props.filterValues,
             arrayCheck: this.props.events,
