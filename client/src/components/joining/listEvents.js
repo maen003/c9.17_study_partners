@@ -84,11 +84,11 @@ class EventList extends Component {
         } else {
             console.log("THIS PROPS: ", this.props);
             console.log("THIS PROPS EVENTS: ", this.props.events);
-            const arrayCheck = this.props.events;
-            if (arrayCheck.length !== 0) {
-                const eventArray = this.props.events.data;
-                console.log("EVENT ARRAY: ", this.props.events.data);
-                const eventElements = eventArray.map((eventItem, index) => {
+            const arrayCheck = this.props.events.data;
+            if (arrayCheck.length > 0) {
+                // const eventArray = this.props.events.data;
+                // console.log("EVENT ARRAY: ", this.props.events.data);
+                const eventElements = arrayCheck.map((eventItem, index) => {
                     return <EventDetails key={index} info={eventItem}/>
                 });
                 return (
