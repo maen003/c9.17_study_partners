@@ -179,8 +179,10 @@ class CreateEvent extends Component {
                             <Field className="col-sm-4 col-xs-12 selectInput" name="max" component={this.renderInputText} type="number" min={2} max={100} placeholder="Group Size" label="Max Group Size" />
                             <p className="maxSizeNote">Note: Max group size includes event creator.</p>
                         </div>
-                        <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
-                        <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
+                        <div className="col-sm-12 col-xs-12 dateTime">
+                            <Field className="col-sm-4 col-sm-offset-1 col-xs-12" name="date" component={this.renderInputText} type="date" label="Date" placeholder="Date of Event" />
+                            <Field className="col-sm-4 col-sm-offset-2 col-xs-12" name="time" component={this.renderInputText} type="time" label="Time" placeholder="Time of Event" />
+                        </div>
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
                                 <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx" />

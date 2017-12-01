@@ -47,7 +47,9 @@
 
 .maxSizeNote {
     color: gray;
-    margin-left: 1.5%;
+    display: inline-block;
+    float: right;
+    margin-right: 7%;
 }
 
 
