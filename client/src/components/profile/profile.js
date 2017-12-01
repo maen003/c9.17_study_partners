@@ -16,23 +16,32 @@ class Profile extends Component {
             contact: null,
             photo: null
         }
+
+        this.getUserDataCreate = this.getUserDataCreate.bind(this);
     }
 
     componentWillMount() {  
         this.props.allCreateEvent();
         this.props.allJoinEvent();
 
-        this.setState({
-            firstName: this.props.all.data.profile.user.name.givenName,
-            lastName: this.props.all.data.profile.user.name.familyName,
-            contact: this.props.all.data.profile.user.emails[0].value,
-            photo: this.props.all.data.profile.user.photos[0].value
+        this.getUserDataCreate();
+    }
+
+    getUserDataCreate() {
+        this.props.allCreateEvent().then((resp) => {
+            console.log('response for user CREATED: ', resp);
+            this.setState({
+                firstName: resp.payload.data.profile.user.name.givenName,
+                lastName: resp.payload.data.profile.user.name.familyName,
+                contact: resp.payload.data.profile.user.emails[0].value,
+                photo: resp.payload.data.profile.user.photos[0].value,
+                userCreated: resp.payload.data.data
+            });
         })
     }
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        console.log("PROPS FOR PROFILE INFO: ", this.props.all);
         const {firstName, lastName, contact, photo} = this.state;
 
         return (
@@ -70,8 +79,7 @@ class Profile extends Component {
 function mapStateToProps(state){
     return {
         created: state.event.userCreatedEvents,
-        joined: state.event.userJoinedEvents,
-        all: state.event.all
+        joined: state.event.userJoinedEvents
     }
 }
 
