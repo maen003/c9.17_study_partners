@@ -126,26 +126,7 @@ app.get('/events',
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
         `;
-        const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
-        FROM events
-        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1"
-        `;
-        if (req.session.passport.user.id == "undefined") {
-            connection.connect(() => {
-                connection.query(
-                    queryNotLoggedIn, function(err, results, fields){
-                        const output = {
-                            success: true,
-                            data: results
-                        };
-                        console.log('KRYSTAL output in the the /events', output);
-                        res.end(JSON.stringify(output));
-                    });
-                console.log('query has started')
-            });
-        }
-        else {
-            connection.connect(() => {
+        connection.connect(() => {
                 connection.query(
                     queryLoggedIn, function(err, results, fields){
                         const output = {
@@ -157,7 +138,7 @@ app.get('/events',
                     });
                 console.log('query has started')
             });
-        }
+
         console.log('got a user request????');
     });
 
