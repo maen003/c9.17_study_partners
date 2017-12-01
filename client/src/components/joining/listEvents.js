@@ -16,7 +16,6 @@ class EventList extends Component {
     render() {
         if (this.props.filterValues.length > 0) {
             const arrayCheck = this.props.events;
-            console.log("THIS.PROPS.events: ", this.props.events);
             if (arrayCheck.length !== 0) {
                 const acceptedValues = [];
                 const eventArray = this.props.events.data;
@@ -64,7 +63,6 @@ class EventList extends Component {
                             infoWindow.close();
                         });
                     }
-                    console.log("ACCEPTED VALUES: ", acceptedValues);
                     const eventElements = acceptedValues.map((eventItem, index) => {
                         return <EventDetails key={index} info={eventItem}/>
                     });
@@ -84,9 +82,12 @@ class EventList extends Component {
                 }
             }
         } else {
+            console.log("THIS PROPS: ", this.props);
+            console.log("THIS PROPS EVENTS: ", this.props.events);
             const arrayCheck = this.props.events;
             if (arrayCheck.length !== 0) {
                 const eventArray = this.props.events.data;
+                console.log("EVENT ARRAY: ", this.props.events.data);
                 const eventElements = eventArray.map((eventItem, index) => {
                     return <EventDetails key={index} info={eventItem}/>
                 });
