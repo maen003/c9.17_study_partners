@@ -12,7 +12,7 @@ class EventList extends Component {
         super (props);
     }
 
-    render() { 
+    render() {
         var self = this;
         const arrayCheck = self.props.createdEvents;
 

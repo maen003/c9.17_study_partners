@@ -155,6 +155,8 @@ class JoinEvent extends Component {
         this.getJoinData();
         window.addEventListener('load', this.joinMapOnLoad);
         this.joinMapOnLoad();
+        this.selectedCheckboxes = new Set();
+
     }
 
     getJoinData() {
@@ -174,9 +176,9 @@ class JoinEvent extends Component {
         })
     }
 
-    componentWillMount = () => {
-        this.selectedCheckboxes = new Set();
-    }
+    // componentWillMount() {
+    //     this.selectedCheckboxes = new Set();
+    // }
     
     toggleCheckbox = label => {
         if (this.selectedCheckboxes.has(label)) {
