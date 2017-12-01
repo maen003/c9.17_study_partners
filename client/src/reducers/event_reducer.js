@@ -13,7 +13,6 @@ export default (state = DEFAULT_STATE, action) => {
         case types.USER_CREATED_EVENTS:
             return {
                 ...state,
-                all: action.payload,
                 userCreatedEvents: action.payload.data.data
             };
         case types.USER_JOINED_EVENTS:
