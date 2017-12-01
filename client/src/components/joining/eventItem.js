@@ -109,7 +109,6 @@ class EventDetails extends Component {
     userJoinEvent() {
         const self = this;
         this.props.userJoin(this.state.info).then(function(response){
-            console.log('response from server about join event action: ', response);
             if (response.payload.data === 'duplicate') {
                 self.toggleModalConf("error1");
             } else if (response.payload.data === 'max') {
@@ -124,7 +123,6 @@ class EventDetails extends Component {
 
     checkLogin() {
         this.props.userAuth().then((resp) => {
-            console.log('response: ', resp);
             this.setState({
                 isLoggedIn: resp.payload.data.isLoggedIn
             })

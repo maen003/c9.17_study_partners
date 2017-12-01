@@ -5,7 +5,6 @@ const DEFAULT_STATE = {all: [], userCreatedEvents: [], userJoinedEvents: []};
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type) {
         case types.GET_ALL:
-            console.log("ACTION PAYLOAD: ", action.payload);
             return {
                 ...state,
                 all: action.payload.data

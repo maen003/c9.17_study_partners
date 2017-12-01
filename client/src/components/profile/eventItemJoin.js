@@ -64,9 +64,7 @@ class EventDetails extends Component {
         const {info} = this.props;
         var self = this;
         
-        console.log('you are no longer part of this event');
         this.props.leaveEvent(info).then(function(response){
-            console.log('response: ', response.payload.data);
             self.props.allJoinEvent();
         });
     }

@@ -50,7 +50,6 @@ class CreateEvent extends Component {
         this.setState({
             coordinates: response.data.results[0].geometry.location
         });
-        console.log('coordinates: ', this.state.coordinates);
         this.createMap();
     }
 
@@ -103,7 +102,6 @@ class CreateEvent extends Component {
     }
 
     toggleModal(message) {
-        console.log('toggling confirm modal');
         this.setState({
             showModal: !this.state.showModal,
             modalMessage: message
@@ -114,12 +112,9 @@ class CreateEvent extends Component {
             const self = this;
             const { reset } = this.props;
             const formData = { values, coordinates: JSON.stringify(this.state.coordinates) };
-            console.log('form values: ', formData);
-            console.log("these are the coordinates", formData.coordinates);
+
         if (formData.coordinates !== "null"){
             this.props.createEvent(formData).then(function (resp) {
-                console.log('add events successful');
-                console.log(resp);
                 reset();
                 self.toggleModal("success");
             }).catch(() => {
@@ -136,7 +131,6 @@ class CreateEvent extends Component {
     }
 
     toggleSignInModal() {
-        console.log('toggle sign in modal')
         this.setState({
             showSignInModal: !this.state.showSignInModal,
         })
