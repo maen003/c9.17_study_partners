@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import './home.css';
 import Passport from '../../assets/images/passport_js.png';
 import MeisterTask from '../../assets/images/meistertask.png';
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/homeLogo.png';
 
 class Home extends Component {
     render() {

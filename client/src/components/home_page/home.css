@@ -4,7 +4,6 @@
 }
 .jumbotron {
     margin: 0;
-    opacity: .7;
     text-align: center;
     background-image: url('../../assets/images/open_book.png');
     background-size: contain;
