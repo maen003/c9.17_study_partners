@@ -1,6 +1,6 @@
 import types from '../actions/types';
 
-const DEFAULT_STATE = {all: [], userCreatedEvents: [], userJoinedEvents: [], };
+const DEFAULT_STATE = {all: [], userCreatedEvents: [], userJoinedEvents: []};
 
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type) {
@@ -10,13 +10,13 @@ export default (state = DEFAULT_STATE, action) => {
                 all: action.payload.data
             };
         case types.USER_CREATED_EVENTS:
-            console.log("USER CREATED EVENTS REDUCER: ", action.payload);
+            console.log("USER CREATED EVENTS REDUCER: ", action.payload.data.data);
             return {
                 ...state, 
                 userCreatedEvents: action.payload.data.data
             };
         case types.USER_JOINED_EVENTS:
-            console.log("USER JOINED EVENTS REDUCER: ", action.payload);
+            console.log("USER JOINED EVENTS REDUCER: ", action.payload.data.data);
             return {
                 ...state,
                 userJoinedEvents: action.payload.data.data

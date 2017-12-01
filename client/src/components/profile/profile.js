@@ -54,8 +54,8 @@ class Profile extends Component {
 
 function mapStateToProps(state){
     return {
-        created: state.userCreatedEvents,
-        joined: state.userJoinedEvents
+        created: state.event.userCreatedEvents,
+        joined: state.event.userJoinedEvents
     }
 }
 
