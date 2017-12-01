@@ -9,16 +9,30 @@ import './profile.css';
 class Profile extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            firstName: null,
+            lastName: null,
+            contact: null,
+            photo: null
+        }
     }
 
     componentWillMount() {
         this.props.allCreateEvent();
         this.props.allJoinEvent();
+
+        this.setState({
+            firstName: this.props.data.profile.user.name.givenName,
+            lastName: this.props.data.profile.user.name.familyName,
+            contact: this.props.data.profile.user.emails[0],
+            photo: this.props.data.profile.user.photos[0]
+        })
     }
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        const {firstName, lastName, contact, photo} = this.props;
+        const {firstName, lastName, contact, photo} = this.state;
 
         return (
             <div className="container">
@@ -54,8 +68,8 @@ class Profile extends Component {
 
 function mapStateToProps(state){
     return {
-        created: state.userCreatedEvents,
-        joined: state.userJoinedEvents
+        created: state.event.userCreatedEvents,
+        joined: state.event.userJoinedEvents
     }
 }
 
