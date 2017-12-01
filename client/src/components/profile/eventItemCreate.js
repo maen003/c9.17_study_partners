@@ -122,7 +122,7 @@ class EventDetails extends Component {
 }
 
 function mapStateToProps(state) {
-    created: state.event.userCreatedEvents
+    created: state.userCreatedEvents
 }
 
 export default connect(mapStateToProps, {deleteEvent, allCreateEvent})(EventDetails);

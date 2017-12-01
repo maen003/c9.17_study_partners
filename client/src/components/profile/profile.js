@@ -9,13 +9,6 @@ import './profile.css';
 class Profile extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            firstName: null,
-            lastName: null,
-            contact: null,
-            photo: null,
-        };
     }
 
     componentWillMount() {
@@ -41,14 +34,13 @@ class Profile extends Component {
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
-                                        <EventListJoin joinedEvents={this.props.joined}/>
-                                        {/* eventList={this.props.events} */}
+                                        <EventListJoin joinedEvents={this.props.joined} eventList={this.props.events}/>
                                     </div>
                                 </div>
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.props.created}/>
+                                        <EventListCreate createdEvents={this.props.created} eventList={this.props.events}/>
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +54,8 @@ class Profile extends Component {
 
 function mapStateToProps(state){
     return {
-        created: state.event.userCreatedEvents,
-        joined: state.event.userJoinedEvents
+        created: state.userCreatedEvents,
+        joined: state.userJoinedEvents
     }
 }
 
