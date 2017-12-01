@@ -105,10 +105,11 @@ class EventList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        events: state.event.all
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         events: state.event.all
+//     }
+// }
 
-export default connect(mapStateToProps)(EventList);
+// connect(mapStateToProps)(
+export default EventList;

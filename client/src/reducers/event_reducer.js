@@ -16,13 +16,12 @@ export default (state = DEFAULT_STATE, action) => {
                 userCreatedEvents: action.payload.data.data
             };
         case types.USER_JOINED_EVENTS:
-            console.log("USER CREATED EVENTS REDUCER: ", action.payload);
+            console.log("USER JOINED EVENTS REDUCER: ", action.payload);
             return {
                 ...state,
                 userJoinedEvents: action.payload.data.data
             };
         case types.DELETE_EVENT:
-            return state;
         default:
             return state;
     }

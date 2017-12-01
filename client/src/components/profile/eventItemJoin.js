@@ -124,7 +124,7 @@ class EventDetails extends Component {
 }
 
 function mapStateToProps(state) {
-    joined: state.event.userJoinedEvents
+    joined: state.userJoinedEvents
 }
 
 export default connect(mapStateToProps, {leaveEvent, allJoinEvent})(EventDetails);
