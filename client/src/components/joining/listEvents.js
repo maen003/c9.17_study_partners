@@ -13,7 +13,9 @@ class EventList extends Component {
         super (props);
 
         this.state = {
-            acceptedValues: []
+            acceptedValues: [],
+            arrayCheck: null,
+            eventList: []
         }
     }
 
@@ -99,7 +101,7 @@ class EventList extends Component {
             console.log("THIS PROPS: ", this.props);
             console.log("THIS PROPS EVENTS: ", this.props.events);
             const arrayCheck = this.state.arrayCheck;
-
+            console.log("THIS STATE ARRAYCHECK 2: ", arrayCheck);
             if (arrayCheck.length !== 0 || arrayCheck.length !== undefined) {
                 const eventArray = this.state.eventList;
 

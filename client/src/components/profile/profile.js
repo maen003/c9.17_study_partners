@@ -41,7 +41,7 @@ class Profile extends Component {
     }
 
     render() {
-        console.log('PROPS FOR PROFILE:', this.props);
+        // console.log('PROPS FOR PROFILE:', this.props);
         const {firstName, lastName, contact, photo} = this.state;
 
         return (
