@@ -41,11 +41,11 @@ class Profile extends Component {
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <div className="col-sm-3 col-xs-12">                                   
+                                {/* <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
                                     <div><h4>{firstName} {lastName} </h4></div>
                                     <div>{contact}</div>
-                                </div>
+                                </div> */}
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
