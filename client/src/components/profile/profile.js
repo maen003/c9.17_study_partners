@@ -25,7 +25,7 @@ class Profile extends Component {
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        // const {firstName, lastName, contact, photo} = this.state;
+        const {firstName, lastName, contact, photo} = this.props;
 
         return (
             <div className="container">
@@ -33,21 +33,22 @@ class Profile extends Component {
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                {/* <div className="col-sm-3 col-xs-12">                                   
+                                <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
                                     <div className="" ><h4>{firstName} {lastName} </h4></div>
                                     <div className="" >{ contact} </div>
-                                </div> */}
+                                </div>
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
-                                        <EventListJoin joinedEvents={this.state.userJoined} eventList={this.props.events}/>
+                                        <EventListJoin joinedEvents={this.props.joined}/>
+                                        {/* eventList={this.props.events} */}
                                     </div>
                                 </div>
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events}/>
+                                        <EventListCreate createdEvents={this.props.created}/>
                                     </div>
                                 </div>
                             </div>
