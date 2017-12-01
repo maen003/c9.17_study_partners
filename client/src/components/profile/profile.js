@@ -10,16 +10,22 @@ class Profile extends Component {
     constructor(props) {
         super(props);
 
+        // this.state = {
+        //     firstName: null,
+        //     lastName: null,
+        //     contact: null,
+        //     photo: null
+        // }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.allCreateEvent();
         this.props.allJoinEvent();
     }
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        // const {firstName, lastName, contact, photo} = this.props;
+        // const {firstName, lastName, contact, photo} = this.state;
 
         return (
             <div className="container">
