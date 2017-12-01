@@ -32,7 +32,7 @@ class Profile extends Component {
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        console.log("PROPS FOR PROFILE INFO: ", this.props.all.data);
+        console.log("PROPS FOR PROFILE INFO: ", this.props.all);
         const {firstName, lastName, contact, photo} = this.state;
 
         return (
