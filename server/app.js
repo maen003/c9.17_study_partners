@@ -521,4 +521,5 @@ app.get('*', function(req, res) {
 
 // Listen
 app.listen(4000,function(){
+    console.log("Server has started")
 });
