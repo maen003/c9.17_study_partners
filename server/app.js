@@ -117,6 +117,12 @@ const transporter = nodemailer.createTransport({
 // Reading Events
 app.get('/events',
     function(req, res){
+        if (req.session.passport !== undefined) {
+            loggedIn();
+        }
+        else {
+            notLoggedIn();
+        }
         console.log("The req.session.passport", req.session.passport);
         console.log('the data is receiveth');
         console.log('req is before this');
@@ -160,12 +166,7 @@ app.get('/events',
                 });
             }
         console.log('got a user request????');
-        if (req.session.passport !== undefined) {
-            loggedIn();
-        }
-        else {
-            notLoggedIn();
-        }
+
     });
 
 app.get('/user_events',function(req, res){
