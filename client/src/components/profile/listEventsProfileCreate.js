@@ -13,7 +13,8 @@ class EventList extends Component {
     }
 
     render() { 
-        const arrayCheck = this.props.createdEvents;
+        var self = this;
+        const arrayCheck = self.props.createdEvents;
 
         if (arrayCheck.length !== 0) {
             const eventElements = arrayCheck.map((eventItem, index) => {

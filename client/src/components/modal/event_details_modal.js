@@ -78,6 +78,7 @@ class DetailsModal extends Component {
                                 <p><b>Description: </b>{details.description}</p>
                                 <p><b>Location: </b>{details.location}</p>
                             </div>
+
                             <div className="singleMap col-sm-6 col-xs-12" id="singleMap"></div>
                         </div>
                         <div className="modal-footer col-sm-12 col-xs-12">

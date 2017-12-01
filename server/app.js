@@ -124,7 +124,6 @@ app.get('/events',
         const connection = mysql.createConnection(credentials);
         if (req.session.passport !== undefined) {
 
-
             const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
@@ -163,7 +162,7 @@ app.get('/events',
             });
 
         console.log('got a user request????');
-    });
+    }});
 
 app.get('/user_events',function(req, res){
     if(req.session.passport !== undefined){
