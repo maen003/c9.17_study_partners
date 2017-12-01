@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import EventDetails from './eventItemCreate';
 
 const listDiv = {
     overflowY: 'auto',
     height: '77vmin',
-    /* border: '1px dashed lightcoral' */
 }
 
 class EventList extends Component {
@@ -14,13 +12,12 @@ class EventList extends Component {
     }
 
     render() { 
-        console.log('PROPS FOR CREATE LIST: ', this.props);
         const arrayCheck = this.props.createdEvents;
-        
+
         if (arrayCheck.length !== 0) {
             const eventArray = this.props.createdEvents;
             const eventElements = eventArray.map((eventItem, index) => {
-                return <EventDetails key={index} info={eventItem} renderList={this.props.renderList}/>
+                return <EventDetails key={index} info={eventItem}/>
             });
             return (
                 <div style={listDiv}>
@@ -37,10 +34,4 @@ class EventList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        events: state.event.all
-    }
-}
-
-export default connect(mapStateToProps)(EventList);
+export default EventList;

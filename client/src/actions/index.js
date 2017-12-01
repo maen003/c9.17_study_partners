@@ -35,15 +35,6 @@ export function getAll() {
     }
 }
 
-export function userEvents() {
-    const request = axios.get("http://dev.michaelahn.solutions/user_events");
-
-    return {
-        type: types.USER_EVENTS,
-        payload: request
-    }
-}
-
 export function userAuth() {
     const request = axios.get("http://dev.michaelahn.solutions/checkLogin");
 
@@ -62,16 +53,16 @@ export function userJoin(eventInfo) {
     }
 }
 
-export function deleteEvent(eventInfo) {
-    const request = axios.post("http://dev.michaelahn.solutions/delete_events", eventInfo);
+export function allCreateEvent() {
+    const request = axios.get("http://dev.michaelahn.solutions/user_events");
 
     return {
-        type: types.DELETE_EVENT,
+        type: types.USER_EVENTS,
         payload: request
     }
 }
 
-export function getProfileJoin() {
+export function allJoinEvent() {
     const request = axios.get("http://dev.michaelahn.solutions/user_joined_events");
 
     return {
@@ -85,6 +76,15 @@ export function leaveEvent(eventInfo) {
 
     return {
         type: types.LEAVE_EVENT,
+        payload: request
+    }
+}
+
+export function deleteEvent(eventInfo) {
+    const request = axios.post("http://dev.michaelahn.solutions/delete_events", eventInfo);
+
+    return {
+        type: types.DELETE_EVENT,
         payload: request
     }
 }

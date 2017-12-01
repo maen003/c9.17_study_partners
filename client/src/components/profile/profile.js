@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {userEvents, getProfileJoin} from '../../actions/index';
+import {allCreateEvent, allJoinEvent} from '../../actions';
 import EventListCreate from './listEventsProfileCreate';
 import EventListJoin from './listEventsProfileJoin';
 
@@ -11,45 +11,21 @@ class Profile extends Component {
         super(props);
 
         this.state = {
-          firstName: null,
-          lastName: null,
+            firstName: null,
+            lastName: null,
             contact: null,
             photo: null,
-            userCreated: [],
-            userJoined: []
         };
-
-        this.getUserCreate = this.getUserCreate.bind(this);
-        this.getJoinedEvents = this.getJoinedEvents.bind(this);
     }
 
     componentWillMount() {
-        this.getUserCreate();
-        this.getJoinedEvents();
-    }
-
-    getUserCreate() {
-        this.props.userEvents().then((resp) => {
-            this.setState({
-                firstName: resp.payload.data.profile.user.name.givenName,
-                lastName: resp.payload.data.profile.user.name.familyName,
-                contact: resp.payload.data.profile.user.emails[0].value,
-                photo: resp.payload.data.profile.user.photos[0].value,
-                userCreated: resp.payload.data.data
-            });
-        })
-    }
-
-    getJoinedEvents() {
-        this.props.getProfileJoin().then((resp) => {
-            this.setState({
-                userJoined: resp.payload.data.data
-            })
-        })
+        this.props.allCreateEvent();
+        this.props.allJoinEvent();
     }
 
     render() {
-        const { firstName, lastName, contact, photo } = this.state;
+        console.log('PROPS FOR PROFILE:', this.props);
+        // const {firstName, lastName, contact, photo} = this.state;
 
         return (
             <div className="container">
@@ -57,11 +33,11 @@ class Profile extends Component {
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <div className="col-sm-3 col-xs-12">                                   
+                                {/* <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
                                     <div className="" ><h4>{firstName} {lastName} </h4></div>
                                     <div className="" >{ contact} </div>
-                                </div>
+                                </div> */}
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   
@@ -71,7 +47,7 @@ class Profile extends Component {
                                 <div id="createDiv"className="col-sm-4 col-xs-12">
                                     <h1>Events Created</h1>
                                     <div>   
-                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events} renderList={this.getUserCreate}/>
+                                        <EventListCreate createdEvents={this.state.userCreated} eventList={this.props.events}/>
                                     </div>
                                 </div>
                             </div>
@@ -83,4 +59,11 @@ class Profile extends Component {
     }
 }
 
-export default connect(null, {userEvents, getProfileJoin})(Profile);
+function mapStateToProps(state){
+    return {
+        created: state.event.userCreatedEvents,
+        joined: state.event.userJoinedEvents
+    }
+}
+
+export default connect(mapStateToProps, {allCreateEvent, allJoinEvent})(Profile);
