@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {leaveEvent} from '../../actions';
+import {leaveEvent, allJoinEvent} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
@@ -62,11 +62,12 @@ class EventDetails extends Component {
 
     cancelJoinEvent() {
         const {info} = this.props;
+        var self = this;
         
         console.log('you are no longer part of this event');
         this.props.leaveEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
-            console.log("delete info: ,", info)
+            self.props.allJoinEvent();
         });
     }
 
@@ -103,6 +104,7 @@ class EventDetails extends Component {
     }
 
     render() {
+        console.log('PROPS FOR JOIN EVENT ITEM: ', this.props);
         const {info} = this.props;
 
         return (
@@ -122,4 +124,8 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {leaveEvent})(EventDetails);
+function mapStateToProps(state) {
+    joined: state.event.userJoinedEvents
+}
+
+export default connect(mapStateToProps, {leaveEvent, allJoinEvent})(EventDetails);

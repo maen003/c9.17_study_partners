@@ -1,26 +1,27 @@
 import types from '../actions/types';
 
-const DEFAULT_STATE = {all: []};
+const DEFAULT_STATE = {all: [], userCreatedEvents: [], userJoinedEvents: []};
 
 export default (state = DEFAULT_STATE, action) => {
     switch(action.type) {
         case types.GET_ALL:
             return {
+                ...state,
                 all: action.payload.data
             };
-        case types.USER_EVENTS:
+        case types.USER_CREATED_EVENTS:
+            console.log("USER CREATED EVENTS REDUCER: ", action.payload);
             return {
-                all: action.payload.data
+                ...state,
+                all: action.payload,
+                userCreatedEvents: action.payload.data.data
             };
-        case types.GET_JOIN_PROFILE:
+        case types.USER_JOINED_EVENTS:
             return {
-                all: action.payload.data
+                ...state,
+                userJoinedEvents: action.payload.data.data
             };
         case types.DELETE_EVENT:
-            return {
-                all: action.payload.data
-            };
-        // case types.USER_JOIN:
         default:
             return state;
     }

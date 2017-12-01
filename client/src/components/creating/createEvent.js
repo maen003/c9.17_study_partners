@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createEvent, userAuth } from '../../actions';
+import React, {Component} from 'react';
+import {Field, reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import {createEvent, userAuth} from '../../actions';
 import axios from 'axios';
 import ConfirmationModal from '../modal/confirmation_success';
 import SignInModal from '../modal/sign_in_modal';
@@ -125,7 +125,7 @@ class CreateEvent extends Component {
             }).catch(() => {
                 self.toggleModal("error");
             });
-
+            this.createMapOnLoad();
             this.setState({
                 coordinates: ''
             })

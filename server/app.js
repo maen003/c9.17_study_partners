@@ -122,15 +122,36 @@ app.get('/events',
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
-        console.log('The passport before undefined:', req.session.passport);
-        const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+        if (req.session.passport !== undefined) {
+
+
+            const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+        FROM events
+        JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
+        `;
+            connection.connect(() => {
+                connection.query(
+                    queryLoggedIn, function (err, results, fields) {
+                        const output = {
+                            success: true,
+                            data: results
+                        };
+                        console.log('KRYSTAL output in the the /events', output);
+                        res.end(JSON.stringify(output));
+                    });
+                console.log('query has started')
+            });
+        }
+        else {
+            console.log("not logged in");
+            const queryNotLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
                 FROM events
-                JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
+                JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID 
                 `;
 
             connection.connect(() => {
                 connection.query(
-                    queryLoggedIn, function(err, results, fields){
+                    queryNotLoggedIn, function (err, results, fields) {
                         const output = {
                             success: true,
                             data: results

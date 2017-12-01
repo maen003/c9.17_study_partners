@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {deleteEvent, } from '../../actions';
+import {deleteEvent, allCreateEvent} from '../../actions';
 import DetailsModal from '../modal/event_details_modal';
 
 import './eventItemProfile.css';
@@ -61,11 +60,12 @@ class EventDetails extends Component {
     }
 
     deleteUserEvent() {
-        const {info, renderList} = this.props;
+        const {info} = this.props;
+        var self = this;
 
         this.props.deleteEvent(info).then(function(response){
             console.log('response: ', response.payload.data);
-            this.props.renderList();
+            self.props.allCreateEvent();
         });
     }
 
@@ -102,7 +102,6 @@ class EventDetails extends Component {
     }
 
     render() {
-        console.log('PROPS FOR CREATE EVENT ITEM: ', this.props);
         const {info} = this.props;
 
         return (
@@ -122,4 +121,8 @@ class EventDetails extends Component {
     }
 }
 
-export default connect(null, {deleteEvent})(EventDetails);
+function mapStateToProps(state) {
+    created: state.event.userCreatedEvents
+}
+
+export default connect(mapStateToProps, {deleteEvent, allCreateEvent})(EventDetails);
