@@ -28,7 +28,7 @@ class EventList extends Component {
     render() {
         console.log("THIS STATE ARRAYCHECK: ", this.state.arrayCheck);
         console.log("THIS STATE EVENT LIST: ", this.state.eventList);
-        if (this.state.filterValues.length > 0) {
+        if (this.state.acceptedValues.length > 0) {
             const arrayCheck = this.props.events;
             if (arrayCheck.length !== 0) {
                 const acceptedValues = [];
