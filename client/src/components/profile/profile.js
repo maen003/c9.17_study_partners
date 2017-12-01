@@ -12,7 +12,7 @@ class Profile extends Component {
 
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         this.props.allCreateEvent();
         this.props.allJoinEvent();
     }
