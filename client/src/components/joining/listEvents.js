@@ -11,26 +11,12 @@ const listDiv = {
 class EventList extends Component {
     constructor (props) {
         super (props);
-
-        this.state = {
-            acceptedValues: [],
-            arrayCheck: null,
-            eventList: []
-        }
     }
 
-    componentWillReceiveProps() {
-        this.setState({
-            acceptedValues: this.props.filterValues,
-            arrayCheck: this.props.events,
-            eventList: this.props.events.data
-        })
-    }
 
     render() {
-        console.log("THIS STATE ARRAYCHECK: ", this.state.arrayCheck);
-        console.log("THIS STATE EVENT LIST: ", this.state.eventList);
-        if (this.state.acceptedValues.length > 0) {
+        console.log("THIS PROPS: ", this.props);
+        if (this.props.filterValues.length > 0) {
             const arrayCheck = this.props.events;
             if (arrayCheck.length !== 0) {
                 const acceptedValues = [];
@@ -98,13 +84,11 @@ class EventList extends Component {
                 }
             }
         } else {
-            console.log("THIS PROPS: ", this.props);
             console.log("THIS PROPS EVENTS: ", this.props.events);
-            const arrayCheck = this.state.arrayCheck;
-            console.log("THIS STATE ARRAYCHECK 2: ", arrayCheck);
-            if (arrayCheck.length !== 0 || arrayCheck.length !== undefined) {
-                const eventArray = this.state.eventList;
-
+            const arrayCheck = this.props.events;
+            if (arrayCheck.length !== 0) {
+                const eventArray = this.props.events.data;
+                console.log("EVENT ARRAY: ", this.props.events.data);
                 const eventElements = eventArray.map((eventItem, index) => {
                     return <EventDetails key={index} info={eventItem}/>
                 });
