@@ -122,7 +122,7 @@ app.get('/events',
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
-        if (req.session.passport.user.id !== undefined) {
+        if (req.session.passport !== undefined) {
 
 
             const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
