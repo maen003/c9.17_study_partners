@@ -30,9 +30,19 @@
 @media screen and (max-width: 768px) {
     #joinDiv {
         margin-top: 30%;
+        height: 118%;
+        border-bottom: 1px solid #428bca;
+        border-left: none;
     }
 
     #createDiv {
         margin-bottom: 5%;
+        height: 118%;
+        border-bottom: 1px solid #428bca;
+        border-left: none;
+    }
+
+    .buttonContainer {
+        height: 35px;
     }
 }
