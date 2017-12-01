@@ -23,10 +23,10 @@ class Profile extends Component {
         this.props.allJoinEvent();
 
         this.setState({
-            firstName: action.payload.data.profile.user.name.givenName,
-            lastName: action.payload.data.profile.user.name.familyName,
-            contact: action.payload.data.profile.user.emails[0].value,
-            photo: action.payload.data.profile.user.photos[0].value
+            firstName: this.props.all.data.profile.user.name.givenName,
+            lastName: this.props.all.data.profile.user.name.familyName,
+            contact: this.props.all.data.profile.user.emails[0].value,
+            photo: this.props.all.data.profile.user.photos[0].value
         })
     }
 
