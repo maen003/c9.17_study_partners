@@ -23,10 +23,10 @@ class Profile extends Component {
         this.props.allJoinEvent();
 
         this.setState({
-            firstName: resp.payload.data.profile.user.name.givenName,
-            lastName: resp.payload.data.profile.user.name.familyName,
-            contact: resp.payload.data.profile.user.emails[0].value,
-            photo: resp.payload.data.profile.user.photos[0].value
+            firstName: action.payload.data.profile.user.name.givenName,
+            lastName: action.payload.data.profile.user.name.familyName,
+            contact: action.payload.data.profile.user.emails[0].value,
+            photo: action.payload.data.profile.user.photos[0].value
         })
     }
 
@@ -40,11 +40,11 @@ class Profile extends Component {
                     <div className="col-sm-12 col-xs-12">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                {/* <div className="col-sm-3 col-xs-12">                                   
+                                <div className="col-sm-3 col-xs-12">                                   
                                     <img className="img-circle img-thumbnail" src={photo} />
-                                    <div className="" ><h4>{firstName} {lastName} </h4></div>
-                                    <div className="" >{ contact} </div>
-                                </div> */}
+                                    <div><h4>{firstName} {lastName} </h4></div>
+                                    <div>{contact}</div>
+                                </div>
                                 <div id="joinDiv"className="col-sm-4 col-sm-offset-1 col-xs-12">
                                     <h1>Events Joined</h1>
                                     <div>   

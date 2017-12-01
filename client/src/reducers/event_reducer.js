@@ -12,7 +12,8 @@ export default (state = DEFAULT_STATE, action) => {
         case types.USER_CREATED_EVENTS:
             console.log("USER CREATED EVENTS REDUCER: ", action.payload);
             return {
-                ...state, 
+                ...state,
+                all: action.payload,
                 userCreatedEvents: action.payload.data.data
             };
         case types.USER_JOINED_EVENTS:
