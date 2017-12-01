@@ -125,7 +125,7 @@ class CreateEvent extends Component {
             }).catch(() => {
                 self.toggleModal("error");
             });
-
+            this.createMapOnLoad();
             this.setState({
                 coordinates: ''
             })
