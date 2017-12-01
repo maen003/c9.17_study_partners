@@ -148,6 +148,7 @@ app.get('/events',
                 FROM events
                 JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID 
                 `;
+
             connection.connect(() => {
                 connection.query(
                     queryNotLoggedIn, function (err, results, fields) {
@@ -160,7 +161,7 @@ app.get('/events',
                     });
                 console.log('query has started')
             });
-        }
+
         console.log('got a user request????');
     });
 
