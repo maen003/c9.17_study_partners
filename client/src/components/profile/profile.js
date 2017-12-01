@@ -10,22 +10,29 @@ class Profile extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = {
-        //     firstName: null,
-        //     lastName: null,
-        //     contact: null,
-        //     photo: null
-        // }
+        this.state = {
+            firstName: null,
+            lastName: null,
+            contact: null,
+            photo: null
+        }
     }
 
-    componentWillMount() {
+    componentWillMount() {  
         this.props.allCreateEvent();
         this.props.allJoinEvent();
+
+        this.setState({
+            firstName: resp.payload.data.profile.user.name.givenName,
+            lastName: resp.payload.data.profile.user.name.familyName,
+            contact: resp.payload.data.profile.user.emails[0].value,
+            photo: resp.payload.data.profile.user.photos[0].value
+        })
     }
 
     render() {
         console.log('PROPS FOR PROFILE:', this.props);
-        // const {firstName, lastName, contact, photo} = this.state;
+        const {firstName, lastName, contact, photo} = this.state;
 
         return (
             <div className="container">
@@ -62,7 +69,8 @@ class Profile extends Component {
 function mapStateToProps(state){
     return {
         created: state.event.userCreatedEvents,
-        joined: state.event.userJoinedEvents
+        joined: state.event.userJoinedEvents,
+        all: state.event.all
     }
 }
 
