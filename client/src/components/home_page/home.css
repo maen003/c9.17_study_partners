@@ -26,6 +26,7 @@
 	-webkit-background-clip: text;
 	animation: shine 2s infinite;
 	text-shadow: 0 0px 0px rgba(104, 169, 196, 0.228);
+    margin-top: 3px;
 }
 
 @keyframes shine {
