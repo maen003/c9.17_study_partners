@@ -122,13 +122,16 @@ app.get('/events',
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
-        const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
+        if (req.session.passport.user.id !== undefined) {
+
+
+            const queryLoggedIn = `SELECT events.*, events_subjects.subject AS e_s_subj
         FROM events
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1 WHERE events.facebookID != "${req.session.passport.user.id}"
         `;
-        connection.connect(() => {
+            connection.connect(() => {
                 connection.query(
-                    queryLoggedIn, function(err, results, fields){
+                    queryLoggedIn, function (err, results, fields) {
                         const output = {
                             success: true,
                             data: results
@@ -138,7 +141,10 @@ app.get('/events',
                     });
                 console.log('query has started')
             });
-
+        }
+        else {
+            console.log("not logged in")
+        }
         console.log('got a user request????');
     });
 
