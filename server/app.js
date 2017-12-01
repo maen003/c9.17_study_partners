@@ -118,7 +118,6 @@ const transporter = nodemailer.createTransport({
 app.get('/events',
     function(req, res){
         console.log("The req.session.passport", req.session.passport);
-        console.log('the data is receiveth');
         console.log('req is before this');
         console.log("grumbo!!!!", req.session.passport);
         const connection = mysql.createConnection(credentials);
