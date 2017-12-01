@@ -47,7 +47,8 @@
 
 .maxSizeNote {
     color: gray;
-    margin-left: 1.5%;
+    float: right;
+    margin-right: 1.8%;
 }
 
 
@@ -79,8 +80,8 @@
 
     .maxSizeNote {
         color: gray;
-        display: inline-block;
         margin: 0 0 10px 5%;
+        float: left;
     }
 
     .selectDivContainer > select {
