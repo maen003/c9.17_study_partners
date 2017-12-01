@@ -15,7 +15,8 @@ class EventDetails extends Component {
             showModalDetails: false,
             info: this.props.info,
             modalMessageConfirm: null,
-            showModalConf: false
+            showModalConf: false,
+            isLoggedIn: false
         }
 
         this.toggleModalDetails = this.toggleModalDetails.bind(this);
@@ -55,6 +56,10 @@ class EventDetails extends Component {
         });
     }
     /////////////////////////MAP////////////////////////
+
+    componentWillMount() {
+        this.checkLogin();
+    }
 
     toggleModalDetails(event) {
         this.setState({
