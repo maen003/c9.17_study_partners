@@ -185,7 +185,7 @@ class CreateEvent extends Component {
                         </div>
                         <div className="col-sm-12 col-xs-12">
                             <div className="leftOfMap col-sm-4">
-                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="xxx-xxx-xxxx" />
+                                <Field name="phone" component={this.renderInputText} type="text" label="Phone" placeholder="e.g. xxxxxxxxxx" />
                                 <Field name="email" component={this.renderInputText} type="email" label="Email" placeholder="e.g. johndoe@gmail.com" />
                                 <Field className="locationPadding" name="location" component={this.renderInputText} onBlur={this.renderMapAfterText} type="text" label="Event Location" placeholder="e.g. Starbucks, Irvine or 8539 Irvine Center" />
                             </div>

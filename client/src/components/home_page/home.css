@@ -2,17 +2,22 @@
     background-color: white;
     opacity: .9;
 }
-.jumbotron {
+
+.banner {
     margin: 0;
-    opacity: .7;
     text-align: center;
     background-image: url('../../assets/images/open_book.png');
     background-size: contain;
     background-position: 50% 50%;
-    padding: 25px 60px;
+    padding: 25px 30px;
+    opacity: 1;
 }
 
-.jumbotron > h2 {
+.banner > img {
+    height: 140px;
+}
+
+.banner > h2 {
 	background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
     background-size: 150px;
     -webkit-background-size: 150px;
@@ -58,7 +63,7 @@
     box-shadow: 4px 4px 0 slategray;
 }
 
-.info h3 {
+.info > h1 {
     text-align: center;
 }
 
@@ -71,8 +76,16 @@
     height: 58vmin;
 }
 
+.about p {
+    font-size: 1.5em;
+}
+
+.about p:last-of-type {
+    font-size: 2em;
+}
+
 @media screen and (max-width: 768px) {
-    .jumbotron > h2 {
+    .banner > h2 {
         background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.3, #fff)) 0 0 no-repeat;
         background-size: 100px;
         -webkit-background-size: 100px;
@@ -83,10 +96,13 @@
         margin-top: 5px;
     }
 
-    .jumbotron {
-        padding-top: 5px;
-        padding-bottom: 50px;
+    .banner {
+        padding-bottom: 60px;
         opacity: 1;
+    }
+
+    .banner > img {
+        height: 120px;
     }
 
     .about > h2 {
@@ -94,7 +110,11 @@
     }
 
     .about {
-        height: 105vmin;
+        height: 115vmin;
+    }
+
+    .about p, .about p:last-of-type {
+        font-size: 1.4em;
     }
 
     .passport, .meistertask {
@@ -103,6 +123,10 @@
 
     .indiv {
         text-align: center;
+    }
+
+    .indiv > a {
+        font-size: 1.5em;
     }
 
     .footer h4 {
