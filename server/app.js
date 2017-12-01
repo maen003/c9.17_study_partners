@@ -131,21 +131,6 @@ app.get('/events',
         JOIN events_subjects on events.subject = events_subjects.id AND events.isActive = 1"
         `;
         console.log('The passport before undefined:', req.session.passport);
-        if (req.session.passport == undefined) {
-            connection.connect(() => {
-                connection.query(
-                    queryNotLoggedIn, function(err, results, fields){
-                        const output = {
-                            success: true,
-                            data: results
-                        };
-                        console.log('KRYSTAL output in the the /events', output);
-                        res.end(JSON.stringify(output));
-                    });
-                console.log('query has started')
-            });
-        }
-        else {
             connection.connect(() => {
                 connection.query(
                     queryLoggedIn, function(err, results, fields){
@@ -158,7 +143,6 @@ app.get('/events',
                     });
                 console.log('query has started')
             });
-        }
         console.log('got a user request????');
     });
 
