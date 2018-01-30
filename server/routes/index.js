@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// const dbtest = require('./dbtest');
-const eventsRoutes = require('./events');
+// const eventsRoutes = require('./events');
+// router.use('/', eventsRoutes);
 
-router.use('/', eventsRoutes);
+const dbtest = require('./dbtest');
+router.use('/', dbtest);
 
 module.exports = router;

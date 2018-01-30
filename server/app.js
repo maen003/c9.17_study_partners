@@ -11,8 +11,11 @@ const { USERNAME, PASSWORD } = require('./nodemailerConfig.js');
 
 const app = express();
 
-// const routes = require('./routes');
+// const routes = require('./routes/index');
+// app.use('/', routes);
 // const passportRoutes = require('./routes/passport');
+const dbtest = require('./routes/index');
+app.use('/', dbtest);
 
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;

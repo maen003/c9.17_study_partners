@@ -11,10 +11,10 @@ router.get('/', function(req, res) {
 })
 
 router.get('/dbtest',function(req, res){
-    console.log(credentials);
+    console.log('these are the cred:',credentials);
     const connection = mysql.createConnection(credentials);
     connection.connect( function(){
-        console.log(arguments);
+        console.log('these are the arguments:',arguments);
         connection.query('SELECT * FROM events', function(err, results){
             res.end(JSON.stringify(results));
         })
