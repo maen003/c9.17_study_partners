@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import './home.css';
-// import Passport from '../../assets/images/passport_js.png';
-// import MeisterTask from '../../assets/images/meistertask.png';
 import Logo from '../../assets/images/logo.png';
 
 class Home extends Component {
@@ -43,76 +41,6 @@ class Home extends Component {
                         <Link to="https://github.com/oowretep" target="_blank">Peter: Frontend</Link>
                     </div>
                 </div>
-
-                {/*<div className="info col-sm-4 col-xs-12">*/}
-                    {/*<h2>Tech Stack</h2>*/}
-                    {/*<hr style={{borderTop: '1px solid black'}}/>*/}
-                    {/*<div>*/}
-                        {/*<div className="col-sm-12 techCategory">*/}
-                            {/*<h4>Front End</h4>*/}
-                            {/*<ul className="listTech">*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-react-original colored"></i>*/}
-                                    {/*<br/>React.JS*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-css3-plain colored"></i>*/}
-                                    {/*<br/>CSS3*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-bootstrap-plain colored"></i>*/}
-                                    {/*<br/>Boostrap*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-javascript-plain colored"></i>*/}
-                                    {/*<br/>JavaScript*/}
-                                {/*</li>*/}
-                            {/*</ul>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-sm-12 techCategory">*/}
-                            {/*<h4>Back End</h4>*/}
-                            {/*<ul className="listTech">*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-nodejs-plain colored"></i>*/}
-                                    {/*<br/>Node.JS*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-mysql-plain colored"></i>*/}
-                                    {/*<br/>MySql*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-express-original"></i>*/}
-                                    {/*<br/>Express*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<img className="passport" src={Passport}/>*/}
-                                    {/*<br/>Passport*/}
-                                {/*</li>*/}
-                            {/*</ul>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-sm-12 techCategory">*/}
-                            {/*<h4>Misc</h4>*/}
-                            {/*<ul className="listTech">*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<img className="meistertask" src={MeisterTask}/>*/}
-                                    {/*<br/>MeisterTask*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-git-plain colored"></i>*/}
-                                    {/*<br/>Git*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-github-plain colored"></i>*/}
-                                    {/*<br/>GitHub*/}
-                                {/*</li>*/}
-                                {/*<li className="col-sm-3 col-xs-3">*/}
-                                    {/*<i className="deviconicon devicon-slack-plain colored"></i>*/}
-                                    {/*<br/>Slack*/}
-                                {/*</li>*/}
-                            {/*</ul>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
             </div>
         )
     }
